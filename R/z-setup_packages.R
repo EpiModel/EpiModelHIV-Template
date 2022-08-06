@@ -10,8 +10,8 @@ renv::install(c(
   )),
   "EpiModel/ARTnetData",
   "EpiModel/ARTnet",
-  "epimodel/epimodel@tracker_mod",
-  "EpiModel/EpiModelHIV-p@tracker_mod"
+  "epimodel/epimodel",
+  "EpiModel/EpiModelHIV-p"
 ))
 
 # This code finds and install the libraries used by the project (CRAN version)
