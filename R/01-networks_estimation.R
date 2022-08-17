@@ -3,13 +3,12 @@
 ##
 
 # Setup  -----------------------------------------------------------------------
-library(EpiModelHIV)
-library(ARTnet)
+library("EpiModelHIV")
+library("ARTnet")
 
 ncores <- 1
 
-if (!fs::dir_exists("data/netsim_inputs"))
-  fs::dir_create("data/netsim_inputs")
+
 # 0. Initialize Network --------------------------------------------------------
 
 epistats <- build_epistats(
@@ -19,7 +18,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, file = "data/netsim_inputs/epistats.rds")
+saveRDS(epistats, file = "data/input/epistats.rds")
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -32,7 +31,7 @@ netstats <- build_netstats(
   expect.mort = 0.000478213,
   network.size = 1e4
 )
-saveRDS(netstats, file = "data/netsim_inputs/netstats.rds")
+saveRDS(netstats, file = "data/input/netstats.rds")
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -180,4 +179,4 @@ fit_inst <- trim_netest(fit_inst)
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = paste0("data/netsim_inputs/netest.rds"))
+saveRDS(out, file = paste0("data/input/netest.rds"))
