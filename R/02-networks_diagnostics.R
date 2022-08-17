@@ -6,11 +6,11 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
 
-ncores <- 2
+ncores <- parallel::detectCores() - 1
 nsims <- 10
 nsteps <- 500
 
-est <- readRDS("data/netsim_inputs/netest.rds")
+est <- readRDS("data/input/netest.rds")
 
 # Main -------------------------------------------------------------------------
 
