@@ -8,10 +8,12 @@ renv::install(c(
     "network",
     "networkDynamic"
   )),
-  "EpiModel/ARTnetData",
-  "EpiModel/ARTnet",
-  "epimodel/epimodel",
-  "EpiModel/EpiModelHIV-p"
+  paste0("EpiModel/", c(
+    "ARTnetData",
+    "ARTnet",
+    "EpiModel",
+    "EpiModelHIV-p"
+  ))
 ))
 
 # This code finds and install the libraries used by the project (CRAN version)
