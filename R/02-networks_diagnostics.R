@@ -14,7 +14,7 @@ if (interactive()) {
 library(EpiModelHIV)
 source("R/000-project_settings.R")
 
-est <- readRDS(fs::path(estimates_directory, "netest.rds"))
+est <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Main -------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ dx_main_static <- netdx(
 )
 
 dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
-saveRDS(dx, fs::path(diagnostics_directory, "netdx-main.rds"))
+saveRDS(dx, fs::path(diagnostics_dir, "netdx-main.rds"))
 rm(dx, dx_main, dx_main_static)
 
 # Casual -----------------------------------------------------------------------
@@ -91,7 +91,7 @@ dx_casl_static <- netdx(
 )
 
 dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
-saveRDS(dx, fs::path(diagnostics_directory, "netdx-casl.rds"))
+saveRDS(dx, fs::path(diagnostics_dir, "netdx-casl.rds"))
 rm(dx, dx_casl, dx_casl_static)
 
 # One-Off ----------------------------------------------------------------------
@@ -117,4 +117,4 @@ dx_inst <- netdx(
 )
 
 dx <- list(dx_inst = dx_inst)
-saveRDS(dx, fs::path(diagnostics_directory, "netdx-inst.rds"))
+saveRDS(dx, fs::path(diagnostics_dir, "netdx-inst.rds"))

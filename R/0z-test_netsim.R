@@ -1,15 +1,17 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
+source("R/000-project_settings.R")
+
 
 # Necessary files
-epistats <- readRDS("data/netsim_inputs/epistats.rds")
-netstats <- readRDS("data/netsim_inputs/netstats.rds")
-est      <- readRDS("data/netsim_inputs/netest.rds")
+epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
+netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
+est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Parameters
 prep_start <- 65 * 52
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
+  data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,

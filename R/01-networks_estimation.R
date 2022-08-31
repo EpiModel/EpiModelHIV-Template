@@ -15,7 +15,6 @@ library(ARTnet)
 source("R/000-project_settings.R")
 
 # 0. Initialize Network --------------------------------------------------------
-
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",
@@ -23,7 +22,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, fs::path(estimates_directory, "epistats.rds"))
+saveRDS(epistats, fs::path(estimates_dir, "epistats.rds"))
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -36,7 +35,7 @@ netstats <- build_netstats(
   expect.mort = 0.000478213,
   network.size = networks_size
 )
-saveRDS(netstats, fs::path(estimates_directory, "netstats.rds"))
+saveRDS(netstats, fs::path(estimates_dir, "netstats.rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -184,4 +183,4 @@ fit_inst <- trim_netest(fit_inst)
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, fs::path(estimates_directory, "netest.rds"))
+saveRDS(out, fs::path(estimates_dir, "netest.rds"))
