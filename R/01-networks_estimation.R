@@ -1,15 +1,19 @@
 ##
 ## 01. Network Model Estimation
 ##
+## This file estimates the ERGMs for 100k nodes network. Running this script
+## outside of an HPC can take a massive amount of time.
+##
 
 # Setup  -----------------------------------------------------------------------
+if (interactive) {
+  ncores <- 4
+}
+
 library(EpiModelHIV)
 library(ARTnet)
+source("R/000-project_settings.R")
 
-ncores <- 1
-
-if (!fs::dir_exists("data/netsim_inputs"))
-  fs::dir_create("data/netsim_inputs")
 # 0. Initialize Network --------------------------------------------------------
 
 epistats <- build_epistats(
@@ -19,7 +23,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, file = "data/netsim_inputs/epistats.rds")
+saveRDS(epistats, fs::path(estimates_directory, "epistats.rds"))
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -30,9 +34,9 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 1e4
+  network.size = networks_size
 )
-saveRDS(netstats, file = "data/netsim_inputs/netstats.rds")
+saveRDS(netstats, fs::path(estimates_directory, "netstats.rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -180,4 +184,4 @@ fit_inst <- trim_netest(fit_inst)
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = paste0("data/netsim_inputs/netest.rds"))
+saveRDS(out, fs::path(estimates_directory, "netest.rds"))

@@ -1,16 +1,20 @@
-##
+#
 ## 02. Network Model Diagnostics
 ##
 
+# Required variables:
 
 # Setup ------------------------------------------------------------------------
+if (interactive()) {
+  ncores <- 5
+  nsims  <- 10
+  nsteps <- 500
+}
+
 library(EpiModelHIV)
+source("R/000-project_settings.R")
 
-ncores <- 2
-nsims <- 10
-nsteps <- 500
-
-est <- readRDS("data/netsim_inputs/netest.rds")
+est <- readRDS(fs::path(estimates_directory, "netest.rds"))
 
 # Main -------------------------------------------------------------------------
 
@@ -38,10 +42,7 @@ dx_main <- netdx(
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
-print(dx_main, digits = 2)
-plot(dx_main)
-
-dx_main_static <- EpiModel::netdx(
+dx_main_static <- netdx(
   fit_main,
   dynamic = FALSE,
   nsims = 10000,
@@ -50,8 +51,9 @@ dx_main_static <- EpiModel::netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_main_static, digits = 2)
-plot(dx_main_static)
+dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
+saveRDS(dx, fs::path(diagnostics_directory, "netdx-main.rds"))
+rm(dx, dx_main, dx_main_static)
 
 # Casual -----------------------------------------------------------------------
 
@@ -79,9 +81,6 @@ dx_casl <- netdx(
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
-print(dx_casl, digits = 2)
-plot(dx_casl)
-
 dx_casl_static <- netdx(
   fit_casl,
   dynamic = FALSE,
@@ -91,8 +90,9 @@ dx_casl_static <- netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_casl_static, digits = 2)
-plot(dx_casl_static)
+dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
+saveRDS(dx, fs::path(diagnostics_directory, "netdx-casl.rds"))
+rm(dx, dx_casl, dx_casl_static)
 
 # One-Off ----------------------------------------------------------------------
 
@@ -116,5 +116,5 @@ dx_inst <- netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_inst, digits = 2)
-plot(dx_inst)
+dx <- list(dx_inst = dx_inst)
+saveRDS(dx, fs::path(diagnostics_directory, "netdx-inst.rds"))
