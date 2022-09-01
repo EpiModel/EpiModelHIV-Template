@@ -1,0 +1,114 @@
+##
+## Epidemic Model Parameter Calibration, HPC setup
+##
+
+# Setup ------------------------------------------------------------------------
+library(slurmworkflow)
+library(EpiModelHPC)
+source("R/000-project_settings.R")
+
+hpc_configs <- swf_configs_rsph(
+  partition = "preemptable",
+  mail_user = "aleguil@emory.edu"
+)
+
+max_cores <- 32
+
+# Workflow creation ------------------------------------------------------------
+wf <- create_workflow(
+  wf_name = "model_calibration",
+  default_sbatch_opts = hpc_configs$default_sbatch_opts
+)
+
+# Update RENV on the HPC -------------------------------------------------------
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_renv_restore(
+    git_branch = current_git_branch,
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = hpc_configs$renv_sbatch_opts
+)
+
+# Run the simulations ----------------------------------------------------------
+library(EpiModelHIV)
+
+epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
+netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
+est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
+
+prep_start <- 65 * 52
+param <- param.net(
+  data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
+  netstats          = netstats,
+  epistats          = epistats,
+  prep.start        = prep_start,
+  riskh.start       = prep_start - 53
+)
+
+init <- init_msm()
+
+# Controls
+source("R/utils-targets.R")
+control <- control_msm(
+  nsteps              = 52 * 60,
+  nsims               = 1,
+  ncores              = 1,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  .tracker.list       = calibration_trackers,
+  verbose             = FALSE,
+  .checkpoint.dir     = "temp/cp_calib",
+  .checkpoint.clear   = TRUE,
+  .checkpoint.steps   = 15 * 52
+)
+
+# insert test values here
+scenarios.df <- tibble(
+  .scenario.id = c("0", "1"),
+  .at = 1,
+  hiv.trans.scale_1	= c(4.1, 4.2),
+  hiv.trans.scale_2	= c(.53, .54),
+  hiv.trans.scale_3	= c(.32, .33)
+)
+scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
+
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_netsim_scenarios(
+    est, param, init, control,
+    scenarios_list = scenarios.list,
+    output_dir = calibration_dir,
+    libraries = "EpiModelHIV",
+    n_rep = 32,
+    n_cores = max_cores,
+    max_array_size = 999,
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "mail-type" = "FAIL,TIME_LIMIT",
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem" = "0" # special: all mem on node
+  )
+)
+
+# Process calibrations ---------------------------------------------------------
+# produce a data frame with the calibration targets for each scenario
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/wscript-calibration_process.R",
+    args = list(
+      ncores = 15,
+      nsteps = 52
+    ),
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "4G",
+    "mail-type" = "END"
+  )
+)

@@ -9,7 +9,7 @@ netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
 est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Parameters
-prep_start <- 65 * 52
+prep_start <- 54
 param <- param.net(
   data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
   netstats          = netstats,
@@ -24,7 +24,7 @@ init <- init_msm()
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 25,
+  nsteps              = 52 * 3,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -40,5 +40,16 @@ sim <- netsim(est, param, init, control)
 d_sim <- as_tibble(sim)
 
 glimpse(d_sim)
+d_sim$prep_startat___ALL
+d_sim$prep_ret1y___ALL
+d_sim$prep_ret2y___ALL
 
+dd <- d_sim %>%
+  select(
+    starts_with("s_prep___"),
+    prep_startat___ALL, prep_ret1y___ALL
+  ) %>%
+  mutate(prep_prop_ret = prep_ret1y___ALL / lag(prep_startat___ALL, 52))
+
+dd$prep_prop_ret[110:156] |> mean()
 

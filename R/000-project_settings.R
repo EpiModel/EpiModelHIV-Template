@@ -4,7 +4,8 @@ networks_size <- 100 * 1e3
 directories <- c(
   inputs_dir      = "data/input",
   estimates_dir   = "data/intermediate/estitmates",
-  diagnostics_dir = "data/intermediate/diagnostics"
+  diagnostics_dir = "data/intermediate/diagnostics",
+  calibration_dir = "data/intermediate/calibration"
 )
 
 # create first level variables with the directories path

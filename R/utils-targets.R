@@ -21,7 +21,9 @@ targets <- c(
   i.prev.dx.B = 0.33,
   i.prev.dx.H = 0.127,
   i.prev.dx.W = 0.084,
-  prep_prop = 0.15
+  prep_prop = 0.15,
+  prep_ret1y = 0.56, # DOI: 10.1002/jia2.25252
+  prep_ret2y = 0.41
 )
 
 # function to calculate the target
@@ -45,7 +47,9 @@ mutate_targets <- function(d) {
     i.prev.dx.W = i_dx___W / n___W,
     prep_users = s_prep___B + s_prep___H + s_prep___W,
     prep_elig = s_prep_elig___B + s_prep_elig___H + s_prep_elig___W,
-    prep_prop = prep_users / prep_elig
+    prep_prop = prep_users / prep_elig,
+    prep_prop_ret1y = prep_ret1y___ALL / lag(prep_startat___ALL, 52),
+    prep_prop_ret2y = prep_ret2y___ALL / lag(prep_startat___ALL, 104)
   )
 }
 
@@ -60,8 +64,9 @@ process_one_calibration <- function(file_name, nsteps = 52) {
 
   d <- as_tibble(readRDS(file_name))
   d <- d %>%
-    filter(time >= max(time) - nsteps) %>%
+    filter(time >= max(time) - (nsteps + 52 * 3)) %>% # margin for prep_ret2y
     mutate_targets() %>%
+    filter(time >= max(time) - nsteps) %>%
     select(c(sim, all_of(names(targets)))) %>%
     group_by(sim) %>%
     summarise(across(
@@ -78,23 +83,35 @@ process_one_calibration <- function(file_name, nsteps = 52) {
 
 # required trackers for the calibration step
 source("R/utils-epi_trackers.R")
-calibration_trackers_list <- list(
-  n           = epi_n,
-  i           = epi_i,
-  i_dx        = epi_i_dx,
-  i_sup       = epi_i_sup,
-  linked1m    = epi_linked_time(4), # 1 month ~= 4 weeks
-  linked3m    = epi_linked_time(13), # 1 month ~= 4 weeks
-  gc_s        = epi_gc_s(c(0, 1)), # we want the gc susceptible HIV+ and -
-  ct_s        = epi_ct_s(c(0, 1)),
-  s_prep      = epi_s_prep,
-  s_prep_elig = epi_s_prep_elig
+
+calib_track_indiv <- list(
+  n            = epi_n,
+  i            = epi_i,
+  i_dx         = epi_i_dx,
+  i_sup        = epi_i_sup,
+  linked1m     = epi_linked_time(4), # 1 month ~= 4 weeks
+  linked3m     = epi_linked_time(13), # 1 month ~= 4 weeks
+  gc_s         = epi_gc_s(c(0, 1)), # we want the gc susceptible HIV+ and -
+  ct_s         = epi_ct_s(c(0, 1)),
+  s_prep       = epi_s_prep,
+  s_prep_elig  = epi_s_prep_elig
 )
 
-calibration_trackers <- epi_trackers_by_races(
-  calibration_trackers_list,
-  races = c(1, 2, 3),
-  races_names = c("B", "H", "W"),
-  individual_trackers = TRUE,
-  global_trackers = FALSE
+calib_track_global <-  list(
+  prep_startat = epi_prep_ret(0),  # n starting at `at`
+  prep_ret1y   = epi_prep_ret(52), # n starting at `at - 52`
+  prep_ret2y   = epi_prep_ret(104) # n starting at `at - 104`
+)
+
+calibration_trackers <- c(
+  epi_trackers_by_races(
+    calib_track_indiv,
+    races = c(1, 2, 3), races_names = c("B", "H", "W"),
+    individual_trackers = TRUE, global_trackers = FALSE
+  ),
+  epi_trackers_by_races(
+    calib_track_global,
+    races = c(1, 2, 3), races_names = c("B", "H", "W"),
+    individual_trackers = FALSE, global_trackers = TRUE
+  )
 )
