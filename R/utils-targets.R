@@ -22,8 +22,8 @@ targets <- c(
   i.prev.dx.H = 0.127,
   i.prev.dx.W = 0.084,
   prep_prop = 0.15,
-  prep_ret1y = 0.56, # DOI: 10.1002/jia2.25252
-  prep_ret2y = 0.41
+  prep_prop_ret1y = 0.56, # DOI: 10.1002/jia2.25252
+  prep_prop_ret2y = 0.41
 )
 
 # function to calculate the target

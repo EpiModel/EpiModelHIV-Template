@@ -11,7 +11,7 @@ nsteps <- 52
 # Process each file in parallel ------------------------------------------------
 calib_files <- list.files(
   calibration_dir,
-  pattern = "^simcalib__.*rds$",
+  pattern = "^sim__.*rds$",
   full.names = TRUE
 )
 
