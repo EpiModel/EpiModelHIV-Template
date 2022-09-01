@@ -52,12 +52,12 @@
       "Version": "2.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodel",
       "RemoteRef": "main",
       "RemoteSha": "6616af2d3f18dc466dbcbb264cb32d3d43d0b537",
-      "RemoteHost": "api.github.com",
-      "Hash": "2f92d64b84a195fa8b6f05067c12d12d",
+      "Hash": "a75dbaddab020831eb0c8be2edfa6470",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -97,6 +97,29 @@
         "networkDynamic",
         "progressr",
         "statnet.common",
+        "tergm"
+      ]
+    },
+    "EpiModelHPC": {
+      "Package": "EpiModelHPC",
+      "Version": "2.1.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHPC",
+      "RemoteRef": "main",
+      "RemoteSha": "4603fc5906094c7ba70991a42731db30f4930938",
+      "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
+      "Hash": "34d482693dec052c0cfd15bfc917b3a4",
+      "Requirements": [
+        "EpiModel",
+        "doParallel",
+        "ergm",
+        "foreach",
+        "fs",
+        "slurmworkflow",
+        "stringr",
         "tergm"
       ]
     },
@@ -741,6 +764,22 @@
         "viridisLite"
       ]
     },
+    "slurmworkflow": {
+      "Package": "slurmworkflow",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "slurmworkflow",
+      "RemoteRef": "main",
+      "RemoteSha": "33702bbcd6847218f9c7ee71e500e452f99e4f8b",
+      "RemoteHost": "api.github.com",
+      "Hash": "828f53eca4783e1621e6c4008ff1d9fe",
+      "Requirements": [
+        "fs",
+        "yaml"
+      ]
+    },
     "statnet.common": {
       "Package": "statnet.common",
       "Version": "4.7.0-403",
@@ -813,26 +852,6 @@
         "pillar",
         "pkgconfig",
         "rlang",
-        "vctrs"
-      ]
-    },
-    "tidyr": {
-      "Package": "tidyr",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
-      "Requirements": [
-        "cpp11",
-        "dplyr",
-        "ellipsis",
-        "glue",
-        "lifecycle",
-        "magrittr",
-        "purrr",
-        "rlang",
-        "tibble",
-        "tidyselect",
         "vctrs"
       ]
     },
