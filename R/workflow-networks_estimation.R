@@ -10,7 +10,7 @@ source("R/000-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "epimodel",
-  mail_user = "aleguil@emory.edu"
+  mail_user = mail_user
 )
 
 max_cores <- 10

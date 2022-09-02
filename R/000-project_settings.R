@@ -1,6 +1,8 @@
 current_git_branch <- "100k"
 networks_size <- 100 * 1e3
 
+mail_user <- "aleguil@emory.edu"
+
 directories <- c(
   inputs_dir      = "data/input",
   estimates_dir   = "data/intermediate/estitmates",
