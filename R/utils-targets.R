@@ -15,8 +15,10 @@ targets <- c(
   cc.vsupp.H = 0.60,
   cc.vsupp.W = 0.72,
   # STIs
-  ir100.gc = 12.81,
-  ir100.ct = 14.59,
+  # ir100.gc = 12.81,
+  # ir100.ct = 14.59,
+  ir100.gc = 0,
+  ir100.ct = 0,
   # 3rd calibration set
   i.prev.dx.B = 0.33,
   i.prev.dx.H = 0.127,

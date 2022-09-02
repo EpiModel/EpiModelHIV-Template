@@ -37,13 +37,18 @@ epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
 netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
 est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
-prep_start <- 65 * 52
+
 param <- param.net(
   data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
-  riskh.start       = prep_start - 53
+  riskh.start       = prep_start - 53,
+  .param.updater.list = list(
+    # High PrEP intake for the first year; go back to normal to get to 15%
+    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
+    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
+  )
 )
 
 init <- init_msm()
@@ -51,7 +56,7 @@ init <- init_msm()
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 52 * 60,
+  nsteps              = calib_end,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -73,8 +78,8 @@ scenarios.df <- tibble(
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
-# for choosing the restart point, set `scenarios_list` to NULL
-scenarios_list <- NULL
+# for choosing the restart point, set `scenarios.list` to NULL
+scenarios.list <- NULL
 
 
 wf <- add_workflow_step(

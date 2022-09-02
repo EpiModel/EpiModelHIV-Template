@@ -3,6 +3,11 @@ networks_size <- 100 * 1e3
 
 mail_user <- "aleguil@emory.edu"
 
+
+calib_end <- 60 * 52
+prep_start <- calib_end + 5 * 52 + 1
+
+
 directories <- c(
   inputs_dir      = "data/input",
   estimates_dir   = "data/intermediate/estitmates",
