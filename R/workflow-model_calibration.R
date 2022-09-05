@@ -78,10 +78,6 @@ scenarios.df <- tibble(
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
-# for choosing the restart point, set `scenarios.list` to NULL
-scenarios.list <- NULL
-
-
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
@@ -89,7 +85,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios.list,
     output_dir = calibration_dir,
     libraries = "EpiModelHIV",
-    n_rep = 620,
+    n_rep = 200,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader

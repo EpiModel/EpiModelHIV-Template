@@ -52,12 +52,12 @@
       "Version": "2.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "main",
-      "RemoteSha": "6616af2d3f18dc466dbcbb264cb32d3d43d0b537",
-      "Hash": "a75dbaddab020831eb0c8be2edfa6470",
+      "RemoteSha": "331413420039ad4e6a9dd4a6f1989bad56053d1a",
+      "RemoteHost": "api.github.com",
+      "Hash": "13bacb200594bc0c76d1eb7a287c3b85",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -82,13 +82,13 @@
       "Version": "2.5.0",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "main",
-      "RemoteSha": "e6f520384f8e65768d42be944496333199173de6",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "riskhist_test",
+      "RemoteSha": "2a3c9589634ddc411f19bd302eedd24e41128a68",
       "Remotes": "github::statnet/EpiModel@main, github::statnet/statnet@master,\n    github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master,\n    github::statnet/tergm@master",
-      "Hash": "352c1be40503f052814e7b9135b605fb",
+      "Hash": "12fd861b1faa550bdfacef3e06219515",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -674,10 +674,10 @@
     },
     "progressr": {
       "Package": "progressr",
-      "Version": "0.10.1",
+      "Version": "0.11.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f785c20b96fae12a810c66717c0137a6",
+      "Hash": "2d004de7f34cd30956e95265f56a8bb6",
       "Requirements": [
         "digest"
       ]
@@ -852,6 +852,26 @@
         "pillar",
         "pkgconfig",
         "rlang",
+        "vctrs"
+      ]
+    },
+    "tidyr": {
+      "Package": "tidyr",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
+      "Requirements": [
+        "cpp11",
+        "dplyr",
+        "ellipsis",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "tibble",
+        "tidyselect",
         "vctrs"
       ]
     },
