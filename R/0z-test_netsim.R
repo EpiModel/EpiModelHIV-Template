@@ -15,7 +15,12 @@ param <- param.net(
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
-  riskh.start       = prep_start - 53
+  riskh.start       = prep_start - 53,
+  .param.updater.list = list(
+    # High PrEP intake for the first year; go back to normal to get to 15%
+    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
+    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
+  )
 )
 
 # Initial conditions
@@ -53,3 +58,7 @@ dd <- d_sim %>%
 
 dd$prep_prop_ret[110:156] |> mean()
 
+
+library(ggplot2)
+ggplot(d_sim, aes(x = time, y = s_prep___B)) +
+  geom_line()
