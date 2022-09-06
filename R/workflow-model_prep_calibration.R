@@ -73,12 +73,12 @@ control <- control_msm(
 scenarios.df <- tibble(
   .scenario.id = c("0", "1", "2", "3"),
   .at = 1,
-  prep.start.prob_1 = c(0.301, 0.301, 0.301, 0.301),
-  prep.start.prob_2 = c(0.301, 0.301, 0.301, 0.301),
-  prep.start.prob_3 = c(0.301, 0.301, 0.301, 0.301),
-  prep.discont.rate_1 = c(0.007, 0.0075, 0.008, 0.0085),
-  prep.discont.rate_2 = c(0.007, 0.0075, 0.008, 0.0085),
-  prep.discont.rate_3 = c(0.007, 0.0075, 0.008, 0.0085)
+  prep.start.prob_1 = rep(0.301, 4),
+  prep.start.prob_2 = prep.start.prob_1,
+  prep.start.prob_3 = prep.start.prob_1,
+  prep.discont.rate_1 = seq(0.007, 0.006, length.out = 4),
+  prep.discont.rate_2 = prep.discont.rate_1,
+  prep.discont.rate_3 = prep.discont.rate_1
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
