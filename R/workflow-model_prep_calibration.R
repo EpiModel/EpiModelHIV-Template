@@ -76,7 +76,7 @@ scenarios.df <- tibble(
   prep.start.prob_1 = rep(0.301, 4),
   prep.start.prob_2 = prep.start.prob_1,
   prep.start.prob_3 = prep.start.prob_1,
-  prep.discont.rate_1 = seq(0.007, 0.006, length.out = 4),
+  prep.discont.rate_1 = seq(0.0063, 0.0067, length.out = 4),
   prep.discont.rate_2 = prep.discont.rate_1,
   prep.discont.rate_3 = prep.discont.rate_1
 )
