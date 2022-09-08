@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-max_cores <- 32
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -73,10 +73,10 @@ control <- control_msm(
 scenarios.df <- tibble(
   .scenario.id = c("0", "1", "2", "3"),
   .at = 1,
-  prep.start.prob_1 = rep(0.301, 4),
+  prep.start.prob_1 = seq(0.28, 0.31, length.out = 4),
   prep.start.prob_2 = prep.start.prob_1,
   prep.start.prob_3 = prep.start.prob_1,
-  prep.discont.rate_1 = seq(0.0063, 0.0067, length.out = 4),
+  prep.discont.rate_1 = rep(0.0064, 4),
   prep.discont.rate_2 = prep.discont.rate_1,
   prep.discont.rate_3 = prep.discont.rate_1
 )
@@ -92,6 +92,7 @@ wf <- add_workflow_step(
     n_rep = 200,
     n_cores = max_cores,
     max_array_size = 999,
+    dump_frames = TRUE,
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(

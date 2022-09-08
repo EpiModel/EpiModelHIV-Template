@@ -107,11 +107,11 @@
       "RemoteType": "github",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "main",
-      "RemoteSha": "b119d0e9fc864d0acfc86e56e1a154908f0c7b62",
+      "RemoteRef": "dumps",
+      "RemoteSha": "36ab27bb69e73f2d2f994c5206225e84053bdde0",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "95b523ced49a65148be94c5e5beab566",
+      "Hash": "21941677048f28959e672e770c05c64b",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -782,15 +782,15 @@
     },
     "statnet.common": {
       "Package": "statnet.common",
-      "Version": "4.7.0-403",
+      "Version": "4.7.0-406",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "statnet",
       "RemoteRepo": "statnet.common",
       "RemoteRef": "master",
-      "RemoteSha": "8a7a61b4d5f1bdef20a48d67a5fcff21fca32467",
-      "Hash": "4c4c3bc302c3dd2c9bb445f49d02b98c",
+      "RemoteSha": "9cb8919f0bde1c74e466e5567c937a1afa6d8b77",
+      "RemoteHost": "api.github.com",
+      "Hash": "27fe4c32d544712ff406d9cb292c9ea6",
       "Requirements": [
         "coda"
       ]
