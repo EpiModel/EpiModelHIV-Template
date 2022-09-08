@@ -108,10 +108,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "dumps",
-      "RemoteSha": "36ab27bb69e73f2d2f994c5206225e84053bdde0",
+      "RemoteSha": "98ed000ba30164839be11141f749e3420fc2f53e",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "21941677048f28959e672e770c05c64b",
+      "Hash": "9b00565f321b177ac0a147bf73f5934a",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -208,13 +208,11 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.3.0",
+      "Version": "3.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "23abf173c2b783dcc43379ab9bba00ee",
-      "Requirements": [
-        "glue"
-      ]
+      "Hash": "78003c09d258968a4d28107e779edb10",
+      "Requirements": []
     },
     "clipr": {
       "Package": "clipr",
@@ -857,10 +855,10 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.2.0",
+      "Version": "1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
+      "Hash": "cdb403db0de33ccd1b6f53b83736efa8",
       "Requirements": [
         "cpp11",
         "dplyr",
