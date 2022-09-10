@@ -108,10 +108,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "dumps",
-      "RemoteSha": "98ed000ba30164839be11141f749e3420fc2f53e",
+      "RemoteSha": "bc99af632cfce5c495949f092e380c9e209eba4b",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "9b00565f321b177ac0a147bf73f5934a",
+      "Hash": "9947cdcd61613f7f8be134537a3a4d27",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -322,16 +322,16 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.3-6988",
+      "Version": "4.3-7009",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "statnet",
       "RemoteRepo": "ergm",
       "RemoteRef": "master",
-      "RemoteSha": "eebdbfa51e55d0dbff3867a2efb7bd136f018b46",
+      "RemoteSha": "7408df4c10220414f2141fa83dbe092e7de5e202",
       "RemoteHost": "api.github.com",
       "Remotes": "github::statnet/statnet.common@master, github::statnet/tergm@master,\n    github::statnet/ergm.count@master",
-      "Hash": "de2772adbdaed8eb0aa056fb3794423f",
+      "Hash": "cb3930e05e62ccfb7e0acef6b74af150",
       "Requirements": [
         "MASS",
         "Matrix",
@@ -525,10 +525,10 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "1.0.1",
+      "Version": "1.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a6b6d352e3ed897373ab19d8395c98d0",
+      "Hash": "25f74670fa7d3277fe3ad8c1712a699f",
       "Requirements": [
         "glue",
         "rlang"
@@ -780,15 +780,15 @@
     },
     "statnet.common": {
       "Package": "statnet.common",
-      "Version": "4.7.0-406",
+      "Version": "4.7.0-409",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "statnet",
       "RemoteRepo": "statnet.common",
       "RemoteRef": "master",
-      "RemoteSha": "9cb8919f0bde1c74e466e5567c937a1afa6d8b77",
+      "RemoteSha": "f0ee33f3e3a7d5e78ff6e18fbfbbc803609c0a54",
       "RemoteHost": "api.github.com",
-      "Hash": "27fe4c32d544712ff406d9cb292c9ea6",
+      "Hash": "e1a313f4644be82804c3387319d6d2c4",
       "Requirements": [
         "coda"
       ]
