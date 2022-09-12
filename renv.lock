@@ -55,9 +55,9 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "main",
-      "RemoteSha": "331413420039ad4e6a9dd4a6f1989bad56053d1a",
+      "RemoteSha": "4ad4fc14f0a821dad2c3a3de7c3610eb1e4fc92b",
       "RemoteHost": "api.github.com",
-      "Hash": "13bacb200594bc0c76d1eb7a287c3b85",
+      "Hash": "a7624c03fcbcfa25d08a3209dc96f7ac",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -85,10 +85,10 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhiv-p",
-      "RemoteRef": "main",
-      "RemoteSha": "41f957a517c932ca064839aaf3559b54f6cf8a07",
+      "RemoteRef": "debug_acts",
+      "RemoteSha": "fbc63da51945ed28b1a75db0eb15dd71e2d91058",
       "Remotes": "github::statnet/EpiModel@main, github::statnet/statnet@master,\n    github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master,\n    github::statnet/tergm@master",
-      "Hash": "3e49c397026eb19d0fad860624d267ae",
+      "Hash": "59a49e3d46d547871ca99f16d17e02f3",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -108,10 +108,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "dumps",
-      "RemoteSha": "bc99af632cfce5c495949f092e380c9e209eba4b",
+      "RemoteSha": "0789af598789d7b3c8666396018c2e8d285f8a08",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "9947cdcd61613f7f8be134537a3a4d27",
+      "Hash": "ea1f469b5db413227ae2a2ec32a2cd80",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -133,10 +133,10 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.4-1",
+      "Version": "1.5-0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "699c47c606293bdfbc9fd78a93c9c8fe",
+      "Hash": "19d2a523548a8fd4f6460f4e61bc15fb",
       "Requirements": [
         "lattice"
       ]

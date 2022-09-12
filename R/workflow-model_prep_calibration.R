@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-max_cores <- 28
+max_cores <- 1
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -99,7 +99,7 @@ wf <- add_workflow_step(
     "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
-    "mem" = "0" # special: all mem on node
+    "mem" = "8G" # special: all mem on node
   )
 )
 
