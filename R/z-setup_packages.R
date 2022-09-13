@@ -18,4 +18,9 @@ renv::install(c(
 renv::hydrate()
 
 # Specific other packages
-
+library("rmarkdown")
+library("knitr")
+library("pkgload")
+library("remotes")
+library("Rglpk")
+library("sessioninfo")
