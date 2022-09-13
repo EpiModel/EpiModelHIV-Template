@@ -85,10 +85,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhiv-p",
       "RemoteRef": "debug_acts",
-      "RemoteSha": "26e80fcafa06df3689e2c0d588c5fdea972f753d",
+      "RemoteSha": "8b2d7637f89fb93015ec85e292575ad7675849d9",
       "RemoteHost": "api.github.com",
       "Remotes": "github::statnet/EpiModel@main, github::statnet/statnet@master,\n    github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master,\n    github::statnet/tergm@master",
-      "Hash": "ebba79eb0ff43dcfba82989e073b1545",
+      "Hash": "d855998829181031d1343dfd4e6885fe",
       "Requirements": [
         "EpiModel",
         "dplyr",
