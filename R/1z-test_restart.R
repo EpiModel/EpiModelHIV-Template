@@ -30,7 +30,7 @@ init <- init_msm()
 source("R/utils-targets.R")
 control <- control_msm(
   start               = calib_end + 1,
-  nsteps              = prep_start + 52 * 4,
+  nsteps              = calib_end + 1,
   nsims               = 1,
   ncores              = 1,
   initialize.FUN      = reinit_msm,
@@ -38,7 +38,7 @@ control <- control_msm(
   truncate.el.cuml    = 0,
   .tracker.list       = calibration_trackers,
   verbose             = TRUE,
-  raw.output          = FALSE
+  raw.output          = TRUE
 )
 
 # Simulation and exploration ---------------------------------------------------
@@ -58,3 +58,6 @@ d_sim %>%
   filter(time > prep_start) %>%
   ggplot(aes(x = time, y = s_prep___B / s_prep_elig___B)) +
     geom_line()
+
+# Raw expl
+
