@@ -12,7 +12,15 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-max_cores <- 32
+hpc_configs <- swf_configs_hyak(
+  hpc = "klone",
+  partition = "ckpt",
+  r_version = "4.1.0",
+  mail_user = mail_user
+)
+swf_configs_hyak
+
+max_cores <- 30
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -51,7 +59,12 @@ param <- param.net(
   )
 )
 
-init <- init_msm()
+init <- init_msm(
+  prev.ugc = 0.05,
+  prev.rct = 0.05,
+  prev.rgc = 0.05,
+  prev.uct = 0.05
+)
 
 # Controls
 source("R/utils-targets.R")
@@ -70,11 +83,11 @@ control <- control_msm(
 
 # insert test values here
 scenarios.df <- tibble(
-  .scenario.id = c("0", "1"),
+  .scenario.id = c("0"),
   .at = 1,
-  hiv.trans.scale_1	= c(4.1, 4.2),
-  hiv.trans.scale_2	= c(.53, .54),
-  hiv.trans.scale_3	= c(.32, .33)
+  hiv.trans.scale_1	= c(4.1),
+  hiv.trans.scale_2	= c(.53),
+  hiv.trans.scale_3	= c(.32)
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
@@ -85,7 +98,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios.list,
     output_dir = calibration_dir,
     libraries = "EpiModelHIV",
-    n_rep = 200,
+    n_rep = 150,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader

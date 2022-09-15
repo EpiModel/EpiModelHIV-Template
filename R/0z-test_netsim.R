@@ -24,7 +24,12 @@ param <- param.net(
 )
 
 # Initial conditions
-init <- init_msm()
+init <- init_msm(
+  prev.ugc = 0.05,
+  prev.rct = 0.05,
+  prev.rgc = 0.05,
+  prev.uct = 0.05
+)
 
 # Controls
 source("R/utils-targets.R")
