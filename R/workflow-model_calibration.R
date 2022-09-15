@@ -18,7 +18,6 @@ hpc_configs <- swf_configs_hyak(
   r_version = "4.1.0",
   mail_user = mail_user
 )
-swf_configs_hyak
 
 max_cores <- 30
 

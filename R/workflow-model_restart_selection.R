@@ -46,7 +46,7 @@ param <- param.net(
   .param.updater.list = list(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
+    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
   )
 )
 
