@@ -54,10 +54,10 @@
       "RemoteType": "github",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
-      "RemoteRef": "main",
-      "RemoteSha": "4ad4fc14f0a821dad2c3a3de7c3610eb1e4fc92b",
+      "RemoteRef": "get_sims_updt",
+      "RemoteSha": "c4fb00c6880eb7c1e7c2b580036cf4e188915aa2",
       "RemoteHost": "api.github.com",
-      "Hash": "a7624c03fcbcfa25d08a3209dc96f7ac",
+      "Hash": "8bc12bb72911b3c0734161e96009e077",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -72,6 +72,7 @@
         "lazyeval",
         "network",
         "networkDynamic",
+        "rlang",
         "statnet.common",
         "tergm",
         "tibble"

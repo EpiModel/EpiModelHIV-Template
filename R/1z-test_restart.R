@@ -61,3 +61,9 @@ d_sim %>%
 
 # Raw expl
 
+dat <- sim[[1]]
+dat <- reinit_msm(orig, param, init, control, 1)
+at <- get_current_timestep(dat)
+uid <- get_unique_ids(dat)
+
+u_dup <- as.numeric(names(which(table(get_unique_ids(dat)) > 1)))
