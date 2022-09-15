@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-max_cores <- 1
+max_cores <- 32
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
