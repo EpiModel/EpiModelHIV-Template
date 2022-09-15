@@ -94,7 +94,7 @@ gc.asympt.tx.prob_3,0.1,numeric,CPN
 ct.asympt.tx.prob_1,0.1,numeric,CPN
 ct.asympt.tx.prob_2,0.1,numeric,CPN
 ct.asympt.tx.prob_3,0.1,numeric,CPN
-sti.cond.eff.rr,95,numeric,CPN
+sti.cond.eff.rr,0.95,numeric,CPN
 sti.cond.fail.rr_1,0.39,numeric,CPN
 sti.cond.fail.rr_2,0.3,numeric,CPN
 sti.cond.fail.rr_3,0.21,numeric,CPN

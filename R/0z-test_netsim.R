@@ -35,8 +35,8 @@ init <- init_msm(
 source("R/utils-targets.R")
 control <- control_msm(
   nsteps              = 52 * 2,
-  nsims               = 2,
-  ncores              = 2,
+  nsims               = 1,
+  ncores              = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
   .tracker.list       = calibration_trackers,
@@ -45,6 +45,7 @@ control <- control_msm(
 )
 
 # Simulation and exploration ---------------------------------------------------
+# debug(stitrans_msm)
 sim <- netsim(est, param, init, control)
 
 
