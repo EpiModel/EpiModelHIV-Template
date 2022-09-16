@@ -10,8 +10,8 @@ est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Parameters
 prep_start <- 54
-gc_b <- 0.4
-ct_b <- 0.4
+gc_b <- 0.5
+ct_b <- 0.5
 param <- param.net(
   data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
   rgc.prob = plogis(qlogis(gc_b) + log(1.25)),
@@ -31,16 +31,16 @@ param <- param.net(
 
 # Initial conditions
 init <- init_msm(
-  prev.ugc = 0.15,
-  prev.rct = 0.15,
-  prev.rgc = 0.15,
-  prev.uct = 0.15
+  prev.ugc = 0.05,
+  prev.rct = 0.05,
+  prev.rgc = 0.05,
+  prev.uct = 0.05
 )
 
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 52 * 10,
+  nsteps              = 52 * 7,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
