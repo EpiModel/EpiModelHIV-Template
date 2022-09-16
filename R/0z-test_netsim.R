@@ -48,7 +48,6 @@ control <- control_msm(
 # debug(stitrans_msm)
 sim <- netsim(est, param, init, control)
 
-
 d_sim <- as_tibble(sim)
 
 glimpse(d_sim)
