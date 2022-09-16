@@ -10,8 +10,14 @@ est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Parameters
 prep_start <- 54
+gc_b <- 0.4
+ct_b <- 0.4
 param <- param.net(
   data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
+  rgc.prob = plogis(qlogis(gc_b) + log(1.25)),
+  ugc.prob = gc_b,
+  rct.prob = plogis(qlogis(ct_b) + log(1.25)),
+  uct.prob = ct_b,
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
@@ -25,16 +31,16 @@ param <- param.net(
 
 # Initial conditions
 init <- init_msm(
-  prev.ugc = 0.05,
-  prev.rct = 0.05,
-  prev.rgc = 0.05,
-  prev.uct = 0.05
+  prev.ugc = 0.15,
+  prev.rct = 0.15,
+  prev.rgc = 0.15,
+  prev.uct = 0.15
 )
 
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 52 * 2,
+  nsteps              = 52 * 10,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -66,5 +72,5 @@ dd$prep_prop_ret[110:156] |> mean()
 
 
 library(ggplot2)
-ggplot(d_sim, aes(x = time, y = s_prep___B)) +
+ggplot(d_sim, aes(x = time, y = prev.gc)) +
   geom_line()

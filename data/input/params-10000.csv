@@ -78,10 +78,10 @@ rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
 uct.sympt.prob,0.95,numeric, CPN- gaps 10.2
 rgc.ntx.int,26,numeric,CPN
 ugc.ntx.int,26,numeric, CPN
-gc.tx.int,2,numeric, CPN
+gc.tx.int,1,numeric, 2 in CPN but one in PAF (coherent with lit and CDC)
 rct.ntx.int,32,numeric, CPN
 uct.ntx.int,32,numeric, CPN
-ct.tx.int,2,numeric, CPN
+ct.tx.int,1,numeric, 2 in CPN but one in PAF (coherent with lit and CDC)
 gc.sympt.tx.prob_1,0.9,numeric,CPN
 gc.sympt.tx.prob_2,0.9,numeric,CPN
 gc.sympt.tx.prob_3,0.9,numeric,CPN
