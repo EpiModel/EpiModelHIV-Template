@@ -21,7 +21,7 @@ d %>%
 # - target value
 
 d %>%
-  filter(scenario_name == "1") %>%
+  filter(scenario_name == "3") %>%
   pivot_longer(-scenario_name) %>%
   separate(name, into = c("name", "quant"), sep = "__") %>%
   pivot_wider(names_from = quant, values_from = value)

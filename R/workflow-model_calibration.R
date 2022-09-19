@@ -8,7 +8,7 @@ library(EpiModelHPC)
 source("R/000-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
-  partition = "preemptable",
+  partition = "epimodel",
   mail_user = mail_user
 )
 
@@ -84,9 +84,9 @@ control <- control_msm(
 scenarios.df <- tibble(
   .scenario.id = as.character(seq_len(5)),
   .at = 1,
-  ugc.prob = seq(0.3, 0.4, length.out = 5),
+  ugc.prob = seq(0.325, 0.375, length.out = 5),
   rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
-  uct.prob = seq(0.3, 0.4, length.out = 5),
+  uct.prob = seq(0.29, 0.294, length.out = 5),
   rct.prob = plogis(qlogis(uct.prob) + log(1.25))
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
