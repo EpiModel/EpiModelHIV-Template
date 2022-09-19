@@ -12,12 +12,12 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-hpc_configs <- swf_configs_hyak(
-  hpc = "klone",
-  partition = "ckpt",
-  r_version = "4.1.0",
-  mail_user = mail_user
-)
+# hpc_configs <- swf_configs_hyak(
+#   hpc = "klone",
+#   partition = "ckpt",
+#   r_version = "4.1.0",
+#   mail_user = mail_user
+# )
 
 max_cores <- 30
 
@@ -59,10 +59,10 @@ param <- param.net(
 )
 
 init <- init_msm(
-  prev.ugc = 0.05,
-  prev.rct = 0.05,
-  prev.rgc = 0.05,
-  prev.uct = 0.05
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
 )
 
 # Controls
@@ -82,11 +82,12 @@ control <- control_msm(
 
 # insert test values here
 scenarios.df <- tibble(
-  .scenario.id = c("0"),
+  .scenario.id = as.character(seq_len(5)),
   .at = 1,
-  hiv.trans.scale_1	= c(4.1),
-  hiv.trans.scale_2	= c(.53),
-  hiv.trans.scale_3	= c(.32)
+  ugc.prob = seq(0.3, 0.4, length.out = 5),
+  rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
+  uct.prob = seq(0.3, 0.4, length.out = 5),
+  rct.prob = plogis(qlogis(uct.prob) + log(1.25))
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 

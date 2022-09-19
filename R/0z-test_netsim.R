@@ -10,8 +10,8 @@ est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
 
 # Parameters
 prep_start <- 54
-gc_b <- 0.5
-ct_b <- 0.5
+gc_b <- 0.4
+ct_b <- 0.4
 param <- param.net(
   data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
   rgc.prob = plogis(qlogis(gc_b) + log(1.25)),
@@ -72,5 +72,6 @@ dd$prep_prop_ret[110:156] |> mean()
 
 
 library(ggplot2)
-ggplot(d_sim, aes(x = time, y = prev.gc)) +
-  geom_line()
+ggplot(d_sim, aes(x = time)) +
+  geom_line(aes(y = prev.ct)) +
+  geom_line(aes(y = prev.gc), col = "blue")
