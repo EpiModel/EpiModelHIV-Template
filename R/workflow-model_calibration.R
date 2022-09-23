@@ -84,9 +84,9 @@ control <- control_msm(
 scenarios.df <- tibble(
   .scenario.id = as.character(seq_len(5)),
   .at = 1,
-  ugc.prob = seq(0.325, 0.375, length.out = 5),
+  ugc.prob = seq(0.3225, 0.3275, length.out = 5), # best 0.325
   rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
-  uct.prob = seq(0.29, 0.294, length.out = 5),
+  uct.prob = seq(0.29, 0.294, length.out = 5), # best 0.291
   rct.prob = plogis(qlogis(uct.prob) + log(1.25))
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
