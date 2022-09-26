@@ -1,17 +1,17 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
 # Necessary files
-epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
-netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
-orig     <- readRDS(fs::path(estimates_dir, "restart.rds"))
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+orig     <- readRDS("data/intermediate/estimates/restart.rds")
 
 prep_start <- calib_end + 55
 
 # Parameters
 param <- param.net(
-  data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
+  data.frame.params = readr::read_csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
@@ -29,8 +29,8 @@ init <- init_msm()
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  start               = calib_end + 1,
-  nsteps              = calib_end + 1,
+  start               = restart_time,
+  nsteps              = restart_time + 1,
   nsims               = 1,
   ncores              = 1,
   initialize.FUN      = reinit_msm,
@@ -38,7 +38,7 @@ control <- control_msm(
   truncate.el.cuml    = 0,
   .tracker.list       = calibration_trackers,
   verbose             = TRUE,
-  raw.output          = TRUE
+  raw.output          = FALSE
 )
 
 # Simulation and exploration ---------------------------------------------------
@@ -58,12 +58,3 @@ d_sim %>%
   filter(time > prep_start) %>%
   ggplot(aes(x = time, y = s_prep___B / s_prep_elig___B)) +
     geom_line()
-
-# Raw expl
-
-dat <- sim[[1]]
-dat <- reinit_msm(orig, param, init, control, 1)
-at <- get_current_timestep(dat)
-uid <- get_unique_ids(dat)
-
-u_dup <- as.numeric(names(which(table(get_unique_ids(dat)) > 1)))

@@ -5,7 +5,7 @@
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 library(EpiModelHPC)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "epimodel",
@@ -40,13 +40,13 @@ wf <- add_workflow_step(
 # Run the simulations ----------------------------------------------------------
 library(EpiModelHIV)
 
-epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
-netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
-est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+est      <- readRDS("data/intermediate/estimates/netest.rds")
 
 
 param <- param.net(
-  data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
+  data.frame.params = readr::read_csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
@@ -96,7 +96,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     est, param, init, control,
     scenarios_list = scenarios.list,
-    output_dir = calibration_dir,
+    output_dir = "data/intermediate/calibration",
     libraries = "EpiModelHIV",
     n_rep = 150,
     n_cores = max_cores,

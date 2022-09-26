@@ -12,7 +12,7 @@ if (interactive()) {
 
 library(EpiModelHIV)
 library(ARTnet)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
 # 0. Initialize Network --------------------------------------------------------
 epistats <- build_epistats(
@@ -22,7 +22,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, fs::path(estimates_dir, "epistats.rds"))
+saveRDS(epistats, "data/intermediate/estimates/epistats.rds")
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -35,7 +35,7 @@ netstats <- build_netstats(
   expect.mort = 0.000478213,
   network.size = networks_size
 )
-saveRDS(netstats, fs::path(estimates_dir, "netstats.rds"))
+saveRDS(netstats, "data/intermediate/estimates/netstats.rds")
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -183,4 +183,4 @@ fit_inst <- trim_netest(fit_inst)
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, fs::path(estimates_dir, "netest.rds"))
+saveRDS(out, "data/intermediate/estimates/netest.rds")

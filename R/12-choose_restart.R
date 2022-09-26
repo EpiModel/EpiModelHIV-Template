@@ -6,9 +6,9 @@
 library(EpiModel)
 library(dplyr)
 library(tidyr)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
-d <- readRDS(fs::path(calibration_dir, "assessments_raw.rds"))
+d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
 source("R/utils-targets.R")
 
@@ -37,7 +37,7 @@ d %>%
 
 # Get best sim
 best <- readRDS(fs::path(
-  calibration_dir,
+  "data/intermediate/calibration",
   paste0("sim__empty_scenario__", best_sim$batch, ".rds"))
 )
 
@@ -47,4 +47,4 @@ epi_num <- best$epi$num
 # Remove all epi except `num`
 best$epi <- list(num = epi_num)
 
-saveRDS(best, fs::path(estimates_dir, "restart.rds"))
+saveRDS(best, "data/intermediate/estimates/restart.rds")

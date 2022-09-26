@@ -6,9 +6,9 @@
 library(EpiModel)
 library(dplyr)
 library(tidyr)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
-d <- readRDS(fs::path(calibration_dir, "assessments.rds"))
+d <- readRDS("data/intermediate/calibration/assessments.rds")
 
 glimpse(d)
 

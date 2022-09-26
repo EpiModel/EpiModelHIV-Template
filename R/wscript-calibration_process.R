@@ -4,13 +4,13 @@
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
-source("R/000-project_settings.R")
+source("R/00-project_settings.R")
 
 nsteps <- 52
 
 # Process each file in parallel ------------------------------------------------
 calib_files <- list.files(
-  calibration_dir,
+  "data/intermediate/calibration",
   pattern = "^sim__.*rds$",
   full.names = TRUE
 )
@@ -24,7 +24,7 @@ assessments <- lapply(
 
 # Merge all and combine --------------------------------------------------------
 assessments <- bind_rows(assessments)
-saveRDS(assessments, fs::path(calibration_dir, "assessments_raw.rds"))
+saveRDS(assessments, "data/intermediate/calibration/assessments_raw.rds")
 
 assessments <- assessments %>%
   select(- c(sim, batch)) %>%
@@ -40,4 +40,4 @@ assessments <- assessments %>%
   ))
 
 # Save the result --------------------------------------------------------------
-saveRDS(assessments, fs::path(calibration_dir, "assessments.rds"))
+saveRDS(assessments, "data/intermediate/calibration/assessments.rds")

@@ -1,23 +1,18 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
-source("R/000-project_settings.R")
+library(dplyr)
+source("R/00-project_settings.R")
 
 
 # Necessary files
-epistats <- readRDS(fs::path(estimates_dir, "epistats.rds"))
-netstats <- readRDS(fs::path(estimates_dir, "netstats.rds"))
-est      <- readRDS(fs::path(estimates_dir, "netest.rds"))
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+est      <- readRDS("data/intermediate/estimates/netest.rds")
 
 # Parameters
 prep_start <- 54
-gc_b <- 0.4
-ct_b <- 0.4
 param <- param.net(
-  data.frame.params = readr::read_csv(fs::path(inputs_dir, "params.csv")),
-  rgc.prob = plogis(qlogis(gc_b) + log(1.25)),
-  ugc.prob = gc_b,
-  rct.prob = plogis(qlogis(ct_b) + log(1.25)),
-  uct.prob = ct_b,
+  data.frame.params = readr::read_csv("data/input/params-100000.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
@@ -29,12 +24,25 @@ param <- param.net(
   )
 )
 
+# Define test scenarios
+scenarios.df <- dplyr::tibble(
+  .scenario.id = c("scenario_1", "scenario_2"),
+  .at = 1,
+  hiv.test.rate_1 = c(0.004, 0.005),
+  hiv.test.rate_2 = c(0.004, 0.005),
+  hiv.test.rate_3 = c(0.007, 0.008)
+)
+scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
+
+# Apply a scenario to the param object
+param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
+
 # Initial conditions
 init <- init_msm(
-  prev.ugc = 0.05,
-  prev.rct = 0.05,
-  prev.rgc = 0.05,
-  prev.uct = 0.05
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
 )
 
 # Controls
@@ -52,7 +60,7 @@ control <- control_msm(
 
 # Simulation and exploration ---------------------------------------------------
 # debug(stitrans_msm)
-sim <- netsim(est, param, init, control)
+sim <- netsim(est, param_sc, init, control)
 
 d_sim <- as_tibble(sim)
 
@@ -69,7 +77,6 @@ dd <- d_sim %>%
   mutate(prep_prop_ret = prep_ret1y___ALL / lag(prep_startat___ALL, 52))
 
 dd$prep_prop_ret[110:156] |> mean()
-
 
 library(ggplot2)
 ggplot(d_sim, aes(x = time)) +
