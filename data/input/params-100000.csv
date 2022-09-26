@@ -108,9 +108,9 @@ hiv.uct.rr,1.73,numeric
 hiv.dual.rr,0.2,numeric
 riskh.start,Inf,numeric
 prep.start,Inf,numeric
-prep.start.prob_1,0.29,numeric
-prep.start.prob_2,0.29,numeric
-prep.start.prob_3,0.29,numeric
+prep.start.prob_1,0.31,numeric
+prep.start.prob_2,0.31,numeric
+prep.start.prob_3,0.31,numeric
 prep.adhr.dist_1,0.089,numeric
 prep.adhr.dist_2,0.127,numeric
 prep.adhr.dist_3,0.784,numeric
