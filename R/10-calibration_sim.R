@@ -37,7 +37,7 @@ init <- init_msm(
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = calib_end,
+  nsteps              = calibration_end,
   nsims               = max_cores,
   ncores              = max_cores,
   cumulative.edgelist = TRUE,
@@ -59,18 +59,19 @@ scenarios.df <- tibble(
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
-for (i in seq_along(scenarios_list)) {
+for (i in seq_along(scenarios.list)) {
   start_time <- Sys.time()
+  scenario <- scenarios.list[[i]]
 
-  param_sc <- EpiModel::use_scenario(param, scenario[[i]])
+  param_sc <- EpiModel::use_scenario(param, scenario)
 
   print(paste0("Starting simulation for scenario: ", scenario[["id"]]))
   sim <- netsim(est, param_sc, init, control)
 
-  file_name <- paste0("sim__", scenario[["id"]], "__", batch_num, ".rds")
+  file_name <- paste0("sim__", scenario[["id"]], "__", i, ".rds")
 
   print(paste0("Saving simulation in file: ", file_name))
-  saveRDS(sim, fs::path(output_dir, file_name))
+  saveRDS(sim, fs::path("data/intermediate/calibration/", file_name))
 
   print("Done in: ")
   print(Sys.time() - start_time)

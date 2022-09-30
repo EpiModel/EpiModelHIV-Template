@@ -6,7 +6,7 @@
 networks_size   <- 100 * 1e3
 
 # Information for the HPC workflows
-current_git_branch <- "100k"
+current_git_branch <- "auto_calib"
 mail_user <- "aleguil@emory.edu"
 
 # Relevant time steps for the simulation

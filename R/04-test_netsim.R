@@ -74,3 +74,4 @@ plot(sim, y = "ir100")
 # Convert to data frame
 df <- as_tibble(sim)
 head(df)
+tail(df$ir100)
