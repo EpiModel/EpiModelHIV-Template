@@ -39,16 +39,18 @@ model_fun <- function(proposal) {
   )
 
   scenario_df <- proposal
-  scenario_df[[".scenario.id"]] <- scenario_df[[".proposal.index"]]
-  scenario_df[[".proposal.index"]] <- NULL
+  scenario_df[[".scenario.id"]] <- scenario_df[[".proposal_index"]]
   scenario_df[[".at"]] <- 1
+
+  scenario_df[[".proposal_index"]] <- NULL
+  scenario_df[[".iteration"]] <- NULL
   scenario <- EpiModel::create_scenario_list(scenario_df)[[1]]
 
   param_sc <- EpiModel::use_scenario(param, scenario)
 
   sim <- netsim(est, param_sc, init, control)
 
-  source("R/targets.R")
+  source("R/utils-targets.R")
   as_tibble(sim) %>%
     mutate_targets() %>%
     filter(time >= max(time) - 52) %>%

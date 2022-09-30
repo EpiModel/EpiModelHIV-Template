@@ -3,8 +3,11 @@
 step1_n_cores <- 10
 step2_n_cores <- 30
 
+library(EpiModelHPC)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
+
+n_sims <- 900
 
 calib_object <- list(
   waves = list(
@@ -14,9 +17,9 @@ calib_object <- list(
         targets_val = 0.804,
         params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_1 = seq(0.001, 0.01, length.out = 200),
+          hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job2 = list(
@@ -24,9 +27,9 @@ calib_object <- list(
         targets_val = 0.799,
         params = c("hiv.test.rate_2"), # target: 0.0038
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_2 = seq(0.001, 0.01, length.out = 200),
+          hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job3 = list(
@@ -34,9 +37,9 @@ calib_object <- list(
         targets_val = 0.88,
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_3 = seq(0.001, 0.01, length.out = 200),
+          hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job4 = list(
@@ -44,9 +47,9 @@ calib_object <- list(
         targets_val = 0.62,
         params = c("tx.init.rate_1"), # target: 0.1775
         initial_proposals = dplyr::tibble(
-          tx.init.rate_1 = seq(0.1, 0.5, length.out = 200),
+          tx.init.rate_1 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job5 = list(
@@ -54,9 +57,9 @@ calib_object <- list(
         targets_val = 0.65,
         params = c("tx.init.rate_2"), # target: 0.19
         initial_proposals = dplyr::tibble(
-          tx.init.rate_2 = seq(0.1, 0.5, length.out = 200),
+          tx.init.rate_2 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job6 = list(
@@ -64,9 +67,9 @@ calib_object <- list(
         targets_val = 0.76,
         params = c("tx.init.rate_3"), # target: 0.2521
         initial_proposals = dplyr::tibble(
-          tx.init.rate_3 = seq(0.1, 0.5, length.out = 200),
+          tx.init.rate_3 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       )
     ),
@@ -74,37 +77,37 @@ calib_object <- list(
       job1 = list(
         targets = "cc.vsupp.B",
         targets_val = 0.55,
-        params = c("tt.halt.partial.rate_1"), # target: 0.00385
+        params = c("tx.halt.partial.rate_1"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          tt.halt.partial.rate_1 = seq(0.001, 0.01, length.out = 200),
+          tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job2 = list(
         targets = "cc.vsupp.H",
         targets_val = 0.60,
-        params = c("tt.halt.partial.rate_2"), # target: 0.0038
+        params = c("tx.halt.partial.rate_2"), # target: 0.0038
         initial_proposals = dplyr::tibble(
-          tt.halt.partial.rate_2 = seq(0.001, 0.01, length.out = 200),
+          tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       ),
       job3 = list(
         targets = "cc.vsupp.W",
         targets_val = 0.72,
-        params = c("tt.halt.partial.rate_3"), # target: 0.0069
+        params = c("tx.halt.partial.rate_3"), # target: 0.0069
         initial_proposals = dplyr::tibble(
-          tt.halt.partial.rate_3 = seq(0.001, 0.01, length.out = 200),
+          tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(1000, 200),
+        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 2),
         get_result = determ_noisy_end(0.01, 50)
       )
     )
   ),
   config = list(
-    simulator = simulator,
+    simulator = model_fun,
     default_proposal = dplyr::tibble(
       hiv.test.rate_1 = 0.001,
       hiv.test.rate_2 = 0.001,
@@ -112,16 +115,17 @@ calib_object <- list(
       tx.init.rate_1 = 0.1,
       tx.init.rate_2 = 0.1,
       tx.init.rate_3 = 0.1,
-      tt.halt.partial.rate_1 = 0.001,
-      tt.halt.partial.rate_2 = 0.001,
-      tt.halt.partial.rate_3 = 0.001
+      tx.halt.partial.rate_1 = 0.001,
+      tx.halt.partial.rate_2 = 0.001,
+      tx.halt.partial.rate_3 = 0.001
     ),
     root_directory = "data/calib",
     max_iteration = 100,
-    n_sims = 1000
+    n_sims = n_sims
   )
   # state = list() # managed internally
 )
+
 
 library(slurmworkflow)
 library(EpiModelHPC)
@@ -133,12 +137,11 @@ hpc_configs <- swf_configs_rsph(
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
-  wf_name = "em_calib",
+  wf_name = "auto_calib",
   default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
 # Step 1 -----------------------------------------------------------------------
-
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
@@ -158,8 +161,7 @@ wf <- add_workflow_step(
 )
 
 # Step 2 -----------------------------------------------------------------------
-
-batch_numbers <- get_batch_numbers(calib_object, step2_n_cores)
+batch_numbers <- EpiModelHPC:::get_batch_numbers(calib_object, step2_n_cores)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_map_script(
@@ -180,4 +182,3 @@ wf <- add_workflow_step(
     "mail-type" = "FAIL"
   )
 )
-

@@ -6,7 +6,7 @@ make_partition_proposer <- function(partitions, allowed_range = c(-Inf, Inf)) {
     values <- results[[job$targets]]
     target <- job$targets_val
 
-    calib_res <- tibble(
+    calib_res <- dplyr::tibble(
       param = results[[job$params]],
       dist = values - target,
       loss = abs(dist)
@@ -58,12 +58,14 @@ fill_proposals <- function(proposals, default_proposal) {
 
 # ------------------------------------------------------------------------------
 make_noisy_proposer <- function(n_new, n_best) {
+  force(n_new)
+  force(n_best)
   function(job, results) {
     values <- results[[job$targets]]
     target <- job$targets_val
 
     # warning, only work on unique values
-    calib_res <- tibble(
+    calib_res <- dplyr::tibble(
       param = results[[job$params]],
       dist = values - target,
       loss = abs(dist)
@@ -99,6 +101,8 @@ rmse <- function(values, targets) {
 }
 
 determ_noisy_end <- function(threshold, n_needed) {
+  force(threshold)
+  force(n_needed)
   function(job, results) {
     values <- results[[job$targets]]
     target <- job$targets_val
