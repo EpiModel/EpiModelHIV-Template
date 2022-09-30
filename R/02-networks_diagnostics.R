@@ -9,7 +9,7 @@ if (interactive()) {
   nsteps <- 500
 }
 
-library(EpiModelHIV)
+library("EpiModelHIV")
 
 est <- readRDS("data/intermediate/estimates/netest.rds")
 
