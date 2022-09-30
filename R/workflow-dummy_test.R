@@ -1,4 +1,10 @@
 # working on HPC
+#
+# if works correctly:
+#   - step1 should provide better logs
+#   - how to simplify the whole process
+#   - how to get message on finish?
+#
 
 step1_n_cores <- 10
 step2_n_cores <- 30
