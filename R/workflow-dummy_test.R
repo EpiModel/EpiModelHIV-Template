@@ -5,6 +5,10 @@
 #   - how to simplify the whole process
 #   - how to get message on finish?
 #
+#  PROBABLE ERROR ON determ_noisy_end IN CALCULATING THE LOSS
+#   not in loss apparently
+#   need log when a calib is done (to see where we at)
+#     store in calib object and log at the end of each step1
 
 step1_n_cores <- 10
 step2_n_cores <- 30

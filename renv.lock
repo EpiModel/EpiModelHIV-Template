@@ -56,9 +56,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "2fc9b3c2032ef003b90ba501c1249829d0b4639b",
+      "RemoteSha": "186da89f7355563c3f29e9af86f4b3da2ac2b34c",
       "RemoteHost": "api.github.com",
-      "Hash": "501fadfe40287db05af6c10485c90d10",
+      "Hash": "7531ab1677e7040ae22104e96a3dc98e",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -110,10 +110,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "auto_calibration",
-      "RemoteSha": "662bd54e7327882b72923607b27303b74797aefe",
+      "RemoteSha": "2d7d4ad5c0c4d230c9240b816b9d3ff6fb67c9e7",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "8ebf433d5fff19432d0364ba99814534",
+      "Hash": "4a4732dfcd44e769092bf9234e5b71bf",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -988,10 +988,10 @@
     },
     "vroom": {
       "Package": "vroom",
-      "Version": "1.5.7",
+      "Version": "1.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "976507b5a105bc3bdf6a5a5f29e0684f",
+      "Hash": "64f81fdead6e0d250fb041e175d123ab",
       "Requirements": [
         "bit64",
         "cli",
