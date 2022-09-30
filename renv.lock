@@ -110,16 +110,17 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "auto_calibration",
-      "RemoteSha": "c6d81608961f3b5021003302b4d073fc01456ec2",
+      "RemoteSha": "662bd54e7327882b72923607b27303b74797aefe",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "0870202de2b2ee408a0e7aff302498f8",
+      "Hash": "8ebf433d5fff19432d0364ba99814534",
       "Requirements": [
         "EpiModel",
         "doParallel",
         "ergm",
         "foreach",
         "fs",
+        "future.apply",
         "slurmworkflow",
         "stringr",
         "tergm"
@@ -404,6 +405,30 @@
       "Hash": "7c89603d81793f0d5486d91ab1fc6f1d",
       "Requirements": []
     },
+    "future": {
+      "Package": "future",
+      "Version": "1.28.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f3e26a942d4ee32cec9403e1ddd7000b",
+      "Requirements": [
+        "digest",
+        "globals",
+        "listenv",
+        "parallelly"
+      ]
+    },
+    "future.apply": {
+      "Package": "future.apply",
+      "Version": "1.9.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "77dbef5c63aa92d1c319ad3b6c10eccb",
+      "Requirements": [
+        "future",
+        "globals"
+      ]
+    },
     "generics": {
       "Package": "generics",
       "Version": "0.1.3",
@@ -429,6 +454,16 @@
         "scales",
         "tibble",
         "withr"
+      ]
+    },
+    "globals": {
+      "Package": "globals",
+      "Version": "0.16.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e14798793892c6bebdbe2f144aacf6e6",
+      "Requirements": [
+        "codetools"
       ]
     },
     "glue": {
@@ -536,6 +571,14 @@
         "rlang"
       ]
     },
+    "listenv": {
+      "Package": "listenv",
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0bde42ee282efb18c7c4e63822f5b4f7",
+      "Requirements": []
+    },
     "lpSolveAPI": {
       "Package": "lpSolveAPI",
       "Version": "5.5.2.0-17.8",
@@ -626,6 +669,14 @@
       "Requirements": [
         "lattice"
       ]
+    },
+    "parallelly": {
+      "Package": "parallelly",
+      "Version": "1.32.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9e3d8d65cb9c5ca5966340a6bfec60b2",
+      "Requirements": []
     },
     "pillar": {
       "Package": "pillar",
