@@ -2,22 +2,18 @@
 ## 02. Network Model Diagnostics
 ##
 
-# Required variables:
-
 # Setup ------------------------------------------------------------------------
 if (interactive()) {
-  ncores <- 5
+  ncores <- 2
   nsims  <- 10
   nsteps <- 500
 }
 
 library(EpiModelHIV)
-source("R/00-project_settings.R")
 
 est <- readRDS("data/intermediate/estimates/netest.rds")
 
 # Main -------------------------------------------------------------------------
-
 fit_main <- est[["fit_main"]]
 
 model_main_dx <- ~edges +
@@ -56,7 +52,6 @@ saveRDS(dx, "data/intermediate/diagnostics/netdx-main.rds")
 rm(dx, dx_main, dx_main_static)
 
 # Casual -----------------------------------------------------------------------
-
 fit_casl <- est[["fit_casl"]]
 
 model_casl_dx <- ~edges +
@@ -95,7 +90,6 @@ saveRDS(dx, "data/intermediate/diagnostics/netdx-casl.rds")
 rm(dx, dx_casl, dx_casl_static)
 
 # One-Off ----------------------------------------------------------------------
-
 fit_inst <- est[["fit_inst"]]
 
 model_inst_dx <- ~edges +

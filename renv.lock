@@ -11,15 +11,16 @@
   "Packages": {
     "ARTnet": {
       "Package": "ARTnet",
-      "Version": "2.5.6",
+      "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "a4480db0e422a62631ff97b95fef7c75b46df7f7",
+      "RemoteSha": "9ecf11f59488a53e8bd78b004e933bcc5f39a73f",
       "RemoteHost": "api.github.com",
-      "Hash": "dc2625d08cb3fc15459730dd9095a7fa",
+      "Remotes": "github::EpiModel/ARTnetData@main",
+      "Hash": "289064cc638bdb1451fe20d49d41a4e4",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
@@ -34,9 +35,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnetData",
       "RemoteRef": "master",
-      "RemoteSha": "bd7993f9639294b05496390079fcf27778977b08",
+      "RemoteSha": "5220754935e3ddbe3a10ae5c366355d8a987f2fb",
       "RemoteHost": "api.github.com",
-      "Hash": "81a4387f581f6323b31dbe5c5b002e92",
+      "Hash": "4b27e8a709335d1658121fd8cfa3525f",
       "Requirements": []
     },
     "DEoptimR": {
@@ -52,12 +53,12 @@
       "Version": "2.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "main",
-      "RemoteSha": "4285531345aa0e7dc82a7843adc807dc529a4293",
-      "Hash": "80c5e0b99cf5adb79e9eaced37fff959",
+      "RemoteSha": "2fc9b3c2032ef003b90ba501c1249829d0b4639b",
+      "RemoteHost": "api.github.com",
+      "Hash": "9b5f5368f8627bc400566c93c6cb279f",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -83,13 +84,13 @@
       "Version": "2.5.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "main",
-      "RemoteSha": "41f957a517c932ca064839aaf3559b54f6cf8a07",
+      "RemoteSha": "495f14a7fce7ad66011f67a12889c6553adda4ad",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::statnet/EpiModel@main, github::statnet/statnet@master,\n    github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master,\n    github::statnet/tergm@master",
-      "Hash": "26572aa7750f503c27e04f0100d0398c",
+      "Hash": "d4cac8e751537425117652fc57bd07bc",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -209,10 +210,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.4.0",
+      "Version": "3.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "78003c09d258968a4d28107e779edb10",
+      "Hash": "0d297d01734d2bcea40197bd4971a764",
       "Requirements": []
     },
     "clipr": {
@@ -259,10 +260,10 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.5.1",
+      "Version": "1.5.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8dc45fd8a1ee067a92b85ef274e66d6a",
+      "Hash": "e8a1e41acf02548751f45c718d55aa6a",
       "Requirements": []
     },
     "deSolve": {
@@ -323,16 +324,16 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.3-7009",
+      "Version": "4.3-7049",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "statnet",
       "RemoteRepo": "ergm",
       "RemoteRef": "master",
-      "RemoteSha": "7408df4c10220414f2141fa83dbe092e7de5e202",
+      "RemoteSha": "951da42a5d86a364eec3533116e3d54dfb27457b",
       "RemoteHost": "api.github.com",
       "Remotes": "github::statnet/statnet.common@master, github::statnet/tergm@master,\n    github::statnet/ergm.count@master",
-      "Hash": "cb3930e05e62ccfb7e0acef6b74af150",
+      "Hash": "a2ee3741e8fb76c7de6d98bc0c1b3902",
       "Requirements": [
         "MASS",
         "Matrix",
@@ -714,18 +715,18 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.15.5",
+      "Version": "0.16.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6a38294e7d12f5d8e656b08c5bd8ae34",
+      "Hash": "c9e8442ab69bc21c9697ecf856c1e6c7",
       "Requirements": []
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.5",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "971c3d698fc06dabdac6bc4bcda72dc4",
+      "Hash": "4ed1f8336c8d52c3e750adcdc57228a7",
       "Requirements": []
     },
     "rle": {
@@ -916,10 +917,10 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.4.1",
+      "Version": "0.4.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8b54f22e2a58c4f275479c92ce041a57",
+      "Hash": "0e3dfc070b2a8f0478fcdf86fb33355d",
       "Requirements": [
         "cli",
         "glue",

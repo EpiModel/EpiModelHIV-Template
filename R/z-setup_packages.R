@@ -6,7 +6,7 @@ renv::install(c(
   "statnet/ergm",
   "statnet/tergm",
   "statnet/network",
-  "statnet/networkDynamic"
+  "statnet/networkDynamic",
   # ARTnet
   "EpiModel/ARTnetData",
   "EpiModel/ARTnet",

@@ -1,18 +1,20 @@
 ##
 ## 01. Network Model Estimation
 ##
-## This file estimates the ERGMs for 100k nodes network. Running this script
-## outside of an HPC can take a massive amount of time.
-##
+## This file estimates the ERGMs. When run locally (interactively) it fits
+## 5k nodes networks. They can be used for local testing of the project.
+## When run on the HPC (`interactive == FALSE`) the `networks_size` is set in
+## the "R/00-project_settings.R".
 
 # Setup  -----------------------------------------------------------------------
+library("EpiModelHIV")
+library("ARTnet")
+source("R/00-project_settings.R")
+
 if (interactive()) {
   ncores <- 4
+  networks_size <- 5e3
 }
-
-library(EpiModelHIV)
-library(ARTnet)
-source("R/00-project_settings.R")
 
 # 0. Initialize Network --------------------------------------------------------
 epistats <- build_epistats(
@@ -181,6 +183,5 @@ fit_inst <- netest(
 fit_inst <- trim_netest(fit_inst)
 
 # 4. Save Data -----------------------------------------------------------------
-
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
 saveRDS(out, "data/intermediate/estimates/netest.rds")

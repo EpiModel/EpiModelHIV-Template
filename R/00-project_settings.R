@@ -1,8 +1,15 @@
-current_git_branch <- "100k"
-networks_size <- 100 * 1e3
+##
+## 00. Shared variables setup
+##
 
+# Networks size for the analysis on HPC
+networks_size   <- 100 * 1e3
+
+# Information for the HPC workflows
+current_git_branch <- "100k"
 mail_user <- "aleguil@emory.edu"
 
+# Relevant time steps for the simulation
 calibration_end    <- 52 * 60
 restart_time       <- calibration_end + 1
 prep_start         <- restart_time + 52 * 5

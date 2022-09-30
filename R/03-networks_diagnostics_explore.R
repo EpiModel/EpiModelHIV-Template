@@ -4,7 +4,6 @@
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
-source("R/00-project_settings.R")
 
 # Interactive Dx Analysis ------------------------------------------------------
 

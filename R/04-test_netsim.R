@@ -1,8 +1,6 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
 library(dplyr)
-source("R/00-project_settings.R")
-
 
 # Necessary files
 epistats <- readRDS("data/intermediate/estimates/epistats.rds")
@@ -12,7 +10,7 @@ est      <- readRDS("data/intermediate/estimates/netest.rds")
 # Parameters
 prep_start <- 54
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params-100000.csv"),
+  data.frame.params = readr::read_csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
@@ -25,9 +23,9 @@ param <- param.net(
 )
 
 # Define test scenarios
-scenarios.df <- dplyr::tibble(
-  .scenario.id = c("scenario_1", "scenario_2"),
-  .at = 1,
+scenarios.df <- tibble(
+  .scenario.id    = c("scenario_1", "scenario_2"),
+  .at             = 1,
   hiv.test.rate_1 = c(0.004, 0.005),
   hiv.test.rate_2 = c(0.004, 0.005),
   hiv.test.rate_3 = c(0.007, 0.008)
@@ -37,7 +35,9 @@ scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 # Apply a scenario to the param object
 param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
 
-# Initial conditions
+# Initial conditions (default prevalence initialized in epistats)
+# For models without bacterial STIs, these must be initialized here
+# with non-zero values
 init <- init_msm(
   prev.ugc = 0.1,
   prev.rct = 0.1,
@@ -48,7 +48,7 @@ init <- init_msm(
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 52 * 7,
+  nsteps              = 52 * 7, # seven years
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -58,27 +58,19 @@ control <- control_msm(
   raw.output          = FALSE
 )
 
-# Simulation and exploration ---------------------------------------------------
-# debug(stitrans_msm)
-sim <- netsim(est, param_sc, init, control)
+# See listing of modules and other control settings
+# Module function defaults defined in ?control_msm
+print(control)
 
-d_sim <- as_tibble(sim)
+sim <- netsim(est, param, init, control)
 
-glimpse(d_sim)
-d_sim$prep_startat___ALL
-d_sim$prep_ret1y___ALL
-d_sim$prep_ret2y___ALL
+# Examine the model object output
+print(sim)
 
-dd <- d_sim %>%
-  select(
-    starts_with("s_prep___"),
-    prep_startat___ALL, prep_ret1y___ALL
-  ) %>%
-  mutate(prep_prop_ret = prep_ret1y___ALL / lag(prep_startat___ALL, 52))
+# Plot outcomes
+plot(sim, y = "i.num")
+plot(sim, y = "ir100")
 
-dd$prep_prop_ret[110:156] |> mean()
-
-library(ggplot2)
-ggplot(d_sim, aes(x = time)) +
-  geom_line(aes(y = prev.ct)) +
-  geom_line(aes(y = prev.gc), col = "blue")
+# Convert to data frame
+df <- as_tibble(sim)
+head(df)
