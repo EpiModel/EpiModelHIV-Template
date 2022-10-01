@@ -192,3 +192,21 @@ wf <- add_workflow_step(
     "mail-type" = "FAIL"
   )
 )
+
+# Step 3 -----------------------------------------------------------------------
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call(
+    r_script = EpiModelHPC::calibration_step3,
+    args = list(
+      calib_object = calib_object
+    ),
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = 1,
+    "time" = "00:20:00",
+    "mem-per-cpu" = "8G",
+    "mail-type" = "END"
+  )
+)
