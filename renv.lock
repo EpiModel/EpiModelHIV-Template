@@ -110,10 +110,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "auto_calibration",
-      "RemoteSha": "0613778fc6d8027afbc0690165a92afbbba49e3a",
+      "RemoteSha": "9aeba928dbf8838ad30009ccdccf2f7b108435de",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "b70a0013343afded7ee6497edf8bfa42",
+      "Hash": "9e216ea3d52bd330a8b3d660dd54594f",
       "Requirements": [
         "EpiModel",
         "doParallel",
