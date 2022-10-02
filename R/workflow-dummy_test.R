@@ -18,6 +18,8 @@ source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
 n_sims <- 900
+n_needed <- 300
+
 
 calib_object <- list(
   waves = list(
@@ -30,7 +32,7 @@ calib_object <- list(
           hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job2 = list(
         targets = "cc.dx.H",
@@ -40,7 +42,7 @@ calib_object <- list(
           hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job3 = list(
         targets = "cc.dx.W",
@@ -50,7 +52,7 @@ calib_object <- list(
           hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job4 = list(
         targets = "cc.linked1m.B",
@@ -60,7 +62,7 @@ calib_object <- list(
           tx.init.rate_1 = seq(0.1, 0.5, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job5 = list(
         targets = "cc.linked1m.H",
@@ -70,7 +72,7 @@ calib_object <- list(
           tx.init.rate_2 = seq(0.1, 0.5, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job6 = list(
         targets = "cc.linked1m.W",
@@ -80,7 +82,7 @@ calib_object <- list(
           tx.init.rate_3 = seq(0.1, 0.5, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       )
     ),
     wave2 = list(
@@ -92,7 +94,7 @@ calib_object <- list(
           tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job2 = list(
         targets = "cc.vsupp.H",
@@ -102,7 +104,7 @@ calib_object <- list(
           tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       ),
       job3 = list(
         targets = "cc.vsupp.W",
@@ -112,7 +114,7 @@ calib_object <- list(
           tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
         make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
-        get_result = determ_noisy_end(0.01, 100)
+        get_result = determ_noisy_end(0.01, n_needed)
       )
     )
   ),
