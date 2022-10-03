@@ -6,8 +6,8 @@
 networks_size   <- 100 * 1e3
 
 # Information for the HPC workflows
-current_git_branch <- "100k"
-mail_user <- "aleguil@emory.edu"
+current_git_branch <- "main"
+mail_user <- "user@emory.edu"
 
 # Relevant time steps for the simulation
 calibration_end    <- 52 * 60

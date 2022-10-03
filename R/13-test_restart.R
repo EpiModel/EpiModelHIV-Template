@@ -1,5 +1,5 @@
 # Setup ------------------------------------------------------------------------
-library(EpiModelHIV)
+library("EpiModelHIV")
 source("R/00-project_settings.R")
 
 # Necessary files

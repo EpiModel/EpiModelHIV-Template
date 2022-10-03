@@ -1,2 +1,1 @@
-load("dump.rda")
-debugger(dump)
+# Scratchpad for interactive testing before integration in a script
