@@ -1,4 +1,4 @@
-library(EpiModel)
+library("EpiModel")
 
 # Utilities --------------------------------------------------------------------
 
@@ -211,6 +211,22 @@ epi_ct_s <- function(hiv_status) {
           race %in% races_set &
             status %in% hiv_status &
             (rCT == 0 & uCT == 0),
+          na.rm = TRUE
+        )
+      })
+    }
+  }
+}
+
+epi_prep_ret <- function(ret_steps) {
+  function(races_set) {
+    function(dat) {
+      at <- get_current_timestep(dat)
+      needed_attributes <- c("race", "prepStartTime")
+      with(get_attr_list(dat, needed_attributes), {
+        retained <- sum(
+          race %in% races_set &
+          prepStartTime == at - ret_steps,
           na.rm = TRUE
         )
       })

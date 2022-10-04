@@ -18,7 +18,6 @@
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
       "RemoteSha": "9ecf11f59488a53e8bd78b004e933bcc5f39a73f",
-      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnetData@main",
       "Hash": "289064cc638bdb1451fe20d49d41a4e4",
       "Requirements": [
@@ -94,6 +93,29 @@
         "networkDynamic",
         "progressr",
         "statnet.common",
+        "tergm"
+      ]
+    },
+    "EpiModelHPC": {
+      "Package": "EpiModelHPC",
+      "Version": "2.1.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHPC",
+      "RemoteRef": "dumps",
+      "RemoteSha": "0789af598789d7b3c8666396018c2e8d285f8a08",
+      "RemoteHost": "api.github.com",
+      "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
+      "Hash": "ea1f469b5db413227ae2a2ec32a2cd80",
+      "Requirements": [
+        "EpiModel",
+        "doParallel",
+        "ergm",
+        "foreach",
+        "fs",
+        "slurmworkflow",
+        "stringr",
         "tergm"
       ]
     },
@@ -889,6 +911,23 @@
       "Hash": "e25793551cbdb843154152e5ee88cbd6",
       "Requirements": []
     },
+    "slurmworkflow": {
+      "Package": "slurmworkflow",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "slurmworkflow",
+      "RemoteRef": "main",
+      "RemoteSha": "3cc33e5298a86b539dae73596bfc76eb928c7298",
+      "RemoteHost": "api.github.com",
+      "Hash": "2d065a6751cb725d559b98e3235947c9",
+      "Requirements": [
+        "fs",
+        "yaml"
+      ]
+    },
+
     "statnet.common": {
       "Package": "statnet.common",
       "Version": "4.7.0",

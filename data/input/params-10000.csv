@@ -1,4 +1,4 @@
-param,value,type,source
+param,value,type
 hiv.test.rate_1,0.00385,numeric
 hiv.test.rate_2,0.0038,numeric
 hiv.test.rate_3,0.0069,numeric
@@ -68,10 +68,10 @@ hiv.circ.prob_3,0.918,numeric
 acts.aids.vl,5.75,numeric
 acts.scale,1,numeric
 cond.scale,1,numeric
-rgc.prob,0.3702632,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps appendix 9.4
-ugc.prob,0.3199,numeric,CPN-gaps appendix 9.4 | calibrated
-rct.prob,0.3348961,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
-uct.prob,0.28715,numeric, CPN-gaps appendix 9.3 | calibrated
+rgc.prob,0.2267303,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps appendix 9.4
+ugc.prob,0.19,numeric,CPN-gaps appendix 9.4
+rct.prob,0.2038369,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
+uct.prob,0.17,numeric, CPN-gaps appendix 9.3
 rgc.sympt.prob,0.1,numeric, CPN-aps 9.3
 ugc.sympt.prob,0.9333,numeric, CPN-Gaps10.3
 rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
@@ -98,9 +98,9 @@ sti.cond.eff.rr,0.95,numeric,CPN
 sti.cond.fail.rr_1,0.39,numeric,CPN
 sti.cond.fail.rr_2,0.3,numeric,CPN
 sti.cond.fail.rr_3,0.21,numeric,CPN
-hiv.trans.scale_1,3.9,numeric
-hiv.trans.scale_2,0.465,numeric
-hiv.trans.scale_3,0.2805,numeric
+hiv.trans.scale_1,3.4,numeric
+hiv.trans.scale_2,0.53,numeric
+hiv.trans.scale_3,0.33,numeric
 hiv.rgc.rr,2.78,numeric
 hiv.ugc.rr,1.73,numeric
 hiv.rct.rr,2.78,numeric
@@ -108,18 +108,18 @@ hiv.uct.rr,1.73,numeric
 hiv.dual.rr,0.2,numeric
 riskh.start,Inf,numeric
 prep.start,Inf,numeric
-prep.start.prob_1,0.31,numeric
-prep.start.prob_2,0.31,numeric
-prep.start.prob_3,0.31,numeric
+prep.start.prob_1,0.301,numeric
+prep.start.prob_2,0.301,numeric
+prep.start.prob_3,0.301,numeric
 prep.adhr.dist_1,0.089,numeric
 prep.adhr.dist_2,0.127,numeric
 prep.adhr.dist_3,0.784,numeric
 prep.adhr.rr_1,0.69,numeric
 prep.adhr.rr_2,0.19,numeric
 prep.adhr.rr_3,0.01,numeric
-prep.discont.rate_1,0.0064,numeric
-prep.discont.rate_2,0.0064,numeric
-prep.discont.rate_3,0.0064,numeric
+prep.discont.rate_1,0.0079,numeric
+prep.discont.rate_2,0.0079,numeric
+prep.discont.rate_3,0.0079,numeric
 prep.tst.int,12.8571,numeric
 prep.risk.int,26,numeric
 prep.sti.screen.int,26,numeric

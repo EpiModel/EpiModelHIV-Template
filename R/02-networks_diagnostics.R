@@ -1,19 +1,19 @@
-##
+#
 ## 02. Network Model Diagnostics
 ##
 
-
 # Setup ------------------------------------------------------------------------
-library(EpiModelHIV)
+if (interactive()) {
+  ncores <- 2
+  nsims  <- 10
+  nsteps <- 500
+}
 
-ncores <- parallel::detectCores() - 1
-nsims <- 10
-nsteps <- 500
+library("EpiModelHIV")
 
-est <- readRDS("data/input/netest.rds")
+est <- readRDS("data/intermediate/estimates/netest.rds")
 
 # Main -------------------------------------------------------------------------
-
 fit_main <- est[["fit_main"]]
 
 model_main_dx <- ~edges +
@@ -38,10 +38,7 @@ dx_main <- netdx(
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
-print(dx_main, digits = 2)
-plot(dx_main)
-
-dx_main_static <- EpiModel::netdx(
+dx_main_static <- netdx(
   fit_main,
   dynamic = FALSE,
   nsims = 10000,
@@ -50,11 +47,11 @@ dx_main_static <- EpiModel::netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_main_static, digits = 2)
-plot(dx_main_static)
+dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
+saveRDS(dx, "data/intermediate/diagnostics/netdx-main.rds")
+rm(dx, dx_main, dx_main_static)
 
 # Casual -----------------------------------------------------------------------
-
 fit_casl <- est[["fit_casl"]]
 
 model_casl_dx <- ~edges +
@@ -79,9 +76,6 @@ dx_casl <- netdx(
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
-print(dx_casl, digits = 2)
-plot(dx_casl)
-
 dx_casl_static <- netdx(
   fit_casl,
   dynamic = FALSE,
@@ -91,11 +85,11 @@ dx_casl_static <- netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_casl_static, digits = 2)
-plot(dx_casl_static)
+dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
+saveRDS(dx, "data/intermediate/diagnostics/netdx-casl.rds")
+rm(dx, dx_casl, dx_casl_static)
 
 # One-Off ----------------------------------------------------------------------
-
 fit_inst <- est[["fit_inst"]]
 
 model_inst_dx <- ~edges +
@@ -116,5 +110,5 @@ dx_inst <- netdx(
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-print(dx_inst, digits = 2)
-plot(dx_inst)
+dx <- list(dx_inst = dx_inst)
+saveRDS(dx, "data/intermediate/diagnostics/netdx-inst.rds")

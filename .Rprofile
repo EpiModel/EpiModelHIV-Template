@@ -13,18 +13,19 @@ if (dir.exists("renv/")) {
 }
 
 # 2. directory structure
-if (!dir.exists("data/input/")) {
-  dir.create("data/input/", recursive = TRUE)
+.folder.struct <- c(
+  "out",
+  "data/input",
+  "data/intermediate/estimates",
+  "data/intermediate/diagnostics",
+  "data/intermediate/calibration",
+  "data/output",
+  "workflows"
+)
+for (.folder in .folder.struct) {
+  if (!dir.exists(.folder)) dir.create(.folder, recursive = TRUE)
 }
-if (!dir.exists("data/output/")) {
-  dir.create("data/output/")
-}
-if (!dir.exists("out/")) {
-  dir.create("out/")
-}
-if (!dir.exists("workflows/")) {
-  dir.create("workflows/")
-}
+rm(.folder.struct, .folder)
 
 # 3. Helpful aliases
 rs <- function() .rs.restartR()

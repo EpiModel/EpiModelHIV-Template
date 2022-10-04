@@ -3,17 +3,15 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library(EpiModelHIV)
+library("EpiModelHIV")
+source("R/00-project_settings.R")
 
 nsteps <- 52
 
-# Create the output directory
-calib_dir <- "data/output/calibration"
-
 # Process each file in parallel ------------------------------------------------
 calib_files <- list.files(
-  calib_dir,
-  pattern = "^simcalib__.*rds$",
+  "data/intermediate/calibration",
+  pattern = "^sim__.*rds$",
   full.names = TRUE
 )
 
@@ -26,7 +24,7 @@ assessments <- lapply(
 
 # Merge all and combine --------------------------------------------------------
 assessments <- bind_rows(assessments)
-saveRDS(assessments, paste0(calib_dir, "/assessments.rds"))
+saveRDS(assessments, "data/intermediate/calibration/assessments_raw.rds")
 
 assessments <- assessments %>%
   select(- c(sim, batch)) %>%
@@ -40,7 +38,6 @@ assessments <- assessments %>%
     ),
     .names = "{.col}__{.fn}"
   ))
-  # this last bloc calculate the q1, median and q3 for all of the variables
 
 # Save the result --------------------------------------------------------------
-saveRDS(assessments, paste0(calib_dir, "/assessments.rds"))
+saveRDS(assessments, "data/intermediate/calibration/assessments.rds")

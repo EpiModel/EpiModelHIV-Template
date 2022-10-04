@@ -1,16 +1,22 @@
 ##
 ## 01. Network Model Estimation
 ##
+## This file estimates the ERGMs. When run locally (interactively) it fits
+## 5k nodes networks. They can be used for local testing of the project.
+## When run on the HPC (`interactive == FALSE`) the `networks_size` is set in
+## the "R/00-project_settings.R".
 
 # Setup  -----------------------------------------------------------------------
 library("EpiModelHIV")
 library("ARTnet")
+source("R/00-project_settings.R")
 
-ncores <- 1
-
+if (interactive()) {
+  ncores <- 4
+  networks_size <- 5e3
+}
 
 # 0. Initialize Network --------------------------------------------------------
-
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",
@@ -18,7 +24,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, file = "data/input/epistats.rds")
+saveRDS(epistats, "data/intermediate/estimates/epistats.rds")
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -29,9 +35,9 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 1e4
+  network.size = networks_size
 )
-saveRDS(netstats, file = "data/input/netstats.rds")
+saveRDS(netstats, "data/intermediate/estimates/netstats.rds")
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -177,6 +183,5 @@ fit_inst <- netest(
 fit_inst <- trim_netest(fit_inst)
 
 # 4. Save Data -----------------------------------------------------------------
-
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = paste0("data/input/netest.rds"))
+saveRDS(out, "data/intermediate/estimates/netest.rds")
