@@ -12,9 +12,9 @@ if (dir.exists("renv/")) {
   cat("* Run renv::init() to install the R packages for this project\n")
 }
 
-
 # 2. directory structure
 .folder.struct <- c(
+  "out",
   "data/input",
   "data/intermediate/estimates",
   "data/intermediate/diagnostics",
