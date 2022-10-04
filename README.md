@@ -1,7 +1,6 @@
 # EpiModeHIV-Template
 
-
-This repository contains an example applied project using [EpiModelHIV-p](https://github.com/EpiModel/EpiModelHIV-p). It may be used as a "starter" project repository for future applied projects.
+This repository contains an example applied project using [EpiModelHIV-p](https://github.com/EpiModel/EpiModelHIV-p). It may be used as a "starter" project repository for future applied projects. 
 
 ## ARTnet/ARTnetData Dependency
 EpiModelHIV-p requires installation of the `ARTnet` package, which itself depends on the `ARTnetData` package that contains the restricted dataset for the ARTnet study. Before getting started with the package workflow below, make sure you have requested access to the `ARTnetData` package and can successfully install and load the `ARTnet` package following the instructions on the [ARTnet package repository](https://github.com/EpiModel/ARTnet#readme).

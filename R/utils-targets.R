@@ -2,7 +2,7 @@ library("dplyr")
 library("EpiModel")
 
 targets <- c(
-  # 1st calibration set (all independant)
+  # 1st calibration set (all independent)
   cc.dx.B = 0.804,
   cc.dx.H = 0.799,
   cc.dx.W = 0.88,
@@ -10,7 +10,7 @@ targets <- c(
   cc.linked1m.H = 0.65,
   cc.linked1m.W = 0.76,
   # CombPrev appendix 8.2.2
-  # 2nd calibration set (all independant)
+  # 2nd calibration set (all independent)
   cc.vsupp.B = 0.55,
   cc.vsupp.H = 0.60,
   cc.vsupp.W = 0.72,

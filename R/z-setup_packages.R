@@ -15,5 +15,3 @@ if (FALSE) {
   library("Rglpk")
   library("sessioninfo")
 }
-
-
