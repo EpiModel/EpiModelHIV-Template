@@ -3,21 +3,14 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library(slurmworkflow)
-library(EpiModelHPC)
+library("slurmworkflow")
+library("EpiModelHPC")
 source("R/00-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "epimodel",
   mail_user = mail_user
 )
-
-# hpc_configs <- swf_configs_hyak(
-#   hpc = "klone",
-#   partition = "ckpt",
-#   r_version = "4.1.0",
-#   mail_user = mail_user
-# )
 
 max_cores <- 30
 
@@ -46,7 +39,7 @@ est      <- readRDS("data/intermediate/estimates/netest.rds")
 
 
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
+  data.frame.params = read.csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,

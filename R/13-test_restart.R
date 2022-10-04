@@ -11,11 +11,11 @@ prep_start <- calib_end + 55
 
 # Parameters
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
-  netstats          = netstats,
-  epistats          = epistats,
-  prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
+  data.frame.params   = read.csv("data/input/params.csv"),
+  netstats            = netstats,
+  epistats            = epistats,
+  prep.start          = prep_start,
+  riskh.start         = prep_start - 53,
   .param.updater.list = list(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
@@ -24,6 +24,7 @@ param <- param.net(
 )
 
 # Initial conditions
+#   The values don't matter here as we restart from an existing simulation
 init <- init_msm()
 
 # Controls
@@ -41,16 +42,16 @@ control <- control_msm(
   raw.output          = FALSE
 )
 
-# Simulation and exploration ---------------------------------------------------
+# Simulation -------------------------------------------------------------------
 sim <- netsim(orig, param, init, control)
 
+# Interactiv exploration -------------------------------------------------------
 d_sim <- as_tibble(sim)
 
 glimpse(d_sim)
 d_sim$prep_startat___ALL
 d_sim$prep_ret1y___ALL
 d_sim$prep_ret2y___ALL
-
 
 library(ggplot2)
 

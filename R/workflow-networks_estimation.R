@@ -3,8 +3,8 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library(slurmworkflow)
-library(EpiModelHPC)
+library("slurmworkflow")
+library("EpiModelHPC")
 
 source("R/00-project_settings.R")
 

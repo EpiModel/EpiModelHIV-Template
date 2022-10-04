@@ -1,25 +1,14 @@
-# This code install the main/master branch version of EpiModelHIV and the
-# CRAN version of all the dependencies
+# This code installs the packages only available on GitHub (not on CRAN)
 renv::install(c(
-  # ARTnet
-  "EpiModel/ARTnetData",
   "EpiModel/ARTnet",
-  # EpiModel
-  "EpiModel/EpiModel",
   "EpiModel/EpiModelHIV-p",
-  # HPC related packages
-  "EpiModel/EpiModelHPC",
-  "EpiModel/slurmworkflow"
-  # Others
-  # "Rglpk",
-  # "rmarkdown",
-  # "pkgload",
-  # "sessioninfo"
+  "EpiModel/EpiModelHPC"
 ))
 
 # This code finds and install the libraries used by the project (CRAN version)
 renv::hydrate()
 
+# Force `renv` to discover the following packages
 if (FALSE) {
   library("rmarkdown")
   library("pkgload")

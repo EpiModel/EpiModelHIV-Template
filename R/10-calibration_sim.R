@@ -15,7 +15,7 @@ netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 est      <- readRDS("data/intermediate/estimates/netest.rds")
 
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
+  data.frame.params = read.csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,

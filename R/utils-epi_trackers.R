@@ -1,4 +1,4 @@
-library(EpiModel)
+library("EpiModel")
 
 # Utilities --------------------------------------------------------------------
 
@@ -233,4 +233,3 @@ epi_prep_ret <- function(ret_steps) {
     }
   }
 }
-

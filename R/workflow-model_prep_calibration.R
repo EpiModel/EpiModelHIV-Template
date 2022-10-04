@@ -3,8 +3,8 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library(slurmworkflow)
-library(EpiModelHPC)
+library("slurmworkflow")
+library("EpiModelHPC")
 source("R/00-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
@@ -38,11 +38,11 @@ netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 orig     <- readRDS("data/intermediate/estimates/restart.rds")
 
 param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
-  netstats          = netstats,
-  epistats          = epistats,
-  prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
+  data.frame.params   = read.csv("data/input/params.csv"),
+  netstats            = netstats,
+  epistats            = epistats,
+  prep.start          = prep_start,
+  riskh.start         = prep_start - 53,
   .param.updater.list = list(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
@@ -50,6 +50,8 @@ param <- param.net(
   )
 )
 
+# Initial conditions
+#   The values don't matter here as we restart from an existing simulation
 init <- init_msm()
 
 # Controls
@@ -71,11 +73,11 @@ control <- control_msm(
 
 # insert test values here
 scenarios.df <- tibble(
-  .scenario.id = c("0", "1", "2", "3"),
-  .at = 1,
-  prep.start.prob_1 = seq(0.28, 0.31, length.out = 4),
-  prep.start.prob_2 = prep.start.prob_1,
-  prep.start.prob_3 = prep.start.prob_1,
+  .scenario.id        = c("0", "1", "2", "3"),
+  .at                 = 1,
+  prep.start.prob_1   = seq(0.28, 0.31, length.out = 4),
+  prep.start.prob_2   = prep.start.prob_1,
+  prep.start.prob_3   = prep.start.prob_1,
   prep.discont.rate_1 = rep(0.0064, 4),
   prep.discont.rate_2 = prep.discont.rate_1,
   prep.discont.rate_3 = prep.discont.rate_1

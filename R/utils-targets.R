@@ -1,5 +1,5 @@
-library(dplyr)
-library(EpiModel)
+library("dplyr")
+library("EpiModel")
 
 targets <- c(
   # 1st calibration set (all independant)
