@@ -20,7 +20,6 @@ source("R/auto_cal_sim.R")
 n_sims <- 900
 n_needed <- 300
 
-
 calib_object <- list(
   waves = list(
     wave1 = list(
@@ -31,7 +30,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job2 = list(
@@ -41,7 +40,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job3 = list(
@@ -51,7 +50,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job4 = list(
@@ -61,7 +60,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_1 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job5 = list(
@@ -71,7 +70,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_2 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job6 = list(
@@ -81,7 +80,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_3 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       )
     ),
@@ -93,7 +92,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job2 = list(
@@ -103,7 +102,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       ),
       job3 = list(
@@ -113,7 +112,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_noisy_proposer(n_sims, n_sims / 3),
+        make_next_proposals = make_poly_proposer(n_sims),
         get_result = determ_noisy_end(0.01, n_needed)
       )
     )
@@ -153,7 +152,17 @@ wf <- create_workflow(
   default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
-# Step 1 -----------------------------------------------------------------------
+# Update RENV on the HPC -------------------------------------------------------
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_renv_restore(
+    git_branch = "auto_calib",
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = hpc_configs$renv_sbatch_opts
+)
+
+# Calibration step 1 -----------------------------------------------------------
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
@@ -172,7 +181,7 @@ wf <- add_workflow_step(
   )
 )
 
-# Step 2 -----------------------------------------------------------------------
+# Calibration step 2 -----------------------------------------------------------
 batch_numbers <- EpiModelHPC:::get_batch_numbers(calib_object, step2_n_cores)
 wf <- add_workflow_step(
   wf_summary = wf,
@@ -195,7 +204,7 @@ wf <- add_workflow_step(
   )
 )
 
-# Step 3 -----------------------------------------------------------------------
+# Calibration step 3 -----------------------------------------------------------
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call(

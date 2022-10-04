@@ -81,6 +81,29 @@ make_noisy_proposer <- function(n_new, n_best) {
   }
 }
 
+make_poly_proposer <- function(n_new, poly_n = 4) {
+  force(n_new)
+  force(poly_n)
+  function(job, results) {
+    values <- results[[job$targets]]
+    target <- job$targets_val
+    param <- results[[job$params]]
+
+    tar_range <- range(
+      results[[job$params]][
+        results[[".iteration"]] == max(results[[".iteration"]])])
+
+    spread <- (tar_range[2] - tar_range[1]) / 4
+
+    mod <- lm(param ~ poly(values, poly_n))
+    pp <- predict(mod, data.frame(values = target), target = "response", se = T)
+    proposals <- seq(pp$fit - spread, pp$fit + spread, length.out = n_new)
+    out <- list(proposals)
+    names(out) <- job$params
+    dplyr::as_tibble(out)
+  }
+}
+
 get_loss <- function(job, results, loss_fun) {
   losses <- numeric(nrow(results))
   for (i in seq_len(nrow(results))) {
@@ -100,6 +123,7 @@ rmse <- function(values, targets) {
   sqrt(sum((values - targets)^2) / length(values))
 }
 
+# must return a DF with exaclty ONE line or NULL
 determ_noisy_end <- function(threshold, n_needed) {
   force(threshold)
   force(n_needed)
@@ -114,7 +138,7 @@ determ_noisy_end <- function(threshold, n_needed) {
       results <- results[good_enough, c(job$params, job$targets)]
       med_param <- quantile(results[[job$params]], 0.5, type = 1)
       med_row <- which(results[[job$params]] == med_param)
-      return(results[med_row, c(job$params, job$targets)])
+      return(results[med_row[1], c(job$params, job$targets)])
     } else {
       return(NULL)
     }

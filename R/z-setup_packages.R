@@ -2,11 +2,6 @@
 # CRAN version of all the dependencies
 renv::install(c(
   # statnet packages
-  "statnet/statnet.common",
-  "statnet/ergm",
-  "statnet/tergm",
-  "statnet/network",
-  "statnet/networkDynamic",
   # ARTnet
   "EpiModel/ARTnetData",
   "EpiModel/ARTnet",
@@ -17,6 +12,12 @@ renv::install(c(
   "EpiModel/EpiModelHPC",
   "EpiModel/slurmworkflow",
   # CRAN
+  "statnet.common",
+  "ergm",
+  "tergm",
+  "network",
+  "networkDynamic",
+
   "rmarkdown",
   "pkgload",
   "sessioninfo"
