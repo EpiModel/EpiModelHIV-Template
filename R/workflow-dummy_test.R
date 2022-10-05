@@ -18,7 +18,7 @@ source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
 n_sims <- 900
-n_needed <- 300
+n_needed <- 50
 
 calib_object <- list(
   waves = list(
@@ -88,7 +88,7 @@ calib_object <- list(
       job1 = list(
         targets = "cc.vsupp.B",
         targets_val = 0.55,
-        params = c("tx.halt.partial.rate_1"), # target: 0.00385
+        params = c("tx.halt.partial.rate_1"), # target: 0.0068
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
@@ -98,7 +98,7 @@ calib_object <- list(
       job2 = list(
         targets = "cc.vsupp.H",
         targets_val = 0.60,
-        params = c("tx.halt.partial.rate_2"), # target: 0.0038
+        params = c("tx.halt.partial.rate_2"), # target: 0.0055
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
@@ -108,7 +108,7 @@ calib_object <- list(
       job3 = list(
         targets = "cc.vsupp.W",
         targets_val = 0.72,
-        params = c("tx.halt.partial.rate_3"), # target: 0.0069
+        params = c("tx.halt.partial.rate_3"), # target: 0.0031
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
