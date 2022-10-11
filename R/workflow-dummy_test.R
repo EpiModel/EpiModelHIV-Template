@@ -137,7 +137,6 @@ calib_object <- list(
   # state = list() # managed internally
 )
 
-
 library(slurmworkflow)
 library(EpiModelHPC)
 
@@ -182,7 +181,7 @@ wf <- add_workflow_step(
 )
 
 # Calibration step 2 -----------------------------------------------------------
-batch_numbers <- EpiModelHPC:::get_batch_numbers(calib_object, step2_n_cores)
+batch_numbers <- swfcalib:::get_batch_numbers(calib_object, step2_n_cores)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_map_script(
@@ -208,7 +207,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call(
-    what = EpiModelHPC::calibration_step3,
+    what = swfcalib::calibration_step3,
     args = list(
       calib_object = calib_object
     ),

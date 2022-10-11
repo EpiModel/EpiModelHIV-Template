@@ -53,12 +53,12 @@
       "Version": "2.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "5bfdab409b3e25c6cd5519d323e352a4a3310c9f",
-      "RemoteHost": "api.github.com",
-      "Hash": "77dd6f0fc1186e56c779531d5e03777d",
+      "RemoteSha": "384316159992984291efd6dbbb487ab5dc1a519d",
+      "Hash": "19070356fe61e93ce72c98a7bfd11145",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -87,9 +87,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "main",
-      "RemoteSha": "5627d3aba31e7fa35c2ffc6ca74ec192c9858f35",
+      "RemoteSha": "05942be51a2b649146f93d5dcfebcc40db469aed",
       "RemoteHost": "api.github.com",
-      "Hash": "be61aea8c9d35077fb25c8b81615aca0",
+      "Hash": "28eaaf070eba47501d824c6d89c5f668",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -106,20 +106,19 @@
       "Version": "2.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
-      "RemoteRef": "auto_calibration",
-      "RemoteSha": "9de6970812bb93126034030d9626ba9f1d0bb4d5",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "main",
+      "RemoteSha": "8336783072c909b56ae3134acdb5eb3938716e5a",
       "Remotes": "github::EpiModel/EpiModel, github::EpiModel/slurmworkflow",
-      "Hash": "5d2d378e8d0c50f7e84687f13a919755",
+      "Hash": "32b79c0a8a233fdae8f1675d16ea38a4",
       "Requirements": [
         "EpiModel",
         "doParallel",
         "ergm",
         "foreach",
         "fs",
-        "future.apply",
         "slurmworkflow",
         "stringr",
         "tergm"
@@ -349,10 +348,10 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.16",
+      "Version": "0.17",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9a3d3c345f8a5648abe61608aaa29518",
+      "Hash": "9171b012a55a1ef53f1442b1d798a3b4",
       "Requirements": []
     },
     "fansi": {
@@ -501,10 +500,10 @@
     },
     "isoband": {
       "Package": "isoband",
-      "Version": "0.2.5",
+      "Version": "0.2.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "7ab57a6de7f48a8dc84910d1eca42883",
+      "Hash": "cfdea9dea85c1a973991c8cbe299f4da",
       "Requirements": []
     },
     "iterators": {
@@ -555,11 +554,12 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "1.0.2",
+      "Version": "1.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "25f74670fa7d3277fe3ad8c1712a699f",
+      "Hash": "001cecbeac1cff9301bdc3775ee46a86",
       "Requirements": [
+        "cli",
         "glue",
         "rlang"
       ]
@@ -622,10 +622,10 @@
     },
     "network": {
       "Package": "network",
-      "Version": "1.17.2",
+      "Version": "1.18.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4fbe774d3585cae91fe87a942268612a",
+      "Hash": "a902756a6f7d6d52be4afbce0b954fed",
       "Requirements": [
         "magrittr",
         "statnet.common",
@@ -645,10 +645,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-159",
+      "Version": "3.1-160",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4a0b3a68f846cb999ff0e8e519524fbb",
+      "Hash": "02e3c6e7df163aafa8477225e6827bc5",
       "Requirements": [
         "lattice"
       ]
@@ -718,10 +718,10 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "0.3.4",
+      "Version": "0.3.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "97def703420c8ab10d8f0e6c72101e02",
+      "Hash": "54842a2443c76267152eface28d9e90a",
       "Requirements": [
         "magrittr",
         "rlang"
@@ -844,6 +844,26 @@
         "stringi"
       ]
     },
+    "swfcalib": {
+      "Package": "swfcalib",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "swfcalib",
+      "RemoteRef": "main",
+      "RemoteSha": "0742abc7d6399ac0f7a95d8568af01a67f3e550b",
+      "Remotes": "github::EpiModel/slurmworkflow",
+      "Hash": "7922b63c6a9856678abcea947ba0e6c3",
+      "Requirements": [
+        "dplyr",
+        "fs",
+        "future",
+        "future.apply",
+        "slurmworkflow"
+      ]
+    },
     "tergm": {
       "Package": "tergm",
       "Version": "4.1.0",
@@ -900,16 +920,17 @@
     },
     "tidyselect": {
       "Package": "tidyselect",
-      "Version": "1.1.2",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "17f6da8cfd7002760a859915ce7eef8f",
+      "Hash": "79540e5fcd9e0435af547d885f184fd5",
       "Requirements": [
-        "ellipsis",
+        "cli",
         "glue",
-        "purrr",
+        "lifecycle",
         "rlang",
-        "vctrs"
+        "vctrs",
+        "withr"
       ]
     },
     "trust": {

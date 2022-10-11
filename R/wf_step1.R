@@ -1,3 +1,3 @@
 source("R/auto_cal_fns.R")
 
-EpiModelHPC::calibration_step1(calib_object, n_cores)
+swfcalib::calibration_step1(calib_object, n_cores)
