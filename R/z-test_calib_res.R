@@ -2,6 +2,7 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
+
 it <- 1
 res1 <- readRDS("data/calib/waves/1/results.rds") %>%
    filter(between(.iteration, it - 1, it + 1))
@@ -92,3 +93,16 @@ make_poly_proposer <- function(n_new, poly_n = 4) {
     dplyr::as_tibble(out)
   }
 }
+
+
+calib_object <- readRDS("data/calib_object.rds")
+calib_object$state
+
+cat("Currently running:\n")
+cat("\tWave: ", calib_object$state$wave, "\n")
+cat("\tIteration: ", calib_object$state$iteration, "\n\n")
+cat("The `default_proposal` currently contains:\n")
+for (nm in names(calib_object$state$default_proposal)) {
+  cat(nm, ": ", calib_object$state$default_proposal[[nm]][1], "\n")
+}
+

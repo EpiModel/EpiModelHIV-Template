@@ -39,10 +39,16 @@ model_fun <- function(proposal) {
   )
 
   scenario_df <- proposal
+
+  scenario_df[["rgc.prob"]] <-
+    plogis(qlogis(scenario_df[["ugc.prob"]]) + log(1.25))
+  scenario_df[["rct.prob"]] <-
+    plogis(qlogis(scenario_df[["uct.prob"]]) + log(1.25))
+
   scenario_df[[".scenario.id"]] <- scenario_df[[".proposal_index"]]
   scenario_df[[".at"]] <- 1
-
   scenario_df[[".proposal_index"]] <- NULL
+  scenario_df[[".wave"]] <- NULL
   scenario_df[[".iteration"]] <- NULL
   scenario <- EpiModel::create_scenario_list(scenario_df)[[1]]
 
