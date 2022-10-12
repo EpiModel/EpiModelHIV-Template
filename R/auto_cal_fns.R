@@ -2,7 +2,7 @@ make_partition_proposer <- function(partitions, allowed_range = c(-Inf, Inf)) {
   if (partitions < 3)
     stop("`partitions` must be greater than or equal to 3")
 
-  function(job, results) {
+  function(calib_object, job, results) {
     values <- results[[job$targets]]
     target <- job$targets_val
 
@@ -39,30 +39,17 @@ make_partition_proposer <- function(partitions, allowed_range = c(-Inf, Inf)) {
 }
 
 # ------------------------------------------------------------------------------
-merge_proposals <- function(proposals) {
-  max_rows <- max(vapply(proposals, nrow, numeric(1)))
-  proposals <- lapply(proposals, function(d) {
-    missing_rows <- max_rows - nrow(d)
-    if (missing_rows > 0)
-      d <- dplyr::bind_rows(d, dplyr::sample_n(d, missing_rows, replace = TRUE))
-    d
-  })
-  dplyr::bind_cols(proposals)
-}
-
-fill_proposals <- function(proposals, default_proposal) {
-  missing_cols <- setdiff(names(default_proposal), names(proposals))
-  merge_proposals(list(proposals, default_proposal[, missing_cols]))
-}
-
-
-# ------------------------------------------------------------------------------
 make_noisy_proposer <- function(n_new, n_best) {
   force(n_new)
   force(n_best)
-  function(job, results) {
+  function(calib_object, job, results) {
     values <- results[[job$targets]]
+    param <- results[[job$params]]
     target <- job$targets_val
+
+    complete_rows <- vctrs::vec_detect_complete(values)
+    values <- values[complete_rows]
+    param <- param[complete_rows]
 
     # warning, only work on unique values
     calib_res <- dplyr::tibble(
@@ -81,23 +68,49 @@ make_noisy_proposer <- function(n_new, n_best) {
   }
 }
 
-make_poly_proposer <- function(n_new, poly_n = 4) {
+make_poly_proposer <- function(n_new, poly_n = 3, shrink = 2) {
   force(n_new)
   force(poly_n)
-  function(job, results) {
+  force(shrink)
+  function(calib_object, job, results) {
     values <- results[[job$targets]]
+    params <- results[[job$params]]
     target <- job$targets_val
-    param <- results[[job$params]]
+
+    complete_rows <- vctrs::vec_detect_complete(values)
+    values <- values[complete_rows]
+    params <- params[complete_rows]
 
     tar_range <- range(
       results[[job$params]][
         results[[".iteration"]] == max(results[[".iteration"]])])
 
-    spread <- (tar_range[2] - tar_range[1]) / 4
+    spread <- (tar_range[2] - tar_range[1]) / shrink / 2
 
-    mod <- lm(param ~ poly(values, poly_n))
-    pp <- predict(mod, data.frame(values = target), target = "response", se = T)
-    proposals <- seq(pp$fit - spread, pp$fit + spread, length.out = n_new)
+    mod <- lm(values ~ poly(params, poly_n))
+
+    loss_fun <- function(par, target) {
+      abs(predict(mod, data.frame(params = par)) - target)
+    }
+
+    predicted_param <- optimize(
+      range(params),
+      f = loss_fun,
+      target = target,
+      tol = 1e-6
+    )
+    new_guess <- predicted_param$minimum
+
+    sl <- swfcalib::load_sideload(calib_object, id = job$targets)
+    old_guess <- if (!is.null(sl)) sl$new_guess else NA
+
+    swfcalib::save_sideload(
+      calib_object,
+      x = list(model = mod, new_guess = new_guess, old_guess = old_guess),
+      id  = job$targets
+    )
+
+    proposals <- seq(new_guess - spread, new_guess + spread, length.out = n_new)
     out <- list(proposals)
     names(out) <- job$params
     dplyr::as_tibble(out)
@@ -139,6 +152,26 @@ determ_noisy_end <- function(threshold, n_needed) {
       med_param <- quantile(results[[job$params]], 0.5, type = 1)
       med_row <- which(results[[job$params]] == med_param)
       return(results[med_row[1], c(job$params, job$targets)])
+    } else {
+      return(NULL)
+    }
+  }
+}
+
+determ_poly_end <- function(threshold) {
+  force(threshold)
+  function(calib_object, job, results) {
+    sl <- swfcalib::save_sideload(calib_object, id = job$targets)
+    if (is.na(sl$old_guess)) return(NULL)
+
+    old_res <- predict(sl$model, data.frame(param = sl$old_guess))
+    new_res <- predict(sl$model, data.frame(param = sl$new_guess))
+
+    if (abs(old_res - new_res) < threshold &&
+          abs(new_res - job$target) < threshold) {
+      result <- data.frame(x = new_res)
+      names(result) <- job$params
+      return(result)
     } else {
       return(NULL)
     }

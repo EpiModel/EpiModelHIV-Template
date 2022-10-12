@@ -14,13 +14,13 @@
       "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "9ecf11f59488a53e8bd78b004e933bcc5f39a73f",
+      "RemoteSha": "dce6c96c8e9b82949287dca29fb9fe9ed0daf3a7",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnetData@main",
-      "Hash": "289064cc638bdb1451fe20d49d41a4e4",
+      "Hash": "9194bfad25545f6f08538db1ce1e4805",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
@@ -251,10 +251,10 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.2",
+      "Version": "0.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fa53ce256cd280f468c080a58ea5ba8c",
+      "Hash": "ed588261931ee3be2c700d22e94a29ab",
       "Requirements": []
     },
     "crayon": {
@@ -852,10 +852,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "4a9042ecba4c96bfb34d470924579ba043233bec",
+      "RemoteSha": "f6071b588952f6c11ef321349de6f4f9e7332c5e",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "078e1f3a01ea8096bc7ee58663badeac",
+      "Hash": "54cc6f10594cfd90c49bf1af397dc440",
       "Requirements": [
         "dplyr",
         "fs",

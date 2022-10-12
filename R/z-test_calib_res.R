@@ -2,10 +2,13 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
+res <- readRDS("data/results.rds") |> as_tibble()
 
-it <- 1
-res1 <- readRDS("data/calib/waves/1/results.rds") %>%
-   filter(between(.iteration, it - 1, it + 1))
+res1 <- filter(
+  res,
+  .iteration <= 4
+)
+range(res1$hiv.test.rate_1)
 
 # # LOESS
 # mod <- loess(hiv.test.rate_1 ~ cc.dx.B, data = res1)
@@ -17,92 +20,52 @@ res1 <- readRDS("data/calib/waves/1/results.rds") %>%
 # summary(mod)
 
 # LM POLY
-mod <- lm(hiv.test.rate_1 ~ poly(cc.dx.B, 3), data = res1)
-summary(mod)
+# mod <- lm(hiv.test.rate_1 ~ poly(cc.dx.B, 3), data = res1)
+# summary(mod)
+#
+# # plot the points (actual observations), regression line, and confidence interval
+# preds <- cbind(res1, predict(mod, type = "response", se.fit = TRUE)) %>%
+#   mutate(upr = fit + 2 * se.fit, lwr = fit - 2 * se.fit)
+#
+# ggplot(preds, aes(y = hiv.test.rate_1, x = cc.dx.B)) +
+#   geom_point() +
+#   geom_line(aes(y = fit), col = "red") +
+#   geom_ribbon(aes(ymin=lwr,ymax=upr), alpha=0.3, col = "blue")
+#
+# pp <- predict(mod, data.frame(cc.dx.B = 0.847), se = TRUE, type = "response")
+# pp
 
-# plot the points (actual observations), regression line, and confidence interval
-preds <- cbind(res1, predict(mod, type = "response", se.fit = TRUE)) %>%
+values <- res1$cc.dx.B
+params <- res1$hiv.test.rate_1
+target <- 0.847
+
+s_v <- (values - mean(values)) / sd(values)
+s_p <- (params - mean(params)) / sd(params)
+s_t <- (target - mean(values)) / sd(values)
+
+
+mod2 <- lm(s_v ~ poly(s_p, 4))
+
+preds2 <- as_tibble(predict(mod2, type = "response", se.fit = TRUE)) %>%
   mutate(upr = fit + 2 * se.fit, lwr = fit - 2 * se.fit)
 
-ggplot(preds, aes(y = hiv.test.rate_1, x = cc.dx.B)) +
+ggplot(data.frame(s_v, s_p, preds2), aes(x = s_p, y = s_v)) +
   geom_point() +
   geom_line(aes(y = fit), col = "red") +
   geom_ribbon(aes(ymin=lwr,ymax=upr), alpha=0.3, col = "blue")
 
-pp <- predict(mod, data.frame(cc.dx.B = 0.804), se = TRUE, type = "response")
-pp$fit - 2 * pp$se.fit
-pp$fit + 2 * pp$se.fit
+ofu <- function(par, target) {
+  abs(predict(mod2, data.frame(s_p = par)) - target)
+}
 
-pp <- predict(
-  mod,
-  data.frame(cc.dx.B = 0.804),
-  se = TRUE,
-  type = "response",
-  dispersion = TRUE
+oo <- optimize(
+  c(-2, 2),
+  f = ofu,
+  target = s_t
 )
+pp <- predict(mod2, data.frame(s_p = oo$minimum))
 
-oom <- function(x) {
-  10^floor(log10(x))
-}
+oo$minimum * sd(params) + mean(params)
+pp * sd(values) + mean(values)
 
-# test
-simulator <- function(x)  x - 2 * x^2
-
-target <- -0.3
-x0 <- seq(0.1, 1, length.out = 1000)
-y0 <- simulator(x0)
-
-plot(y0 ~ x0)
-
-mod <- lm(x0 ~ poly(y0, 3))
-preds <- predict(mod, type = "response")
-plot(y0, preds)
-
-pp <- predict(mod, data.frame(y0 = target), se = TRUE, type = "response")
-x1 <- seq(pp$fit - oom(pp$fit), pp$fit + oom(pp$fit), length.out = 1000)
-x = c(x0, x1)
-
-y = simulator(x)
-plot(y ~ x)
-mod <- lm(x ~ poly(y, 3))
-
-preds <- predict(mod, type = "response")
-plot(y, preds)
-
-pp <- predict(mod, data.frame(y = target), se = TRUE, type = "response")
-
-make_poly_proposer <- function(n_new, poly_n = 4) {
-  force(n_new)
-  force(poly_n)
-  function(job, results) {
-    values <- results[[job$targets]]
-    target <- job$targets_val
-    param <- results[[job$params]]
-
-    tar_range <- range(
-      results[[job$params]][
-        results[[".iteration"]] == max(results[[".iteration"]])])
-
-    spread <- (tar_range[2] - tar_range[1]) / 4
-
-    mod <- lm(param ~ poly(values, poly_n))
-    pp <- predict(mod, data.frame(values = target), target = "response", se = T)
-    proposals <- seq(pp$fit - spread, pp$fit + spread, length.out = n_new)
-    out <- list(proposals)
-    names(out) <- job$params
-    dplyr::as_tibble(out)
-  }
-}
-
-
-calib_object <- readRDS("data/calib_object.rds")
-calib_object$state
-
-cat("Currently running:\n")
-cat("\tWave: ", calib_object$state$wave, "\n")
-cat("\tIteration: ", calib_object$state$iteration, "\n\n")
-cat("The `default_proposal` currently contains:\n")
-for (nm in names(calib_object$state$default_proposal)) {
-  cat(nm, ": ", calib_object$state$default_proposal[[nm]][1], "\n")
-}
 
