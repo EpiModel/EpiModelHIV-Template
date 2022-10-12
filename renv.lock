@@ -852,10 +852,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "b0b287f6bdb50c2d587d80cd1ff38acb47e39b34",
+      "RemoteSha": "e4d40dcd064a3ec428ba35cf739b29208009bd89",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "6ac47f04c12ec2d44ed34d121905a1f9",
+      "Hash": "0275e0ee560a87fdcbe81557a9f3fb98",
       "Requirements": [
         "dplyr",
         "fs",
