@@ -161,7 +161,7 @@ determ_noisy_end <- function(threshold, n_needed) {
 determ_poly_end <- function(threshold) {
   force(threshold)
   function(calib_object, job, results) {
-    sl <- swfcalib::save_sideload(calib_object, id = job$targets)
+    sl <- swfcalib::load_sideload(calib_object, id = job$targets)
     if (is.na(sl$old_guess)) return(NULL)
 
     old_res <- predict(sl$model, data.frame(param = sl$old_guess))
