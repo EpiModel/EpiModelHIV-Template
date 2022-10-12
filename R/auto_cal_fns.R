@@ -162,7 +162,7 @@ determ_poly_end <- function(threshold) {
   force(threshold)
   function(calib_object, job, results) {
     sl <- swfcalib::load_sideload(calib_object, id = job$targets)
-    if (is.na(sl$old_guess)) return(NULL)
+    if (is.null(sl) || is.na(sl$old_guess)) return(NULL)
 
     old_res <- predict(sl$model, data.frame(param = sl$old_guess))
     new_res <- predict(sl$model, data.frame(param = sl$new_guess))
