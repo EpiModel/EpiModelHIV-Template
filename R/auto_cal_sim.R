@@ -29,7 +29,7 @@ model_fun <- function(proposal) {
   # Controls
   source("R/utils-targets.R")
   control <- control_msm(
-    nsteps              = calibration_end,
+    nsteps              = 104, #calibration_end,
     nsims               = 1,
     ncores              = 1,
     cumulative.edgelist = TRUE,

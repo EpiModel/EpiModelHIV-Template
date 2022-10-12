@@ -12,6 +12,7 @@
 
 step1_n_cores <- 10
 step2_n_cores <- 30
+# pkgload::load_all("../../swfcalib")
 
 library(EpiModelHPC)
 source("R/auto_cal_fns.R")
