@@ -18,7 +18,7 @@ library(EpiModelHPC)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
-n_sims <- 90
+n_sims <- 300
 
 calib_object <- list(
   waves = list(
