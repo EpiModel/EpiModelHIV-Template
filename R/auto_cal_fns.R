@@ -135,7 +135,7 @@ determ_poly_end <- function(threshold, poly_n = 3) {
     s_newp <- predicted_param$minimum
     s_newv <- predict(mod, data.frame(s_p = s_newp))
 
-    newp <- munscale(s_newp)
+    newp <- munscale(s_newp, params)
 
     oldp <- swfcalib::load_sideload(calib_object, id = job$targets)
     swfcalib::save_sideload(calib_object, x = newp, id = job$targets)
