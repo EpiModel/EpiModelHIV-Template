@@ -30,7 +30,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job2 = list(
@@ -40,7 +40,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job3 = list(
@@ -50,7 +50,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job4 = list(
@@ -60,7 +60,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_1 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job5 = list(
@@ -70,7 +70,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_2 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job6 = list(
@@ -80,7 +80,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.init.rate_3 = seq(0.1, 0.5, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job7 = list(
@@ -90,7 +90,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           ugc.prob = seq(0.1, 0.7, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.1)
       ),
       job8 = list(
@@ -100,7 +100,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           uct.prob = seq(0.1, 0.7, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.1)
       )
     ),
@@ -112,7 +112,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job2 = list(
@@ -122,7 +122,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       ),
       job3 = list(
@@ -132,7 +132,7 @@ calib_object <- list(
         initial_proposals = dplyr::tibble(
           tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
         ),
-        make_next_proposals = make_poly_proposer(n_sims),
+        make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001)
       )
     )

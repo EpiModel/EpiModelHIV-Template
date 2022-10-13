@@ -68,55 +68,6 @@ make_noisy_proposer <- function(n_new, n_best) {
   }
 }
 
-make_poly_proposer <- function(n_new, poly_n = 3, shrink = 2) {
-  force(n_new)
-  force(poly_n)
-  force(shrink)
-  function(calib_object, job, results) {
-    values <- results[[job$targets]]
-    params <- results[[job$params]]
-    target <- job$targets_val
-
-    complete_rows <- vctrs::vec_detect_complete(values)
-    values <- values[complete_rows]
-    params <- params[complete_rows]
-
-    tar_range <- range(
-      results[[job$params]][
-        results[[".iteration"]] == max(results[[".iteration"]])])
-
-    spread <- (tar_range[2] - tar_range[1]) / shrink / 2
-
-    mod <- lm(values ~ poly(params, poly_n))
-
-    loss_fun <- function(par, target) {
-      abs(predict(mod, data.frame(params = par)) - target)
-    }
-
-    predicted_param <- optimize(
-      range(params),
-      f = loss_fun,
-      target = target,
-      tol = 1e-6
-    )
-    new_guess <- predicted_param$minimum
-
-    sl <- swfcalib::load_sideload(calib_object, id = job$targets)
-    old_guess <- if (!is.null(sl)) sl$new_guess else NA
-
-    swfcalib::save_sideload(
-      calib_object,
-      x = list(model = mod, new_guess = new_guess, old_guess = old_guess),
-      id  = job$targets
-    )
-
-    proposals <- seq(new_guess - spread, new_guess + spread, length.out = n_new)
-    out <- list(proposals)
-    names(out) <- job$params
-    dplyr::as_tibble(out)
-  }
-}
-
 get_loss <- function(job, results, loss_fun) {
   losses <- numeric(nrow(results))
   for (i in seq_len(nrow(results))) {
@@ -158,22 +109,83 @@ determ_noisy_end <- function(threshold, n_needed) {
   }
 }
 
-determ_poly_end <- function(threshold) {
+determ_poly_end <- function(threshold, poly_n = 3) {
   force(threshold)
+  force(poly_n)
   function(calib_object, job, results) {
-    sl <- swfcalib::load_sideload(calib_object, id = job$targets)
-    if (is.null(sl) || is.na(sl$old_guess)) return(NULL)
+    values <- results[[job$targets]]
+    params <- results[[job$params]]
+    target <- job$targets_val
 
-    old_res <- predict(sl$model, data.frame(param = sl$old_guess))
-    new_res <- predict(sl$model, data.frame(param = sl$new_guess))
+    mscale <- function(x, val) (x - mean(val)) / sd(val)
+    munscale <- function(x, val) x * sd(val) + mean(val)
 
-    if (abs(old_res - new_res) < threshold &&
-          abs(new_res - job$target) < threshold) {
-      result <- data.frame(x = new_res)
+    complete_rows <- vctrs::vec_detect_complete(values)
+    values <- values[complete_rows]
+    params <- params[complete_rows]
+
+    s_v <- mscale(values, values)
+    s_t <- mscale(target, values)
+    s_p <- mscale(params, params)
+
+    mod <- lm(s_v ~ poly(s_p, poly_n))
+    loss_fun <- function(par)  abs(predict(mod, data.frame(s_p = par)) - s_t)
+    predicted_param <- optimize(range(-3, 3), f = loss_fun)
+
+    s_newp <- predicted_param$minimum
+    s_newv <- predict(mod, data.frame(s_p = s_newp))
+
+    newp <- munscale(s_newp)
+
+    oldp <- swfcalib::load_sideload(calib_object, id = job$targets)
+    swfcalib::save_sideload(calib_object, x = newp, id = job$targets)
+
+    if (is.null(oldp)) return(NULL)
+
+    s_oldp <- mscale(oldp, params)
+    s_oldv <- predict(mod, data.frame(s_p = s_oldp))
+
+    newv <- munscale(s_newv, values)
+    oldv <- munscale(s_oldv, values)
+
+    swfcalib::save_sideload(calib_object, x = newp, id = job$targets)
+
+    if (abs(oldv - newv) < threshold && abs(newv - target) < threshold) {
+      result <- data.frame(x = newp)
       names(result) <- job$params
       return(result)
     } else {
       return(NULL)
     }
+  }
+}
+
+make_shrink_proposer <- function(n_new, shrink = 2) {
+  force(n_new)
+  force(shrink)
+  function(calib_object, job, results) {
+    tar_range <- range(
+      results[[job$params]][
+        results[[".iteration"]] == max(results[[".iteration"]])
+      ]
+    )
+
+    spread <- (tar_range[2] - tar_range[1]) / shrink / 2
+    center <- swfcalib::load_sideload(calib_object, id = job$targets)
+    if (is.null(center)) {
+      stop(
+        "While making shrinked proposals: \n",
+        "Sideload file with ID: `", job$targets, "` does not exist"
+      )
+    }
+
+    proposals <- seq(
+      max(center - spread, tar_range[1]),
+      min(center + spread, tar_range[2]),
+      length.out = n_new
+    )
+    out <- list(proposals)
+    names(out) <- job$params
+    dplyr::as_tibble(out)
   }
 }
