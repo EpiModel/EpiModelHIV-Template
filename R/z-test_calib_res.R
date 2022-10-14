@@ -6,7 +6,7 @@ res <- readRDS("data/calib/full_results.rds") |> as_tibble()
 
 res1 <- filter(
   res,
-  # .iteration <= 4,
+  .iteration <= 4,
   .wave == 1
 )
 
