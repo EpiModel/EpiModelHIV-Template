@@ -159,6 +159,69 @@ calib_object <- list(
   # state = list() # managed internally
 )
 
+calib_object <- list(
+  waves = list(
+    wave1 = list(
+      job1 = list(
+        targets = paste0("cc.dx.", c("B", "H", "W")),
+        targets_val = c(0.847, 0.818, 0.873),
+        params = paste0("hiv.test.rate_", 1:3),
+        initial_proposals = dplyr::tibble(
+          hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
+          hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
+          hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
+        ),
+        make_next_proposals = make_ind_shrink_proposer(n_sims),
+        get_result = determ_ind_poly_end(0.001)
+      ),
+      job2 = list(
+        targets = paste0("cc.linked.", c("B", "H", "W")),
+        targets_val = c(0.829, 0.898, 0.89),
+        params = paste0("tx.init.rate_", 1:3),
+        initial_proposals = dplyr::tibble(
+          tx.init.rate_1 = seq(0.001, 0.01, length.out = n_sims),
+          tx.init.rate_2 = seq(0.001, 0.01, length.out = n_sims),
+          tx.init.rate_3 = seq(0.001, 0.01, length.out = n_sims),
+        ),
+        make_next_proposals = make_ind_shrink_proposer(n_sims),
+        get_result = determ_ind_poly_end(0.001)
+      )
+    ),
+    wave2 = list(
+      job1 = list(
+        targets = paste0("cc.vsupp.", c("B", "H", "W")),
+        targets_val = c(0.605, 0.62, 0.71),
+        params = paste0("tx.halt.partial.rate_", 1:3),
+        initial_proposals = dplyr::tibble(
+          tx.halt.partial.rate_1 = seq(0.001, 0.01, length.out = n_sims),
+          tx.halt.partial.rate_2 = seq(0.001, 0.01, length.out = n_sims),
+          tx.halt.partial.rate_3 = seq(0.001, 0.01, length.out = n_sims),
+        ),
+        make_next_proposals = make_ind_shrink_proposer(n_sims),
+        get_result = determ_ind_poly_end(0.001)
+      )
+    )
+  ),
+  config = list(
+    simulator = model_fun,
+    default_proposal = dplyr::tibble(
+      hiv.test.rate_1 = 0.001,
+      hiv.test.rate_2 = 0.001,
+      hiv.test.rate_3 = 0.001,
+      tx.init.rate_1 = 0.1,
+      tx.init.rate_2 = 0.1,
+      tx.init.rate_3 = 0.1,
+      tx.halt.partial.rate_1 = 0.001,
+      tx.halt.partial.rate_2 = 0.001,
+      tx.halt.partial.rate_3 = 0.001
+    ),
+    root_directory = "data/calib",
+    max_iteration = 100,
+    n_sims = n_sims
+  )
+  # state = list() # managed internally
+)
+
 library(slurmworkflow)
 library(EpiModelHPC)
 

@@ -47,7 +47,14 @@ param <- param.net(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
     list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
-  )
+  ),
+         hiv.test.rate = c(0.004225436, 0.003399046, 0.005282737),
+         tx.init.rate = c(0.2979903, 0.3664161, 0.3578327),
+         uct.prob = 0.2333895,
+         rct.prob = plogis(qlogis(0.2333895 + log(1.25))),
+         ugc.prob = 0.2611572,
+         rgc.prob = plogis(qlogis(0.2611572 + log(1.25))),
+         tx.halt.partial.rate = c(0.005335528, 0.005129021, 0.00336572)
 )
 
 init <- init_msm()
@@ -55,16 +62,16 @@ init <- init_msm()
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = calib_end,
+  nsteps              = calibration_end,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
   .tracker.list       = calibration_trackers,
-  verbose             = FALSE,
-  .checkpoint.dir     = "temp/cp_calib",
-  .checkpoint.clear   = TRUE,
-  .checkpoint.steps   = 15 * 52
+  # .checkpoint.dir     = "temp/cp_calib",
+  # .checkpoint.clear   = TRUE,
+  # .checkpoint.steps   = 15 * 52,
+  verbose             = FALSE
 )
 
 wf <- add_workflow_step(
@@ -74,7 +81,7 @@ wf <- add_workflow_step(
     scenarios_list = NULL,
     output_dir = "data/intermediate/calibration",
     libraries = "EpiModelHIV",
-    n_rep = 620,
+    n_rep = 200,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader

@@ -2,12 +2,14 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
-res <- readRDS("data/results.rds") |> as_tibble()
+res <- readRDS("data/calib/full_results.rds") |> as_tibble()
 
 res1 <- filter(
   res,
-  .iteration <= 4
+  # .iteration <= 4,
+  .wave == 1
 )
+
 range(res1$hiv.test.rate_1)
 
 # # LOESS
@@ -64,6 +66,7 @@ oo <- optimize(
   target = s_t
 )
 pp <- predict(mod2, data.frame(s_p = oo$minimum))
+pp <- predict(mod2, data.frame(s_p = oo$minimum + c(0.01, 0.02, 0.03)))
 
 oo$minimum * sd(params) + mean(params)
 pp * sd(values) + mean(values)

@@ -130,7 +130,7 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     mod <- lm(s_v ~ poly(s_p, poly_n))
     loss_fun <- function(par)  abs(predict(mod, data.frame(s_p = par)) - s_t)
-    predicted_param <- optimize(range(-3, 3), f = loss_fun)
+    predicted_param <- optimize(interval = c(-3, 3), f = loss_fun)
 
     s_newp <- predicted_param$minimum
     s_newv <- predict(mod, data.frame(s_p = s_newp))
@@ -147,8 +147,6 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     newv <- munscale(s_newv, values)
     oldv <- munscale(s_oldv, values)
-
-    swfcalib::save_sideload(calib_object, x = newp, id = job$targets)
 
     if (abs(oldv - newv) < threshold && abs(newv - target) < threshold) {
       result <- data.frame(x = newp)
@@ -187,5 +185,97 @@ make_shrink_proposer <- function(n_new, shrink = 2) {
     out <- list(proposals)
     names(out) <- job$params
     dplyr::as_tibble(out)
+  }
+}
+
+determ_ind_poly_end <- function(threshold, poly_n = 3) {
+  force(threshold)
+  force(poly_n)
+  function(calib_object, job, results) {
+    mscale <- function(x, val) (x - mean(val)) / sd(val)
+    munscale <- function(x, val) x * sd(val) + mean(val)
+
+    values <- c()
+    params <- c()
+    targets <- job$targets_val
+
+    for (i in seq_along(job$targets)) {
+      values <- c(values, results[[ job$targets[i] ]])
+      params <- c(params, results[[ job$params[i] ]])
+    }
+
+    complete_rows <- vctrs::vec_detect_complete(values)
+    values <- values[complete_rows]
+    params <- params[complete_rows]
+
+    s_v <- mscale(values, values)
+    s_t <- mscale(targets, values)
+    s_p <- mscale(params, params)
+
+    mod <- lm(s_v ~ poly(s_p, poly_n))
+    loss_fun <- function(par, t)  abs(predict(mod, data.frame(s_p = par)) - t)
+    s_newp <- vapply(
+      s_t,
+      function(t) optimize(interval = c(-3, 3), f = loss_fun, t = t)$minumum,
+      numeric(1)
+    )
+    s_newv <- predict(mod, data.frame(s_p = s_newp))
+    newp <- munscale(s_newp, params)
+
+    sl_id <- paste0(job$targets, collapse = "")
+    oldp <- swfcalib::load_sideload(calib_object, id = sl_id)
+    swfcalib::save_sideload(calib_object, x = newp, id = sl_id)
+
+    if (is.null(oldp)) return(NULL)
+
+    s_oldp <- mscale(oldp, params)
+    s_oldv <- predict(mod, data.frame(s_p = s_oldp))
+
+    newv <- munscale(s_newv, values)
+    oldv <- munscale(s_oldv, values)
+
+    if (all(abs(oldv - newv) < threshold & abs(newv - targets) < threshold)) {
+      result <- as.list(newp)
+      names(result) <- job$params
+      return(dplyr::as_tibble(result))
+    } else {
+      return(NULL)
+    }
+  }
+}
+
+make_ind_shrink_proposer <- function(n_new, shrink = 2) {
+  force(n_new)
+  force(shrink)
+  function(calib_object, job, results) {
+    sl_id <- paste0(job$targets, collapse = "")
+    centers <- swfcalib::load_sideload(calib_object, id = sl_id)
+    if (is.null(centers)) {
+      stop(
+        "While making shrinked proposals: \n",
+        "Sideload file with ID: `", job$targets, "` does not exist"
+      )
+    }
+
+    outs <- list()
+    for (i in seq_along(job$params)) {
+      tar_range <- range(
+        results[[job$params[i]]][
+          results[[".iteration"]] == max(results[[".iteration"]])
+          ]
+      )
+      spread <- (tar_range[2] - tar_range[1]) / shrink / 2
+
+      proposals <- seq(
+        max(centers[i] - spread, tar_range[1]),
+        min(centers[i] + spread, tar_range[2]),
+        length.out = n_new
+      )
+
+      out <- list(proposals)
+      names(out) <- job$params[i]
+      outs[[i]] <- dplyr::as_tibble(out)
+    }
+    dplyr::bind_cols(outs)
   }
 }
