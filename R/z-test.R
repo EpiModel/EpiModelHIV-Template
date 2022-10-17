@@ -15,3 +15,16 @@ optim(
   par = c(0.1, 0.1, 0.1),
   fn = loss
 )
+
+d <- d %>%
+  group_by(sim) %>%
+  filter(time >= 3641 & time < 4681) %>%
+  replace(is.na(.), 0) %>%
+  summarize(across(
+    c(
+      starts_with("incid"),
+      contains("part") | contains("index")
+    ),
+    ~ sum(.x),
+    .names = "cuml_{.col}")
+  )

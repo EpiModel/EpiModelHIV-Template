@@ -165,7 +165,7 @@ calib_object <- list(
         get_result = determ_ind_poly_end(0.001)
       ),
       job2 = list(
-        targets = paste0("cc.linked.", c("B", "H", "W")),
+        targets = paste0("cc.linked1m.", c("B", "H", "W")),
         targets_val = c(0.829, 0.898, 0.89),
         params = paste0("tx.init.rate_", 1:3),
         initial_proposals = dplyr::tibble(
@@ -198,9 +198,9 @@ calib_object <- list(
       hiv.test.rate_1 = 0.001,
       hiv.test.rate_2 = 0.001,
       hiv.test.rate_3 = 0.001,
-      tx.init.rate_1 = 0.1,
-      tx.init.rate_2 = 0.1,
-      tx.init.rate_3 = 0.1,
+      tx.init.rate_1 = 0.001,
+      tx.init.rate_2 = 0.001,
+      tx.init.rate_3 = 0.001,
       tx.halt.partial.rate_1 = 0.001,
       tx.halt.partial.rate_2 = 0.001,
       tx.halt.partial.rate_3 = 0.001

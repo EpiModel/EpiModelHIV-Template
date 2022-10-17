@@ -2,51 +2,34 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
-res <- readRDS("data/calib/full_results.rds") |> as_tibble()
+res <- readRDS("./data/calib/waves/1/results.rds") |> as_tibble()
+readRDS("./data/calib/sideloads/cc.linked1m.Bcc.linked1m.Hcc.linked1m.W.rds")
 
 res1 <- filter(
   res,
-  .iteration <= 4,
+  .iteration == max(.iteration) ,
   .wave == 1
 )
 
-range(res1$hiv.test.rate_1)
 
-# # LOESS
-# mod <- loess(hiv.test.rate_1 ~ cc.dx.B, data = res1)
-# preds <- cbind(res1, predict(mod, se = TRUE)) %>%
-#   mutate(upr = fit + 2 * se.fit, lwr = fit - 2 * se.fit)
-#
-# # GLM
-# mod <- glm(hiv.test.rate_1 ~ cc.dx.B, data = res1, family = Gamma("log"))
-# summary(mod)
+values <- c(
+  res1$cc.linked1m.B,
+  res1$cc.linked1m.H,
+  res1$cc.linked1m.W
+)
+params <- c(
+  res1$tx.init.rate_1,
+  res1$tx.init.rate_2,
+  res1$tx.init.rate_3
+)
 
-# LM POLY
-# mod <- lm(hiv.test.rate_1 ~ poly(cc.dx.B, 3), data = res1)
-# summary(mod)
-#
-# # plot the points (actual observations), regression line, and confidence interval
-# preds <- cbind(res1, predict(mod, type = "response", se.fit = TRUE)) %>%
-#   mutate(upr = fit + 2 * se.fit, lwr = fit - 2 * se.fit)
-#
-# ggplot(preds, aes(y = hiv.test.rate_1, x = cc.dx.B)) +
-#   geom_point() +
-#   geom_line(aes(y = fit), col = "red") +
-#   geom_ribbon(aes(ymin=lwr,ymax=upr), alpha=0.3, col = "blue")
-#
-# pp <- predict(mod, data.frame(cc.dx.B = 0.847), se = TRUE, type = "response")
-# pp
-
-values <- res1$cc.dx.B
-params <- res1$hiv.test.rate_1
-target <- 0.847
+target <- 0.829
 
 s_v <- (values - mean(values)) / sd(values)
 s_p <- (params - mean(params)) / sd(params)
 s_t <- (target - mean(values)) / sd(values)
 
-
-mod2 <- lm(s_v ~ poly(s_p, 4))
+mod2 <- lm(s_v ~ poly(s_p, 3))
 
 preds2 <- as_tibble(predict(mod2, type = "response", se.fit = TRUE)) %>%
   mutate(upr = fit + 2 * se.fit, lwr = fit - 2 * se.fit)
@@ -54,7 +37,10 @@ preds2 <- as_tibble(predict(mod2, type = "response", se.fit = TRUE)) %>%
 ggplot(data.frame(s_v, s_p, preds2), aes(x = s_p, y = s_v)) +
   geom_point() +
   geom_line(aes(y = fit), col = "red") +
-  geom_ribbon(aes(ymin=lwr,ymax=upr), alpha=0.3, col = "blue")
+  geom_ribbon(aes(ymin = lwr,ymax = upr), alpha=0.3, col = "blue")
+
+ggplot(data.frame(values, params), aes(x = params, y = values)) +
+  geom_point()
 
 ofu <- function(par, target) {
   abs(predict(mod2, data.frame(s_p = par)) - target)

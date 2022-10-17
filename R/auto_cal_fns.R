@@ -137,8 +137,8 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     newp <- munscale(s_newp, params)
 
-    oldp <- swfcalib::load_sideload(calib_object, id = job$targets)
-    swfcalib::save_sideload(calib_object, x = newp, id = job$targets)
+    oldp <- swfcalib::load_sideload(calib_object, job)
+    swfcalib::save_sideload(calib_object, job, newp)
 
     if (is.null(oldp)) return(NULL)
 
@@ -169,7 +169,7 @@ make_shrink_proposer <- function(n_new, shrink = 2) {
     )
 
     spread <- (tar_range[2] - tar_range[1]) / shrink / 2
-    center <- swfcalib::load_sideload(calib_object, id = job$targets)
+    center <- swfcalib::load_sideload(calib_object, job)
     if (is.null(center)) {
       stop(
         "While making shrinked proposals: \n",
@@ -222,9 +222,8 @@ determ_ind_poly_end <- function(threshold, poly_n = 3) {
     s_newv <- predict(mod, data.frame(s_p = s_newp))
     newp <- munscale(s_newp, params)
 
-    sl_id <- paste0(job$targets, collapse = "")
-    oldp <- swfcalib::load_sideload(calib_object, id = sl_id)
-    swfcalib::save_sideload(calib_object, x = newp, id = sl_id)
+    oldp <- swfcalib::load_sideload(calib_object, job)
+    swfcalib::save_sideload(calib_object, job, newp)
 
     if (is.null(oldp)) return(NULL)
 
@@ -249,7 +248,7 @@ make_ind_shrink_proposer <- function(n_new, shrink = 2) {
   force(shrink)
   function(calib_object, job, results) {
     sl_id <- paste0(job$targets, collapse = "")
-    centers <- swfcalib::load_sideload(calib_object, id = sl_id)
+    centers <- swfcalib::load_sideload(calib_object, job)
     if (is.null(centers)) {
       stop(
         "While making shrinked proposals: \n",
