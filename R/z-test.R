@@ -4,7 +4,7 @@ x2 <- runif(n)
 x3 <- runif(n)
 y <- x1 + x2 + x3 - x1*x2*x3 + rnorm(n)
 
-m <- lm(y ~ poly(x1, 2) * poly(x2, 2) * poly(x2, 2))
+m <- lm(y ~ poly(x1, 2) * poly(x2, 2) * poly(x3, 2))
 summary(m)
 
 loss <- function(par) {
@@ -12,6 +12,6 @@ loss <- function(par) {
 }
 
 optim(
-  par = c(0.1, 0.1),
+  par = c(0.1, 0.1, 0.1),
   fn = loss
 )
