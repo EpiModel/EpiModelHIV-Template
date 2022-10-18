@@ -2,7 +2,8 @@
 renv::install(c(
   "EpiModel/ARTnet",
   "EpiModel/EpiModelHIV-p",
-  "EpiModel/EpiModelHPC"
+  "EpiModel/EpiModelHPC",
+  "EpiModel/slurmworkflow"
 ))
 
 # This code finds and install the libraries used by the project (CRAN version)
