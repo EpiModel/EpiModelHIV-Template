@@ -10,6 +10,8 @@ source("R/00-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "epimodel",
+  r_version = "4.2.1",
+  git_version = "2.35.1",
   mail_user = mail_user
 )
 
