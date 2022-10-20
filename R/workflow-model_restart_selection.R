@@ -48,13 +48,9 @@ param <- param.net(
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
     list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
   ),
-         hiv.test.rate = c(0.004225436, 0.003399046, 0.005282737),
-         tx.init.rate = c(0.2979903, 0.3664161, 0.3578327),
-         uct.prob = 0.2333895,
-         rct.prob = plogis(qlogis(0.2333895 + log(1.25))),
-         ugc.prob = 0.2611572,
-         rgc.prob = plogis(qlogis(0.2611572 + log(1.25))),
-         tx.halt.partial.rate = c(0.005335528, 0.005129021, 0.00336572)
+  hiv.test.rate = c(0.004488266, 0.003773103, 0.005530729),
+  tx.init.rate = c(0.2983845, 0.3677398, 0.3580073),
+  tx.halt.partial.rate = c(0.00537829, 0.005037659, 0.003340232)
 )
 
 init <- init_msm()

@@ -3,7 +3,7 @@ library(ggplot2)
 theme_set(theme_light())
 
 res <- readRDS("./data/calib/waves/1/results.rds") |> as_tibble()
-readRDS("./data/calib/sideloads/cc.linked1m.Bcc.linked1m.Hcc.linked1m.W.rds")
+readRDS("./data/calib/sideloads/cc.linked1m.Btx.init.rate_1cc.linked1m.Htx.init.rate_2cc.linked1m.Wtx.init.rate_3.rds")
 
 res1 <- filter(
   res,

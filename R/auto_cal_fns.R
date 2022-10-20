@@ -216,7 +216,7 @@ determ_ind_poly_end <- function(threshold, poly_n = 3) {
     loss_fun <- function(par, t)  abs(predict(mod, data.frame(s_p = par)) - t)
     s_newp <- vapply(
       s_t,
-      function(t) optimize(interval = c(-3, 3), f = loss_fun, t = t)$minimum,
+      function(t) optimize(interval = c(-5, 5), f = loss_fun, t = t)$minimum,
       numeric(1)
     )
     s_newv <- predict(mod, data.frame(s_p = s_newp))
@@ -271,10 +271,85 @@ make_ind_shrink_proposer <- function(n_new, shrink = 2) {
         length.out = n_new
       )
 
+      proposals <- sample(proposals)
+
       out <- list(proposals)
       names(out) <- job$params[i]
       outs[[i]] <- dplyr::as_tibble(out)
     }
     dplyr::bind_cols(outs)
+  }
+}
+
+determ_lin_poly_end <- function(thresholds, poly_n = 3) {
+  force(thresholds)
+  force(poly_n)
+  function(calib_object, job, results) {
+    mscale <- function(x, val) (x - mean(val)) / sd(val)
+    munscale <- function(x, val) x * sd(val) + mean(val)
+
+    values <- results[, job$targets]
+    params <- results[, job$params]
+    targets <- job$targets_val
+
+    complete_rows <- vctrs::vec_detect_complete(values)
+    values <- values[complete_rows, ]
+    params <- params[complete_rows, ]
+
+    s_v <- purrr::map_dfc(values, ~ mscale(.x, .x))
+    s_p <- purrr::map_dfc(params, ~ mscale(.x, .x))
+    s_t <- purrr::map2_dbl(targets, values, mscale)
+    s_data <- dplyr::bind_cols(s_p, s_v)
+
+    sfmla <- paste0(
+      "cbind(",
+      paste0(job$targets, collapse = ", "),
+      ") ~ ",
+      paste0(
+        paste0("poly(", job$params, ", ", poly_n, ")"),
+        collapse = " + "
+      )
+    )
+
+    fmla <- as.formula(sfmla)
+    mod <- lm(fmla, data = s_data)
+
+    loss_fun <- function(par, t) {
+      dat <- as.data.frame(as.list(par))
+      names(dat) <- job$params
+      out <- predict(mod, dat)
+      sum((out - t)^2)
+    }
+
+    initial <- rep(0, ncol(params))
+    s_newp <- optim(initial, loss_fun, t = s_t)$par
+
+    dat <- as.data.frame(as.list(s_newp))
+    names(dat) <- job$params
+    s_newv <- predict(mod, dat)
+
+    newp <- purrr::map2_dbl(s_newp, params, munscale)
+
+    oldp <- swfcalib::load_sideload(calib_object, job)
+    swfcalib::save_sideload(calib_object, job, newp)
+
+    if (is.null(oldp)) return(NULL)
+
+    s_oldp <- purrr::map2_dbl(oldp, params, mscale)
+    dat <- as.data.frame(as.list(s_oldp))
+    names(dat) <- job$params
+    s_oldv <- predict(mod, dat)
+
+    newv <- purrr::map2_dbl(s_newv, values, munscale)
+    oldv <- purrr::map2_dbl(s_oldv, values, munscale)
+
+    if (all(abs(oldv - newv) < thresholds) &&
+        all(abs(newv - target) < thresholds)) {
+      result <- data.frame(as.list(newp))
+      names(result) <- job$params
+      return(result)
+    } else {
+      return(NULL)
+    }
   }
 }

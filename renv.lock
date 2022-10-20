@@ -287,10 +287,10 @@
     },
     "digest": {
       "Package": "digest",
-      "Version": "0.6.29",
+      "Version": "0.6.30",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "cf6b206a045a684728c3267ef7596190",
+      "Hash": "bf1cd206a5d170d132ef75c7537b9bdb",
       "Requirements": []
     },
     "doParallel": {
@@ -889,10 +889,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "97b08ecea9f537b5f2de2fa398cca292faa745c0",
+      "RemoteSha": "8554b8ebadcdcfd17c496526578aa63865ad0f7d",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "9cd88b1106f89954c3dece34157c81ac",
+      "Hash": "f36e9f29d57f64766b5b29e48647f506",
       "Requirements": [
         "dplyr",
         "fs",
@@ -1049,18 +1049,18 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.33",
+      "Version": "0.34",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "1a666f915cd65072f4ccf5b2888d5d39",
+      "Hash": "9eba2411b0b1f879797141bd24df7407",
       "Requirements": []
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.5",
+      "Version": "2.3.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "458bb38374d73bf83b1bb85e353da200",
+      "Hash": "9b570515751dcbae610f29885e025b41",
       "Requirements": []
     }
   }
