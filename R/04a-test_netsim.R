@@ -1,4 +1,7 @@
 
+## Example interactive epidemic simulation run script with basic parameterization
+##    and all parameters defined in `param_msm`, with example of writing/debugging modules
+
 library("EpiModelHIV")
 
 # Necessary files

@@ -1,4 +1,8 @@
-# Setup ------------------------------------------------------------------------
+
+## Example interactive epidemic simulation run script with more complex parameterization
+##    and parameters defined in spreadsheet, with example of running model scenarios defined
+##    with data frame approach
+
 library("EpiModelHIV")
 library("dplyr")
 
