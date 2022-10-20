@@ -2,9 +2,9 @@
 library("EpiModelHIV")
 
 # Necessary files
-epistats <- readRDS("data/input/epistats.rds")
-netstats <- readRDS("data/input/netstats.rds")
-est      <- readRDS("data/input/netest.rds")
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+est      <- readRDS("data/intermediate/estimates/netest.rds")
 
 # Parameters
 # Uses example of data frame/spreadsheet for parameter input
