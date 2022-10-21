@@ -1,14 +1,14 @@
 # working on HPC
 
 step1_n_cores <- 10
-step2_n_cores <- 30
+step2_n_cores <- 28
 # pkgload::load_all("../../swfcalib")
 
 library(EpiModelHPC)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
-n_sims <- 300
+n_sims <- 280
 
 calib_object <- list(
   waves = list(
@@ -95,6 +95,12 @@ library(EpiModelHPC)
 
 hpc_configs <- swf_configs_rsph(
   partition = "preemptable",
+  mail_user = "aleguil@emory.edu"
+)
+
+hpc_configs <- swf_configs_rsph(
+  hpc = "mox",
+  partition = "ckpt",
   mail_user = "aleguil@emory.edu"
 )
 
