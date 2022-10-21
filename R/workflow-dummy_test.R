@@ -98,9 +98,10 @@ hpc_configs <- swf_configs_rsph(
   mail_user = "aleguil@emory.edu"
 )
 
-hpc_configs <- swf_configs_rsph(
+hpc_configs <- swf_configs_hyak(
   hpc = "mox",
   partition = "ckpt",
+  r_version = "4.1.2",
   mail_user = "aleguil@emory.edu"
 )
 
