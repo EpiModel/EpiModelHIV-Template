@@ -344,7 +344,7 @@ determ_lin_poly_end <- function(thresholds, poly_n = 3) {
     oldv <- purrr::map2_dbl(s_oldv, values, munscale)
 
     if (all(abs(oldv - newv) < thresholds) &&
-        all(abs(newv - target) < thresholds)) {
+        all(abs(newv - targets) < thresholds)) {
       result <- data.frame(as.list(newp))
       names(result) <- job$params
       return(result)

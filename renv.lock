@@ -53,11 +53,11 @@
       "Version": "2.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
       "RemoteSha": "384316159992984291efd6dbbb487ab5dc1a519d",
+      "RemoteHost": "api.github.com",
       "Hash": "19070356fe61e93ce72c98a7bfd11145",
       "Requirements": [
         "RColorBrewer",
@@ -84,12 +84,12 @@
       "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "main",
-      "RemoteSha": "ad749167dde89abb41a130cc8cd9698614c6111f",
-      "RemoteHost": "api.github.com",
-      "Hash": "ed4e7434b7519aac3804210b6e4c50af",
+      "RemoteRef": "ergm_api",
+      "RemoteSha": "ad5f9f479b73e6121fa9db4308f241a46dacc842",
+      "Hash": "5ff143a6c7277afe14c4b345b168b63d",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -267,10 +267,10 @@
     },
     "deSolve": {
       "Package": "deSolve",
-      "Version": "1.33",
+      "Version": "1.34",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f8808faea7c804a62e83018933789255",
+      "Hash": "c67dd1e87a978781734086453f0f1d9b",
       "Requirements": []
     },
     "desc": {
@@ -613,10 +613,10 @@
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.8-40",
+      "Version": "1.8-41",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c6b2fdb18cf68ab613bd564363e1ba0d",
+      "Hash": "6b3904f13346742caa3e82dd0303d4ad",
       "Requirements": [
         "Matrix",
         "nlme"
@@ -998,13 +998,14 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.4.2",
+      "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0e3dfc070b2a8f0478fcdf86fb33355d",
+      "Hash": "001fd6a5ebfff8316baf9fb2b5516dc9",
       "Requirements": [
         "cli",
         "glue",
+        "lifecycle",
         "rlang"
       ]
     },

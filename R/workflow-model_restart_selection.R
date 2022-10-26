@@ -12,7 +12,14 @@ hpc_configs <- swf_configs_rsph(
   mail_user = mail_user
 )
 
-max_cores <- 32
+hpc_configs <- swf_configs_hyak(
+  hpc = "mox",
+  partition = "ckpt",
+  r_version = "4.1.2",
+  mail_user = "aleguil@emory.edu"
+)
+
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -43,14 +50,14 @@ param <- param.net(
   epistats          = epistats,
   prep.start        = prep_start,
   riskh.start       = prep_start - 53,
+  # hiv.test.rate = c(0.004488266, 0.003773103, 0.005530729),
+  # tx.init.rate = c(0.2983845, 0.3677398, 0.3580073),
+  # tx.halt.partial.rate = c(0.00537829, 0.005037659, 0.003340232),
   .param.updater.list = list(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
     list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
-  ),
-  hiv.test.rate = c(0.004488266, 0.003773103, 0.005530729),
-  tx.init.rate = c(0.2983845, 0.3677398, 0.3580073),
-  tx.halt.partial.rate = c(0.00537829, 0.005037659, 0.003340232)
+  )
 )
 
 init <- init_msm()

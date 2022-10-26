@@ -1,77 +1,73 @@
-n <- 1e4
-x1 <- rnorm(n)
-x2 <- rnorm(n)
-x3 <- rnorm(n)
-y1 <- 2*x1 + 0.2*x2 + 0.3 * x3 + rnorm(n, 0, 0.5)
-y2 <- 0.2*x1 + 2*x2 + 0.3 * x3 + rnorm(n, 0, 0.5)
-y3 <- 0.2*x1 + 0.2*x2 + 3 * x3 + rnorm(n, 0, 0.5)
-results <- data.frame(x1, x2, x3, y1, y2, y3)
+# Setup ------------------------------------------------------------------------
+# library("EpiModelHIV")
+pkgload::load_all("../../EpiModelHIV-p.git/main")
+library("dplyr")
 
-mscale <- function(x, val) (x - mean(val)) / sd(val)
-munscale <- function(x, val) x * sd(val) + mean(val)
+# Necessary files
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+est      <- readRDS("data/intermediate/estimates/netest.rds")
 
-poly_n <- 3
-job <- list()
-job$targets <- c("y1", "y2", "y3")
-job$params <- c("x1", "x2", "x3")
-targets <- c(0.3, -1, 0.2)
-
-complete_rows <- vctrs::vec_detect_complete(values)
-values <- values[complete_rows, ]
-params <- params[complete_rows, ]
-
-s_v <- purrr::map_dfc(values, ~ mscale(.x, .x))
-s_p <- purrr::map_dfc(params, ~ mscale(.x, .x))
-s_t <- purrr::map2_dbl(targets, values, mscale)
-s_data <- dplyr::bind_cols(s_p, s_v)
-
-sfmla <- paste0(
-  "cbind(",
-  paste0(job$targets, collapse = ", "),
-  ") ~ ",
-  paste0(
-    paste0("poly(", job$params, ", ", poly_n, ")"),
-    collapse = " + "
+# Parameters
+prep_start <- 54
+param <- param.net(
+  data.frame.params = readr::read_csv("data/input/params.csv"),
+  netstats          = netstats,
+  epistats          = epistats,
+  prep.start        = prep_start,
+  riskh.start       = prep_start - 53,
+  .param.updater.list = list(
+    # High PrEP intake for the first year; go back to normal to get to 15%
+    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
+    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
   )
 )
 
-fmla <- as.formula(sfmla)
-mod <- lm(fmla, data = s_data)
+# Define test scenarios
+scenarios.df <- tibble(
+  .scenario.id    = c("scenario_1", "scenario_2"),
+  .at             = 1,
+  hiv.test.rate_1 = c(0.004, 0.005),
+  hiv.test.rate_2 = c(0.004, 0.005),
+  hiv.test.rate_3 = c(0.007, 0.008)
+)
+scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
-loss_fun <- function(par, t) {
-  dat <- as.data.frame(as.list(par))
-  names(dat) <- job$params
-  out <- predict(mod, dat)
-  sum((out - t)^2)
+# Apply a scenario to the param object
+param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
+
+# Initial conditions (default prevalence initialized in epistats)
+# For models without bacterial STIs, these must be initialized here
+# with non-zero values
+init <- init_msm(
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
+)
+
+# Controls
+source("R/utils-targets.R")
+control <- control_msm(
+  nsteps              = 3,
+  nsims               = 1,
+  ncores              = 1,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  verbose             = FALSE,
+  raw.output          = TRUE
+)
+
+# See listing of modules and other control settings
+# Module function defaults defined in ?control_msm
+print(control)
+
+out <- numeric(100)
+for (i in seq_len(100)) {
+  sim <- netsim(est, param, init, control)
+  dat <- sim[[1]]
+  out[i] <- get_edgelist(dat, 3) |> nrow()
 }
 
-initial <- rep(0, ncol(params))
-s_newp <- optim(initial, loss_fun, t = s_t)$par
-
-dat <- as.data.frame(as.list(s_newp))
-names(dat) <- job$params
-s_newv <- predict(mod, dat)
-
-newp <- purrr::map2_dbl(s_newp, params, munscale)
-
-oldp <- swfcalib::load_sideload(calib_object, job)
-swfcalib::save_sideload(calib_object, job, newp)
-
-if (is.null(oldp)) return(NULL)
-
-s_oldp <- purrr::map2_dbl(oldp, params, mscale)
-dat <- as.data.frame(as.list(s_oldp))
-names(dat) <- job$params
-s_oldv <- predict(mod, dat)
-
-newv <- purrr::map2_dbl(s_newv, values, munscale)
-oldv <- purrr::map2_dbl(s_oldv, values, munscale)
-
-if (all(abs(oldv - newv) < thresholds) &&
-  all(abs(newv - target) < thresholds)) {
-  result <- data.frame(as.list(newp))
-  names(result) <- job$params
-  return(result)
-} else {
-  return(NULL)
-}
+mean(out)
+median(out)
