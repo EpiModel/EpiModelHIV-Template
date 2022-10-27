@@ -50,9 +50,10 @@ param <- param.net(
   epistats          = epistats,
   prep.start        = prep_start,
   riskh.start       = prep_start - 53,
-  # hiv.test.rate = c(0.004488266, 0.003773103, 0.005530729),
-  # tx.init.rate = c(0.2983845, 0.3677398, 0.3580073),
-  # tx.halt.partial.rate = c(0.00537829, 0.005037659, 0.003340232),
+  hiv.test.rate = c(0.004508235, 0.003748965, 0.005791135),
+  tx.init.rate = c(0.2972737, 0.3674605, 0.3575724),
+  tx.halt.partial.rate = c(0.005324598, 0.005001534, 0.003334693),
+  hiv.trans.scale = c(1.713511, 0.266574, 0.1783712),
   .param.updater.list = list(
     # High PrEP intake for the first year; go back to normal to get to 15%
     list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
