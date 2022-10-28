@@ -1,5 +1,6 @@
 # Setup ------------------------------------------------------------------------
-library(EpiModelHIV)
+# library(EpiModelHIV)
+pkgload::load_all("../../EpiModelHIV-p.git/main")
 source("R/00-project_settings.R")
 
 # Necessary files
@@ -7,7 +8,7 @@ epistats <- readRDS("data/intermediate/estimates/epistats.rds")
 netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 orig     <- readRDS("data/intermediate/estimates/restart.rds")
 
-prep_start <- calib_end + 55
+prep_start <- restart_time + 55
 
 # Parameters
 param <- param.net(
@@ -30,7 +31,7 @@ init <- init_msm()
 source("R/utils-targets.R")
 control <- control_msm(
   start               = restart_time,
-  nsteps              = restart_time + 1,
+  nsteps              = restart_time + 5,
   nsims               = 1,
   ncores              = 1,
   initialize.FUN      = reinit_msm,

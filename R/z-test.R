@@ -1,6 +1,5 @@
 # Setup ------------------------------------------------------------------------
 # library("EpiModelHIV")
-pkgload::load_all("../../EpiModelHIV-p.git/main")
 library("dplyr")
 
 # Necessary files
