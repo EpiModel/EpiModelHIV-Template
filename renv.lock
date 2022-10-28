@@ -840,12 +840,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "fix_map",
+      "RemoteRef": "main",
       "RemoteSha": "96da618fc4c1713f76c2e42664b7e2a16c9f0718",
-      "RemoteHost": "api.github.com",
-      "Hash": "6e6a41cfde5dbd1f135dd2a25e891606",
+      "Hash": "1aa23575eec5cf20dee06d809e667066",
       "Requirements": [
         "fs",
         "yaml"

@@ -44,5 +44,3 @@ wf <- add_workflow_step(
     "mail-type" = "FAIL"
   )
 )
-
-
