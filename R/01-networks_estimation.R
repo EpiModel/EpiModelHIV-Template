@@ -12,8 +12,8 @@ library("ARTnet")
 source("R/00-project_settings.R")
 
 if (interactive()) {
-  ncores <- 4
-  networks_size <- 5e3
+  ncores <- 1
+  networks_size <- 10e3
 }
 
 # 0. Initialize Network --------------------------------------------------------
