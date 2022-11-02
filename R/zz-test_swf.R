@@ -32,7 +32,7 @@ wf <- add_workflow_step(
       print(paste0("array_offset = ", Sys.getenv("SWF__ARRAY_OFFSET")))
       print(paste0("batch_num = ", batch_num))
     },
-    batch_num = 1:22,
+    batch_num = 22:1,
     setup_lines = hpc_configs$r_loader,
     max_array_size = 10,
     MoreArgs = list()

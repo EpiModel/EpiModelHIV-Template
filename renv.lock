@@ -106,15 +106,16 @@
       "Version": "2.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
-      "RemoteRef": "main",
-      "RemoteSha": "091f9913e5374320031cbf5b7e42d142f51366c0",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "netsim_scenarios",
+      "RemoteSha": "5cd2f5812dae704ea948d8809947c0758aa4f175",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "edf42dee206e3cffb9739e880b1270ab",
+      "Hash": "8a089be5740da8e190d35f019e071fa6",
       "Requirements": [
         "EpiModel",
+        "callr",
         "doParallel",
         "ergm",
         "foreach",
@@ -205,6 +206,17 @@
       "Requirements": [
         "fastmap",
         "rlang"
+      ]
+    },
+    "callr": {
+      "Package": "callr",
+      "Version": "3.7.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "358689cac9fe93b1bb3a19088d2dbed8",
+      "Requirements": [
+        "R6",
+        "processx"
       ]
     },
     "cli": {
@@ -722,6 +734,17 @@
       "Hash": "95ef9167b75dde9d2ccc3c7528393e7e",
       "Requirements": []
     },
+    "processx": {
+      "Package": "processx",
+      "Version": "3.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a33ee2d9bf07564efb888ad98410da84",
+      "Requirements": [
+        "R6",
+        "ps"
+      ]
+    },
     "progress": {
       "Package": "progress",
       "Version": "1.2.2",
@@ -744,6 +767,14 @@
       "Requirements": [
         "digest"
       ]
+    },
+    "ps": {
+      "Package": "ps",
+      "Version": "1.7.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "68dd03d98a5efd1eb3012436de45ba83",
+      "Requirements": []
     },
     "purrr": {
       "Package": "purrr",
@@ -840,12 +871,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
       "RemoteSha": "96da618fc4c1713f76c2e42664b7e2a16c9f0718",
-      "Hash": "1aa23575eec5cf20dee06d809e667066",
+      "RemoteHost": "api.github.com",
+      "Hash": "de2cf07f62d9922e6d9f28ef98d63d19",
       "Requirements": [
         "fs",
         "yaml"
