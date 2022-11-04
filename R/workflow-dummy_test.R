@@ -1,13 +1,13 @@
 # working on HPC
 
 step1_n_cores <- 10
-step2_n_cores <- 28
+step2_n_cores <- 20
 
 library(EpiModelHPC)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
-n_sims <- 280
+n_sims <- 200
 
 calib_object <- list(
   waves = list(
@@ -156,7 +156,7 @@ wf <- add_workflow_step(
   ),
   sbatch_opts = list(
     "cpus-per-task" = step2_n_cores,
-    "time" = "02:00:00",
+    "time" = "05:00:00",
     "mem" = "0",
     "mail-type" = "FAIL"
   )

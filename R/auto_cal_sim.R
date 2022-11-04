@@ -34,9 +34,9 @@ model_fun <- function(proposal) {
     ncores              = 1,
     cumulative.edgelist = TRUE,
     truncate.el.cuml    = 0,
-    .checkpoint.dir     = paste0("temp/cp_calib/", proposal[[".proposal_index"]], "/"),
-    .checkpoint.clear   = TRUE,
-    .checkpoint.steps   = 15 * 52,
+    # .checkpoint.dir     = paste0("temp/cp_calib/", proposal[[".proposal_index"]], "/"),
+    # .checkpoint.clear   = TRUE,
+    # .checkpoint.steps   = 15 * 52,
     .tracker.list       = calibration_trackers,
     verbose             = FALSE
   )
