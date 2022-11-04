@@ -109,14 +109,13 @@
       "RemoteType": "github",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
-      "RemoteRef": "netsim_scenarios",
-      "RemoteSha": "ccbca4778647e4763c4d5fdf93d9e7ff37afb0d4",
+      "RemoteRef": "main",
+      "RemoteSha": "091f9913e5374320031cbf5b7e42d142f51366c0",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "279c8980a9f18cf5bfca90e4efbc24fe",
+      "Hash": "edf42dee206e3cffb9739e880b1270ab",
       "Requirements": [
         "EpiModel",
-        "callr",
         "doParallel",
         "ergm",
         "foreach",
@@ -207,17 +206,6 @@
       "Requirements": [
         "fastmap",
         "rlang"
-      ]
-    },
-    "callr": {
-      "Package": "callr",
-      "Version": "3.7.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "358689cac9fe93b1bb3a19088d2dbed8",
-      "Requirements": [
-        "R6",
-        "processx"
       ]
     },
     "cli": {
@@ -735,17 +723,6 @@
       "Hash": "95ef9167b75dde9d2ccc3c7528393e7e",
       "Requirements": []
     },
-    "processx": {
-      "Package": "processx",
-      "Version": "3.8.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a33ee2d9bf07564efb888ad98410da84",
-      "Requirements": [
-        "R6",
-        "ps"
-      ]
-    },
     "progress": {
       "Package": "progress",
       "Version": "1.2.2",
@@ -768,14 +745,6 @@
       "Requirements": [
         "digest"
       ]
-    },
-    "ps": {
-      "Package": "ps",
-      "Version": "1.7.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "68dd03d98a5efd1eb3012436de45ba83",
-      "Requirements": []
     },
     "purrr": {
       "Package": "purrr",

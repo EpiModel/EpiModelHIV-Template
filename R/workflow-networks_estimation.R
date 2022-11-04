@@ -8,9 +8,11 @@ library(EpiModelHPC)
 
 source("R/00-project_settings.R")
 
-hpc_configs <- swf_configs_rsph(
-  partition = "epimodel",
-  mail_user = mail_user
+hpc_configs <- swf_configs_hyak(
+  hpc = "mox",
+  partition = "csde",
+  r_version = "4.1.2",
+  mail_user = "aleguil@emory.edu"
 )
 
 max_cores <- 10
