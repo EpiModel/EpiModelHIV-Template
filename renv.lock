@@ -168,16 +168,6 @@
       "Hash": "e9c08b94391e9f3f97355841229124f2",
       "Requirements": []
     },
-    "Rglpk": {
-      "Package": "Rglpk",
-      "Version": "0.6-4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "94a9ae53d323c330f2bc5bda54ea9f31",
-      "Requirements": [
-        "slam"
-      ]
-    },
     "ape": {
       "Package": "ape",
       "Version": "5.6-2",
@@ -950,14 +940,6 @@
       "Requirements": [
         "cli"
       ]
-    },
-    "slam": {
-      "Package": "slam",
-      "Version": "0.1-50",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e25793551cbdb843154152e5ee88cbd6",
-      "Requirements": []
     },
     "slurmworkflow": {
       "Package": "slurmworkflow",
