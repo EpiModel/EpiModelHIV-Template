@@ -1,8 +1,13 @@
 pkgload::load_all("../../swfcalib")
+library(swfcalib)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
 calib_object <- readRDS("./data/calib/calib_object.rds")
+
+calibrated_scenario <- calib_object$state$default_proposal
+calibrated_scenario[[".at"]] <- 1
+calibrated_scenario[[".scenario.id"]] <- "calibrated"
 
 # calibration_step1(calib_object, n_cores = 1)
 n_cores <- 1
@@ -33,3 +38,5 @@ print_log(calib_object)
 
 calibration_step2(calib_object, n_cores = 1)
 calibration_step3(calib_object, n_cores = 1)
+
+

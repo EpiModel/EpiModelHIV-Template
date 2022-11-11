@@ -1,13 +1,13 @@
 # working on HPC
 
 step1_n_cores <- 10
-step2_n_cores <- 20
+step2_n_cores <- 10
 
 library(EpiModelHPC)
 source("R/auto_cal_fns.R")
 source("R/auto_cal_sim.R")
 
-n_sims <- 200
+n_sims <- 500
 
 calib_object <- list(
   waves = list(
@@ -22,7 +22,7 @@ calib_object <- list(
           hiv.test.rate_3 = sample(hiv.test.rate_1)
         ),
         make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001)
+        get_result = determ_ind_poly_end(0.0005, poly_end = 4)
       ),
       job2 = list(
         targets = paste0("cc.linked1m.", c("B", "H", "W")),
@@ -34,7 +34,7 @@ calib_object <- list(
           tx.init.rate_3 = sample(tx.init.rate_1),
         ),
         make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001)
+        get_result = determ_ind_poly_end(0.001, poly_end = 3)
       )
     ),
     wave2 = list(
@@ -48,7 +48,7 @@ calib_object <- list(
           tx.halt.partial.rate_3 = sample(tx.halt.partial.rate_1)
         ),
         make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001)
+        get_result = determ_ind_poly_end(0.001, poly_end = 3)
       )
     ),
     wave3 = list(
@@ -62,7 +62,7 @@ calib_object <- list(
           hiv.trans.scale_3 = sample(seq(0.1, 1, length.out = n_sims))
         ),
         make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_lin_poly_end(c(0.01, 0.01, 0.01))
+        get_result = determ_lin_poly_end(c(0.01, 0.01, 0.01), poly_end = 4)
       )
     )
   ),
