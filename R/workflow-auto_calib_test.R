@@ -24,7 +24,7 @@ hpc_configs <- swf_configs_hyak(
   mail_user = "aleguil@emory.edu"
 )
 
-max_cores <- 28
+max_cores <- 20
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
