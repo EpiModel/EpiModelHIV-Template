@@ -22,7 +22,7 @@ calib_object <- list(
           hiv.test.rate_3 = sample(hiv.test.rate_1)
         ),
         make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001, poly_n = 4)
+        get_result = determ_ind_poly_end(0.001, poly_n = 5)
       ),
       job2 = list(
         targets = paste0("cc.linked1m.", c("B", "H", "W")),
@@ -36,46 +36,46 @@ calib_object <- list(
         make_next_proposals = make_ind_shrink_proposer(n_sims),
         get_result = determ_ind_poly_end(0.001, poly_n = 3)
       )
-    ),
-    wave2 = list(
-      job1 = list(
-        targets = paste0("cc.vsupp.", c("B", "H", "W")),
-        targets_val = c(0.605, 0.62, 0.71),
-        params = paste0("tx.halt.partial.rate_", 1:3),
-        initial_proposals = dplyr::tibble(
-          tx.halt.partial.rate_1 = sample(seq(0.001, 0.01, length.out = n_sims)),
-          tx.halt.partial.rate_2 = sample(tx.halt.partial.rate_1),
-          tx.halt.partial.rate_3 = sample(tx.halt.partial.rate_1)
-        ),
-        make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001, poly_n = 3)
-      )
-    ),
-    wave3 = list(
-      job1 = list(
-        targets = paste0("i.prev.dx.", c("B", "H", "W")),
-        targets_val = c(0.33, 0.127, 0.084),
-        params = paste0("hiv.trans.scale_", 1:3),
-        initial_proposals = dplyr::tibble(
-          hiv.trans.scale_1 = sample(seq(3, 6, length.out = n_sims)),
-          hiv.trans.scale_2 = sample(seq(0.3, 0.6, length.out = n_sims)),
-          hiv.trans.scale_3 = sample(seq(0.2, 0.5, length.out = n_sims))
-        ),
-        make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_lin_poly_end(c(0.005, 0.01, 0.01), poly_n = 2)
-      )
-    )
+    )#,
+    # wave2 = list(
+    #   job1 = list(
+    #     targets = paste0("cc.vsupp.", c("B", "H", "W")),
+    #     targets_val = c(0.605, 0.62, 0.71),
+    #     params = paste0("tx.halt.partial.rate_", 1:3),
+    #     initial_proposals = dplyr::tibble(
+    #       tx.halt.partial.rate_1 = sample(seq(0.001, 0.01, length.out = n_sims)),
+    #       tx.halt.partial.rate_2 = sample(tx.halt.partial.rate_1),
+    #       tx.halt.partial.rate_3 = sample(tx.halt.partial.rate_1)
+    #     ),
+    #     make_next_proposals = make_ind_shrink_proposer(n_sims),
+    #     get_result = determ_ind_poly_end(0.001, poly_n = 3)
+    #   )
+    # ),
+    # wave3 = list(
+    #   job1 = list(
+    #     targets = paste0("i.prev.dx.", c("B", "H", "W")),
+    #     targets_val = c(0.33, 0.127, 0.084),
+    #     params = paste0("hiv.trans.scale_", 1:3),
+    #     initial_proposals = dplyr::tibble(
+    #       hiv.trans.scale_1 = sample(seq(3, 6, length.out = n_sims)),
+    #       hiv.trans.scale_2 = sample(seq(0.3, 0.6, length.out = n_sims)),
+    #       hiv.trans.scale_3 = sample(seq(0.2, 0.5, length.out = n_sims))
+    #     ),
+    #     make_next_proposals = make_ind_shrink_proposer(n_sims),
+    #     get_result = determ_lin_poly_end(c(0.005, 0.01, 0.01), poly_n = 1)
+    #   )
+    # )
   ),
   config = list(
     simulator = model_fun,
     default_proposal = dplyr::tibble(
-      hiv.test.rate_1 = 0.001,
+      hiv.test.rate_1 = 0.004,
       hiv.test.rate_2 = hiv.test.rate_1,
       hiv.test.rate_3 = hiv.test.rate_1,
-      tx.init.rate_1 = 0.1,
+      tx.init.rate_1 = 0.3,
       tx.init.rate_2 = tx.init.rate_1,
       tx.init.rate_3 = tx.init.rate_1,
-      tx.halt.partial.rate_1 = 0.001,
+      tx.halt.partial.rate_1 = 0.003,
       tx.halt.partial.rate_2 = tx.halt.partial.rate_1,
       tx.halt.partial.rate_3 = tx.halt.partial.rate_1,
       hiv.trans.scale_1 = 4,

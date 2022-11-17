@@ -130,7 +130,7 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     mod <- lm(s_v ~ poly(s_p, poly_n))
     loss_fun <- function(par)  abs(predict(mod, data.frame(s_p = par)) - s_t)
-    predicted_param <- optimize(interval = c(-3, 3), f = loss_fun)
+    predicted_param <- optimize(interval = range(s_p), f = loss_fun)
 
     s_newp <- predicted_param$minimum
     s_newv <- predict(mod, data.frame(s_p = s_newp))
@@ -216,7 +216,7 @@ determ_ind_poly_end <- function(threshold, poly_n = 3) {
     loss_fun <- function(par, t)  abs(predict(mod, data.frame(s_p = par)) - t)
     s_newp <- vapply(
       s_t,
-      function(t) optimize(interval = c(-5, 5), f = loss_fun, t = t)$minimum,
+      function(t) optimize(interval = range(s_p), f = loss_fun, t = t)$minimum,
       numeric(1)
     )
     s_newv <- predict(mod, data.frame(s_p = s_newp))

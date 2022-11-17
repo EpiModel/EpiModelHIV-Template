@@ -7,6 +7,7 @@ res <- readRDS("./data/calib/full_results.rds") |> as_tibble()
 calib_object <- readRDS("./data/calib/calib_object.rds")
 
 calib_object$state$default_proposal %>% as.list()
+
 res %>%
   group_by(.wave) %>%
   summarise(it = max(.iteration))
@@ -39,7 +40,7 @@ s_t <- (target - mean(values)) / sd(values)
 
 mod2 <- lm(s_v ~ poly(s_p, 3))
 preds2 <- as_tibble(predict(mod2, type = "response", se.fit = TRUE))
-mod3 <- lm(s_v ~ poly(s_p, 5))
+mod3 <- lm(s_v ~ poly(s_p, 4))
 preds3 <- as_tibble(predict(mod3, type = "response", se.fit = TRUE))
 mod4 <- mgcv::gam(s_v ~ s(s_p, bs = "cs"))
 preds4 <- as_tibble(predict(mod4, type = "response", se.fit = TRUE))
@@ -49,15 +50,19 @@ ggplot(data.frame(s_v, s_p), aes(x = s_p, y = s_v)) +
   geom_line(data = preds2, aes(y = fit), col = "red") +
   geom_line(data = preds3, aes(y = fit), col = "blue") +
   geom_line(data = preds4, aes(y = fit), col = "green") +
-  scale_x_continuous(limits = c(-0.2, 0.2)) +
+  # scale_x_continuous(limits = c(-0.2, 0.2)) +
   geom_hline(yintercept = s_t)
 
-close_vals <- abs(values - target) < 0.01
-close_pars <- params[close_vals]
-sum(close_vals)
-hist(close_pars)
-mean(close_pars)
-median(close_pars)
+ggplot(data.frame(values, params), aes(x = params, y = values)) +
+  geom_point(alpha = 0.6) +
+  # scale_x_continuous(limits = c(-0.2, 0.2)) +
+  geom_hline(yintercept = 0.847) +
+  geom_hline(yintercept = 0.818) +
+  geom_hline(yintercept = 0.873) +
+  geom_vline(xintercept = 0.004767) +
+  geom_vline(xintercept = 0.003639) +
+  geom_vline(xintercept = 0.005979)
+
 
 opti_f <- function(mod) {
   function(par, target) {
@@ -65,16 +70,19 @@ opti_f <- function(mod) {
   }
 }
 
-oo <- optimize(c(-2, 2), f = opti_f(mod2), target = s_t)
-(oo <- optimize(c(-2, 2), f = opti_f(mod2), target = s_t)$minimum)
-(oo <- optimize(c(-2, 2), f = opti_f(mod3), target = s_t)$minimum)
+(oo <- optimize(range(s_p), f = opti_f(mod2), target = s_t)$minimum)
+oo * sd(params) + mean(params)
+
+(oo <- optimize(range(s_p), f = opti_f(mod3), target = s_t)$minimum)
+oo * sd(params) + mean(params)
+
 (oo <- optimize(c(-2, 2), f = opti_f(mod4), target = s_t)$minimum)
 oo * sd(params) + mean(params)
 
-pp <- predict(mod2, data.frame(s_p = oo$minimum))
+pp <- predict(mod2, data.frame(s_p = oo))
 
 old_pp =  predict(mod2, data.frame(s_p = (old_oo - mean(params)) / sd(params)))
-old_oo = oo$minimum * sd(params) + mean(params)
+old_oo = oo * sd(params) + mean(params)
 old_oo
 
 pp4 * sd(values) + mean(values)
