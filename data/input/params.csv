@@ -51,7 +51,8 @@ vl.part.supp,3.5,numeric
 vl.tx.down.rate,0.25,numeric
 vl.tx.aids.down.rate,0.25,numeric
 vl.tx.up.rate,0.25,numeric
-aids.mort.rate,0.009615,numeric
+aids.on.tx.mort.rate,0,numeric
+aids.off.tx.mort.rate,0.0006,numeric
 a.rate,0.00049,numeric
 arrival.age,15,numeric
 hiv.urai.prob,0.008938,numeric
