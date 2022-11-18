@@ -176,6 +176,83 @@ wf <- add_workflow_step(
     "cpus-per-task" = 1,
     "time" = "00:20:00",
     "mem-per-cpu" = "8G",
+    "mail-type" = "FAIL"
+  )
+)
+
+# Calibration test -------------------------------------------------------------
+library(EpiModelHIV)
+source("R/00-project_settings.R")
+max_cores <- 20
+
+epistats <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+est      <- readRDS("data/intermediate/estimates/netest.rds")
+
+param <- param.net(
+  data.frame.params = readr::read_csv("data/input/params.csv"),
+  netstats          = netstats,
+  epistats          = epistats,
+  prep.start        = prep_start,
+  riskh.start       = prep_start - 53,
+  .param.updater.list = list(
+    # High PrEP intake for the first year; go back to normal to get to 15%
+    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
+    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
+  )
+)
+
+init <- init_msm()
+
+# Controls
+source("R/utils-targets.R")
+control <- control_msm(
+  nsteps              = calibration_end,
+  nsims               = 1,
+  ncores              = 1,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  .tracker.list       = calibration_trackers,
+  # .checkpoint.dir     = "temp/cp_calib",
+  # .checkpoint.clear   = TRUE,
+  # .checkpoint.steps   = 15 * 52,
+  verbose             = FALSE
+)
+
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_netsim_swfcalib_output(
+    est, param, init, control,
+    calib_object = calib_object,
+    output_dir = "data/intermediate/calibration",
+    libraries = "EpiModelHIV",
+    n_rep = 200,
+    n_cores = 20,
+    max_array_size = 999,
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "mail-type" = "FAIL,TIME_LIMIT",
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem" = "0" # special: all mem on node
+  )
+)
+
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/wscript-calibration_process.R",
+    args = list(
+      ncores = 15,
+      nsteps = 52
+    ),
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "4G",
     "mail-type" = "END"
   )
 )
