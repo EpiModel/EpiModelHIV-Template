@@ -84,16 +84,15 @@
       "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodelhiv-p",
-      "RemoteRef": "main",
-      "RemoteSha": "f5b0f3b627b5f35154cbc4f651da42a247e746d8",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHIV-p",
+      "RemoteRef": "auto_calib",
+      "RemoteSha": "7a9c6f29f054794d897959b46cd0982e06391562",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModel@main",
-      "Hash": "d5393b4dcb38110e29baafc2a1322d7d",
+      "Hash": "8a3ab47d59dc1d0ea03026b724149947",
       "Requirements": [
         "EpiModel",
-        "Rglpk",
         "dplyr",
         "ergm",
         "network",
@@ -170,16 +169,6 @@
       "Repository": "CRAN",
       "Hash": "e9c08b94391e9f3f97355841229124f2",
       "Requirements": []
-    },
-    "Rglpk": {
-      "Package": "Rglpk",
-      "Version": "0.6-4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "94a9ae53d323c330f2bc5bda54ea9f31",
-      "Requirements": [
-        "slam"
-      ]
     },
     "ape": {
       "Package": "ape",
@@ -881,14 +870,6 @@
         "rlang",
         "viridisLite"
       ]
-    },
-    "slam": {
-      "Package": "slam",
-      "Version": "0.1-50",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e25793551cbdb843154152e5ee88cbd6",
-      "Requirements": []
     },
     "slurmworkflow": {
       "Package": "slurmworkflow",
