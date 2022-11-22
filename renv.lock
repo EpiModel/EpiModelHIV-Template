@@ -17,10 +17,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "9065b1c8519cee9e209307ea612b4c815bd7fb59",
+      "RemoteSha": "f9919f02ec907ddf61fd71dcb7d346b6e1ba10b9",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModelHIV-p@main",
-      "Hash": "4052700f176f7b2f915505fb890df498",
+      "Hash": "0ef08c3c2afc394ce8e5fe551b991d51",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
@@ -56,9 +56,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "7af7a9dbc060de11dd10c9d6c1a526eca3890101",
+      "RemoteSha": "c227514a16728a32e35c85d410ce8537bb764a48",
       "RemoteHost": "api.github.com",
-      "Hash": "01197b4c5343089b64eef1429ae5d6be",
+      "Hash": "c1db7db2576d00d88c2a161b44b9a320",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -85,12 +85,12 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "auto_calib",
-      "RemoteSha": "7a9c6f29f054794d897959b46cd0982e06391562",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodelhiv-p",
+      "RemoteRef": "main",
+      "RemoteSha": "8f1d1e66d4f7168573674476d1c2b0a3b8a18a90",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModel@main",
-      "Hash": "8a3ab47d59dc1d0ea03026b724149947",
+      "Hash": "cd22d2a1f69e68336a5680f3f21e4dc4",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -479,10 +479,10 @@
     },
     "globals": {
       "Package": "globals",
-      "Version": "0.16.1",
+      "Version": "0.16.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e14798793892c6bebdbe2f144aacf6e6",
+      "Hash": "baa9585ab4ce47a9f4618e671778cc6f",
       "Requirements": [
         "codetools"
       ]
@@ -545,10 +545,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.40",
+      "Version": "1.41",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "caea8b0f899a0b1738444b9bc47067e7",
+      "Hash": "6d4971f3610e75220534a1befe81bc92",
       "Requirements": [
         "evaluate",
         "highr",
