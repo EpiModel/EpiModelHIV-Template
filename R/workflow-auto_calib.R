@@ -1,7 +1,7 @@
 # working on HPC
 
 step1_n_cores <- 10
-step2_n_cores <- 10
+step2_n_cores <- 20
 
 library(EpiModelHPC)
 source("R/auto_cal_fns.R")
@@ -13,18 +13,48 @@ calib_object <- list(
   waves = list(
     wave1 = list(
       job1 = list(
-        targets = paste0("cc.dx.", c("B", "H", "W")),
-        targets_val = c(0.847, 0.818, 0.873),
-        params = paste0("hiv.test.rate_", 1:3),
+        targets = "cc.dx.B",
+        targets_val = 0.847,
+        params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_1 = sample(seq(0.001, 0.01, length.out = n_sims)),
-          hiv.test.rate_2 = sample(hiv.test.rate_1),
-          hiv.test.rate_3 = sample(hiv.test.rate_1)
+          hiv.test.rate_1 = seq(0.001, 0.01, length.out = n_sims),
+          ),
+        make_next_proposals = make_shrink_proposer(n_sims),
+        get_result = determ_poly_end(0.001, poly_n = 5)
         ),
-        make_next_proposals = make_ind_shrink_proposer(n_sims),
-        get_result = determ_ind_poly_end(0.001, poly_n = 5)
-      ),
       job2 = list(
+        targets = "cc.dx.H",
+        targets_val = 0.818,
+        params = c("hiv.test.rate_2"), # target: 0.0038
+        initial_proposals = dplyr::tibble(
+          hiv.test.rate_2 = seq(0.001, 0.01, length.out = n_sims),
+          ),
+        make_next_proposals = make_shrink_proposer(n_sims),
+        get_result = determ_poly_end(0.001, poly_n = 5)
+        ),
+      job3 = list(
+        targets = "cc.dx.W",
+        targets_val = 0.873,
+        params = c("hiv.test.rate_3"), # target: 0.0069
+        initial_proposals = dplyr::tibble(
+          hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
+          ),
+        make_next_proposals = make_shrink_proposer(n_sims),
+        get_result = determ_poly_end(0.001, poly_n = 5)
+        ),
+      # job1 = list(
+      #   targets = paste0("cc.dx.", c("B", "H", "W")),
+      #   targets_val = c(0.847, 0.818, 0.873),
+      #   params = paste0("hiv.test.rate_", 1:3),
+      #   initial_proposals = dplyr::tibble(
+      #     hiv.test.rate_1 = sample(seq(0.001, 0.01, length.out = n_sims)),
+      #     hiv.test.rate_2 = sample(hiv.test.rate_1),
+      #     hiv.test.rate_3 = sample(hiv.test.rate_1)
+      #   ),
+      #   make_next_proposals = make_ind_shrink_proposer(n_sims),
+      #   get_result = determ_ind_poly_end(0.001, poly_n = 5)
+      # ),
+      job4 = list(
         targets = paste0("cc.linked1m.", c("B", "H", "W")),
         targets_val = c(0.829, 0.898, 0.89),
         params = paste0("tx.init.rate_", 1:3),

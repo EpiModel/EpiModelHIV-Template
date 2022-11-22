@@ -17,10 +17,15 @@ res1 <- filter(
   between(.iteration, 1, 5),
   .wave == 1
 )
+grp <- as.factor(rep(1:3, each = nrow(res1)))
 
 values <- unlist(res1[paste0("cc.dx.", c("B", "H", "W"))])
 params <- unlist(res1[paste0("hiv.test.rate_", 1:3)])
-target <- c(0.847, 0.818, 873)[1]
+target <- c(0.847, 0.818, 0.873)[1]
+
+values <- unlist(res1[paste0("cc.dx.", c("W"))])
+params <- unlist(res1[paste0("hiv.test.rate_", 3)])
+target <- c(0.847, 0.818, 0.873)[3]
 
 values <- unlist(res1[paste0("cc.linked1m.", c("B", "H", "W"))])
 params <- unlist(res1[paste0("tx.init.rate_", 1:3)])
@@ -45,7 +50,7 @@ preds3 <- as_tibble(predict(mod3, type = "response", se.fit = TRUE))
 mod4 <- mgcv::gam(s_v ~ s(s_p, bs = "cs"))
 preds4 <- as_tibble(predict(mod4, type = "response", se.fit = TRUE))
 
-ggplot(data.frame(s_v, s_p), aes(x = s_p, y = s_v)) +
+ggplot(data.frame(s_v, s_p, grp), aes(x = s_p, y = s_v, col = grp)) +
   geom_point(alpha = 0.6) +
   geom_line(data = preds2, aes(y = fit), col = "red") +
   geom_line(data = preds3, aes(y = fit), col = "blue") +
