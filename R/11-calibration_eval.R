@@ -25,3 +25,10 @@ d %>%
   pivot_longer(-scenario_name) %>%
   separate(name, into = c("name", "quant"), sep = "__") %>%
   pivot_wider(names_from = quant, values_from = value)
+
+d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
+
+glimpse(d)
+
+ggplot(d, aes(x = cc.dx.W)) +
+  geom_density()

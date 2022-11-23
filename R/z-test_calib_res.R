@@ -23,9 +23,10 @@ values <- unlist(res1[paste0("cc.dx.", c("B", "H", "W"))])
 params <- unlist(res1[paste0("hiv.test.rate_", 1:3)])
 target <- c(0.847, 0.818, 0.873)[1]
 
-values <- unlist(res1[paste0("cc.dx.", c("W"))])
-params <- unlist(res1[paste0("hiv.test.rate_", 3)])
-target <- c(0.847, 0.818, 0.873)[3]
+nrg <- 2
+values <- unlist(res1[paste0("cc.dx.", c("B", "H", "W")[nrg])])
+params <- unlist(res1[paste0("hiv.test.rate_", nrg)])
+target <- c(0.847, 0.818, 0.873)[nrg]
 
 values <- unlist(res1[paste0("cc.linked1m.", c("B", "H", "W"))])
 params <- unlist(res1[paste0("tx.init.rate_", 1:3)])
@@ -45,7 +46,7 @@ s_t <- (target - mean(values)) / sd(values)
 
 mod2 <- lm(s_v ~ poly(s_p, 3))
 preds2 <- as_tibble(predict(mod2, type = "response", se.fit = TRUE))
-mod3 <- lm(s_v ~ poly(s_p, 4))
+mod3 <- lm(s_v ~ poly(s_p, 5))
 preds3 <- as_tibble(predict(mod3, type = "response", se.fit = TRUE))
 mod4 <- mgcv::gam(s_v ~ s(s_p, bs = "cs"))
 preds4 <- as_tibble(predict(mod4, type = "response", se.fit = TRUE))

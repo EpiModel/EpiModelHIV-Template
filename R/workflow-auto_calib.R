@@ -256,7 +256,7 @@ wf <- add_workflow_step(
     calib_object = calib_object,
     output_dir = "data/intermediate/calibration",
     libraries = "EpiModelHIV",
-    n_rep = 200,
+    n_rep = 500,
     n_cores = 20,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
