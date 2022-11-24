@@ -1,5 +1,5 @@
 ##
-## 12. Epidemic Model Parameter Calibration, Choice of a restart point
+## 22. Epidemic Model Restart Point, Choice of the best restart point
 ##
 
 # Setup ------------------------------------------------------------------------
@@ -47,4 +47,4 @@ epi_num <- best$epi$num
 # Remove all epi except `num`
 best$epi <- list(num = epi_num)
 
-saveRDS(best, "data/intermediate/estimates/restart.rds")
+saveRDS(best, "data/intermediate/estimates/restart_point.rds")

@@ -1,5 +1,5 @@
 ##
-## 10. Epidemic Model Parameter Calibration, Local simulation runs
+## 20. Epidemic Model Restart Point, Local simulation runs
 ##
 
 # Setup ------------------------------------------------------------------------
@@ -44,31 +44,16 @@ control <- control_msm(
   verbose             = FALSE
 )
 
-# insert test values here
-n_scenarios <- 2
-scenarios_df <- tibble(
-  # mandatory columns
-  .scenario.id = as.character(seq_len(n_scenarios)),
-  .at          = 1,
-  # parameters to test columns
-  ugc.prob     = seq(0.3225, 0.3275, length.out = n_scenarios), # best 0.325
-  rgc.prob     = plogis(qlogis(ugc.prob) + log(1.25)),
-  uct.prob     = seq(0.29, 0.294, length.out = n_scenarios), # best 0.291
-  rct.prob     = plogis(qlogis(uct.prob) + log(1.25))
-)
-scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
+# No scenarios are used here
 
-# Each scenario will be run exactly 3 times using up to 3 CPU cores.
-# The results are save in the "data/intermediate/test04" folder using the
-# following pattern: "sim__<scenario name>__<batch number>.rds".
-# See ?EpiModelHPC::netsim_scenarios for details
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control, scenarios_list,
+  est, param, init, control,
+  scenarios_list = NULL,
   n_rep = 3,
   n_cores = 3,
   output_dir = calibration_dir,
   libraries = NULL,
-  save_pattern = "simple"
+  save_pattern = "restart"
 )
 
 # Check the files produced

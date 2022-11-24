@@ -9,18 +9,19 @@ epistats <- readRDS("data/intermediate/estimates/epistats.rds")
 netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 est      <- readRDS("data/intermediate/estimates/netest.rds")
 
-param <- param_msm(
-  netstats               = netstats,
-  epistats               = epistats,
-  a.rate                 = 0.00049,
-  hiv.test.rate          = c(0.00385, 0.00380, 0.00690),
-  tx.init.rate           = c(0.1775, 0.190, 0.2521),
-  tx.halt.partial.rate   = c(0.0062, 0.0055, 0.0031),
-  tx.reinit.partial.rate = c(0.00255, 0.00255, 0.00255),
-  hiv.trans.scale        = c(2.44, 0.424, 0.270),
-  riskh.start            = 1,
-  prep.start             = 26,
-  prep.start.prob        = rep(0.66, 3)
+prep_start <- 52 * 2
+param <- param.net(
+  data.frame.params = readr::read_csv("data/input/params.csv"),
+  netstats          = netstats,
+  epistats          = epistats,
+  prep.start        = prep_start,
+  riskh.start       = prep_start - 53,
+  .param.updater.list = list(
+    # High PrEP intake for the first year; go back to normal to get to 15%
+    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
+    list(at = prep_start + 52,
+         param = list(prep.start.prob = function(x) x / 2))
+  )
 )
 
 # See full listing of parameters
@@ -35,7 +36,7 @@ init <- init_msm()
 control <- control_msm(
   nsteps = 250,
   nsims = 1,
-  ncores = 1,
+  ncores = 1
 )
 
 # See listing of modules and other control settings
@@ -56,14 +57,14 @@ plot(sim, y = "ir100", main = "Incidence")
 # Convert to data frame
 df <- as.data.frame(sim)
 head(df)
-
+tail(df)
 
 ## Run 5 simulations on 5 cores
 ## Note: this will not run generate a progress tracker in the console
 control <- control_msm(
   nsteps = 250,
-  nsims = 5,
-  ncores = 5,
+  nsims = 2,
+  ncores = 2
 )
 sim <- netsim(est, param, init, control)
 

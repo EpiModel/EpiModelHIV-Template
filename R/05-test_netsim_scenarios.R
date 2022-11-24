@@ -26,6 +26,19 @@ param <- param.net(
   )
 )
 
+# Define test scenarios
+scenarios.df <- tibble(
+  .scenario.id    = c("scenario_1", "scenario_2"),
+  .at             = 1,
+  hiv.test.rate_1 = c(0.004, 0.005),
+  hiv.test.rate_2 = c(0.004, 0.005),
+  hiv.test.rate_3 = c(0.007, 0.008)
+)
+scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
+
+# Apply a scenario to the param object
+param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
+
 # Initial conditions (default prevalence initialized in epistats)
 # For models without bacterial STIs, these must be initialized here
 # with non-zero values
@@ -46,29 +59,12 @@ control <- control_msm(
   truncate.el.cuml    = 0,
   .tracker.list       = calibration_trackers,
   verbose             = FALSE,
-  .checkpoint.dir     = "temp/cp_calib",
-  .checkpoint.clear   = TRUE,
-  .checkpoint.steps   = 26,
   raw.output          = FALSE
 )
 
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 print(control)
-
-# Define test scenarios
-scenarios.df <- tibble(
-  .scenario.id    = c("scenario_1", "scenario_2"),
-  .at             = 1,
-  hiv.test.rate_1 = c(0.004, 0.005),
-  hiv.test.rate_2 = c(0.003, 0.004),
-  hiv.test.rate_3 = c(0.007, 0.008)
-)
-scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
-
-# Apply a scenario to the param object
-param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
-
 
 # Each scenario will be run exactly 3 times using up to 2 CPU cores.
 # The results are save in the "data/intermediate/test04" folder using the
@@ -80,7 +76,7 @@ EpiModelHPC::netsim_scenarios(
   n_cores = 2,
   output_dir = "./data/intermediate/test04",
   libraries = NULL,
-  save_pattern = ""
+  save_pattern = "simple"
 )
 
 # Load one of the simulation files

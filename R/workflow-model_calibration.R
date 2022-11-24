@@ -9,7 +9,7 @@ source("R/00-project_settings.R")
 
 hpc_configs <- swf_configs_hyak(
   hpc = "klone",
-  partition = "ckpt",
+  partition = "compute",
   r_version = "4.1.0",
   mail_user = "aleguil@emory.edu"
 )
@@ -39,7 +39,6 @@ epistats <- readRDS("data/intermediate/estimates/epistats.rds")
 netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 est      <- readRDS("data/intermediate/estimates/netest.rds")
 
-
 param <- param.net(
   data.frame.params = read.csv("data/input/params.csv"),
   netstats          = netstats,
@@ -63,7 +62,7 @@ init <- init_msm(
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
-  nsteps              = calib_end,
+  nsteps              = 100,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -77,11 +76,11 @@ control <- control_msm(
 
 # insert test values here
 scenarios.df <- tibble(
-  .scenario.id = as.character(seq_len(5)),
+  .scenario.id = as.character(seq_len(2)),
   .at = 1,
-  ugc.prob = seq(0.3225, 0.3275, length.out = 5), # best 0.325
+  ugc.prob = seq(0.3225, 0.3275, length.out = 2), # best 0.325
   rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
-  uct.prob = seq(0.29, 0.294, length.out = 5), # best 0.291
+  uct.prob = seq(0.29, 0.294, length.out = 2), # best 0.291
   rct.prob = plogis(qlogis(uct.prob) + log(1.25))
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
@@ -91,9 +90,10 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     est, param, init, control,
     scenarios_list = scenarios.list,
-    output_dir = "data/intermediate/calibration",
+    output_dir = "./data/intermediate/calibration",
     libraries = "EpiModelHIV",
-    n_rep = 150,
+    save_pattern = c("simple", "el.cuml"),
+    n_rep = 40,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
@@ -103,25 +103,5 @@ wf <- add_workflow_step(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
     "mem" = "0" # special: all mem on node
-  )
-)
-
-# Process calibrations ---------------------------------------------------------
-# produce a data frame with the calibration targets for each scenario
-wf <- add_workflow_step(
-  wf_summary = wf,
-  step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/wscript-calibration_process.R",
-    args = list(
-      ncores = 15,
-      nsteps = 52
-    ),
-    setup_lines = hpc_configs$r_loader
-  ),
-  sbatch_opts = list(
-    "cpus-per-task" = max_cores,
-    "time" = "04:00:00",
-    "mem-per-cpu" = "4G",
-    "mail-type" = "END"
   )
 )

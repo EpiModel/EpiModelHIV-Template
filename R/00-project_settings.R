@@ -6,8 +6,8 @@
 networks_size   <- 100 * 1e3
 
 # Information for the HPC workflows
-current_git_branch <- "main"
-mail_user <- "user@emory.edu"
+current_git_branch <- "scenarios"
+mail_user <- "aleguil@emory.edu"
 
 # Relevant time steps for the simulation
 calibration_end    <- 52 * 60
@@ -16,3 +16,4 @@ prep_start         <- restart_time + 52 * 5
 intervention_start <- prep_start + 52 * 5
 intervention_end   <- intervention_start + 52 * 10
 
+calibration_dir <- "./data/intermediate/calibration"
