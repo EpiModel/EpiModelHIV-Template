@@ -232,7 +232,12 @@ param <- param.net(
   )
 )
 
-init <- init_msm()
+init <- init_msm(
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
+)
 
 # Controls
 source("R/utils-targets.R")

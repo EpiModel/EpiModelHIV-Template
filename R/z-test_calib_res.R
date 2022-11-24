@@ -4,6 +4,7 @@ theme_set(theme_light())
 
 # res <- readRDS("./data/results.rds") |> as_tibble()
 res <- readRDS("./data/calib/full_results.rds") |> as_tibble()
+calib_object <- readRDS("./data/calib-old/calib_object.rds")
 calib_object <- readRDS("./data/calib/calib_object.rds")
 
 calib_object$state$default_proposal %>% as.list()
@@ -23,7 +24,7 @@ values <- unlist(res1[paste0("cc.dx.", c("B", "H", "W"))])
 params <- unlist(res1[paste0("hiv.test.rate_", 1:3)])
 target <- c(0.847, 0.818, 0.873)[1]
 
-nrg <- 2
+nrg <- 1
 values <- unlist(res1[paste0("cc.dx.", c("B", "H", "W")[nrg])])
 params <- unlist(res1[paste0("hiv.test.rate_", nrg)])
 target <- c(0.847, 0.818, 0.873)[nrg]
@@ -132,3 +133,11 @@ ggplot(data.frame(s_v, s_p), aes(x = s_p, y = s_v)) +
   # geom_line(data = preds4, aes(y = fit), col = "green") +
   scale_x_continuous(limits = c(-0.2, 0.2)) +
   geom_hline(yintercept = s_t1)
+
+res2 <- filter(
+  res,
+  .wave == 2,
+  between(hiv.test.rate_1, 0.0038, 0.0039)
+)
+
+summary(res2$cc.dx.B)

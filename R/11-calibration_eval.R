@@ -6,6 +6,7 @@
 library(EpiModel)
 library(dplyr)
 library(tidyr)
+library(ggplot2)
 source("R/00-project_settings.R")
 
 d <- readRDS("data/intermediate/calibration/assessments.rds")
@@ -26,9 +27,11 @@ d %>%
   separate(name, into = c("name", "quant"), sep = "__") %>%
   pivot_wider(names_from = quant, values_from = value)
 
-d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
+d2 <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
-glimpse(d)
+glimpse(d2)
 
-ggplot(d, aes(x = cc.dx.W)) +
+ggplot(d2, aes(x = cc.dx.B)) +
   geom_density()
+
+summary(d2$cc.dx.B)
