@@ -2,7 +2,7 @@
 
 library("slurmworkflow")
 library("EpiModelHPC")
-source("R/00-project_settings.R")
+source("R/utils-project_settings.R")
 
 # Run the simulations ----------------------------------------------------------
 library(EpiModelHIV)

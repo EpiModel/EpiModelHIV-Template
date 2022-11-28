@@ -7,60 +7,13 @@ library("EpiModelHIV")
 library("dplyr")
 
 # Necessary files
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
-est      <- readRDS("data/intermediate/estimates/netest.rds")
-
-# Parameters
-prep_start <- 54
-param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
-  netstats          = netstats,
-  epistats          = epistats,
-  prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
-  .param.updater.list = list(
-    # High PrEP intake for the first year; go back to normal to get to 15%
-    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
-  )
-)
-
-# Define test scenarios
-scenarios.df <- tibble(
-  .scenario.id    = c("scenario_1", "scenario_2"),
-  .at             = 1,
-  hiv.test.rate_1 = c(0.004, 0.005),
-  hiv.test.rate_2 = c(0.004, 0.005),
-  hiv.test.rate_3 = c(0.007, 0.008)
-)
-scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
-
-# Apply a scenario to the param object
-param_sc <- EpiModel::use_scenario(param, scenarios.list[[1]])
-
-# Initial conditions (default prevalence initialized in epistats)
-# For models without bacterial STIs, these must be initialized here
-# with non-zero values
-init <- init_msm(
-  prev.ugc = 0.1,
-  prev.rct = 0.1,
-  prev.rgc = 0.1,
-  prev.uct = 0.1
-)
+est <- readRDS("data/intermediate/estimates/netest.rds")
+source("R/utils-default_inputs.R") # generate `param` and `init`
 
 # Controls
 source("R/utils-targets.R")
-control <- control_msm(
-  nsteps              = 52 * 1, # seven years
-  nsims               = 1,
-  ncores              = 1,
-  cumulative.edgelist = TRUE,
-  truncate.el.cuml    = 0,
-  .tracker.list       = calibration_trackers,
-  verbose             = FALSE,
-  raw.output          = FALSE
-)
+# `nsims` and `ncores` will be overridden later
+control <- control_msm(nsteps = 52 * 1)
 
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
@@ -70,17 +23,49 @@ print(control)
 # The results are save in the "data/intermediate/test04" folder using the
 # following pattern: "sim__<scenario name>__<batch number>.rds".
 # See ?EpiModelHPC::netsim_scenarios for details
+#
+# for now, no scenarios are used (`scenarios.list = NULL`), the files will be
+# named "sim__empty_scenario__1.rds" and "sim__empty_scenario__2.rds"
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control, scenarios.list,
+  est, param, init, control,
+  scenarios.list = NULL,
   n_rep = 3,
   n_cores = 2,
-  output_dir = "./data/intermediate/test04",
-  libraries = NULL,
+  output_dir = "data/intermediate/no_scenario_test",
+  libraries = "EpiModelHIV",
   save_pattern = "simple"
 )
 
+list.files(calibration_dir)
+
+# Using scenarios --------------------------------------------------------------
+
+# Define test scenarios
+scenarios_df <- tibble(
+  .scenario.id    = c("scenario_1", "scenario_2"),
+  .at             = 1,
+  hiv.test.rate_1 = c(0.004, 0.005),
+  hiv.test.rate_2 = c(0.004, 0.005),
+  hiv.test.rate_3 = c(0.007, 0.008)
+)
+
+glimpse(scenarios_df)
+scenarios_list <- EpiModel::create_scenario_list(scenarios.df)
+
+# Here 2 scenarios will be used "scenario_1" and "scenario_2".
+# This will generate 4 files (2 per scenarios)
+EpiModelHPC::netsim_scenarios(
+  est, param, init, control, scenarios_list,
+  n_rep = 3,
+  n_cores = 2,
+  output_dir = "data/intermediate/scenario_test",
+  libraries = "EpiModelHIV",
+  save_pattern = "simple"
+)
+list.files(calibration_dir)
+
 # Load one of the simulation files
-sim <- readRDS("./data/intermediate/test04/sim__scenario_1__1.rds")
+sim <- readRDS("data/intermediate/no_scenario_test/sim__scenario_1__1.rds")
 names(sim)
 
 # Examine the model object output

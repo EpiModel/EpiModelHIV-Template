@@ -3,34 +3,13 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-source("R/00-project_settings.R")
+source("R/utils-project_settings.R")
 
 # Run the simulations ----------------------------------------------------------
 library("EpiModelHIV")
 
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
-est      <- readRDS("data/intermediate/estimates/netest.rds")
-
-param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
-  netstats          = netstats,
-  epistats          = epistats,
-  prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
-  .param.updater.list = list(
-    # High PrEP intake for the first year; go back to normal to get to 15%
-    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x/2))
-  )
-)
-
-init <- init_msm(
-  prev.ugc = 0.1,
-  prev.rct = 0.1,
-  prev.rgc = 0.1,
-  prev.uct = 0.1
-)
+est <- readRDS("data/intermediate/estimates/netest.rds")
+source("R/utils-default_inputs.R") # generate `param` and `init`
 
 # Controls
 source("R/utils-targets.R")

@@ -4,13 +4,14 @@
 ## This file estimates the ERGMs. When run locally (interactively) it fits
 ## 5k nodes networks. They can be used for local testing of the project.
 ## When run on the HPC (`interactive == FALSE`) the `networks_size` is set in
-## the "R/00-project_settings.R".
+## the "R/utils-project_settings.R".
 
 # Setup  -----------------------------------------------------------------------
 library("EpiModelHIV")
 library("ARTnet")
-source("R/00-project_settings.R")
+source("R/utils-project_settings.R")
 
+# When running the code locally, work with 5k nodes networks on a single CPU
 if (interactive()) {
   ncores <- 1
   networks_size <- 5e3

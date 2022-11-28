@@ -6,7 +6,7 @@
 library("EpiModel")
 library("dplyr")
 library("tidyr")
-source("R/00-project_settings.R")
+source("R/utils-project_settings.R")
 
 d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 

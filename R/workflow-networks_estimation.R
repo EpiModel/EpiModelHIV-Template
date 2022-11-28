@@ -6,7 +6,7 @@
 library("slurmworkflow")
 library("EpiModelHPC")
 
-source("R/00-project_settings.R")
+source("R/utils-project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "epimodel",
