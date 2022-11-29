@@ -158,6 +158,7 @@ determ_poly_end <- function(threshold, poly_n = 3) {
   }
 }
 
+
 make_shrink_proposer <- function(n_new, shrink = 2) {
   force(n_new)
   force(shrink)
@@ -346,6 +347,20 @@ determ_lin_poly_end <- function(thresholds, poly_n = 3) {
     if (all(abs(oldv - newv) < thresholds) &&
         all(abs(newv - targets) < thresholds)) {
       result <- data.frame(as.list(newp))
+      names(result) <- job$params
+      return(result)
+    } else {
+      return(NULL)
+    }
+  }
+}
+
+dumb_end <- function(iter) {
+  force(iter)
+  function(calib_object, job, results) {
+    if (swfcalib:::get_current_iteration(calib_object) >= iter) {
+      params <- results[, job$params]
+      result <- params[sample(nrow(params), 1), , drop = FALSE]
       names(result) <- job$params
       return(result)
     } else {

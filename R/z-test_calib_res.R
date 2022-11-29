@@ -141,3 +141,17 @@ res2 <- filter(
 )
 
 summary(res2$cc.dx.B)
+res2 <- filter(
+  res,
+  between(.iteration, 1, 1),
+  .wave == 1
+) %>%
+  mutate(yes = floor(cc.dx.B * 1e5), no = floor((1 - cc.dx.B) * 1e5))
+
+mod3 <- glm(
+  cc.dx.B ~ poly(hiv.test.rate_1, 2),
+  data = res2,
+  family = "binomial",
+  weights = rep(1e5, nrow(res2))
+)
+plot(mod3)
