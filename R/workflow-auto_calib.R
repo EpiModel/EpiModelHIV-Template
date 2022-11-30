@@ -79,8 +79,8 @@ calib_object <- list(
           hiv.trans.scale_2 = sample(seq(0.3, 0.6, length.out = n_sims)),
           hiv.trans.scale_3 = sample(seq(0.2, 0.5, length.out = n_sims))
         ),
-        make_next_proposals = make_ind_shrink_proposer(n_sims, 1),
-        get_result = dumb_end(iter = 5)
+        make_next_proposals = make_dumb_proposer(n_sims),
+        get_result = make_dumb_end(iter = 5)
         # get_result = determ_lin_poly_end(c(0.005, 0.01, 0.01), poly_n = 1)
       )
     )

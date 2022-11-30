@@ -355,7 +355,7 @@ determ_lin_poly_end <- function(thresholds, poly_n = 3) {
   }
 }
 
-dumb_end <- function(iter) {
+make_dumb_end <- function(iter) {
   force(iter)
   function(calib_object, job, results) {
     if (swfcalib:::get_current_iteration(calib_object) >= iter) {
@@ -366,5 +366,23 @@ dumb_end <- function(iter) {
     } else {
       return(NULL)
     }
+  }
+}
+
+make_dumb_proposer <- function(n_new) {
+  force(n_new)
+  function(calib_object, job, results) {
+    outs <- list()
+    for (i in seq_along(job$params)) {
+      tar_range <- range(results[[job$params[i]]])
+
+      proposals <- seq(tar_range[1], tar_range[2], length.out = n_new)
+      proposals <- sample(proposals)
+
+      out <- list(proposals)
+      names(out) <- job$params[i]
+      outs[[i]] <- dplyr::as_tibble(out)
+    }
+    dplyr::bind_cols(outs)
   }
 }
