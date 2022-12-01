@@ -6,7 +6,7 @@
 library("EpiModel")
 library("dplyr")
 library("tidyr")
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
@@ -17,7 +17,7 @@ for (nme in names(targets)) {
 }
 
 # Calculate RMSE
-mat_d <- as.matrix(select(d, - c(batch, sim, scenario_name)))
+mat_d <- as.matrix(select(d, - c(batch_number, sim, scenario_name)))
 
 d$scores <- apply(mat_d, 1, function(x) {
   sum(x^2, na.rm = TRUE)
@@ -26,7 +26,7 @@ d$scores <- apply(mat_d, 1, function(x) {
 # pick best sim
 best_sim <- d %>%
   arrange(scores) %>%
-  select(batch, sim) %>%
+  select(batch_number, sim) %>%
   head(1)
 
 # Check the values manually
@@ -38,7 +38,7 @@ d %>%
 # Get best sim
 best <- readRDS(fs::path(
   "data/intermediate/calibration",
-  paste0("sim__empty_scenario__", best_sim$batch, ".rds"))
+  paste0("sim__empty_scenario__", best_sim$batch_number, ".rds"))
 )
 
 best <- EpiModel::get_sims(best, best_sim$sim)

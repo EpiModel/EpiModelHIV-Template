@@ -5,7 +5,7 @@
 # Setup ------------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 hpc_configs <- swf_configs_rsph(
   partition = "preemptable",

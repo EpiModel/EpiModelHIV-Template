@@ -3,11 +3,13 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 source("R/utils-targets.R")
 library(dplyr)
 
-batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calibration_dir)
+batches_infos <- EpiModelHPC::get_scenarios_batches_infos(
+  "data/intermediate/calibration"
+)
 
 process_one_batch <- function(scenario_infos) {
   sim <- readRDS(scenario_infos$file_name)
@@ -40,7 +42,7 @@ assessments_raw <- lapply(
 )
 
 assessments_raw <- bind_rows(assessments_raw)
-saveRDS(assessments_raw, paste0(calibration_dir, "/assessments_raw.rds"))
+saveRDS(assessments_raw, "data/intermediate/calibration/assessments_raw.rds")
 
 assessments <- assessments_raw %>%
   select(- c(sim, batch_number)) %>%
@@ -56,4 +58,4 @@ assessments <- assessments_raw %>%
   ))
 
 # Save the result --------------------------------------------------------------
-saveRDS(assessments, paste0(calibration_dir, "/assessments.rds"))
+saveRDS(assessments, "data/intermediate/calibration/assessments.rds")

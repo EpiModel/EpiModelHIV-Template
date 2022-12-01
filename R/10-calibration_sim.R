@@ -3,12 +3,12 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 # Run the simulations ----------------------------------------------------------
 library("EpiModelHIV")
 
-est <- readRDS("data/intermediate/estimates/netest.rds")
+path_to_est <- "data/intermediate/estimates/netest.rds"
 source("R/utils-default_inputs.R") # generate `param` and `init`
 
 # Controls
@@ -42,13 +42,13 @@ scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 # following pattern: "sim__<scenario name>__<batch number>.rds".
 # See ?EpiModelHPC::netsim_scenarios for details
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control, scenarios_list,
+  path_to_est, param, init, control, scenarios_list,
   n_rep = 3,
   n_cores = 3,
-  output_dir = calibration_dir,
+  output_dir = "data/intermediate/calibration",
   libraries = NULL,
   save_pattern = "simple"
 )
 
 # Check the files produced
-list.files(calibration_dir)
+list.files("data/intermediate/calibration")

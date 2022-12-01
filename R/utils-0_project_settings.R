@@ -15,5 +15,3 @@ restart_time       <- calibration_end + 1
 prep_start         <- restart_time + 52 * 5
 intervention_start <- prep_start + 52 * 5
 intervention_end   <- intervention_start + 52 * 10
-
-calibration_dir <- "./data/intermediate/calibration"

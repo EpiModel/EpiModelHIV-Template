@@ -3,14 +3,14 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 # Run the simulations ----------------------------------------------------------
 library("EpiModelHIV")
 
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
-est      <- readRDS("data/intermediate/estimates/netest.rds")
+epistats    <- readRDS("data/intermediate/estimates/epistats.rds")
+netstats    <- readRDS("data/intermediate/estimates/netstats.rds")
+path_to_est <- "data/intermediate/estimates/netest.rds"
 
 param <- param.net(
   data.frame.params = readr::read_csv("data/input/params.csv"),
@@ -47,14 +47,14 @@ control <- control_msm(
 # No scenarios are used here
 
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control,
+  path_to_est, param, init, control,
   scenarios_list = NULL,
   n_rep = 3,
   n_cores = 3,
-  output_dir = calibration_dir,
+  output_dir = "data/intermediate/calibration",
   libraries = NULL,
   save_pattern = "restart"
 )
 
 # Check the files produced
-list.files(calibration_dir)
+list.files("data/intermediate/calibration")

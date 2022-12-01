@@ -1,6 +1,6 @@
 # Setup ------------------------------------------------------------------------
 library("EpiModelHIV")
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 # Necessary files
 epistats <- readRDS("data/intermediate/estimates/epistats.rds")

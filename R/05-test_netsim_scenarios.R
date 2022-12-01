@@ -7,7 +7,7 @@ library("EpiModelHIV")
 library("dplyr")
 
 # Necessary files
-est <- readRDS("data/intermediate/estimates/netest.rds")
+path_to_est <- "data/intermediate/estimates/netest.rds"
 source("R/utils-default_inputs.R") # generate `param` and `init`
 
 # Controls
@@ -27,8 +27,8 @@ print(control)
 # for now, no scenarios are used (`scenarios.list = NULL`), the files will be
 # named "sim__empty_scenario__1.rds" and "sim__empty_scenario__2.rds"
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control,
-  scenarios.list = NULL,
+  path_to_est, param, init, control,
+  scenarios_list = NULL,
   n_rep = 3,
   n_cores = 2,
   output_dir = "data/intermediate/no_scenario_test",
@@ -36,7 +36,8 @@ EpiModelHPC::netsim_scenarios(
   save_pattern = "simple"
 )
 
-list.files(calibration_dir)
+list.files("data/intermediate/no_scenario_test")
+unlink("data/intermediate/no_scenario_test")
 
 # Using scenarios --------------------------------------------------------------
 
@@ -50,22 +51,22 @@ scenarios_df <- tibble(
 )
 
 glimpse(scenarios_df)
-scenarios_list <- EpiModel::create_scenario_list(scenarios.df)
+scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 # Here 2 scenarios will be used "scenario_1" and "scenario_2".
 # This will generate 4 files (2 per scenarios)
 EpiModelHPC::netsim_scenarios(
-  est, param, init, control, scenarios_list,
+  path_to_est, param, init, control, scenarios_list,
   n_rep = 3,
   n_cores = 2,
   output_dir = "data/intermediate/scenario_test",
   libraries = "EpiModelHIV",
   save_pattern = "simple"
 )
-list.files(calibration_dir)
+list.files("data/intermediate/scenario_test")
 
 # Load one of the simulation files
-sim <- readRDS("data/intermediate/no_scenario_test/sim__scenario_1__1.rds")
+sim <- readRDS("data/intermediate/scenario_test/sim__scenario_1__1.rds")
 names(sim)
 
 # Examine the model object output

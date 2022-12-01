@@ -1,6 +1,6 @@
 library("EpiModel")
 
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 epistats <- readRDS("data/intermediate/estimates/epistats.rds")
 netstats <- readRDS("data/intermediate/estimates/netstats.rds")

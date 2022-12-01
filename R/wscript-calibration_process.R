@@ -4,7 +4,7 @@
 
 # Setup ------------------------------------------------------------------------
 library("EpiModelHIV")
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 
 # where the calibration files are stored
 source_dir <- "data/intermediate/calibration/"

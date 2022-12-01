@@ -59,7 +59,7 @@ df <- as.data.frame(sim)
 head(df)
 tail(df)
 
-## Run 5 simulations on 5 cores
+## Run 2 simulations on 2 cores
 ## Note: this will not run generate a progress tracker in the console
 control <- control_msm(
   nsteps = 250,

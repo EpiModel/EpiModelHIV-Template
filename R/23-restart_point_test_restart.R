@@ -1,6 +1,6 @@
 # Setup ------------------------------------------------------------------------
 library("EpiModelHIV")
-source("R/utils-project_settings.R")
+source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R")
 
 # Controls
@@ -17,7 +17,7 @@ control <- control_msm(
   verbose             = TRUE
 )
 
-orig <- readRDS("data/intermediate/estimates/restart.rds")
+orig <- readRDS("data/intermediate/estimates/restart_point.rds")
 
 # Simulation -------------------------------------------------------------------
 sim <- netsim(orig, param, init, control)
@@ -34,5 +34,5 @@ library(ggplot2)
 
 d_sim %>%
   filter(time > prep_start) %>%
-  ggplot(aes(x = time, y = s_prep___B / s_prep_elig___B)) +
+  ggplot(aes(x = time, y = s_prep__B / s_prep_elig__B)) +
     geom_line()
