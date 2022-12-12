@@ -63,7 +63,7 @@ model_fun <- function(proposal) {
   as_tibble(sim) %>%
     mutate_targets() %>%
     filter(time >= max(time) - 52) %>%
-    select(c(sim, all_of(names(targets)))) %>%
+    select(c(sim, any_of(names(targets)))) %>%
     group_by(sim) %>%
     summarise(across(
       everything(),
