@@ -137,6 +137,10 @@ hpc_configs <- swf_configs_rsph(
   partition = "preemptable",
   mail_user = "aleguil@emory.edu"
 )
+wf <- create_workflow(
+  wf_name = "auto_calib_sph",
+  default_sbatch_opts = hpc_configs$default_sbatch_opts
+)
 
 # hpc_configs <- swf_configs_hyak(
 #   hpc = "mox",
@@ -144,12 +148,10 @@ hpc_configs <- swf_configs_rsph(
 #   r_version = "4.1.2",
 #   mail_user = "aleguil@emory.edu"
 # )
-
-# Workflow creation ------------------------------------------------------------
-wf <- create_workflow(
-  wf_name = "auto_calib",
-  default_sbatch_opts = hpc_configs$default_sbatch_opts
-)
+# wf <- create_workflow(
+#   wf_name = "auto_calib",
+#   default_sbatch_opts = hpc_configs$default_sbatch_opts
+# )
 
 # Update RENV on the HPC -------------------------------------------------------
 wf <- add_workflow_step(

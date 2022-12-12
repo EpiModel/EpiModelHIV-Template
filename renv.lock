@@ -17,10 +17,10 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "f9919f02ec907ddf61fd71dcb7d346b6e1ba10b9",
+      "RemoteSha": "9c4adab02fd753f78fc61963201817a292b54a2d",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModelHIV-p@main",
-      "Hash": "0ef08c3c2afc394ce8e5fe551b991d51",
+      "Hash": "6877b1fcdcaa195179b34765f9ef9ec8",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
@@ -56,9 +56,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "c227514a16728a32e35c85d410ce8537bb764a48",
+      "RemoteSha": "7aa3a975f9363a653f54fba55cac75316ba3a401",
       "RemoteHost": "api.github.com",
-      "Hash": "c1db7db2576d00d88c2a161b44b9a320",
+      "Hash": "08aa702c85091f11ddbebfcac6b70ee4",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -84,13 +84,13 @@
       "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhiv-p",
       "RemoteRef": "main",
-      "RemoteSha": "8f1d1e66d4f7168573674476d1c2b0a3b8a18a90",
+      "RemoteSha": "a1ffcc1d89e80af2d94f245536a2814b38d1b82a",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModel@main",
-      "Hash": "cd22d2a1f69e68336a5680f3f21e4dc4",
+      "Hash": "dbbc2c71b4323eb7a4365b36e358d587",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -302,10 +302,10 @@
     },
     "digest": {
       "Package": "digest",
-      "Version": "0.6.30",
+      "Version": "0.6.31",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "bf1cd206a5d170d132ef75c7537b9bdb",
+      "Hash": "8b708f296afd9ae69f450f9640be8990",
       "Requirements": []
     },
     "doParallel": {
@@ -350,10 +350,10 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.3.1",
+      "Version": "4.3.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6f9006c6bb7f16015a6ee4eddbac537d",
+      "Hash": "1a3cf29b85e03803448d0c70d4228863",
       "Requirements": [
         "MASS",
         "Matrix",
@@ -907,14 +907,18 @@
     },
     "stringr": {
       "Package": "stringr",
-      "Version": "1.4.1",
+      "Version": "1.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a66ad12140cd34d4f9dfcc19e84fc2a5",
+      "Hash": "671a4d384ae9d32fc47a14e98bfa3dc8",
       "Requirements": [
+        "cli",
         "glue",
+        "lifecycle",
         "magrittr",
-        "stringi"
+        "rlang",
+        "stringi",
+        "vctrs"
       ]
     },
     "swfcalib": {
