@@ -4,8 +4,8 @@
 
 # Setup ------------------------------------------------------------------------
 if (interactive()) {
-  ncores <- 2
-  nsims  <- 10
+  ncores <- 5
+  nsims  <- 25
   nsteps <- 500
 }
 
@@ -33,7 +33,6 @@ dx_main <- netdx(
   ncores = ncores,
   nsteps = nsteps,
   nwstats.formula = model_main_dx,
-  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5),
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
@@ -43,7 +42,6 @@ dx_main_static <- netdx(
   dynamic = FALSE,
   nsims = 10000,
   nwstats.formula = model_main_dx,
-  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
@@ -71,7 +69,6 @@ dx_casl <- netdx(
   ncores = ncores,
   nsteps = nsteps,
   nwstats.formula = model_casl_dx,
-  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5),
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
@@ -81,7 +78,6 @@ dx_casl_static <- netdx(
   dynamic = FALSE,
   nsims = 10000,
   nwstats.formula = model_casl_dx,
-  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
