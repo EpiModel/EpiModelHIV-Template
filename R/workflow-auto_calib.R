@@ -43,6 +43,26 @@ calib_object <- list(
         get_result = determ_poly_end(0.001, poly_n = 5)
         ),
       job4 = list(
+        targets = "ir100.gc",
+        targets_val = 12.81,
+        params = c("ugc.prob"), # target:
+        initial_proposals = dplyr::tibble(
+          ugc.prob = seq(0.1, 0.8, length.out = n_sims),
+        ),
+        make_next_proposals = make_shrink_proposer(n_sims),
+        get_result = determ_poly_end_rm0(0.1, poly_n = 5)
+        ),
+      job5 = list(
+        targets = "ir100.ct",
+        targets_val = 14.59,
+        params = c("uct.prob"), # target:
+        initial_proposals = dplyr::tibble(
+          uct.prob = seq(0.1, 0.8, length.out = n_sims),
+        ),
+        make_next_proposals = make_shrink_proposer(n_sims),
+        get_result = determ_poly_end_rm0(0.1, poly_n = 5)
+        ),
+      job6 = list(
         targets = paste0("cc.linked1m.", c("B", "H", "W")),
         targets_val = c(0.829, 0.898, 0.89),
         params = paste0("tx.init.rate_", 1:3),
@@ -75,12 +95,12 @@ calib_object <- list(
         targets_val = c(0.33, 0.127, 0.084),
         params = paste0("hiv.trans.scale_", 1:3),
         initial_proposals = dplyr::tibble(
-          hiv.trans.scale_1 = sample(seq(3, 6, length.out = n_sims)),
-          hiv.trans.scale_2 = sample(seq(0.3, 0.6, length.out = n_sims)),
-          hiv.trans.scale_3 = sample(seq(0.2, 0.5, length.out = n_sims))
+          hiv.trans.scale_1 = sample(seq(1, 6, length.out = n_sims)),
+          hiv.trans.scale_2 = sample(seq(0.1, 1, length.out = n_sims)),
+          hiv.trans.scale_3 = sample(seq(0.1, 0.1, length.out = n_sims))
         ),
         make_next_proposals = make_dumb_proposer(n_sims),
-        get_result = make_dumb_end(iter = 5)
+        get_result = make_dumb_end(iter = 7)
         # get_result = determ_lin_poly_end(c(0.005, 0.01, 0.01), poly_n = 1)
       )
     )
@@ -94,6 +114,8 @@ calib_object <- list(
       tx.init.rate_1 = 0.3,
       tx.init.rate_2 = tx.init.rate_1,
       tx.init.rate_3 = tx.init.rate_1,
+      ugc.prob = 0.4,
+      uct.prob = 0.4,
       tx.halt.partial.rate_1 = 0.003,
       tx.halt.partial.rate_2 = tx.halt.partial.rate_1,
       tx.halt.partial.rate_3 = tx.halt.partial.rate_1,
@@ -116,12 +138,12 @@ hpc_configs <- swf_configs_rsph(
   mail_user = "aleguil@emory.edu"
 )
 
-hpc_configs <- swf_configs_hyak(
-  hpc = "mox",
-  partition = "ckpt",
-  r_version = "4.1.2",
-  mail_user = "aleguil@emory.edu"
-)
+# hpc_configs <- swf_configs_hyak(
+#   hpc = "mox",
+#   partition = "ckpt",
+#   r_version = "4.1.2",
+#   mail_user = "aleguil@emory.edu"
+# )
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(

@@ -109,6 +109,56 @@ determ_noisy_end <- function(threshold, n_needed) {
   }
 }
 
+determ_poly_end_rm0 <- function(threshold, poly_n = 3) {
+  force(threshold)
+  force(poly_n)
+  function(calib_object, job, results) {
+    values <- results[[job$targets]]
+    params <- results[[job$params]]
+    target <- job$targets_val
+
+    mscale <- function(x, val) (x - mean(val)) / sd(val)
+    munscale <- function(x, val) x * sd(val) + mean(val)
+
+    complete_rows <- vctrs::vec_detect_complete(values) & values != 0
+    values <- values[complete_rows]
+    params <- params[complete_rows]
+
+    s_v <- mscale(values, values)
+    s_t <- mscale(target, values)
+    s_p <- mscale(params, params)
+
+    mod <- lm(s_v ~ poly(s_p, poly_n))
+    loss_fun <- function(par)  abs(predict(mod, data.frame(s_p = par)) - s_t)
+    predicted_param <- optimize(interval = range(s_p), f = loss_fun)
+
+    s_newp <- predicted_param$minimum
+    s_newv <- predict(mod, data.frame(s_p = s_newp))
+
+    newp <- munscale(s_newp, params)
+
+    oldp <- swfcalib::load_sideload(calib_object, job)
+    swfcalib::save_sideload(calib_object, job, newp)
+
+    if (is.null(oldp)) return(NULL)
+
+    s_oldp <- mscale(oldp, params)
+    s_oldv <- predict(mod, data.frame(s_p = s_oldp))
+
+    newv <- munscale(s_newv, values)
+    oldv <- munscale(s_oldv, values)
+
+    if (abs(oldv - newv) < threshold && abs(newv - target) < threshold) {
+      result <- data.frame(x = newp)
+      names(result) <- job$params
+      return(result)
+    } else {
+      return(NULL)
+    }
+  }
+}
+
+
 determ_poly_end <- function(threshold, poly_n = 3) {
   force(threshold)
   force(poly_n)

@@ -4,8 +4,10 @@ theme_set(theme_light())
 
 # res <- readRDS("./data/results.rds") |> as_tibble()
 res <- readRDS("./data/calib/full_results.rds") |> as_tibble()
-calib_object <- readRDS("./data/calib-old/calib_object.rds")
+# calib_object <- readRDS("./data/calib-old/calib_object.rds")
 calib_object <- readRDS("./data/calib/calib_object.rds")
+
+res <- readRDS("./data/calib/waves/3/results.rds") |> as_tibble()
 
 calib_object$state$default_proposal %>% as.list()
 

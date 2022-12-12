@@ -43,10 +43,10 @@ model_fun <- function(proposal) {
 
   scenario_df <- proposal
 
-  # scenario_df[["rgc.prob"]] <-
-  #   plogis(qlogis(scenario_df[["ugc.prob"]]) + log(1.25))
-  # scenario_df[["rct.prob"]] <-
-  #   plogis(qlogis(scenario_df[["uct.prob"]]) + log(1.25))
+  scenario_df[["rgc.prob"]] <-
+    plogis(qlogis(scenario_df[["ugc.prob"]]) + log(1.25))
+  scenario_df[["rct.prob"]] <-
+    plogis(qlogis(scenario_df[["uct.prob"]]) + log(1.25))
 
   scenario_df[[".scenario.id"]] <- scenario_df[[".proposal_index"]]
   scenario_df[[".at"]] <- 1

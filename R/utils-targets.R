@@ -8,12 +8,12 @@ targets <- c(
   cc.dx.W                                 = 0.873,
   cc.linked1m.B                           = 0.829,
   cc.linked1m.H                           = 0.898,
-  cc.linked1m.W                           = 0.89,
+  cc.linked1m.W                           = 0.890,
   # CombPrev appendix 8.2.2
   # 2nd calibration set (all independant)
-  cc.vsupp.B                              = 0.605,
-  cc.vsupp.H                              = 0.62,
-  cc.vsupp.W                              = 0.71,
+  cc.vsupp.B                              = 0.602,
+  cc.vsupp.H                              = 0.620,
+  cc.vsupp.W                              = 0.710,
   # STIs
   ir100.gc                                = 12.81,
   ir100.ct                                = 14.59,
@@ -21,7 +21,16 @@ targets <- c(
   i.prev.dx.B                             = 0.33,
   i.prev.dx.H                             = 0.127,
   i.prev.dx.W                             = 0.084,
+  i.prev.dx                               = 17.0, # not used yet but maybe?
   prep_prop                               = 0.15,
+  cc.prep.ind.B                           = 0.387,
+  cc.prep.ind.H                           = 0.379,
+  cc.prep.ind.W                           = 0.407,
+  cc.prep.ind                             = 0.402,
+  cc.prep.B                               = 0.188,
+  cc.prep.H                               = 0.198,
+  cc.prep.W                               = 0.206,
+  cc.prep                                 = 0.203,
   prep_prop_ret1y                         = 0.56, # DOI: 10.1002/jia2.25252
   prep_prop_ret2y                         = 0.41,
   disease.mr100                           = 0.273
