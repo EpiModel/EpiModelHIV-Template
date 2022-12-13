@@ -77,7 +77,7 @@ process_one_calibration <- function(file_name, nsteps = 52) {
     filter(time >= max(time) - (nsteps + 52 * 3)) %>% # margin for prep_ret2y
     mutate_targets() %>%
     filter(time >= max(time) - nsteps) %>%
-    select(c(sim, all_of(names(targets)))) %>%
+    select(c(sim, any_of(names(targets)))) %>%
     group_by(sim) %>%
     summarise(across(
       everything(),
