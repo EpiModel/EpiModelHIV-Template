@@ -436,3 +436,40 @@ make_dumb_proposer <- function(n_new) {
     dplyr::bind_cols(outs)
   }
 }
+
+
+determ_trans_end <- function(retain_prop = 0.2, thresholds, n_enough) {
+  force(thresholds)
+  force(retain_prop)
+  function(calib_object, job, results) {
+
+    # calculate new ranges if not done
+    new_ranges <- vector(mode = "list", length = length(job$targets))
+    for (i in seq_along(job$target)) {
+      values <- results[[ job$targets[[i]] ]]
+      target <- job$targets_val[[i]]
+
+      d <- tibble(
+        params = results[[ job$params[[i]] ]],
+        score = abs(values - target)
+      ) %>%
+      arrange(score)
+
+      d <- head(d, nrow(d) * retain_prop)
+      new_ranges[[i]] <- range(d$params)
+    }
+    swfcalib::save_sideload(calib_object, job, new_ranges)
+
+
+
+
+    if (all(abs(oldv - newv) < thresholds) &&
+        all(abs(newv - targets) < thresholds)) {
+      result <- data.frame(as.list(newp))
+      names(result) <- job$params
+      return(result)
+    } else {
+      return(NULL)
+    }
+  }
+}
