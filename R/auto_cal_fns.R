@@ -442,6 +442,8 @@ determ_trans_end <- function(retain_prop = 0.2, thresholds, n_enough) {
   force(thresholds)
   force(retain_prop)
   function(calib_object, job, results) {
+    values <- results[, job$targets]
+    targets <- job$targets_val
 
     # calculate new ranges if not done
     new_ranges <- vector(mode = "list", length = length(job$targets))
