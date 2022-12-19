@@ -100,7 +100,7 @@ fit_main <- trim_netest(fit_main)
 # Formula
 model_casl <- ~ edges +
   nodematch("age.grp", diff = TRUE) +
-  nodefactor("age.grp", levels = c(-1, -5)) +
+  nodefactor("age.grp", levels = -5) +
   nodematch("race", diff = FALSE) +
   nodefactor("race", levels = -1) +
   nodefactor("deg.main", levels = -3) +
@@ -112,7 +112,7 @@ model_casl <- ~ edges +
 netstats_casl <- c(
   edges                = netstats$casl$edges,
   nodematch_age.grp    = netstats$casl$nodematch_age.grp,
-  nodefactor_age.grp   = netstats$casl$nodefactor_age.grp[-c(1, 5)],
+  nodefactor_age.grp   = netstats$casl$nodefactor_age.grp[-5],
   nodematch_race       = netstats$casl$nodematch_race_diffF,
   nodefactor_race      = netstats$casl$nodefactor_race[-1],
   nodefactor_deg.main  = netstats$casl$nodefactor_deg.main[-3],

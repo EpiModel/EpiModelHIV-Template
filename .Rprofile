@@ -29,6 +29,7 @@ rm(.folder.struct, .folder)
 
 # 3. Helpful aliases
 rs <- function() .rs.restartR()
+si <- function() sessioninfo::session_info()
 
 # 4. Standard options
 options(deparse.max.lines = 5)
