@@ -133,6 +133,24 @@ for (j in seq_along(targets)) {
   d <- d[d[ job$targets[[j]] ] < thresholds[[j]], ]
 }
 
+p_ok <- results[, c(job$params, job$targets)]
+for (j in seq_along(targets)) {
+  vals <- p_ok[[ job$targets[j] ]]
+  t_val <- job$targets_val[j]
+  ok <- abs(vals - t_val) < thresholds[j]
+  p_ok <- p_ok[ok, ]
+}
+p_ok
+
+if (nrow(p_ok) > n_enough) {
+  return(p_ok[, job$params])
+} else {
+  return(NULL)
+}
+
+
+
+
 # TODO:
 # if nrow(d) > n_enough
 # -> return mean of all

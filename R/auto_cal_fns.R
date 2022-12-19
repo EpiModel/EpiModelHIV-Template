@@ -437,41 +437,61 @@ make_dumb_proposer <- function(n_new) {
   }
 }
 
-
 determ_trans_end <- function(retain_prop = 0.2, thresholds, n_enough) {
-  force(thresholds)
   force(retain_prop)
+  force(thresholds)
+  force(n_enough)
+
   function(calib_object, job, results) {
-    values <- results[, job$targets]
-    targets <- job$targets_val
-
     # calculate new ranges if not done
-    new_ranges <- vector(mode = "list", length = length(job$targets))
-    for (i in seq_along(job$target)) {
-      values <- results[[ job$targets[[i]] ]]
-      target <- job$targets_val[[i]]
+    new_ranges <- list()
+    for (i in seq_along(job$targets)) {
+      params <- results[[ job$params[i] ]]
+      values <- results[[ job$targets[i] ]]
+      target <- job$targets_val[i]
 
-      d <- tibble(
-        params = results[[ job$params[[i]] ]],
+      d <- dplyr::tibble(
+        params = params,
         score = abs(values - target)
-      ) %>%
-      arrange(score)
-
-      d <- head(d, nrow(d) * retain_prop)
+      )
+      d <- dplyr::arrange(d, score)
+      d <- head(d, ceiling(nrow(d) * retain_prop))
       new_ranges[[i]] <- range(d$params)
     }
     swfcalib::save_sideload(calib_object, job, new_ranges)
 
+    # Enough close enough estimates?
+    p_ok <- results[, c(job$params, job$targets)]
+    for (j in seq_along(job$targets)) {
+      values <- p_ok[[ job$targets[j] ]]
+      target <- job$targets_val[j]
+      thresh <- thresholds[j]
 
+      p_ok <- p_ok[abs(values - target) < thresh, ]
+    }
 
-
-    if (all(abs(oldv - newv) < thresholds) &&
-        all(abs(newv - targets) < thresholds)) {
-      result <- data.frame(as.list(newp))
-      names(result) <- job$params
-      return(result)
+    if (nrow(p_ok) > n_enough) {
+      return(p_ok[, job$params])
     } else {
       return(NULL)
     }
+  }
+}
+
+# propose new params based on ranges saved in a sideload
+# ranges : list of range (numeric(2))
+make_range_proposer <- function(n_new) {
+  force(n_new)
+  function(calib_object, job, results) {
+    p_ranges <- swfcalib::load_sideload(calib_object, job)
+    outs <- list()
+    for (i in seq_along(job$params)) {
+      proposals <- seq(p_ranges[[i]][1], p_ranges[[i]][2], length.out = n_new)
+      proposals <- sample(proposals)
+      out <- list(proposals)
+      names(out) <- job$params[i]
+      outs[[i]] <- dplyr::as_tibble(out)
+    }
+    dplyr::bind_cols(outs)
   }
 }
