@@ -38,35 +38,37 @@ calib_object <- list(
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = dplyr::tibble(
           hiv.test.rate_3 = seq(0.001, 0.01, length.out = n_sims),
-          ),
+        ),
         make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001, poly_n = 5)
         ),
       job4 = list(
         targets = "ir100.gc",
         targets_val = 12.81,
-        params = c("ugc.prob"), # target:
+        params = c("ugc.prob", "rgc.prob"), # target:
         initial_proposals = dplyr::tibble(
           ugc.prob = seq(0.1, 0.8, length.out = n_sims),
+          rgc.prob = plogis(qlogis(ugc.prob) + log(1.25))
         ),
-        make_next_proposals = make_range_proposer(n_sims),
+        make_next_proposals = make_sti_range_proposer(n_sims),
         get_result = determ_trans_end(
-          retain_prop = 0.1,
-          thresholds = 0.1,
+          retain_prop = 0.2,
+          thresholds = 1,
           n_enough = 300
         )
       ),
       job5 = list(
         targets = "ir100.ct",
         targets_val = 14.59,
-        params = c("uct.prob"), # target:
+        params = c("uct.prob", "rct.prob"), # target:
         initial_proposals = dplyr::tibble(
           uct.prob = seq(0.1, 0.8, length.out = n_sims),
+          rct.prob = plogis(qlogis(uct.prob) + log(1.25))
         ),
-        make_next_proposals = make_range_proposer(n_sims),
+        make_next_proposals = make_sti_range_proposer(n_sims),
         get_result = determ_trans_end(
-          retain_prop = 0.1,
-          thresholds = 0.1,
+          retain_prop = 0.2,
+          thresholds = 1,
           n_enough = 300
         )
       ),
@@ -109,7 +111,7 @@ calib_object <- list(
         ),
         make_next_proposals = make_range_proposer(n_sims),
         get_result = determ_trans_end(
-          retain_prop = 0.1,
+          retain_prop = 0.2,
           thresholds = rep(0.01, 3),
           n_enough = 300
         )
@@ -127,7 +129,9 @@ calib_object <- list(
       tx.init.rate_2 = tx.init.rate_1,
       tx.init.rate_3 = tx.init.rate_1,
       ugc.prob = 0.4,
+      rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
       uct.prob = 0.4,
+      rct.prob = plogis(qlogis(uct.prob) + log(1.25)),
       tx.halt.partial.rate_1 = 0.003,
       tx.halt.partial.rate_2 = tx.halt.partial.rate_1,
       tx.halt.partial.rate_3 = tx.halt.partial.rate_1,

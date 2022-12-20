@@ -510,3 +510,24 @@ make_range_proposer <- function(n_new) {
     dplyr::bind_cols(outs)
   }
 }
+
+make_sti_range_proposer <- function(n_new) {
+  force(n_new)
+  function(calib_object, job, results) {
+    p_ranges <- swfcalib::load_sideload(calib_object, job)
+    outs <- list()
+
+    proposals <- seq(p_ranges[[1]][1], p_ranges[[1]][2], length.out = n_new)
+    proposals <- sample(proposals)
+    out <- list(proposals)
+    names(out) <- job$params[1]
+    outs[[1]] <- dplyr::as_tibble(out)
+
+    proposals <- plogis(qlogis(proposals) + log(1.25))
+    out <- list(proposals)
+    names(out) <- job$params[2]
+    outs[[2]] <- dplyr::as_tibble(out)
+
+    dplyr::bind_cols(outs)
+  }
+}
