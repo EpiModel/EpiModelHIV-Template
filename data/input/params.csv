@@ -146,9 +146,6 @@ part.prep.start.prob_3,0.5,numeric
 part.tx.init.rate_1,0.6,numeric
 part.tx.init.rate_2,0.6,numeric
 part.tx.init.rate_3,0.8,numeric
-part.tx.halt.rate_1,0.00102,numeric
-part.tx.halt.rate_2,0.00102,numeric
-part.tx.halt.rate_3,0.00071,numeric
 part.tx.reinit.rate_1,0.5,numeric
 part.tx.reinit.rate_2,0.5,numeric
 part.tx.reinit.rate_3,0.5,numeric
