@@ -84,7 +84,7 @@ fit_main <- netest(
   target.stats = netstats_main,
   coef.diss = netstats$main$diss.byage,
   set.control.ergm = control.ergm(
-    main.method = "Stochastic",
+    main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
@@ -130,7 +130,7 @@ fit_casl <- netest(
   target.stats = netstats_casl,
   coef.diss = netstats$casl$diss.byage,
   set.control.ergm = control.ergm(
-    main.method = "Stochastic",
+    main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
@@ -174,7 +174,7 @@ fit_inst <- netest(
   target.stats = netstats_inst,
   coef.diss = dissolution_coefs(~ offset(edges), 1),
   set.control.ergm = control.ergm(
-    main.method = "Stochastic",
+    main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
