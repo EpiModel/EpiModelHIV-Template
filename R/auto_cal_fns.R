@@ -188,7 +188,13 @@ determ_poly_end <- function(threshold, poly_n = 3) {
     newp <- munscale(s_newp, params)
 
     oldp <- swfcalib::load_sideload(calib_object, job)
-    swfcalib::save_sideload(calib_object, job, newp)
+
+    sideload <- list(
+      center = newp,
+      shrink = TRUE
+    )
+
+    swfcalib::save_sideload(calib_object, job, sideload)
 
     if (is.null(oldp)) return(NULL)
 
@@ -200,6 +206,8 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     if (abs(oldv - newv) < threshold && abs(newv - target) < threshold) {
       result <- data.frame(x = newp)
+      sideload$shrink <- FALSE
+      swfcalib::save_sideload(calib_object, job, sideload)
       names(result) <- job$params
       return(result)
     } else {
@@ -219,20 +227,27 @@ make_shrink_proposer <- function(n_new, shrink = 2) {
       ]
     )
 
-    spread <- (tar_range[2] - tar_range[1]) / shrink / 2
-    center <- swfcalib::load_sideload(calib_object, job)
-    if (is.null(center)) {
+    sideload <- swfcalib::load_sideload(calib_object, job)
+    if (is.null(sideload)) {
       stop(
         "While making shrinked proposals: \n",
         "Sideload file with ID: `", job$targets, "` does not exist"
       )
     }
 
+    if (!sideload$shrink)
+      shrink <- 1
+
+    spread <- (tar_range[2] - tar_range[1]) / shrink / 2
+
     proposals <- seq(
-      max(center - spread, tar_range[1]),
-      min(center + spread, tar_range[2]),
+      max(sideload$center - spread, tar_range[1]),
+      min(sideload$center + spread, tar_range[2]),
       length.out = n_new
     )
+
+    proposals <- sample(proposals)
+
     out <- list(proposals)
     names(out) <- job$params
     dplyr::as_tibble(out)
