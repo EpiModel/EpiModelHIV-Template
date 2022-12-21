@@ -187,16 +187,13 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     newp <- munscale(s_newp, params)
 
-    oldp <- swfcalib::load_sideload(calib_object, job)
+    old_sideload <- swfcalib::load_sideload(calib_object, job)
 
-    sideload <- list(
-      center = newp,
-      shrink = TRUE
-    )
+    new_sideload <- list(center = newp, shrink = TRUE)
+    swfcalib::save_sideload(calib_object, job, new_sideload)
 
-    swfcalib::save_sideload(calib_object, job, sideload)
-
-    if (is.null(oldp)) return(NULL)
+    if (is.null(old_sideload)) return(NULL)
+    oldp <- old_sideload$center
 
     s_oldp <- mscale(oldp, params)
     s_oldv <- predict(mod, data.frame(s_p = s_oldp))
@@ -206,8 +203,8 @@ determ_poly_end <- function(threshold, poly_n = 3) {
 
     if (abs(oldv - newv) < threshold && abs(newv - target) < threshold) {
       result <- data.frame(x = newp)
-      sideload$shrink <- FALSE
-      swfcalib::save_sideload(calib_object, job, sideload)
+      new_sideload$shrink <- FALSE
+      swfcalib::save_sideload(calib_object, job, new_sideload)
       names(result) <- job$params
       return(result)
     } else {

@@ -38,7 +38,7 @@ res1 <- res %>%
     gc = abs(ir100.gc - 12.81),
     ct = abs(ir100.ct - 14.59)
   ) %>%
-  filter(gc < 1)
+  filter(gc < 0.5)
 
 nrow(res1)
 res1$ugc.prob %>% summary()

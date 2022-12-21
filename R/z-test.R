@@ -16,3 +16,13 @@ mod <- glm(
 
 mod
 matrix(coefs, ncol = 3)
+
+
+calib_object <- readRDS("./calib_object.rds")
+results <- readRDS("./results.rds")
+job <- calib_object$waves[[1]]$job1
+
+readRDS("./sideloads/waves1-job5.rds")
+
+
+
