@@ -54,7 +54,7 @@ calib_object <- list(
         get_result = determ_trans_end(
           retain_prop = 0.2,
           thresholds = 1,
-          n_enough = 300
+          n_enough = 50
         )
       ),
       job5 = list(
@@ -69,7 +69,7 @@ calib_object <- list(
         get_result = determ_trans_end(
           retain_prop = 0.2,
           thresholds = 1,
-          n_enough = 300
+          n_enough = 50
         )
       ),
       job6 = list(
@@ -113,7 +113,7 @@ calib_object <- list(
         get_result = determ_trans_end(
           retain_prop = 0.2,
           thresholds = rep(0.01, 3),
-          n_enough = 300
+          n_enough = 50
         )
         # get_result = determ_lin_poly_end(c(0.005, 0.01, 0.01), poly_n = 1)
       )

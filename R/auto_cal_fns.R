@@ -483,7 +483,14 @@ determ_trans_end <- function(retain_prop = 0.2, thresholds, n_enough) {
     }
 
     if (nrow(p_ok) > n_enough) {
-      return(p_ok[, job$params])
+      res <- p_ok[, job$params]
+      # get the n_tuple where all values are the closest to the median
+      best <- dplyr::summarise(res, dplyr::across(
+          dplyr::everything(),
+          ~ abs(.x - median(.x)))
+      )
+      best <- which.min(rowSums(best))
+      return(res[best, ])
     } else {
       return(NULL)
     }

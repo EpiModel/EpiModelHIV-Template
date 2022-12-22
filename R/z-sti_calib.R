@@ -3,6 +3,7 @@ library(ggplot2)
 theme_set(theme_light())
 
 res <- readRDS("./data/calib/waves/1/results.rds")
+res <- readRDS("./results.rds")
 
 glimpse(res)
 
@@ -19,10 +20,41 @@ n <- 100
 nbest <- res1 %>%
   head(n)
 
-nbest <- res1 %>%
-  filter(gc < 1)
+job <- list()
+job$params <- c("ugc.prob", "rgc.prob")
 
+nbest <- res1 %>%
+  filter(.iteration < 8) %>%
+  filter(gc < 1) %>%
+  select(all_of(job$params))
 nrow(nbest)
+
+best <- nbest %>%
+  summarise(across(everything(), ~ abs(.x - median(.x)))) %>%
+  rowSums() %>% which.min()
+
+nbest[best, ]
+
+res <- nbest
+# get the n_tuple where all values are the closest to the median
+best <- dplyr::summarise(res, dplyr::across(
+    dplyr::everything(),
+    ~ abs(.x - median(.x)))
+)
+best <- which.min(rowSums(best))
+
+glimpse(nbest)
+
+summary(nbest$ugc.prob)
+
+
+
+
+res1 %>%
+  filter(between(ugc.prob, 0.188, 0.191)) %>%
+  pull(ir100.gc) %>%
+  summary()
+
 
 ggplot(res1, aes(y = ir100.gc, x = ugc.prob)) +
   geom_point() +
@@ -30,7 +62,11 @@ ggplot(res1, aes(y = ir100.gc, x = ugc.prob)) +
 
 res %>%
   group_by(.iteration) %>%
-  summarise(across(ugc.prob, list(min, median, max)))
+  summarise(across(c(ugc.prob, uct.prob), list(min, median, max)))
+
+res %>%
+  group_by(.iteration) %>%
+  summarise(across(hiv.test.rate_2, list(min, median, max)))
 
 
 res1 <- res %>%
