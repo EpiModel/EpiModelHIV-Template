@@ -2,12 +2,17 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
-res <- bind_rows(
-  readRDS("./data/intermediate/full_results_mox.rds"),
-  readRDS("./data/intermediate/full_results_sph.rds")
-)
+res <- readRDS("./data/calib/waves/3/results.rds")
 
 glimpse(res)
+
+res %>%
+  group_by(.iteration) %>%
+  summarise(
+    across(starts_with("hiv.trans."),
+      list(min, median, max))
+  ) %>%
+  print(n = 100)
 
 res1 <- res %>%
   mutate(
@@ -33,9 +38,9 @@ nbest <- res1 %>%
 
 nbest <- res1 %>%
   filter(
-    between(e.B, -0.05, 0.05),
-    between(e.H, -0.05, 0.05),
-    between(e.W, -0.05, 0.05)
+    between(e.B, -0.01, 0.01),
+    between(e.H, -0.01, 0.01),
+    between(e.W, -0.01, 0.01)
   )
 
 nrow(nbest)
