@@ -3,7 +3,7 @@ library(ggplot2)
 theme_set(theme_light())
 
 res <- readRDS("./data/calib/waves/1/results.rds") |> as_tibble()
-# res <- readRDS("./data/calib/full_results.rds") |> as_tibble()
+res <- readRDS("./data/calib/full_results.rds") |> as_tibble()
 calib_object <- readRDS("./data/calib/calib_object.rds")
 
 calib_object$state$default_proposal %>% as.list()

@@ -2,6 +2,9 @@ library(dplyr)
 library(ggplot2)
 theme_set(theme_light())
 
+calib_object <- readRDS("./data/calib/calib_object.rds")
+calib_object$state$default_proposal %>% as.list()
+
 res <- readRDS("./data/calib/waves/3/results.rds")
 
 glimpse(res)
@@ -36,15 +39,31 @@ n <- 100
 nbest <- res1 %>%
   head(n)
 
+thresh <- c(0.015, 0.015, 0.015)
 nbest <- res1 %>%
   filter(
-    between(e.B, -0.01, 0.01),
-    between(e.H, -0.01, 0.01),
-    between(e.W, -0.01, 0.01)
+     .iteration < 17,
+    between(e.B, -thresh[1], thresh[1]),
+    between(e.H, -thresh[2], thresh[2]),
+    between(e.W, -thresh[3], thresh[3])
   )
 
 nrow(nbest)
 select(nbest, starts_with("hiv.trans"))
+
+job <- list()
+job$params <- paste0("hiv.trans.scale_", 1:3)
+p_ok <- nbest
+
+res <- p_ok[, job$params]
+# get the n_tuple where all values are the closest to the median
+best <- dplyr::summarise(res, dplyr::across(
+    dplyr::everything(),
+    ~ abs(.x - median(.x)))
+)
+best <- which.min(rowSums(best))
+res[best, ]
+
 
 range(nbest$hiv.trans.scale_1)
 range(nbest$hiv.trans.scale_2)
