@@ -124,8 +124,8 @@ calib_object <- list(
         targets_val = 0.273,
         params = c("aids.off.tx.mort.rate"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_1 = seq(0.0001, 0.001, length.out = n_sims),
-          ),
+          aids.off.tx.mort.rate = seq(0.0001, 0.001, length.out = n_sims),
+        ),
         make_next_proposals = make_shrink_proposer(n_sims),
         get_result = determ_poly_end(0.001, poly_n = 5)
       )

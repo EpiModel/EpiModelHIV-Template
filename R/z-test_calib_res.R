@@ -8,6 +8,7 @@ calib_object <- readRDS("./data/calib/calib_object.rds")
 
 calib_object$state$default_proposal %>% as.list()
 
+
 res %>%
   group_by(.wave) %>%
   summarise(it = max(.iteration))

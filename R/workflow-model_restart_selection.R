@@ -43,25 +43,24 @@ library(EpiModelHIV)
 epistats <- readRDS("data/intermediate/estimates/epistats.rds")
 netstats <- readRDS("data/intermediate/estimates/netstats.rds")
 est      <- readRDS("data/intermediate/estimates/netest.rds")
+path_to_est <- "data/intermediate/estimates/netest.rds"
 
 param <- param.net(
   data.frame.params = readr::read_csv("data/input/params.csv"),
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
-  hiv.test.rate = c(0.004508235, 0.003748965, 0.005791135),
-  tx.init.rate = c(0.2972737, 0.3674605, 0.3575724),
-  tx.halt.partial.rate = c(0.005324598, 0.005001534, 0.003334693),
-  hiv.trans.scale = c(1.713511, 0.266574, 0.1783712),
-  .param.updater.list = list(
-    # High PrEP intake for the first year; go back to normal to get to 15%
-    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52, param = list(prep.start.prob = function(x) x / 2))
-  )
+  riskh.start       = prep_start - 53
 )
 
 init <- init_msm()
+
+init <- init_msm(
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
+)
 
 # Controls
 source("R/utils-targets.R")
@@ -81,7 +80,7 @@ control <- control_msm(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    est, param, init, control,
+    path_to_est, param, init, control,
     scenarios_list = NULL,
     output_dir = "data/intermediate/calibration",
     libraries = "EpiModelHIV",

@@ -87,10 +87,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhiv-p",
       "RemoteRef": "main",
-      "RemoteSha": "a1ffcc1d89e80af2d94f245536a2814b38d1b82a",
+      "RemoteSha": "d03ec745bc0ca9dd017d9e3832ed05aa40b41649",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModel@main",
-      "Hash": "dbbc2c71b4323eb7a4365b36e358d587",
+      "Hash": "0d586edbcd0c1bf47d0740f22035f0be",
       "Requirements": [
         "EpiModel",
         "dplyr",
@@ -104,16 +104,16 @@
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
-      "Version": "2.1.2",
+      "Version": "2.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
       "RemoteRef": "autocalib",
-      "RemoteSha": "e3d9a80c6fc2f0ed5959368ac600606fc71a69c0",
+      "RemoteSha": "d3625ac952c66b208a868801ad1ce005bcf7a1c5",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
-      "Hash": "eb7dd2d1f1e149dcc603b6f8542ca800",
+      "Hash": "2ce12814e746fcb5e52d063c5e263f3a",
       "Requirements": [
         "EpiModel",
         "callr",
@@ -125,7 +125,8 @@
         "slurmworkflow",
         "stringr",
         "swfcalib",
-        "tergm"
+        "tergm",
+        "tidyr"
       ]
     },
     "MASS": {
@@ -224,10 +225,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.4.1",
+      "Version": "3.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0d297d01734d2bcea40197bd4971a764",
+      "Hash": "eb9fc121ad9a1075c471107ef185be46",
       "Requirements": []
     },
     "clipr": {
@@ -529,10 +530,10 @@
     },
     "isoband": {
       "Package": "isoband",
-      "Version": "0.2.6",
+      "Version": "0.2.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "cfdea9dea85c1a973991c8cbe299f4da",
+      "Hash": "0080607b4a1a7b28979aecef976d8bc2",
       "Requirements": []
     },
     "iterators": {
