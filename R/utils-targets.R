@@ -2,28 +2,37 @@ library("dplyr")
 library("EpiModel")
 
 targets <- c(
-  # 1st calibration set (all independent)
-  cc.dx.B         = 0.804,
-  cc.dx.H         = 0.799,
-  cc.dx.W         = 0.88,
-  cc.linked1m.B   = 0.62,
-  cc.linked1m.H   = 0.65,
-  cc.linked1m.W   = 0.76,
+  # 1st calibration set (all independant)
+  cc.dx.B                                 = 0.847,
+  cc.dx.H                                 = 0.818,
+  cc.dx.W                                 = 0.873,
+  cc.linked1m.B                           = 0.829,
+  cc.linked1m.H                           = 0.898,
+  cc.linked1m.W                           = 0.890,
   # CombPrev appendix 8.2.2
-  # 2nd calibration set (all independent)
-  cc.vsupp.B      = 0.55,
-  cc.vsupp.H      = 0.60,
-  cc.vsupp.W      = 0.72,
+  # 2nd calibration set (all independant)
+  cc.vsupp.B                              = 0.602,
+  cc.vsupp.H                              = 0.620,
+  cc.vsupp.W                              = 0.710,
   # STIs
-  ir100.gc        = 12.81,
-  ir100.ct        = 14.59,
+  ir100.gc                                = 12.81,
+  ir100.ct                                = 14.59,
   # 3rd calibration set
-  i.prev.dx.B     = 0.33,
-  i.prev.dx.H     = 0.127,
-  i.prev.dx.W     = 0.084,
-  prep_prop       = 0.15,
-  prep_prop_ret1y = 0.56, # DOI: 10.1002/jia2.25252
-  prep_prop_ret2y = 0.41
+  i.prev.dx.B                             = 0.33,
+  i.prev.dx.H                             = 0.127,
+  i.prev.dx.W                             = 0.084,
+  i.prev.dx                               = 0.17, # not used yet but maybe?
+  cc.prep.ind.B                           = 0.387,
+  cc.prep.ind.H                           = 0.379,
+  cc.prep.ind.W                           = 0.407,
+  cc.prep.ind                             = 0.402,
+  cc.prep.B                               = 0.206,
+  cc.prep.H                               = 0.237,
+  cc.prep.W                               = 0.332,
+  cc.prep                                 = 0.203,
+  prep_prop_ret1y                         = 0.56, # DOI: 10.1002/jia2.25252
+  prep_prop_ret2y                         = 0.41,
+  disease.mr100                           = 0.273
 )
 
 # function to calculate the calibration target
@@ -45,9 +54,12 @@ mutate_calibration_targets <- function(d) {
     i.prev.dx.B     = i_dx__B / n__B,
     i.prev.dx.H     = i_dx__H / n__H,
     i.prev.dx.W     = i_dx__W / n__W,
+    cc.prep.B       = s_prep__B / s_prep_elig__B,
+    cc.prep.H       = s_prep__H / s_prep_elig__H,
+    cc.prep.W       = s_prep__W / s_prep_elig__W,
     prep_users      = s_prep__B + s_prep__H + s_prep__W,
     prep_elig       = s_prep_elig__B + s_prep_elig__H + s_prep_elig__W,
-    prep_prop       = prep_users / prep_elig,
+    cc.prep         = prep_users / prep_elig,
     prep_prop_ret1y = prep_ret1y / lag(prep_startat, 52),
     prep_prop_ret2y = prep_ret2y / lag(prep_startat, 104)
   )
@@ -65,9 +77,9 @@ process_one_calibration <- function(file_name, nsteps = 52) {
   d <- as_tibble(readRDS(file_name))
   d <- d %>%
     filter(time >= max(time) - (nsteps + 52 * 3)) %>% # margin for prep_ret2y
-    mutate_targets() %>%
+    mutate_calibration_targets() %>%
     filter(time >= max(time) - nsteps) %>%
-    select(c(sim, all_of(names(targets)))) %>%
+    select(c(sim, any_of(names(targets)))) %>%
     group_by(sim) %>%
     summarise(across(
       everything(),

@@ -4,12 +4,14 @@
 
 # Setup ------------------------------------------------------------------------
 source("R/utils-0_project_settings.R")
-source("R/utils-targets.R")
-library(dplyr)
 
-batches_infos <- EpiModelHPC::get_scenarios_batches_infos(
-  "data/intermediate/calibration"
-)
+# Libraries --------------------------------------------------------------------
+library("dplyr")
+
+# ------------------------------------------------------------------------------
+source("R/utils-targets.R")
+
+batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calib_dir)
 
 process_one_batch <- function(scenario_infos) {
   sim <- readRDS(scenario_infos$file_name)
@@ -20,7 +22,7 @@ process_one_batch <- function(scenario_infos) {
 
   d_sim <- d_sim %>%
     filter(time >= max(time) - 52) %>%
-    select(sim, all_of(names(targets))) %>%
+    select(sim, any_of(names(targets))) %>%
     group_by(sim) %>%
     summarise(across(
       everything(),

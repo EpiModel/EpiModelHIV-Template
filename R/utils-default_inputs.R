@@ -1,9 +1,11 @@
-library("EpiModel")
+if (!context %in% c("local", "hpc")) {
+  stop("The `context` variable must be set to either 'local' or 'hpc'")
+}
 
-source("R/utils-0_project_settings.R")
-
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
+epistats <- readRDS(paste0(est_dir, "epistats-", context, ".rds"))
+netstats <- readRDS(paste0(est_dir, "netstats-", context, ".rds"))
+path_to_est <- paste0(est_dir, "netest-", context, ".rds")
+path_to_restart <- paste0(est_dir, "restart-", context, ".rds")
 
 # `netsim` Parameters
 param <- param.net(
@@ -12,11 +14,11 @@ param <- param.net(
   epistats            = epistats,
   prep.start          = prep_start,
   riskh.start         = prep_start - 53,
-  .param.updater.list = list(
-    # High PrEP intake for the first year; go back to normal to get to 15%
-    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52,
-         param = list(prep.start.prob = function(x) x / 2))
+  .param.updater.list = list( # High PrEP intake for the first year only
+    list(at = prep_start, param = list(
+        prep.start.prob = function(x) plogis(qlogis(x) + log(2)))),
+    list(at = prep_start + 52, param = list(
+        prep.start.prob = function(x) plogis(qlogis(x) - log(2))))
   )
 )
 

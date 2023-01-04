@@ -1,14 +1,16 @@
 ##
-## 11. Epidemic Model Parameter Calibration, Local evaluation
+## 12. Epidemic Model Parameter Calibration, Local evaluation
 ##
 
 # Setup ------------------------------------------------------------------------
+source("R/utils-0_project_settings.R")
+
+# Libraries --------------------------------------------------------------------
 library("EpiModel")
 library("dplyr")
 library("tidyr")
-source("R/utils-0_project_settings.R")
 
-d <- readRDS(paste0(calibration_dir, "/assessments.rds"))
+d <- readRDS(paste0(calib_dir, "/assessments.rds"))
 
 glimpse(d)
 

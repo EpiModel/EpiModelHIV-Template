@@ -1,13 +1,17 @@
+## Example interactive epidemic simulation run script with basic
+## parameterization and all parameters defined in `param_msm`, with example of
+## writing/debugging modules
 
-## Example interactive epidemic simulation run script with basic parameterization
-##    and all parameters defined in `param_msm`, with example of writing/debugging modules
+# Setup  -----------------------------------------------------------------------
+source("R/utils-0_project_settings.R")
 
+# Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 
 # Necessary files
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
-est      <- readRDS("data/intermediate/estimates/netest.rds")
+epistats <- readRDS("data/intermediate/estimates/epistats-local.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats-local.rds")
+est      <- readRDS("data/intermediate/estimates/netest-local.rds")
 
 prep_start <- 52 * 2
 param <- param.net(
@@ -15,13 +19,7 @@ param <- param.net(
   netstats          = netstats,
   epistats          = epistats,
   prep.start        = prep_start,
-  riskh.start       = prep_start - 53,
-  .param.updater.list = list(
-    # High PrEP intake for the first year; go back to normal to get to 15%
-    list(at = prep_start, param = list(prep.start.prob = function(x) x * 2)),
-    list(at = prep_start + 52,
-         param = list(prep.start.prob = function(x) x / 2))
-  )
+  riskh.start       = prep_start - 53
 )
 
 # See full listing of parameters
@@ -29,8 +27,14 @@ param <- param.net(
 print(param)
 
 # Initial conditions (default prevalence initialized in epistats)
-# For models with bacterial STIs, these must be initialized here with non-zero values
-init <- init_msm()
+# For models with bacterial STIs, these must be initialized here with non-zero
+# values
+init <- init_msm(
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
+)
 
 # Control settings
 control <- control_msm(

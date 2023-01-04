@@ -3,10 +3,14 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library("EpiModel")
+context <- "local"
+source("R/utils-0_project_settings.R")
+source("R/utils-default_inputs.R") # generate `path_to_restart`
+
+# Libraries --------------------------------------------------------------------
+library("EpiModelHIV")
 library("dplyr")
 library("tidyr")
-source("R/utils-0_project_settings.R")
 
 d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
@@ -47,4 +51,4 @@ epi_num <- best$epi$num
 # Remove all epi except `num`
 best$epi <- list(num = epi_num)
 
-saveRDS(best, "data/intermediate/estimates/restart_point.rds")
+saveRDS(best, path_to_restart)

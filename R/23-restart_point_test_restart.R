@@ -1,13 +1,18 @@
 # Setup ------------------------------------------------------------------------
-library("EpiModelHIV")
+context <- "local"
 source("R/utils-0_project_settings.R")
-source("R/utils-default_inputs.R")
+
+# Run the simulations ----------------------------------------------------------
+library("EpiModelHIV")
+
+# Necessary files
+source("R/utils-default_inputs.R") # generate `path_to_restart`, `param`, `init`
 
 # Controls
 source("R/utils-targets.R")
 control <- control_msm(
   start               = restart_time,
-  nsteps              = restart_time + 1,
+  nsteps              = prep_start + 52,
   nsims               = 1,
   ncores              = 1,
   initialize.FUN      = reinit_msm,
@@ -17,7 +22,7 @@ control <- control_msm(
   verbose             = TRUE
 )
 
-orig <- readRDS("data/intermediate/estimates/restart_point.rds")
+orig <- readRDS(path_to_restart)
 
 # Simulation -------------------------------------------------------------------
 sim <- netsim(orig, param, init, control)

@@ -3,19 +3,27 @@
 ##
 ## This file estimates the ERGMs. When run locally (interactively) it fits
 ## 5k nodes networks. They can be used for local testing of the project.
-## When run on the HPC (`interactive == FALSE`) the `networks_size` is set in
-## the "R/utils-0_project_settings.R".
+## When run on the HPC (`interactive() == FALSE`), 100k nodes networks are used.
 
 # Setup  -----------------------------------------------------------------------
-library("EpiModelHIV")
-library("ARTnet")
+context <- if (interactive()) "local" else "hpc"
 source("R/utils-0_project_settings.R")
 
-# When running the code locally, work with 5k nodes networks on a single CPU
-if (interactive()) {
-  ncores <- 1
-  networks_size <- 5e3
+if (context == "hpc") {
+  networks_size   <- 100 * 1e3
+  estimation_method <- "MCMLE"
+  estimation_ncores <- 10
+} else if (context == "local") {
+  networks_size   <- 5 * 1e3
+  estimation_method <- "Stochastic-Approximation"
+  estimation_ncores <- 1
+} else {
+  stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
+
+# Libraries  -------------------------------------------------------------------
+library("EpiModelHIV")
+library("ARTnet")
 
 # 0. Initialize Network --------------------------------------------------------
 epistats <- build_epistats(
@@ -25,7 +33,7 @@ epistats <- build_epistats(
   race = TRUE,
   time.unit = 7
 )
-saveRDS(epistats, "data/intermediate/estimates/epistats.rds")
+saveRDS(epistats, paste0(est_dir, "epistats-", context, ".rds"))
 
 netparams <- build_netparams(
   epistats = epistats,
@@ -38,7 +46,7 @@ netstats <- build_netstats(
   expect.mort = 0.000478213,
   network.size = networks_size
 )
-saveRDS(netstats, "data/intermediate/estimates/netstats.rds")
+saveRDS(netstats, paste0(est_dir, "netstats-", context, ".rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num)
@@ -84,13 +92,13 @@ fit_main <- netest(
   target.stats = netstats_main,
   coef.diss = netstats$main$diss.byage,
   set.control.ergm = control.ergm(
-    main.method = "Stochastic-Approximation",
+    main.method = estimation_method,
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
     MCMC.samplesize = 1e4,
     MCMC.interval = 5e3,
-    parallel = ncores
+    parallel = estimation_ncores
   ),
   verbose = FALSE
 )
@@ -130,13 +138,13 @@ fit_casl <- netest(
   target.stats = netstats_casl,
   coef.diss = netstats$casl$diss.byage,
   set.control.ergm = control.ergm(
-    main.method = "Stochastic-Approximation",
+    main.method = estimation_method,
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
     MCMC.samplesize = 1e4,
     MCMC.interval = 5e3,
-    parallel = ncores
+    parallel = estimation_ncores
   ),
   verbose = FALSE
 )
@@ -174,13 +182,13 @@ fit_inst <- netest(
   target.stats = netstats_inst,
   coef.diss = dissolution_coefs(~ offset(edges), 1),
   set.control.ergm = control.ergm(
-    main.method = "Stochastic-Approximation",
+    main.method = estimation_method,
     MCMLE.maxit = 500,
     SAN.maxit = 3,
     SAN.nsteps.times = 4,
     MCMC.samplesize = 1e4,
     MCMC.interval = 5e3,
-    parallel = ncores
+    parallel = estimation_ncores
   ),
   verbose = FALSE
 )
@@ -188,4 +196,4 @@ fit_inst <- trim_netest(fit_inst)
 
 # 4. Save Data -----------------------------------------------------------------
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, "data/intermediate/estimates/netest.rds")
+saveRDS(out, paste0(est_dir, "netest-", context, ".rds"))
