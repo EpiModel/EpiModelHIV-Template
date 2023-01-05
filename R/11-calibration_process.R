@@ -27,7 +27,7 @@ process_one_batch <- function(scenario_infos) {
   d_sim <- readRDS(scenario_infos$file_name) %>% as_tibble()
 
   d_sim <- d_sim %>%
-    mutate_calibration_targets() # from "R/utils-targets.R"
+    mutate_calibration_targets() %>% # from "R/utils-targets.R"
     filter(time >= max(time) - 52) %>%
     select(sim, any_of(names(targets))) %>%
     group_by(sim) %>%
