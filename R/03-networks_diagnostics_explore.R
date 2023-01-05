@@ -2,7 +2,7 @@
 ## 03. Network Model Diagnostics: Interactive Analysis
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 #
 # Choose the right context: "local" if you are checking the smaller networks
 #   estimated locally or "hpc" for the full size networks. For "hpc", this

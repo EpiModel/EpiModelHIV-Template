@@ -2,25 +2,32 @@
 ## 11. Epidemic Model Parameter Calibration, Processing of the simulation files
 ##
 
-# Setup ------------------------------------------------------------------------
-source("R/utils-0_project_settings.R")
-
 # Libraries --------------------------------------------------------------------
 library("dplyr")
+library("future.apply")
+
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+context <- if (!exists("context")) "local" else "hpc"
+
+if (context == "local") {
+  plan(sequential)
+} else if (context == "hpc") {
+  plan(multisession, workers = ncores)
+} else  {
+  stop("The `context` variable must be set to either 'local' or 'hpc'")
+}
 
 # ------------------------------------------------------------------------------
-source("R/utils-targets.R")
+source("./R/utils-targets.R")
 
 batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calib_dir)
 
 process_one_batch <- function(scenario_infos) {
-  sim <- readRDS(scenario_infos$file_name)
-
-  d_sim <- as_tibble(sim)
-
-  d_sim <- mutate_calibration_targets(d_sim) # from "R/utils-targets.R"
+  d_sim <- readRDS(scenario_infos$file_name) %>% as_tibble()
 
   d_sim <- d_sim %>%
+    mutate_calibration_targets(d_sim) # from "R/utils-targets.R"
     filter(time >= max(time) - 52) %>%
     select(sim, any_of(names(targets))) %>%
     group_by(sim) %>%
@@ -38,13 +45,13 @@ process_one_batch <- function(scenario_infos) {
   select(d_sim, scenario_name, batch_number, sim, everything())
 }
 
-assessments_raw <- lapply(
+assessments_raw <- future_lapply(
   seq_len(nrow(batches_infos)),
   function(i) process_one_batch(batches_infos[i, ])
 )
 
 assessments_raw <- bind_rows(assessments_raw)
-saveRDS(assessments_raw, "data/intermediate/calibration/assessments_raw.rds")
+saveRDS(assessments_raw, "./data/intermediate/calibration/assessments_raw.rds")
 
 assessments <- assessments_raw %>%
   select(- c(sim, batch_number)) %>%
@@ -60,4 +67,4 @@ assessments <- assessments_raw %>%
   ))
 
 # Save the result --------------------------------------------------------------
-saveRDS(assessments, "data/intermediate/calibration/assessments.rds")
+saveRDS(assessments, "./data/intermediate/calibration/assessments.rds")

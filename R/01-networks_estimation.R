@@ -6,7 +6,7 @@
 ## When run on the HPC (`context` is set in the workflow definition to "hpc"),
 ## 100k nodes networks are used.
 
-# Setup  -----------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
 

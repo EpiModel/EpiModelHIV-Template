@@ -16,6 +16,6 @@
 hpc_configs <- EpiModelHPC::swf_configs_hyak(
   hpc = "klone",
   partition = "ckpt",
-  r_version = "4.1.2",
+  r_version = "4.1.1",
   mail_user = mail_user
 )

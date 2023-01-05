@@ -2,7 +2,7 @@
 ## 22. Epidemic Model Restart Point, Choice of the best restart point
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 context <- "local"
 source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_restart`

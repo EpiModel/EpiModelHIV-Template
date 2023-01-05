@@ -2,7 +2,7 @@
 ## 11. Epidemic Model Parameter Calibration, Processing of the simulation files
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 source("R/utils-0_project_settings.R")
 source("R/utils-scenarios_outcomes.R")
 

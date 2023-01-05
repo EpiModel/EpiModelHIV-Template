@@ -2,7 +2,7 @@
 ## 11. Epidemic Model Parameter Calibration, Local evaluation
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 library("EpiModel")
 library("dplyr")
 library("tidyr")

@@ -2,7 +2,7 @@
 ## 20. Epidemic Model Restart Point, Local simulation runs
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 context <- "local"
 source("R/utils-0_project_settings.R")
 

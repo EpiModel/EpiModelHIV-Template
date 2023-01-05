@@ -2,7 +2,7 @@
 ## parameterization and all parameters defined in `param_msm`, with example of
 ## writing/debugging modules
 
-# Setup  -----------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 source("R/utils-0_project_settings.R")
 
 # Libraries  -------------------------------------------------------------------

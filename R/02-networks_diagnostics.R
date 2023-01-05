@@ -2,7 +2,7 @@
 ## 02. Network Model Diagnostics
 ##
 
-# Setup  -----------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
 context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
 
