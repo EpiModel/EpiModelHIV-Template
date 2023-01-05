@@ -2,16 +2,28 @@
 ## 11. Epidemic Model Parameter Calibration, Processing of the simulation files
 ##
 
-# Settings ---------------------------------------------------------------------
-source("R/utils-0_project_settings.R")
-source("R/utils-scenarios_outcomes.R")
+# Libraries --------------------------------------------------------------------
+library("dplyr")
+library("future.apply")
 
-batches_infos <- EpiModelHPC::get_scenarios_batches_infos(
-  "data/intermediate/scenarios"
-)
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+context <- if (!exists("context")) "local" else "hpc"
+
+if (context == "local") {
+  plan(sequential)
+} else if (context == "hpc") {
+  plan(multisession, workers = ncores)
+} else  {
+  stop("The `context` variable must be set to either 'local' or 'hpc'")
+}
+
+# ------------------------------------------------------------------------------
+source("./R/utils-scenarios_outcomes.R")
+batches_infos <- EpiModelHPC::get_scenarios_batches_infos(scenarios_dir)
 
 # process each batch
-outcomes_raw <- lapply(
+outcomes_raw <- future_lapply(
   seq_len(nrow(batches_infos)),
   function(i) process_one_scenario_batch(batches_infos[i, ])
 )
@@ -19,7 +31,7 @@ outcomes_raw <- lapply(
 # bind all rows into 1 data frame with 1 row per unique simulation
 outcomes_raw <- bind_rows(outcomes_raw)
 head(outcomes_raw)
-saveRDS(outcomes_raw, "data/intermediate/scenarios/outcomes_raw.rds")
+saveRDS(outcomes_raw, "./data/intermediate/scenarios/outcomes_raw.rds")
 
 # summarise the results into a data frame with one row per scenario
 #   here we present each outcome with q1, median, q3
@@ -39,7 +51,5 @@ outcomes <- outcomes_raw %>%
 head(outcomes)
 
 # Save the result --------------------------------------------------------------
-saveRDS(outcomes, "data/intermediate/scenarios/outcomes.rds")
-readr::write_csv(outcomes, "data/intermediate/scenarios/outcomes.csv")
-
-
+saveRDS(outcomes, "./data/intermediate/scenarios/outcomes.rds")
+readr::write_csv(outcomes, "./data/intermediate/scenarios/outcomes.csv")

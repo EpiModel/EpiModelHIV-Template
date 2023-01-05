@@ -2,10 +2,12 @@
 ## 11. Epidemic Model Parameter Calibration, Local evaluation
 ##
 
-# Settings ---------------------------------------------------------------------
+# Libraries --------------------------------------------------------------------
 library("EpiModel")
 library("dplyr")
 library("tidyr")
+
+# Settings ---------------------------------------------------------------------
 source("R/utils-0_project_settings.R")
 
 d <- readRDS("./data/intermediate/calibration/assessments.rds")
@@ -22,7 +24,7 @@ d %>%
 
 # Look at q1, q2 and q3 for a specific scenario
 d %>%
-  filter(scenario_name == "5") %>%
+  filter(scenario_name == "1") %>%
   pivot_longer(-scenario_name) %>%
   separate(name, into = c("name", "quant"), sep = "__") %>%
   pivot_wider(names_from = quant, values_from = value) %>%

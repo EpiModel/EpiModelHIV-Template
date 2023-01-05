@@ -2,27 +2,28 @@
 ## Epidemic Model Parameter Calibration, HPC setup
 ##
 
-# Setup ------------------------------------------------------------------------
+# Libraries --------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
-source("R/utils-0_project_settings.R")
+library("EpiModelHIV")
 
-hpc_configs <- swf_configs_rsph(
-  partition = "epimodel",
-  r_version = "4.2.1",
-  git_version = "2.35.1",
-  mail_user = mail_user
-)
-
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+context <- "hpc"
 max_cores <- 30
 
-# Workflow creation ------------------------------------------------------------
+source("./R/utils-default_inputs.R") # make `path_to_est`, `param` and `init`
+source("./R/utils-hpc_configs.R") # creates `hpc_configs`
+
+# ------------------------------------------------------------------------------
+
+# Workflow creation
 wf <- create_workflow(
   wf_name = "intervention_scenarios",
   default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
-# Update RENV on the HPC -------------------------------------------------------
+# Update RENV on the HPC
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(
@@ -32,14 +33,8 @@ wf <- add_workflow_step(
   sbatch_opts = hpc_configs$renv_sbatch_opts
 )
 
-# Run the simulations ----------------------------------------------------------
-library("EpiModelHIV")
-
-context <- "hpc"
-source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
-
 # Controls
-source("R/utils-targets.R")
+source("./R/utils-targets.R")
 control <- control_msm(
   start               = restart_time,
   nsteps              = intervention_end,
@@ -60,7 +55,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_restart, param, init, control,
     scenarios_list = scenarios_list,
-    output_dir = "data/intermediate/scenarios",
+    output_dir = "./data/intermediate/scenarios",
     libraries = "EpiModelHIV",
     save_pattern = "simple",
     n_rep = 120,
@@ -76,15 +71,16 @@ wf <- add_workflow_step(
   )
 )
 
-# Process calibrations ---------------------------------------------------------
+# Process calibrations
+#
 # produce a data frame with the calibration targets for each scenario
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "./R/41-intervention_scenarios_process.R",
     args = list(
-      ncores = 15,
-      nsteps = 52
+      context = "hpc",
+      ncores = 15
     ),
     setup_lines = hpc_configs$r_loader
   ),

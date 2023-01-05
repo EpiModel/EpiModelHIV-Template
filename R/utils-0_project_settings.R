@@ -5,6 +5,7 @@
 est_dir <- "data/intermediate/estimates/"
 diag_dir <- "data/intermediate/diagnostics/"
 calib_dir <- "data/intermediate/calibration/"
+scenarios_dir <- "data/intermediate/scenarios/"
 
 # Information for the HPC workflows
 current_git_branch <- "scenarios"

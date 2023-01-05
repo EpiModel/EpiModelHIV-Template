@@ -20,7 +20,6 @@ if (context == "local") {
 
 # ------------------------------------------------------------------------------
 source("./R/utils-targets.R")
-
 batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calib_dir)
 
 process_one_batch <- function(scenario_infos) {

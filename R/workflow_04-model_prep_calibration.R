@@ -34,7 +34,7 @@ wf <- add_workflow_step(
 )
 
 # Controls
-source("R/utils-targets.R")
+source("./R/utils-targets.R")
 control <- control_msm(
   start               = restart_time,
   nsteps              = intervention_start,
@@ -48,7 +48,7 @@ control <- control_msm(
 )
 
 # insert test values here
-n_scenarios <- 5
+n_scenarios <- 2
 scenarios_df <- tibble(
   .scenario.id = as.character(seq_len(n_scenarios)),
   .at                 = 1,
@@ -56,9 +56,9 @@ scenarios_df <- tibble(
   prep.start.prob_1   = rep(0.615625, n_scenarios), # 206
   prep.start.prob_2   = rep(0.766, n_scenarios), # 237
   prep.start.prob_3   = seq(0.77, 0.79, length.out = n_scenarios), # 332
-  prep.discont.rate_1 = rep(0.00688, n_scenarios),
-  prep.discont.rate_2 = prep.discont.rate_1,
-  prep.discont.rate_3 = prep.discont.rate_1
+  prep.discont.int_1  = rep(107.9573, n_scenarios),
+  prep.discont.int_2  = prep.discont.int_1,
+  prep.discont.int_3  = prep.discont.int_1
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
