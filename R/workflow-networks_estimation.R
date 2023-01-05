@@ -3,17 +3,13 @@
 ##
 
 # Setup ------------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+
+# Libraries --------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
 
-source("R/utils-0_project_settings.R")
-
-hpc_configs <- swf_configs_rsph(
-  partition = "epimodel",
-  r_version = "4.2.1",
-  git_version = "2.35.1",
-  mail_user = mail_user
-)
+source("./R/utils-hpc_configs.R") # creates `hpc_configs`
 
 max_cores <- 10
 
@@ -37,9 +33,11 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/01-networks_estimation.R",
+    r_script = "./R/01-networks_estimation.R",
     args = list(
-      ncores = max_cores
+      context = "hpc",
+      estimation_method = "MCMLE",
+      estimation_ncores = max_cores
    ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -54,11 +52,10 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/02-networks_diagnostics.R",
+    r_script = "./R/02-networks_diagnostics.R",
     args = list(
       ncores = max_cores,
-      nsims = 50,
-      nsteps = 500
+      nsims = 50
     ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -71,4 +68,4 @@ wf <- add_workflow_step(
 )
 
 # Next step is to download the data from the HPC and analyse them with
-# "R/03-networks_diagnostics_explore.R" locally
+# "./R/03-networks_diagnostics_explore.R" locally

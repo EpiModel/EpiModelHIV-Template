@@ -1,23 +1,22 @@
 ##
 ## 01. Network Model Estimation
 ##
-## This file estimates the ERGMs. When run locally (interactively) it fits
+## This file estimates the ERGMs. When run locally `context == "local"` it fits
 ## 5k nodes networks. They can be used for local testing of the project.
-## When run on the HPC (`interactive() == FALSE`), 100k nodes networks are used.
+## When run on the HPC (`context` is set in the workflow definition to "hpc"),
+## 100k nodes networks are used.
 
 # Setup  -----------------------------------------------------------------------
-context <- if (interactive()) "local" else "hpc"
+context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
 
-if (context == "hpc") {
-  networks_size   <- 100 * 1e3
-  estimation_method <- "MCMLE"
-  estimation_ncores <- 10
-} else if (context == "local") {
+if (context == "local") {
   networks_size   <- 5 * 1e3
   estimation_method <- "Stochastic-Approximation"
   estimation_ncores <- 1
-} else {
+} else if (context == "hpc") {
+  networks_size   <- 100 * 1e3
+} else  {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
 

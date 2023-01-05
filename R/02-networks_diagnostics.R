@@ -3,15 +3,14 @@
 ##
 
 # Setup  -----------------------------------------------------------------------
-context <- if (interactive()) "local" else "hpc"
+context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
 
-if (context == "hpc") {
-  ncores <- 10
-  nsims  <- 50
-} else if (context == "local") {
+if (context == "local") {
   ncores <- 2
   nsims  <- 10
+} else if (context == "hpc") {
+  # hpc configs not passed through the workflow
 } else {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
