@@ -2,27 +2,28 @@
 ## Epidemic Model Parameter Calibration, HPC setup
 ##
 
-# Setup ------------------------------------------------------------------------
+# Libraries --------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
-source("R/utils-0_project_settings.R")
+library("EpiModelHIV")
 
-hpc_configs <- swf_configs_rsph(
-  partition = "epimodel",
-  r_version = "4.2.1",
-  git_version = "2.35.1",
-  mail_user = mail_user
-)
-
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+context <- "hpc"
 max_cores <- 30
 
-# Workflow creation ------------------------------------------------------------
+source("./R/utils-default_inputs.R") # make `path_to_est`, `param` and `init`
+source("./R/utils-hpc_configs.R") # creates `hpc_configs`
+
+# ------------------------------------------------------------------------------
+
+# Workflow creation
 wf <- create_workflow(
   wf_name = "prep_calibration",
   default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
-# Update RENV on the HPC -------------------------------------------------------
+# Update RENV on the HPC
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(
@@ -31,12 +32,6 @@ wf <- add_workflow_step(
   ),
   sbatch_opts = hpc_configs$renv_sbatch_opts
 )
-
-# Run the simulations ----------------------------------------------------------
-library("EpiModelHIV")
-
-context <- "hpc"
-source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
 
 # Controls
 source("R/utils-targets.R")
@@ -88,15 +83,16 @@ wf <- add_workflow_step(
   )
 )
 
-# Process calibrations ---------------------------------------------------------
+# Process calibrations
+#
 # produce a data frame with the calibration targets for each scenario
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "./R/11-calibration_process.R",
     args = list(
-      ncores = 15,
-      nsteps = 52
+      context = "hpc",
+      ncores = 15
     ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -108,3 +104,15 @@ wf <- add_workflow_step(
   )
 )
 
+# Send the workflow folder to the <HPC> and run it
+#
+# $ scp -r ./workflows/model_calibration <HPC>:<project_dir>/workflows/
+#
+# on the HPC:
+# $ ./workflows/model_calibration/start_workflow.sh
+
+# Once the worfklow is finished download the data from the HPC
+#
+# $ scp -r <HPC>:<project_dir>/data/intermediate/calibration/assessments.rds ./data/intermediate/calibration/
+#
+# and analyse them locally using: "./R/12-calibration_eval.R"

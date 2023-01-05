@@ -10,7 +10,7 @@ library("EpiModelHIV")
 # Settings ---------------------------------------------------------------------
 source("./R/utils-0_project_settings.R")
 context <- "hpc"
-max_cores <- 10
+max_cores <- 30
 
 source("./R/utils-default_inputs.R") # make `path_to_est`, `param` and `init`
 source("./R/utils-hpc_configs.R") # creates `hpc_configs`
@@ -36,7 +36,7 @@ wf <- add_workflow_step(
 # Controls
 source("./R/utils-targets.R")
 control <- control_msm(
-  nsteps              = 204,# calibration_end,
+  nsteps              = calibration_end,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
@@ -81,7 +81,8 @@ wf <- add_workflow_step(
   )
 )
 
-# Process calibrations ---------------------------------------------------------
+# Process calibrations
+#
 # produce a data frame with the calibration targets for each scenario
 wf <- add_workflow_step(
   wf_summary = wf,
@@ -94,7 +95,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
-    "cpus-per-task" = max_cores,
+    "cpus-per-task" = 15,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
     "mail-type" = "END"
