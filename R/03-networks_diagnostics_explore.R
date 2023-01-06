@@ -2,30 +2,36 @@
 ## 03. Network Model Diagnostics: Interactive Analysis
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
+#
+# Choose the right context: "local" if you are checking the smaller networks
+#   estimated locally or "hpc" for the full size networks. For "hpc", this
+#   assumes that you downloaded the "netdx-<nwtype>-hpc.rds" files from the HPC.
+context <- c("local", "hpc")[1]
+source("R/utils-0_project_settings.R")
+
+# Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 
-# Interactive Dx Analysis ------------------------------------------------------
+# Interactive Diagnostics Analysis ---------------------------------------------
 
 # Main
-dx <- readRDS("data/intermediate/diagnostics/netdx-main.rds")
+dx <- readRDS(paste0(diag_dir, "netdx-main-", context, ".rds"))
 print(dx$dx_main, digits = 2)
 plot(dx$dx_main)
-plot(dx$dx_main, type = "duration")
 
 print(dx$dx_main_static, digits = 2)
-plot(dx$dx_main_static, sim.lines = TRUE, sim.lwd = 0.1)
+plot(dx$dx_main_static)
 
 # Casual
-dx <- readRDS("data/intermediate/diagnostics/netdx-casl.rds")
+dx <- readRDS(paste0(diag_dir, "netdx-casl-", context, ".rds"))
 print(dx$dx_casl, digits = 2)
 plot(dx$dx_casl)
-plot(dx$dx_casl, type = "duration")
 
 print(dx$dx_casl_static, digits = 2)
-plot(dx$dx_casl_static, sim.lines = TRUE, sim.lwd = 0.1)
+plot(dx$dx_casl_static)
 
 # Inst
-dx <- readRDS("data/intermediate/diagnostics/netdx-inst.rds")
+dx <- readRDS(paste0(diag_dir, "netdx-inst-", context, ".rds"))
 print(dx$dx_inst, digits = 2)
-plot(dx$dx_inst, sim.lines = TRUE, sim.lwd = 0.1)
+plot(dx$dx_inst)

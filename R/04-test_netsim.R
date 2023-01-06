@@ -1,26 +1,25 @@
+## Example interactive epidemic simulation run script with basic
+## parameterization and all parameters defined in `param_msm`, with example of
+## writing/debugging modules
 
-## Example interactive epidemic simulation run script with basic parameterization
-##    and all parameters defined in `param_msm`, with example of writing/debugging modules
+# Settings ---------------------------------------------------------------------
+source("R/utils-0_project_settings.R")
 
+# Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 
 # Necessary files
-epistats <- readRDS("data/intermediate/estimates/epistats.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats.rds")
-est      <- readRDS("data/intermediate/estimates/netest.rds")
+epistats <- readRDS("data/intermediate/estimates/epistats-local.rds")
+netstats <- readRDS("data/intermediate/estimates/netstats-local.rds")
+est      <- readRDS("data/intermediate/estimates/netest-local.rds")
 
-param <- param_msm(
-  netstats               = netstats,
-  epistats               = epistats,
-  a.rate                 = 0.00049,
-  hiv.test.rate          = c(0.00385, 0.00380, 0.00690),
-  tx.init.rate           = c(0.1775, 0.190, 0.2521),
-  tx.halt.partial.rate   = c(0.0062, 0.0055, 0.0031),
-  tx.reinit.partial.rate = c(0.00255, 0.00255, 0.00255),
-  hiv.trans.scale        = c(2.44, 0.424, 0.270),
-  riskh.start            = 1,
-  prep.start             = 26,
-  prep.start.prob        = rep(0.66, 3)
+prep_start <- 52 * 2
+param <- param.net(
+  data.frame.params = readr::read_csv("data/input/params.csv"),
+  netstats          = netstats,
+  epistats          = epistats,
+  prep.start        = prep_start,
+  riskh.start       = prep_start - 53
 )
 
 # See full listing of parameters
@@ -28,14 +27,20 @@ param <- param_msm(
 print(param)
 
 # Initial conditions (default prevalence initialized in epistats)
-# For models with bacterial STIs, these must be initialized here with non-zero values
-init <- init_msm()
+# For models with bacterial STIs, these must be initialized here with non-zero
+# values
+init <- init_msm(
+  prev.ugc = 0.1,
+  prev.rct = 0.1,
+  prev.rgc = 0.1,
+  prev.uct = 0.1
+)
 
 # Control settings
 control <- control_msm(
   nsteps = 250,
   nsims = 1,
-  ncores = 1,
+  ncores = 1
 )
 
 # See listing of modules and other control settings
@@ -56,14 +61,14 @@ plot(sim, y = "ir100", main = "Incidence")
 # Convert to data frame
 df <- as.data.frame(sim)
 head(df)
+tail(df)
 
-
-## Run 5 simulations on 5 cores
+## Run 2 simulations on 2 cores
 ## Note: this will not run generate a progress tracker in the console
 control <- control_msm(
   nsteps = 250,
-  nsims = 5,
-  ncores = 5,
+  nsims = 2,
+  ncores = 2
 )
 sim <- netsim(est, param, init, control)
 

@@ -2,20 +2,16 @@
 ## 00. Network Model Estimation, HPC setup
 ##
 
-# Setup ------------------------------------------------------------------------
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
+max_cores <- 10
+
+# Libraries --------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
 
-source("R/00-project_settings.R")
+source("./R/utils-hpc_configs.R") # creates `hpc_configs`
 
-hpc_configs <- swf_configs_rsph(
-  partition = "epimodel",
-  r_version = "4.2.1",
-  git_version = "2.35.1",
-  mail_user = mail_user
-)
-
-max_cores <- 10
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -37,9 +33,11 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/01-networks_estimation.R",
+    r_script = "./R/01-networks_estimation.R",
     args = list(
-      ncores = max_cores
+      context = "hpc",
+      estimation_method = "MCMLE",
+      estimation_ncores = max_cores
    ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -54,11 +52,11 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/02-networks_diagnostics.R",
+    r_script = "./R/02-networks_diagnostics.R",
     args = list(
+      context = "hpc",
       ncores = max_cores,
-      nsims = 50,
-      nsteps = 500
+      nsims = 50
     ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -66,9 +64,20 @@ wf <- add_workflow_step(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
-    "mail-type" = "END"
+    "mail-type" = "FAIL,END"
   )
 )
 
-# Next step is to download the data from the HPC and analyse them with
-# "R/03-networks_diagnostics_explore.R" locally
+# Send the workflow folder to the <HPC> and run it
+#
+# $ scp -r ./workflows/networks_estimation <HPC>:<project_dir>/workflows/
+#
+# on the HPC:
+# $ ./workflows/networks_estimation/start_workflow.sh
+
+# Once the worfklow is finished download the data from the HPC
+#
+# $ scp -r <HPC>:<project_dir>/data/intermediate/estimates ./data/intermediate/
+# $ scp -r <HPC>:<project_dir>/data/intermediate/diagnostics ./data/intermediate/
+#
+# and analyse them locally using: "./R/03-networks_diagnostics_explore.R"
