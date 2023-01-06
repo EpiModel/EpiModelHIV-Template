@@ -1,5 +1,3 @@
-library(dplyr)
-
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
   d %>%
