@@ -2,13 +2,13 @@
 ## 00. Shared variables setup
 ##
 
-est_dir <- "data/intermediate/estimates/"
-diag_dir <- "data/intermediate/diagnostics/"
-calib_dir <- "data/intermediate/calibration/"
-scenarios_dir <- "data/intermediate/scenarios/"
+est_dir <- "./data/intermediate/estimates/"
+diag_dir <- "./data/intermediate/diagnostics/"
+calib_dir <- "./data/intermediate/calibration/"
+scenarios_dir <- "./data/intermediate/scenarios/"
 
 # Information for the HPC workflows
-current_git_branch <- "scenarios"
+current_git_branch <- "main"
 mail_user <- "aleguil@emory.edu"
 
 # Relevant time steps for the simulation

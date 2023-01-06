@@ -14,12 +14,13 @@ if (dir.exists("renv/")) {
 
 # 2. directory structure
 .folder.struct <- c(
-  "out",
   "data/input",
-  "data/intermediate/estimates",
-  "data/intermediate/diagnostics",
   "data/intermediate/calibration",
+  "data/intermediate/diagnostics",
+  "data/intermediate/estimates",
+  "data/intermediate/scenarios",
   "data/output",
+  "out",
   "workflows"
 )
 for (.folder in .folder.struct) {
