@@ -9,7 +9,7 @@ scenarios_dir <- "./data/intermediate/scenarios/"
 
 # Information for the HPC workflows
 current_git_branch <- "main"
-mail_user <- "<user>@emory.edu" # or any other mail provider
+mail_user <- "aleguil@emory.edu" # or any other mail provider
 
 # Relevant time steps for the simulation
 calibration_end    <- 52 * 60

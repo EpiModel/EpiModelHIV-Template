@@ -78,7 +78,7 @@ plot(sim, y = "ir100", main = "Incidence")
 
 ## Example debugging of HIV transmission module in debug mode
 # Start by sourcing local version of EpiModelHIV
-pkgload::load_all("~/git/EpiModelHIV-p")
+pkgload::load_all("~/GitHub/EpiModelHIV-p")
 
 # Rerun control settings (to source in local set of module functions)
 # Note: debugging needs to run with 1 simulation on 1 core

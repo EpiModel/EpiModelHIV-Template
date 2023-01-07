@@ -30,7 +30,7 @@ targets <- c(
   cc.prep.H                               = 0.237,
   cc.prep.W                               = 0.332,
   cc.prep                                 = 0.203,
-  prep_prop_ret1y                         = 0.56, # DOI: 10.1002/jia2.25252
+  prep_prop_ret1y                         = 0.56, # DOI: 10.1002/jia2.25252 and 10.1093/cid/ciaa037 (54%)
   prep_prop_ret2y                         = 0.41,
   disease.mr100                           = 0.273
 )
