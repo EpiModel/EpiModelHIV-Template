@@ -8,7 +8,7 @@ calib_dir <- "./data/intermediate/calibration/"
 scenarios_dir <- "./data/intermediate/scenarios/"
 
 # Information for the HPC workflows
-current_git_branch <- "main"
+current_git_branch <- "autocalib"
 mail_user <- "aleguil@emory.edu" # or any other mail provider
 
 # Relevant time steps for the simulation

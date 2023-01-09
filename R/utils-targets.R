@@ -18,10 +18,10 @@ targets <- c(
   ir100.gc                                = 12.81,
   ir100.ct                                = 14.59,
   # 3rd calibration set
-  i.prev.dx.B                             = 0.33,
+  i.prev.dx.B                             = 0.330,
   i.prev.dx.H                             = 0.127,
   i.prev.dx.W                             = 0.084,
-  i.prev.dx                               = 0.17, # not used yet but maybe?
+  i.prev.dx                               = 0.170, # not used yet but maybe?
   cc.prep.ind.B                           = 0.387,
   cc.prep.ind.H                           = 0.379,
   cc.prep.ind.W                           = 0.407,
@@ -117,12 +117,12 @@ calibration_trackers <- list(
   linked1m__B    = epi_linked_time(4)(1),
   linked1m__H    = epi_linked_time(4)(2),
   linked1m__W    = epi_linked_time(4)(3),
-  gc_s__B        = epi_gc_s(c(0, 1))(1), # gc susceptible HIV+ and -
-  gc_s__H        = epi_gc_s(c(0, 1))(2),
-  gc_s__W        = epi_gc_s(c(0, 1))(3),
-  ct_s__B        = epi_ct_s(c(0, 1))(1),
-  ct_s__H        = epi_ct_s(c(0, 1))(2),
-  ct_s__W        = epi_ct_s(c(0, 1))(3),
+  gc_s__B        = epi_gc_s(0:1)(1), # gc susceptible HIV+ and -
+  gc_s__H        = epi_gc_s(0:1)(2),
+  gc_s__W        = epi_gc_s(0:1)(3),
+  ct_s__B        = epi_ct_s(0:1)(1),
+  ct_s__H        = epi_ct_s(0:1)(2),
+  ct_s__W        = epi_ct_s(0:1)(3),
   s_prep__B      = epi_s_prep(1),
   s_prep__H      = epi_s_prep(2),
   s_prep__W      = epi_s_prep(3),

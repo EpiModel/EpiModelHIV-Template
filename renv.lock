@@ -107,13 +107,13 @@
       "Version": "2.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodelhpc",
+      "RemoteRef": "autocalib",
+      "RemoteSha": "d3625ac952c66b208a868801ad1ce005bcf7a1c5",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "main",
-      "RemoteSha": "d3e43f76f0a7c4b8e441ae399709afc7ddad0d89",
-      "Remotes": "github::EpiModel/slurmworkflow",
-      "Hash": "0763afc6f55354003ebe1d24543664a1",
+      "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
+      "Hash": "2ce12814e746fcb5e52d063c5e263f3a",
       "Requirements": [
         "EpiModel",
         "callr",
@@ -124,6 +124,7 @@
         "fs",
         "slurmworkflow",
         "stringr",
+        "swfcalib",
         "tergm",
         "tidyr"
       ]
@@ -1039,6 +1040,26 @@
         "rlang",
         "stringi",
         "vctrs"
+      ]
+    },
+    "swfcalib": {
+      "Package": "swfcalib",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "swfcalib",
+      "RemoteRef": "main",
+      "RemoteSha": "eb8a63431d378aca51833cd2f9a72afcbe4c7598",
+      "Remotes": "github::EpiModel/slurmworkflow",
+      "Hash": "d5b743d8f091ed60093c783a07ec748c",
+      "Requirements": [
+        "dplyr",
+        "fs",
+        "future",
+        "future.apply",
+        "slurmworkflow"
       ]
     },
     "tergm": {
