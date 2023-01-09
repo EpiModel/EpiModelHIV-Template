@@ -1,4 +1,4 @@
-if (!context %in% c("local", "hpc")) {
+if (!exists("context") || !context %in% c("local", "hpc")) {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
 
