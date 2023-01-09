@@ -8,7 +8,7 @@ model_fun <- function(proposal) {
   context <- "hpc"
 
   # Inputs ---------------------------------------------------------------------
-  source("./R/utils-default_inputs.R")
+  source("./R/utils-default_inputs.R", local = TRUE)
   est <- readRDS(path_to_est)
 
   source("R/utils-targets.R")
