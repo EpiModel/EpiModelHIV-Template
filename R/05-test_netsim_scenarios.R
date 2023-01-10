@@ -2,14 +2,13 @@
 ## parameterization and parameters defined in spreadsheet, with example of
 ## running model scenarios defined with data-frame approach
 
+# Libraries  -------------------------------------------------------------------
+library("EpiModelHIV")
+library("dplyr")
 
 # Settings ---------------------------------------------------------------------
 context <- "local"
 source("R/utils-0_project_settings.R")
-
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
-library("dplyr")
 
 #  -----------------------------------------------------------------------------
 # Necessary files

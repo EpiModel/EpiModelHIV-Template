@@ -6,6 +6,10 @@
 ## When run on the HPC (`context` is set in the workflow definition to "hpc"),
 ## 100k nodes networks are used.
 
+# Libraries  -------------------------------------------------------------------
+library("EpiModelHIV")
+library("ARTnet")
+
 # Settings ---------------------------------------------------------------------
 context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
@@ -19,10 +23,6 @@ if (context == "local") {
 } else  {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
-
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
-library("ARTnet")
 
 # 0. Initialize Network --------------------------------------------------------
 epistats <- build_epistats(

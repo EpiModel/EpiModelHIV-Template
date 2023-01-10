@@ -60,7 +60,7 @@ wf <- add_workflow_step(
     save_pattern = "simple",
     n_rep = 120,
     n_cores = max_cores,
-    max_array_size = 999,
+    max_array_size = 500,
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(

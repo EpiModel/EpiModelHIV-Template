@@ -2,11 +2,11 @@
 ## parameterization and all parameters defined in `param_msm`, with example of
 ## writing/debugging modules
 
-# Settings ---------------------------------------------------------------------
-source("R/utils-0_project_settings.R")
-
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
+
+# Settings ---------------------------------------------------------------------
+source("R/utils-0_project_settings.R")
 
 # Necessary files
 epistats <- readRDS("data/intermediate/estimates/epistats-local.rds")

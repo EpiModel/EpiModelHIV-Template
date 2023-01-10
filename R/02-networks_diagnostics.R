@@ -2,6 +2,9 @@
 ## 02. Network Model Diagnostics
 ##
 
+# Libraries  -------------------------------------------------------------------
+library("EpiModelHIV")
+
 # Settings ---------------------------------------------------------------------
 context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
@@ -17,11 +20,8 @@ if (context == "local") {
 
 nsteps <- 500
 
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
-est <- readRDS(paste0(est_dir, "netest-", context, ".rds"))
-
 # Main -------------------------------------------------------------------------
+est <- readRDS(paste0(est_dir, "netest-", context, ".rds"))
 fit_main <- est[["fit_main"]]
 
 model_main_dx <- ~edges +

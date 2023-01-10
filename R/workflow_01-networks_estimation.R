@@ -2,16 +2,15 @@
 ## 00. Network Model Estimation, HPC setup
 ##
 
-# Settings ---------------------------------------------------------------------
-source("./R/utils-0_project_settings.R")
-max_cores <- 10
-
 # Libraries --------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
 
-source("./R/utils-hpc_configs.R") # creates `hpc_configs`
+# Settings ---------------------------------------------------------------------
+source("./R/utils-0_project_settings.R")
 
+max_cores <- 10
+source("./R/utils-hpc_configs.R") # creates `hpc_configs`
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -72,12 +71,24 @@ wf <- add_workflow_step(
 #
 # $ scp -r ./workflows/networks_estimation <HPC>:<project_dir>/workflows/
 #
+# or on windows
+# $ set DISPLAY=
+# $ scp -r workflows\networks_estimation <HPC>:<project_dir>/workflows/
+#
 # on the HPC:
 # $ ./workflows/networks_estimation/start_workflow.sh
+#
+# if the file is not executable:
+# $ chmod +x workflows/networks_estimation/start_workflow.sh
 
 # Once the worfklow is finished download the data from the HPC
 #
 # $ scp -r <HPC>:<project_dir>/data/intermediate/estimates ./data/intermediate/
 # $ scp -r <HPC>:<project_dir>/data/intermediate/diagnostics ./data/intermediate/
+#
+# or on windows:
+# $ set DISPLAY=
+# $ scp -r <HPC>:<project_dir>/data/intermediate/estimates data\intermediate\
+# $ scp -r <HPC>:<project_dir>/data/intermediate/diagnostics data\intermediate\
 #
 # and analyse them locally using: "./R/03-networks_diagnostics_explore.R"

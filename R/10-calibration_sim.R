@@ -2,12 +2,12 @@
 ## 10. Epidemic Model Parameter Calibration, Local simulation runs
 ##
 
+# Libraries --------------------------------------------------------------------
+library("EpiModelHIV")
+
 # Settings ---------------------------------------------------------------------
 context <- "local"
 source("R/utils-0_project_settings.R")
-
-# Libraries --------------------------------------------------------------------
-library("EpiModelHIV")
 
 # Run the simulations ----------------------------------------------------------
 
