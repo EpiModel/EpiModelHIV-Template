@@ -40,7 +40,29 @@ init <- init_msm(
 control <- control_msm(
   nsteps = 250,
   nsims = 1,
-  ncores = 1
+  ncores = 1,
+  dat.updates = list(
+    premain = function(dat, at) {
+      print("premain")
+      set_attr(dat, "deg.casl", EpiModel::get_degree(dat$el[[2]]))
+    },
+    precasl = function(dat, at) {
+      print("precasl")
+      set_attr(dat, "deg.main", EpiModel::get_degree(dat$el[[1]]))
+    },
+    preinst = function(dat, at) {
+      print("preinst")
+      dat <- set_attr(dat, "deg.casl", EpiModel::get_degree(dat$el[[2]]))
+      main <- get_attr(dat, "deg.main")
+      casl <- get_attr(dat, "deg.casl")
+      set_attr(dat, "deg.tot", pmin(casl + main, 3))
+    },
+    post = function(dat, at) {
+      print("post")
+      dat
+    }
+  ),
+  verbose = FALSE
 )
 
 # See listing of modules and other control settings

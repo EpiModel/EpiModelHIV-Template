@@ -1,7 +1,8 @@
 # This code installs the packages only available on GitHub (not on CRAN)
 renv::install(c(
   "EpiModel/ARTnet",
-  "EpiModel/EpiModelHIV-p@main",
+  "EpiModel/EpiModel@multinets",
+  "EpiModel/EpiModelHIV-p@multinets",
   "EpiModel/EpiModelHPC",
   "EpiModel/slurmworkflow"
 ))
