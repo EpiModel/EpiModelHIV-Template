@@ -10,7 +10,7 @@ library("EpiModelHIV")
 # Settings ---------------------------------------------------------------------
 source("./R/utils-0_project_settings.R")
 context <- "hpc"
-max_cores <- 30
+max_cores <- 40
 
 source("./R/utils-default_inputs.R") # make `path_to_est`, `param` and `init`
 source("./R/utils-hpc_configs.R") # creates `hpc_configs`
@@ -54,7 +54,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
     scenarios_list = NULL,
-    n_rep = 120,
+    n_rep = 400,
     n_cores = max_cores,
     libraries = "EpiModelHIV",
     output_dir = "data/intermediate/calibration",

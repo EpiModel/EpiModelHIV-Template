@@ -24,7 +24,7 @@ d %>%
 
 # Look at q1, q2 and q3 for a specific scenario
 d %>%
-  filter(scenario_name == "1") %>%
+  filter(scenario_name == "calibrated") %>%
   pivot_longer(-scenario_name) %>%
   separate(name, into = c("name", "quant"), sep = "__") %>%
   pivot_wider(names_from = quant, values_from = value) %>%
