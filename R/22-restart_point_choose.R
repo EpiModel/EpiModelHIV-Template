@@ -2,26 +2,29 @@
 ## 22. Epidemic Model Restart Point, Choice of the best restart point
 ##
 
-# Settings ---------------------------------------------------------------------
-#
-# Choose the right context: "local" when choosing the restart point from local
-# runs, "hpc" otherwise. For "hpc", this
-#   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
-context <- c("local", "hpc")[1]
-source("R/utils-0_project_settings.R")
-source("R/utils-default_inputs.R") # generate `path_to_restart`
-
 # Libraries --------------------------------------------------------------------
 library("EpiModelHIV")
 library("dplyr")
 library("tidyr")
 
-d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
+# Settings ---------------------------------------------------------------------
+#
+# Choose the right context: "local" when choosing the restart point from local
+# runs, "hpc" otherwise. For "hpc", this
+#   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
+context <- c("local", "hpc")[2]
+source("R/utils-0_project_settings.R")
+source("R/utils-default_inputs.R") # generate `path_to_restart`
+
+d_source <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
 source("R/utils-targets.R")
 
+d <- d_source
 for (nme in names(targets)) {
-  d[[nme]] <- d[[nme]] - targets[[nme]]
+  if (nme %in% names(d) && nme != "disease.mr100") {
+    d[[nme]] <- d[[nme]] - targets[[nme]]
+  }
 }
 
 # Calculate RMSE

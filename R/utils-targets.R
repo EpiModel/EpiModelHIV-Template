@@ -21,7 +21,7 @@ targets <- c(
   i.prev.dx.B                             = 0.330,
   i.prev.dx.H                             = 0.127,
   i.prev.dx.W                             = 0.084,
-  i.prev.dx                               = 0.170, # not used yet but maybe?
+  # i.prev.dx                               = 0.170, # not used yet but maybe?
   cc.prep.ind.B                           = 0.387,
   cc.prep.ind.H                           = 0.379,
   cc.prep.ind.W                           = 0.407,
