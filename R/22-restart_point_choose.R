@@ -21,7 +21,9 @@ d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 source("R/utils-targets.R")
 
 for (nme in names(targets)) {
-  d[[nme]] <- d[[nme]] - targets[[nme]]
+  if (nme %in% names(d)) {
+    d[[nme]] <- d[[nme]] - targets[[nme]]
+  }
 }
 
 # Calculate RMSE
