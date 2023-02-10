@@ -2,6 +2,11 @@
 ## 22. Epidemic Model Restart Point, Choice of the best restart point
 ##
 
+# Libraries --------------------------------------------------------------------
+library("EpiModelHIV")
+library("dplyr")
+library("tidyr")
+
 # Settings ---------------------------------------------------------------------
 #
 # Choose the right context: "local" when choosing the restart point from local
@@ -10,11 +15,6 @@
 context <- c("local", "hpc")[1]
 source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_restart`
-
-# Libraries --------------------------------------------------------------------
-library("EpiModelHIV")
-library("dplyr")
-library("tidyr")
 
 d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
