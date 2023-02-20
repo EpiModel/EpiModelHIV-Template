@@ -90,6 +90,25 @@ wf <- add_workflow_step(
   )
 )
 
+# Calibration Plots ------------------------------------------------------------
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "./R/25-restart_point_calib_plot.R",
+    args = list(
+      context = "hpc",
+      ncores = 10
+    ),
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "4G",
+    "mail-type" = "END"
+  )
+)
+
 # Send the workflow folder to the <HPC> and run it
 #
 # $ scp -r ./workflows/restart_point <HPC>:<project_dir>/workflows/

@@ -5,22 +5,20 @@ library("ggplot2")
 library("future.apply")
 
 # Settings ---------------------------------------------------------------------
-#
-# Choose the right context: "local" when choosing the restart point from local
-# runs, "hpc" otherwise. For "hpc", this
-#   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
 context <- if (!exists("context")) "local" else context
+if (context == "local") {
+  plan(sequential)
+} else if (context == "hpc") {
+  plan(multisession, workers = ncores)
+} else  {
+  stop("The `context` variable must be set to either 'local' or 'hpc'")
+}
+
 source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_restart`
 
 source("./R/utils-targets.R")
 batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calib_dir)
-
-# process
-# - all files?
-# - all at once?
-# - save results as 1 rds per target group
-# - process by batch then merge
 
 process_one_plot_calib_batch <- function(scenario_infos, modulo_steps) {
   d_sim <- readRDS(scenario_infos$file_name) %>%
@@ -83,7 +81,6 @@ make_this_target_plot <- function(plot_dir) {
 
 plot_this_target <- function(d_outcomes, d_tar) {
   theme_set(theme_classic())
-
   p <-ggplot(
     d_outcomes,
     aes(x = time, y = q2, ymin = q1, ymax = q3, col = name, fill = name)
@@ -98,21 +95,21 @@ plot_this_target <- function(d_outcomes, d_tar) {
     xlab("Calibration Weeks") +
     ylab("Value") +
     theme(legend.title = element_blank())
-
   p
 }
 
 plot_dirs <- future_lapply(
   seq_len(nrow(batches_infos)),
-  function(i) process_one_plot_calib_batch(batches_infos[i, ], 4)
+  function(i) process_one_plot_calib_batch(batches_infos[i, ], 4),
+  future.seed = TRUE
 )
 
-plot_dirs <- paste0(plot_dirs[[1]], "-", context)
+plot_dirs <- plot_dirs[[1]]
 
-plots <- future_lapply(plot_dirs[[1]], make_this_target_plot)
-names(plots) <- fs::path_file(plot_dirs[[1]])
+plots <- future_lapply(plot_dirs, make_this_target_plot, future.seed = TRUE)
+names(plots) <- fs::path_file(plot_dirs)
 
-calib_plot_dir <- fs::path("data/intermediate/calibration_plots")
+calib_plot_dir <- paste0("data/intermediate/calibration_plots-", context)
 if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
 
 for (i in seq_along(plots)) {
