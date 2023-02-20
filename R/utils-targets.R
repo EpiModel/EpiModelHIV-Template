@@ -35,6 +35,37 @@ targets <- c(
   disease.mr100                           = 0.273
 )
 
+targets_plot_infos <- list(
+  cc.dx = list(
+    names = paste0("cc.dx.", c("B", "H", "W")),
+    window_size = 13
+  ),
+  cc.linked1m = list(
+    names = paste0("cc.linked1m.", c("B", "H", "W")),
+    window_size = 13
+  ),
+  cc.vsupp = list(
+    names = paste0("cc.vsupp.", c("B", "H", "W")),
+    window_size = 13
+  ),
+  i.prev.dx = list(
+    names = paste0("i.prev.dx.", c("B", "H", "W")),
+    window_size = 13
+  ),
+  ir100.sti = list(
+    names = c("ir100.gc", "ir100.ct"),
+    window_size = 52
+  ),
+  cc.prep.ind = list(
+    names = paste0("cc.prep.ind.", c("B", "H", "W")),
+    window_size = 13
+  ),
+  cc.prep = list(
+    names = paste0("cc.prep.", c("B", "H", "W")),
+    window_size = 13
+  )
+)
+
 # function to calculate the calibration target
 mutate_calibration_targets <- function(d) {
   d %>% mutate(

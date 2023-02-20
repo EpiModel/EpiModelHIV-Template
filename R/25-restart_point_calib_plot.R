@@ -9,7 +9,7 @@ library("future.apply")
 # Choose the right context: "local" when choosing the restart point from local
 # runs, "hpc" otherwise. For "hpc", this
 #   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
-context <- c("local", "hpc")[1]
+context <- if (!exists("context")) "local" else context
 source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_restart`
 
@@ -90,7 +90,11 @@ plot_this_target <- function(d_outcomes, d_tar) {
   ) +
     geom_line() +
     geom_ribbon(alpha = 0.6, linetype = 0) +
-    geom_hline(data = d_tar, aes(yintercept = value, col = name), linetype = 2) +
+    geom_hline(
+      data = d_tar,
+      aes(yintercept = value, col = name),
+      linetype = 2
+    ) +
     xlab("Calibration Weeks") +
     ylab("Value") +
     theme(legend.title = element_blank())
@@ -102,6 +106,8 @@ plot_dirs <- future_lapply(
   seq_len(nrow(batches_infos)),
   function(i) process_one_plot_calib_batch(batches_infos[i, ], 4)
 )
+
+plot_dirs <- paste0(plot_dirs[[1]], "-", context)
 
 plots <- future_lapply(plot_dirs[[1]], make_this_target_plot)
 names(plots) <- fs::path_file(plot_dirs[[1]])
@@ -118,7 +124,3 @@ for (i in seq_along(plots)) {
     unit = "cm", dpi = "retina"
   )
 }
-
-# plot by target group
-
-
