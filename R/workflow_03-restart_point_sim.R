@@ -56,7 +56,7 @@ wf <- add_workflow_step(
     scenarios_list = NULL,
     n_rep = 120,
     n_cores = max_cores,
-    libraries = "EpiModelHIV",
+    libraries = c("EpiModelHIV", "networkLite"),
     output_dir = "data/intermediate/calibration",
     save_pattern = "restart", # more data is required to allow restarting
     max_array_size = 999,
