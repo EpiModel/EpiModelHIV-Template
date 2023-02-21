@@ -15,7 +15,6 @@ if (context == "local") {
 }
 
 source("R/utils-0_project_settings.R")
-source("R/utils-default_inputs.R") # generate `path_to_restart`
 
 source("./R/utils-targets.R")
 batches_infos <- EpiModelHPC::get_scenarios_batches_infos(calib_dir)
@@ -81,7 +80,7 @@ make_this_target_plot <- function(plot_dir) {
 
 plot_this_target <- function(d_outcomes, d_tar) {
   theme_set(theme_classic())
-  p <-ggplot(
+  p <- ggplot(
     d_outcomes,
     aes(x = time, y = q2, ymin = q1, ymax = q3, col = name, fill = name)
   ) +
