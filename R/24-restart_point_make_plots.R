@@ -1,21 +1,9 @@
-library("EpiModelHIV")
-library("dplyr")
-library("tidyr")
 library("ggplot2")
-library("future.apply")
 
 # Settings ---------------------------------------------------------------------
-context <- if (!exists("context")) "local" else context
-if (context == "local") {
-  plan(sequential)
-} else if (context == "hpc") {
-  plan(multisession, workers = ncores)
-} else  {
-  stop("The `context` variable must be set to either 'local' or 'hpc'")
-}
+context <- c("local", "hpc")[1]
 
 source("R/utils-0_project_settings.R")
-source("./R/utils-targets.R")
 
 plots <- readRDS("./data/intermediate/calibration/calibration_plots.rds")
 

@@ -94,7 +94,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "./R/25-restart_point_calib_plot.R",
+    r_script = "./R/23-restart_point_process_plots.R",
     args = list(
       context = "hpc",
       ncores = 10
@@ -119,6 +119,10 @@ wf <- add_workflow_step(
 # Once the worfklow is finished download the data from the HPC
 #
 # $ scp -r <HPC>:<project_dir>/data/intermediate/calibration/assessments_raw.rds ./data/intermediate/calibration/
+# $ scp -r <HPC>:<project_dir>/data/intermediate/calibration/calibration_plots.rds ./data/intermediate/calibration/
 #
 # and analyse them locally using: "./R/22-restart_point_choose.R" and set
+# `context` to "hpc"
+#
+# and save the plots locally using: "./R/24-restart_point_make_plots.R" and set
 # `context` to "hpc"

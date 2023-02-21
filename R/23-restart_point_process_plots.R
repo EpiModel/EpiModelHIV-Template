@@ -108,18 +108,3 @@ plot_dirs <- plot_dirs[[1]]
 plots <- future_lapply(plot_dirs, make_this_target_plot, future.seed = TRUE)
 names(plots) <- fs::path_file(plot_dirs)
 saveRDS(plots, fs::path(calib_dir, "calibration_plots", ext = "rds"))
-
-# calib_plot_dir <- paste0("data/intermediate/calibration_plots-", context)
-# if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
-#
-#
-#
-# for (i in seq_along(plots)) {
-#   plot_file <- fs::path(calib_plot_dir, names(plots)[[i]], ext = "jpg")
-#   ggsave(
-#     plot_file,
-#     plot = plots[[i]],
-#     width = 30, height = 20,
-#     unit = "cm", dpi = "retina"
-#   )
-# }
