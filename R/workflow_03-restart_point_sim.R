@@ -56,7 +56,7 @@ wf <- add_workflow_step(
     scenarios_list = NULL,
     n_rep = 120,
     n_cores = max_cores,
-    libraries = "EpiModelHIV",
+    libraries = c("EpiModelHIV", "networkLite"),
     output_dir = "data/intermediate/calibration",
     save_pattern = "restart", # more data is required to allow restarting
     max_array_size = 999,
@@ -90,6 +90,25 @@ wf <- add_workflow_step(
   )
 )
 
+# Calibration Plots ------------------------------------------------------------
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "./R/23-restart_point_process_plots.R",
+    args = list(
+      context = "hpc",
+      ncores = 10
+    ),
+    setup_lines = hpc_configs$r_loader
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "4G",
+    "mail-type" = "END"
+  )
+)
+
 # Send the workflow folder to the <HPC> and run it
 #
 # $ scp -r ./workflows/restart_point <HPC>:<project_dir>/workflows/
@@ -100,6 +119,10 @@ wf <- add_workflow_step(
 # Once the worfklow is finished download the data from the HPC
 #
 # $ scp -r <HPC>:<project_dir>/data/intermediate/calibration/assessments_raw.rds ./data/intermediate/calibration/
+# $ scp -r <HPC>:<project_dir>/data/intermediate/calibration/calibration_plots.rds ./data/intermediate/calibration/
 #
 # and analyse them locally using: "./R/22-restart_point_choose.R" and set
+# `context` to "hpc"
+#
+# and save the plots locally using: "./R/24-restart_point_make_plots.R" and set
 # `context` to "hpc"

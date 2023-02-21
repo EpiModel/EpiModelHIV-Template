@@ -32,7 +32,7 @@ EpiModelHPC::netsim_scenarios(
   n_rep = 3,
   n_cores = 3,
   output_dir = "data/intermediate/calibration",
-  libraries = NULL,
+  libraries = "networkLite",
   save_pattern = "restart" # more data is required to allow restarting
 )
 
