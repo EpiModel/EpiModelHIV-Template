@@ -11,6 +11,7 @@ calib_plot_dir <- paste0("data/intermediate/calibration_plots-", context)
 if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
 
 for (i in seq_along(plots)) {
+  theme_set(theme_classic())
   plot_file <- fs::path(calib_plot_dir, names(plots)[[i]], ext = "jpg")
   ggsave(
     plot_file,
