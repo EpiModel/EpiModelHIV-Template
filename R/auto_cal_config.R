@@ -122,7 +122,7 @@ calib_object <- list(
     )
   ),
   config = list(
-    simulator = model_fun,
+    simulator = calibration1_fun,
     default_proposal = dplyr::tibble(
       hiv.test.rate_1 = 0.004123238,
       hiv.test.rate_2 = 0.003771226,
