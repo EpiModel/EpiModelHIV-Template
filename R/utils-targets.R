@@ -63,6 +63,10 @@ targets_plot_infos <- list(
   cc.prep = list(
     names = paste0("cc.prep.", c("B", "H", "W")),
     window_size = 13
+  ),
+  disease.mr100 = list(
+    names = "disease.mr100",
+    window_size = 13
   )
 )
 
