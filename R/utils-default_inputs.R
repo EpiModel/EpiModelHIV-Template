@@ -13,13 +13,7 @@ param <- param.net(
   netstats            = netstats,
   epistats            = epistats,
   prep.start          = prep_start,
-  riskh.start         = prep_start - 53,
-  .param.updater.list = list( # High PrEP intake for the first year only
-    list(at = prep_start, param = list(
-        prep.start.prob = function(x) plogis(qlogis(x) + log(2)))),
-    list(at = prep_start + 52, param = list(
-        prep.start.prob = function(x) plogis(qlogis(x) - log(2))))
-  )
+  riskh.start         = prep_start - 53
 )
 
 # Initial conditions (default prevalence initialized in epistats)
