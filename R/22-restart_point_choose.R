@@ -12,7 +12,7 @@ library("tidyr")
 # Choose the right context: "local" when choosing the restart point from local
 # runs, "hpc" otherwise. For "hpc", this
 #   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
-context <- c("local", "hpc")[1]
+context <- if (!exists("context")) c("local", "hpc")[1] else context
 source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_restart`
 

@@ -17,16 +17,16 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "0e67b01433447d1f9dba33d3f8f5398f4345c5f7",
+      "RemoteSha": "9c4adab02fd753f78fc61963201817a292b54a2d",
       "RemoteHost": "api.github.com",
-      "Remotes": "github::EpiModel/ARTnetData@main, github::EpiModel/EpiModelHIV-p@main",
+      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnetData@main,\n    github::EpiModel/EpiModelHIV-p@main",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
         "R",
         "dplyr"
       ],
-      "Hash": "6756fd2e67b913d4fd84d41f6f2d6fe9"
+      "Hash": "6877b1fcdcaa195179b34765f9ef9ec8"
     },
     "ARTnetData": {
       "Package": "ARTnetData",
@@ -34,8 +34,8 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "ARTnetData",
       "RemoteUsername": "EpiModel",
+      "RemoteRepo": "ARTnetData",
       "RemoteRef": "main",
       "RemoteSha": "5220754935e3ddbe3a10ae5c366355d8a987f2fb",
       "Requirements": [
@@ -104,11 +104,11 @@
       "Version": "2.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "main",
       "RemoteSha": "e2ed9e5c451309ef008ac0757099622b6cb851af",
-      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
       "Requirements": [
         "EpiModel",
@@ -129,12 +129,12 @@
       "Version": "2.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodelhpc",
-      "RemoteRef": "autocalib",
-      "RemoteSha": "b52e7b92c87e41a2185a24bda736f90963915b12",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHPC",
+      "RemoteRef": "main",
+      "RemoteSha": "e9a08f1d8ed7c7ecb1abee5eaafca4726e506183",
       "RemoteHost": "api.github.com",
-      "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
+      "Remotes": "github::EpiModel/slurmworkflow",
       "Requirements": [
         "EpiModel",
         "R",
@@ -146,11 +146,10 @@
         "fs",
         "slurmworkflow",
         "stringr",
-        "swfcalib",
         "tergm",
         "tidyr"
       ],
-      "Hash": "10031ca1b59314a5a5e6a8c57b674740"
+      "Hash": "c39e41e14df703cdbaefb04d19083cfd"
     },
     "MASS": {
       "Package": "MASS",
@@ -489,7 +488,7 @@
     },
     "egor": {
       "Package": "egor",
-      "Version": "1.22.12",
+      "Version": "1.23.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -505,7 +504,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "75d25cf3474125adcfa330036a95f25f"
+      "Hash": "c14fb0de8fa6ef20e3443418167ff337"
     },
     "ellipsis": {
       "Package": "ellipsis",
@@ -1478,27 +1477,6 @@
       ],
       "Hash": "d683341b1fa2e8d817efde27d6e6d35b"
     },
-    "swfcalib": {
-      "Package": "swfcalib",
-      "Version": "0.0.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "swfcalib",
-      "RemoteRef": "main",
-      "RemoteSha": "8645ac015ce3c4e68f5e4971e1883cf6be4a9452",
-      "RemoteHost": "api.github.com",
-      "Remotes": "github::EpiModel/slurmworkflow",
-      "Requirements": [
-        "R",
-        "dplyr",
-        "fs",
-        "future",
-        "future.apply",
-        "slurmworkflow"
-      ],
-      "Hash": "8332dc1a484577db63600415c45b841c"
-    },
     "tergm": {
       "Package": "tergm",
       "Version": "4.1.1",
@@ -1643,7 +1621,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.5.2",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1653,7 +1631,7 @@
         "lifecycle",
         "rlang"
       ],
-      "Hash": "e4ffa94ceed5f124d429a5a5f0f5b378"
+      "Hash": "7e877404388794361277be95d8445de8"
     },
     "viridisLite": {
       "Package": "viridisLite",
