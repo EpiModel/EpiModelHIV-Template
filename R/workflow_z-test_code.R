@@ -60,7 +60,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
-    "cpus-per-task" = max_cores,
+    "cpus-per-task" = 10,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
     "mail-type" = "FAIL"
@@ -115,7 +115,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
-    "cpus-per-task" = max_cores,
+    "cpus-per-task" = 15,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G"
   )
@@ -132,7 +132,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
-    "cpus-per-task" = max_cores,
+    "cpus-per-task" = 15,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
     "mail-type" = "END"
