@@ -14,7 +14,7 @@ library("tidyr")
 #   assumes that you downloaded the "assessments_raw.rds" files from the HPC.
 context <- if (!exists("context")) c("local", "hpc")[1] else context
 source("R/utils-0_project_settings.R")
-source("R/utils-default_inputs.R") # generate `path_to_restart`
+source("R/utils-default_inputs.R", local = TRUE) # generate `path_to_restart`
 
 d <- readRDS("data/intermediate/calibration/assessments_raw.rds")
 
