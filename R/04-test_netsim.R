@@ -6,21 +6,13 @@
 library("EpiModelHIV")
 
 # Settings ---------------------------------------------------------------------
+context <- "local"
 source("R/utils-0_project_settings.R")
 
-# Necessary files
-epistats <- readRDS("data/intermediate/estimates/epistats-local.rds")
-netstats <- readRDS("data/intermediate/estimates/netstats-local.rds")
-est      <- readRDS("data/intermediate/estimates/netest-local.rds")
-
-prep_start <- 52 * 2
-param <- param.net(
-  data.frame.params = readr::read_csv("data/input/params.csv"),
-  netstats          = netstats,
-  epistats          = epistats,
-  prep.start        = prep_start,
-  riskh.start       = prep_start - 53
-)
+# Necessary files --------------------------------------------------------------
+prep_start <- 2 * year_steps
+source("R/utils-default_inputs.R")
+est <- readRDS(path_to_est)
 
 # See full listing of parameters
 # See ?param_msm for definitions

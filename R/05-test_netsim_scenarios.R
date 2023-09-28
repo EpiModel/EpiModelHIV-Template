@@ -17,31 +17,17 @@ source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
 # Controls
 source("R/utils-targets.R")
 # `nsims` and `ncores` will be overridden later
-control <- control_msm(nsteps = 52 * 1)
+control <- control_msm(
+  nsteps = year_steps * 1,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  .tracker.list       = calibration_trackers,
+  verbose             = FALSE
+)
 
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 print(control)
-
-# Each scenario will be run exactly 3 times using up to 2 CPU cores.
-# The results are save in the "data/intermediate/no_scenario_test" folder using
-# the following pattern: "sim__<scenario name>__<batch number>.rds".
-# See ?EpiModelHPC::netsim_scenarios for details
-#
-# for now, no scenarios are used (`scenarios.list = NULL`), the files will be
-# named "sim__empty_scenario__1.rds" and "sim__empty_scenario__2.rds"
-EpiModelHPC::netsim_scenarios(
-  path_to_est, param, init, control,
-  scenarios_list = NULL,
-  n_rep = 3,
-  n_cores = 2,
-  output_dir = "data/intermediate/no_scenario_test",
-  libraries = "EpiModelHIV",
-  save_pattern = "simple"
-)
-
-list.files("data/intermediate/no_scenario_test")
-unlink("data/intermediate/no_scenario_test")
 
 # Using scenarios --------------------------------------------------------------
 
@@ -58,16 +44,26 @@ glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 # Here 2 scenarios will be used "scenario_1" and "scenario_2".
-# This will generate 4 files (2 per scenarios)
+# This will generate 6 files (3 per scenarios)
 EpiModelHPC::netsim_scenarios(
-  path_to_est, param, init, control, scenarios_list,
+  path_to_est, param, init, control,
+  scenarios_list = scenarios_list, # set to NULL to run with default params
   n_rep = 3,
   n_cores = 2,
   output_dir = "data/intermediate/scenario_test",
   libraries = "EpiModelHIV",
   save_pattern = "simple"
 )
-list.files("data/intermediate/scenario_test")
+fs::dir_ls("data/intermediate/scenario_test")
+
+EpiModelHPC::merge_netsim_scenarios(
+  input_dir = "data/intermediate/scenario_test",
+  output_dir = "data/intermediate/scenario_test/merged_sims"
+)
+EpiModelHPC::merge_netsim_scenarios_tibble(
+  input_dir = "data/intermediate/scenario_test",
+  output_dir = "data/intermediate/scenario_test/merged_tibbles"
+)
 
 # Load one of the simulation files
 sim <- readRDS("data/intermediate/scenario_test/sim__scenario_1__1.rds")
@@ -86,4 +82,4 @@ head(df)
 glimpse(df)
 
 # Clean folder
-unlink("data/intermediate/scenario_test")
+fs::dir_delete("data/intermediate/scenario_test")
