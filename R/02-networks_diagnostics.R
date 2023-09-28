@@ -1,6 +1,6 @@
 #
 ## 02. Network Model Diagnostics
-##
+#
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
@@ -48,7 +48,7 @@ dx_main <- netdx(
 dx_main_static <- netdx(
   fit_main,
   dynamic = FALSE,
-  nsims = 10000,
+  nsims = 1e4,
   nwstats.formula = model_main_dx,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
@@ -84,7 +84,7 @@ dx_casl <- netdx(
 dx_casl_static <- netdx(
   fit_casl,
   dynamic = FALSE,
-  nsims = 10000,
+  nsims = 1e4,
   nwstats.formula = model_casl_dx,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
@@ -108,7 +108,7 @@ model_inst_dx <- ~edges +
 
 dx_inst <- netdx(
   fit_inst,
-  nsims = 10000,
+  nsims = 1e4,
   dynamic = FALSE,
   nwstats.formula = model_inst_dx,
   set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
