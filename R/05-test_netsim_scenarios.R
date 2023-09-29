@@ -13,6 +13,7 @@ source("R/utils-0_project_settings.R")
 #  -----------------------------------------------------------------------------
 # Necessary files
 source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
+sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Controls
 source("R/utils-targets.R")
@@ -50,23 +51,26 @@ EpiModelHPC::netsim_scenarios(
   scenarios_list = scenarios_list, # set to NULL to run with default params
   n_rep = 3,
   n_cores = 2,
-  output_dir = "data/intermediate/scenario_test",
+  output_dir = sc_test_dir,
   libraries = "EpiModelHIV",
   save_pattern = "simple"
 )
-fs::dir_ls("data/intermediate/scenario_test")
+fs::dir_ls(sc_test_dir)
 
 EpiModelHPC::merge_netsim_scenarios(
-  input_dir = "data/intermediate/scenario_test",
-  output_dir = "data/intermediate/scenario_test/merged_sims"
-)
-EpiModelHPC::merge_netsim_scenarios_tibble(
-  input_dir = "data/intermediate/scenario_test",
-  output_dir = "data/intermediate/scenario_test/merged_tibbles"
+  sim_dir = sc_test_dir,
+  output_dir = fs::path(sc_test_dir, "merged_sims"),
+  keep.other = FALSE
 )
 
-# Load one of the simulation files
-sim <- readRDS("data/intermediate/scenario_test/sim__scenario_1__1.rds")
+EpiModelHPC::merge_netsim_scenarios_tibble(
+  sim_dir = sc_test_dir,
+  output_dir = fs::path(sc_test_dir, "merged_tibbles"),
+  steps_to_keep = year_steps * 1
+)
+
+# Load one of the simulation scenarios
+sim <- readRDS(fs::path(sc_test_dir, "merged_sims", "merged__scenario_1.rds"))
 names(sim)
 
 # Examine the model object output
@@ -77,9 +81,10 @@ plot(sim, y = "i.num")
 plot(sim, y = "ir100")
 
 # Convert to data frame
-df <- as_tibble(sim)
-head(df)
-glimpse(df)
+d_sim <- readRDS(fs::path(sc_test_dir, "merged_tibbles", "df__scenario_1.rds"))
+
+head(d_sim)
+glimpse(d_sim)
 
 # Clean folder
-fs::dir_delete("data/intermediate/scenario_test")
+fs::dir_delete(sc_test_dir)

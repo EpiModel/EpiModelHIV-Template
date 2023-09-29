@@ -213,9 +213,9 @@ strip_glm <- function(cm) {
   return(cm)
 }
 
-epistats$acts.mod <- strip_glm(param$epistats$acts.mod)
-epistats$cond.mc.mod <- strip_glm(param$epistats$cond.mc.mod)
-epistats$cond.oo.mod <- strip_glm(param$epistats$cond.oo.mod)
+epistats$acts.mod <- strip_glm(epistats$acts.mod)
+epistats$cond.mc.mod <- strip_glm(epistats$cond.mc.mod)
+epistats$cond.oo.mod <- strip_glm(epistats$cond.oo.mod)
 
 netstats$main <- NULL
 netstats$casl <- NULL
