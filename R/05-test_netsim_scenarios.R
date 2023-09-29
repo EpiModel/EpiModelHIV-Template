@@ -16,13 +16,12 @@ source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
 sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Controls
-source("R/utils-targets.R")
 # `nsims` and `ncores` will be overridden later
 control <- control_msm(
   nsteps = year_steps * 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
-  .tracker.list       = calibration_trackers,
+  .tracker.list       = EpiModelHIV::make_calibration_trackers(),
   verbose             = FALSE
 )
 
@@ -85,6 +84,10 @@ d_sim <- readRDS(fs::path(sc_test_dir, "merged_tibbles", "df__scenario_1.rds"))
 
 head(d_sim)
 glimpse(d_sim)
+
+# Calibration tools are found within EpiModelHIV
+EpiModelHIV::mutate_calibration_targets(d_sim)
+EpiModelHIV::mutate_calibration_distances(d_sim)
 
 # Clean folder
 fs::dir_delete(sc_test_dir)

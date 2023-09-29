@@ -20,7 +20,7 @@ control <- control_msm(
   ncores              = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
-  .tracker.list       = calibration_trackers,
+  .tracker.list       = EpiModelHIV::make_calibration_trackers(),
   verbose             = FALSE
 )
 

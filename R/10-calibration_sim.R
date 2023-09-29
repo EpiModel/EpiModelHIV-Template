@@ -3,6 +3,7 @@
 ##
 
 # Libraries --------------------------------------------------------------------
+library("dplyr")
 library("EpiModelHIV")
 
 # Settings ---------------------------------------------------------------------
@@ -15,14 +16,13 @@ source("R/utils-0_project_settings.R")
 source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
 
 # Controls
-source("R/utils-targets.R")
 control <- control_msm(
   nsteps              = calibration_end,
   nsims               = 1,
   ncores              = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
-  .tracker.list       = calibration_trackers,
+  .tracker.list       = EpiModelHIV::make_calibration_trackers(),
   verbose             = FALSE
 )
 
