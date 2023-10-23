@@ -198,28 +198,8 @@ out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
 saveRDS(out, paste0(est_dir, "netest-", context, ".rds"))
 
 # reduce the size of netstats and epistats before saving them
-strip_glm <- function(cm) {
-  root_elts <- c("y", "model", "residuals", "fitted.values", "effects",
-                 "linear.predictors", "weights", "prior.weights", "data")
-  for (elt in root_elts) cm[[elt]] <- c()
-
-  family_elts <- c("variance", "dev.resids", "aic", "validmu", "simulate")
-  for (elt in family_elts) cm$family[[elt]] <- c()
-
-  cm$qr$qr <- c()
-  attr(cm$terms, ".Environment") <- c()
-  attr(cm$formula, ".Environment") <- c()
-
-  return(cm)
-}
-
-epistats$acts.mod <- strip_glm(epistats$acts.mod)
-epistats$cond.mc.mod <- strip_glm(epistats$cond.mc.mod)
-epistats$cond.oo.mod <- strip_glm(epistats$cond.oo.mod)
-
-netstats$main <- NULL
-netstats$casl <- NULL
-netstats$inst <- NULL
-
+epistats <- ARTnet::trim_epistats(epistats)
 saveRDS(epistats, paste0(est_dir, "epistats-", context, ".rds"))
+
+netstats <- ARTnet::trim_netstats(netstats)
 saveRDS(netstats, paste0(est_dir, "netstats-", context, ".rds"))
