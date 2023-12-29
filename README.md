@@ -47,11 +47,20 @@ then restart R (ctrl+shift+F10)
 
 then the rest
 
-
+Edit the `R/shared_variables.R` file:
+  - `mail_user`
+  - `EMHIVp_dir`
 
 An applied EpiModelHIV project is composed of multiple sequential steps located within the `R/` directory.
 
 Each step contains several `R` scripts, and a `README.md` file explaining how to adapt the code to fit the needs of the project.
+
+## General rules
+
+- Only run the numbered scripts
+- Always restart R before running them
+- the `source`d scripts are utilities
+- Follow the guidance in each step README
 
 
 ## ARTnet/ARTnetData Dependency

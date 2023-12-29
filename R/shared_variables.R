@@ -2,9 +2,12 @@
 ## 00. Shared variables setup
 ##
 
+# EpiModelHIV-p local directory
+EMHIVp_dir <- "~/Desktop/GitHub/EpiModelHIV-p"
+
 # Information for the HPC workflows
-current_git_branch <- "main"
 mail_user <- "USER@emory.edu" # or any other mail provider
+current_git_branch <- "main"
 
 # Relevant time steps for the simulation
 time_unit <- 7                # number of days in a time step
@@ -21,3 +24,4 @@ est_dir <- "data/intermediate/estimates/"
 diag_dir <- "data/intermediate/diagnostics/"
 calib_dir <- "data/intermediate/calibration/"
 scenarios_dir <- "data/intermediate/scenarios/"
+

@@ -2,16 +2,16 @@
 ## parameterization and all parameters defined in `param_msm`, with example of
 ## writing/debugging modules
 
+# Settings ---------------------------------------------------------------------
+source("R/shared_variables.R")
+source("R/B-netsim_local/z-context.R")
+
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 
-# Settings ---------------------------------------------------------------------
-context <- "local"
-source("R/utils-0_project_settings.R")
-
 # Necessary files --------------------------------------------------------------
+source("R/netsim_defaults.R")
 prep_start <- 2 * year_steps
-source("R/utils-default_inputs.R")
 est <- readRDS(path_to_est)
 
 # See full listing of parameters
@@ -70,7 +70,7 @@ plot(sim, y = "ir100", main = "Incidence")
 
 ## Example debugging of HIV transmission module in debug mode
 # Start by sourcing local version of EpiModelHIV
-pkgload::load_all("~/GitHub/EpiModelHIV-p")
+pkgload::load_all(EMHIVp_dir)
 
 # Rerun control settings (to source in local set of module functions)
 # Note: debugging needs to run with 1 simulation on 1 core
