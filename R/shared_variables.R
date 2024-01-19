@@ -3,11 +3,7 @@
 ##
 
 # EpiModelHIV-p local directory
-EMHIVp_dir <- "~/Desktop/GitHub/EpiModelHIV-p"
-
-# Information for the HPC workflows
-mail_user <- "USER@emory.edu" # or any other mail provider
-current_git_branch <- "main"
+EMHIVp_dir <- "../EpiModelHIV-p.git/template"
 
 # Relevant time steps for the simulation
 time_unit <- 7                # number of days in a time step

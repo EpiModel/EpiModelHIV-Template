@@ -1,10 +1,11 @@
 # Initialize renv but do not install anything yet
 renv::init(bare = TRUE)
 
+# restart R
 
 # This code installs the packages only available on GitHub (not CRAN ones)
 renv::install(c(
-  "EpiModel/EpiModelHIV-p@v3.0.x",
+  "EpiModel/EpiModelHIV-p@applied_proj",
   "EpiModel/EpiModelHPC"
 ))
 

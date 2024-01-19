@@ -5,8 +5,8 @@
 # Settings ---------------------------------------------------------------------
 #
 source("R/shared_variables.R")
-# hpc_context <- TRUE
-source("R/A-networks/z-context.R")
+hpc_context <- FALSE
+source("R/A-networks_local/z-context.R")
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModel")
@@ -14,7 +14,7 @@ library("EpiModel")
 # Interactive Diagnostics Analysis ---------------------------------------------
 
 # Main
-dx <- readRDS(paste0(diag_dir, "netdx-main-", context, ".rds"))
+dx <- readRDS(fs::path(diag_dir, paste0("netdx-main-", context, ".rds")))
 print(dx$dynamic, digits = 2)
 plot(dx$dynamic)
 
@@ -22,7 +22,7 @@ print(dx$static, digits = 2)
 plot(dx$static)
 
 # Casual
-dx <- readRDS(paste0(diag_dir, "netdx-casl-", context, ".rds"))
+dx <- readRDS(fs::path(diag_dir, paste0("netdx-casl-", context, ".rds")))
 print(dx$dynamic, digits = 2)
 plot(dx$dynamic)
 
@@ -30,6 +30,6 @@ print(dx$static, digits = 2)
 plot(dx$static)
 
 # Inst
-dx <- readRDS(paste0(diag_dir, "netdx-ooff-", context, ".rds"))
+dx <- readRDS(fs::path(diag_dir, paste0("netdx-ooff-", context, ".rds")))
 print(dx$static, digits = 2)
 plot(dx$static)

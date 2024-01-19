@@ -29,5 +29,5 @@ dx_main_static <- EpiModel::netdx(
 )
 
 dx <- list(dynamic = dx_main, static = dx_main_static)
-saveRDS(dx, paste0(diag_dir, "netdx-main-", context, ".rds"))
+saveRDS(dx, fs::path(diag_dir, paste0("netdx-main-", context, ".rds")))
 rm(dx, dx_main, dx_main_static)

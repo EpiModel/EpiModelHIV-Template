@@ -4,6 +4,18 @@ This template repository contains a working [EpiModelHIV-p](https://github.com/E
 
 Follow the instructions on this README to setup your own project.
 
+
+*Assume the user knows how to create repo etc or send to a wiki page*
+
+## Setup
+
+before going to a step
+
+1. edit `R/shared_variables.R`
+  *sep what is to be edited from the rest*
+2. go through `R/00-setup.R`
+3. go to step `A-networks_local/README.md`
+
 ## Pre-requisite
 
 This document assumes that you are working with [RStudio](https://posit.co/products/open-source/rstudio/) and the [GitHub deskto app](https://desktop.github.com/).
@@ -64,6 +76,7 @@ Each step contains several `R` scripts, and a `README.md` file explaining how to
 
 
 ## ARTnet/ARTnetData Dependency
+
 EpiModelHIV-p requires installation of the `ARTnet` package, which itself depends on the `ARTnetData` package that contains the restricted dataset for the ARTnet study. Before getting started with the package workflow below, make sure you have requested access to the `ARTnetData` package and can successfully install and load the `ARTnet` package following the instructions on the [ARTnet package repository](https://github.com/EpiModel/ARTnet#readme).
 
 ## Setup

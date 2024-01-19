@@ -2,10 +2,10 @@ if (!context %in% c("local", "hpc")) {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }
 
-epistats <- readRDS(paste0(est_dir, "epistats-", context, ".rds"))
-netstats <- readRDS(paste0(est_dir, "netstats-", context, ".rds"))
-path_to_est <- paste0(est_dir, "netest-", context, ".rds")
-path_to_restart <- paste0(est_dir, "restart-", context, ".rds")
+epistats <- readRDS(fs::path(est_dir, paste0("epistats-", context, ".rds")))
+netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
+path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))
+path_to_restart <- fs::path(est_dir, paste0("restart-", context, ".rds"))
 
 # `netsim` Parameters
 param <- param.net(

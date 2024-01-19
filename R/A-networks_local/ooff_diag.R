@@ -17,4 +17,4 @@ dx_ooff <- EpiModel::netdx(
 )
 
 dx <- list(static = dx_ooff)
-saveRDS(dx, paste0(diag_dir, "netdx-ooff-", context, ".rds"))
+saveRDS(dx, fs::path(diag_dir, paste0("netdx-ooff-", context, ".rds")))

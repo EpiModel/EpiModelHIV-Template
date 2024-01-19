@@ -2,23 +2,26 @@
 ## parameterization and parameters defined in spreadsheet, with example of
 ## running model scenarios defined with data-frame approach
 
+# Settings ---------------------------------------------------------------------
+source("R/shared_variables.R")
+source("R/B-netsim_local/z-context.R")
+
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 library("dplyr")
 
-# Settings ---------------------------------------------------------------------
-context <- "local"
-source("R/utils-0_project_settings.R")
+# Necessary files --------------------------------------------------------------
+source("R/netsim_defaults.R")
 
-#  -----------------------------------------------------------------------------
-# Necessary files
-source("R/utils-default_inputs.R") # generate `path_to_est`, `param` and `init`
+# set prep start to a low value to test the full model in a few steps
+prep_start <- 2 * year_steps
+
 sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Controls
 # `nsims` and `ncores` will be overridden later
 control <- control_msm(
-  nsteps = year_steps * 1,
+  nsteps = prep_start + year_steps * 3,
   cumulative.edgelist = TRUE,
   truncate.el.cuml    = 0,
   .tracker.list       = EpiModelHIV::make_calibration_trackers(),

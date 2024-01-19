@@ -11,6 +11,8 @@ library("EpiModelHIV")
 
 # Necessary files --------------------------------------------------------------
 source("R/netsim_defaults.R")
+
+# set prep start to a low value to test the full model in a few steps
 prep_start <- 2 * year_steps
 est <- readRDS(path_to_est)
 
@@ -30,7 +32,7 @@ init <- init_msm(
 
 # Control settings
 control <- control_msm(
-  nsteps = 250,
+  nsteps = prep_start + year_steps * 3,
   nsims = 1,
   ncores = 1
 )
@@ -58,7 +60,7 @@ tail(df)
 ## Run 2 simulations on 2 cores
 ## Note: this will not run generate a progress tracker in the console
 control <- control_msm(
-  nsteps = 250,
+  nsteps = prep_start + year_steps * 3,
   nsims = 2,
   ncores = 2
 )

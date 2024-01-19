@@ -4,15 +4,15 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R")
-source("R/A-networks/z-context.R")
+source("R/A-networks_local/z-context.R")
 
-est <- readRDS(paste0(est_dir, "netest-", context, ".rds"))
+est <- readRDS(fs::path(est_dir, paste0("netest-", context, ".rds")))
 
 # Main -------------------------------------------------------------------------
-source("R/A-networks/main_diag.R")
+source("R/A-networks_local/main_diag.R")
 
 # Casual -----------------------------------------------------------------------
-source("R/A-networks/casl_diag.R")
+source("R/A-networks_local/casl_diag.R")
 
 # One-Off ----------------------------------------------------------------------
-source("R/A-networks/ooff_diag.R")
+source("R/A-networks_local/ooff_diag.R")
