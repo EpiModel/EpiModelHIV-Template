@@ -1,4 +1,5 @@
 if (exists("hpc_context") && hpc_context) {
+  print("i am hpc")
   context <- "hpc"
   networks_size   <- 100 * 1e3
   est_cores <- 10

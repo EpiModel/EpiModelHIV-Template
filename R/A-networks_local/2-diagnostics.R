@@ -4,7 +4,7 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R")
-source("R/A-networks_local/z-context.R")
+source("R/A-networks_local/z-context.R", local = TRUE)
 
 est <- readRDS(fs::path(est_dir, paste0("netest-", context, ".rds")))
 
