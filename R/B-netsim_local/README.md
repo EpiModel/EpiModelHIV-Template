@@ -1,5 +1,6 @@
 # Netsim local
 
+
 goal:
 - understand netsim
 - understand the scenario system / fns

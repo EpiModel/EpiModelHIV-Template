@@ -14,6 +14,7 @@ before going to a step
 1. edit `R/shared_variables.R`
   *sep what is to be edited from the rest*
 2. go through `R/00-setup.R`
+3. edit `R/hpc_config.R`
 3. go to step `A-networks_local/README.md`
 
 ## Pre-requisite
