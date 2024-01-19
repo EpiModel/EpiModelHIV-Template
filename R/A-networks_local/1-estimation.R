@@ -4,7 +4,9 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R")
-source("R/A-networks_local/z-context.R", local = TRUE)
+print("this is the hpc context:")
+print(hpc_context)
+source("R/A-networks_local/z-context.R")
 source("R/A-networks_local/initialize.R")
 
 # 1. Main Model ----------------------------------------------------------------
