@@ -49,7 +49,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios_list,
     output_dir = "./data/intermediate/scenarios",
     libraries = "EpiModelHIV",
-    save_pattern = "full",
+    save_pattern = "all",
     n_rep = 32,
     n_cores = max_cores,
     max_array_size = 500,

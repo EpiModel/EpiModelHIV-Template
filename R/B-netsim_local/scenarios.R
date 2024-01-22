@@ -46,7 +46,7 @@ EpiModelHPC::netsim_scenarios(
   n_rep = 3,
   n_cores = 2,
   output_dir = sc_test_dir,
-  save_pattern = "full"
+  save_pattern = "all"
 )
 fs::dir_ls(sc_test_dir)
 
