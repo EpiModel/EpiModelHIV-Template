@@ -25,3 +25,25 @@ init <- init_msm(
   prev.rgc = 0.1,
   prev.uct = 0.1
 )
+
+# defaul control object - pre-calibration
+control <- control_msm(
+  nsteps              = calibration_end,
+  nsims               = 1,
+  ncores              = 1,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  verbose             = FALSE
+)
+
+# defaul control object - post-calibration
+control_restart <- control_msm(
+  start               = restart_time,
+  nsteps              = intervention_end,
+  nsims               = 1,
+  ncores              = 1,
+  initialize.FUN      = reinit_msm,
+  cumulative.edgelist = TRUE,
+  truncate.el.cuml    = 0,
+  verbose             = FALSE
+)

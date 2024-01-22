@@ -3,33 +3,25 @@
 ## running model scenarios defined with data-frame approach
 
 # Settings ---------------------------------------------------------------------
-source("R/shared_variables.R")
-source("R/B-netsim_local/z-context.R")
+source("R/shared_variables.R", local = TRUE)
+source("R/B-netsim_local/z-context.R", local = TRUE)
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 library("dplyr")
 
 # Necessary files --------------------------------------------------------------
-source("R/netsim_defaults.R")
-
-# set prep start to a low value to test the full model in a few steps
 prep_start <- 2 * year_steps
+source("R/netsim_settings.R", local = TRUE)
+
+# Control settings
+control$nsteps <- prep_start + year_steps * 3
 
 sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Controls
 # `nsims` and `ncores` will be overridden later
-control <- control_msm(
-  nsteps = prep_start + year_steps * 3,
-  cumulative.edgelist = TRUE,
-  truncate.el.cuml    = 0,
-  .tracker.list       = EpiModelHIV::make_calibration_trackers(),
-  verbose             = FALSE
-)
 
-# See listing of modules and other control settings
-# Module function defaults defined in ?control_msm
 print(control)
 
 # Using scenarios --------------------------------------------------------------
@@ -54,43 +46,22 @@ EpiModelHPC::netsim_scenarios(
   n_rep = 3,
   n_cores = 2,
   output_dir = sc_test_dir,
-  libraries = "EpiModelHIV",
-  save_pattern = "simple"
+  save_pattern = "full"
 )
 fs::dir_ls(sc_test_dir)
 
-EpiModelHPC::merge_netsim_scenarios(
-  sim_dir = sc_test_dir,
-  output_dir = fs::path(sc_test_dir, "merged_sims"),
-  keep.other = FALSE
-)
-
+# merge the simulations. Keeping one `tibble` per scenario
 EpiModelHPC::merge_netsim_scenarios_tibble(
   sim_dir = sc_test_dir,
   output_dir = fs::path(sc_test_dir, "merged_tibbles"),
   steps_to_keep = year_steps * 1
 )
 
-# Load one of the simulation scenarios
-sim <- readRDS(fs::path(sc_test_dir, "merged_sims", "merged__scenario_1.rds"))
-names(sim)
-
-# Examine the model object output
-print(sim)
-
-# Plot outcomes
-plot(sim, y = "i.num")
-plot(sim, y = "ir100")
-
 # Convert to data frame
 d_sim <- readRDS(fs::path(sc_test_dir, "merged_tibbles", "df__scenario_1.rds"))
 
-head(d_sim)
 glimpse(d_sim)
-
-# Calibration tools are found within EpiModelHIV
-EpiModelHIV::mutate_calibration_targets(d_sim)
-EpiModelHIV::mutate_calibration_distances(d_sim)
+head(d_sim)
 
 # Clean folder
 fs::dir_delete(sc_test_dir)
