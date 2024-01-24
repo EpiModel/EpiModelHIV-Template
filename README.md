@@ -1,5 +1,24 @@
 # EpiModeHIV-Template
 
+## WIP - TODO
+
+- at the end: remake a `run all` workflow
+- per step README
+  - goal
+  - desc of each script
+  - what to modify
+
+use `rs()` on top of files that needs restart and make the funciton  work even without rstudio
+
+## High level rules
+
+- file names:
+  - utils ?
+  - numbered ?
+-
+
+## Intro
+
 This template repository contains a working [EpiModelHIV-p](https://github.com/EpiModel/EpiModelHIV-p) project to be used as a starting point for new applied research.
 
 Follow the instructions on this README to setup your own project.

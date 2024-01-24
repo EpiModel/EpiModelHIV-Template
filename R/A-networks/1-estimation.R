@@ -4,17 +4,17 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/A-networks_local/z-context.R", local = TRUE)
-source("R/A-networks_local/initialize.R", local = TRUE)
+source("R/A-networks/z-context.R", local = TRUE)
+source("R/A-networks/initialize.R", local = TRUE)
 
 # 1. Main Model ----------------------------------------------------------------
-source("R/A-networks_local/main_model.R", local = TRUE)
+source("R/A-networks/model_main.R", local = TRUE)
 
 # 2. Casual Model --------------------------------------------------------------
-source("R/A-networks_local/casl_model.R", local = TRUE)
+source("R/A-networks/model_casl.R", local = TRUE)
 
 # 3. One-Off Model -------------------------------------------------------------
-source("R/A-networks_local/ooff_model.R", local = TRUE)
+source("R/A-networks/model_ooff.R", local = TRUE)
 
 # 4. Save Data -----------------------------------------------------------------
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_ooff = fit_ooff)

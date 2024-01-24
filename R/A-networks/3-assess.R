@@ -5,8 +5,8 @@
 # Settings ---------------------------------------------------------------------
 #
 source("R/shared_variables.R")
-hpc_context <- FALSE
-source("R/A-networks_local/z-context.R")
+hpc_context <- FALSE # set to TRUE to evaluate HPC estimates
+source("R/A-networks/z-context.R")
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModel")

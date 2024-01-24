@@ -1,13 +1,9 @@
-## Example interactive epidemic simulation run script with basic
-## parameterization and all parameters defined in `param_msm`, with example of
-## writing/debugging modules
-
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_local/z-context.R", local = TRUE)
+source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # set prep start to a low value to test the full model in a few steps
 prep_start <- 2 * year_steps
@@ -22,11 +18,10 @@ print(init)
 
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
+control <- control_msm(
+  nsteps = prep_start + year_steps * 3
+)
 print(control)
-
-# Reduce the length of the simulation and make it verbose
-control$nsteps <- prep_start + year_steps * 3
-control$verbose <- TRUE
 
 # Read in the previously estimated networks and inspect their content
 est <- readRDS(path_to_est)
@@ -53,11 +48,21 @@ tail(df)
 
 ## Run 2 simulations on 2 cores
 ## Note: this will not run generate a progress tracker in the console
-control$nsims <- 2
-control$ncores <- 2
+control <- control_msm(
+  nsteps = prep_start + year_steps * 3,
+  nsims = 2, ncores = 2
+)
+print(control)
 
 sim <- netsim(est, param, init, control)
 
-par(mfrow = c(2, 1))
-plot(sim, y = "i.num", main = "Prevalence")
-plot(sim, y = "ir100", main = "Incidence")
+# Simulation exploration (tidyverse)
+library("dplyr")
+library("ggplot2")
+theme_set(theme_light())
+
+d_sim <- as_tibble(sim)
+glimpse(d_sim)
+
+ggplot(d_sim, aes(x = time, y = prepCurr, col = as.factor(sim))) +
+  geom_line()

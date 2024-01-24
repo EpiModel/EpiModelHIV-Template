@@ -19,7 +19,7 @@ if (exists("hpc_context") && hpc_context) {
 
 } else {
   context <- "local"
-  networks_size   <- 1 * 1e3
+  networks_size   <- 10 * 1e3
   control_ergm <- ergm::control.ergm(
     main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
