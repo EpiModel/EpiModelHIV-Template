@@ -10,8 +10,7 @@ library("dplyr")
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-hpc_context <- TRUE
-source("R/B-netsim_local/z-context.R", local = TRUE)
+context <- "hpc"
 
 source("./R/hpc_configs.R")
 max_cores <- 8
@@ -21,10 +20,12 @@ prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
-control$nsteps <- prep_start + year_steps * 3
+control <- control_msm(
+  nsteps = prep_start + year_steps * 3
+)
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("netsim", override = TRUE)
+wf <- make_em_workflow("scenarios", override = TRUE)
 
 
 # Using scenarios --------------------------------------------------------------
@@ -47,8 +48,8 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
     scenarios_list = scenarios_list,
-    output_dir = "./data/intermediate/scenarios",
-    libraries = "EpiModelHIV",
+    output_dir = scenarios_dir,
+    # libraries = "EpiModelHIV",
     save_pattern = "all",
     n_rep = 32,
     n_cores = max_cores,
@@ -67,9 +68,9 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = "data/intermediate/scenarios",
-      output_dir = "data/intermediate/scenarios/merged_tibbles",
-      steps_to_keep = year_steps * 5, # keep the last 12 years
+      sim_dir = scenarios_dir,
+      output_dir = fs::path(scenarios_dir, "merged_tibbles"),
+      steps_to_keep = year_steps * 3, # keep the last 3 years
       cols = dplyr::everything(),
       n_cores = max_cores,
       setup_lines = hpc_node_setup

@@ -4,7 +4,7 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_local/z-context.R", local = TRUE)
+context <- "local"
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")
@@ -15,9 +15,10 @@ prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
-control$nsteps <- prep_start + year_steps * 3
+control <- control_msm(
+  nsteps = prep_start + year_steps * 3
+)
 
-sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Controls
 # `nsims` and `ncores` will be overridden later
@@ -37,6 +38,9 @@ scenarios_df <- tibble(
 
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
+
+# Where to save the output of these tests
+sc_test_dir <- "data/intermediate/scenarios_test"
 
 # Here 2 scenarios will be used "scenario_1" and "scenario_2".
 # This will generate 6 files (3 per scenarios)
@@ -63,5 +67,5 @@ d_sim <- readRDS(fs::path(sc_test_dir, "merged_tibbles", "df__scenario_1.rds"))
 glimpse(d_sim)
 head(d_sim)
 
-# Clean folder
-fs::dir_delete(sc_test_dir)
+## Clean folder
+# fs::dir_delete(sc_test_dir)

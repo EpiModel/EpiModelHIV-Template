@@ -3,7 +3,7 @@ library("EpiModelHIV")
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R", local = TRUE)
+context <- "local"
 
 # set prep start to a low value to test the full model in a few steps
 prep_start <- 2 * year_steps

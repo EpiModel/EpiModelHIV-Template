@@ -1,10 +1,4 @@
-# Calibration
-
-In this step we calibrate the model. It is the most complex step. For starters
-simply run the *0-restart_point_single.R* script and move on to the next step.
-
-If you intend to calibrate the model yourself or want to understand the
-calibration process more, read on.
+# Netsim Scenarios
 
 ## Goal
 

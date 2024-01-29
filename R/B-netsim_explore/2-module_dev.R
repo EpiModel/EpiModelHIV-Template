@@ -4,7 +4,7 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_local/z-context.R", local = TRUE)
+context <- "local"
 
 # Libraries  -------------------------------------------------------------------
 library("dplyr")
@@ -20,8 +20,9 @@ source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 
 # Control settings
-control$nsteps <- prep_start + year_steps * 3
-control$verbose <- TRUE
+control <- control_msm(
+  nsteps = prep_start + year_steps * 3
+)
 
 # Epidemic simulation
 sim <- netsim(est, param, init, control)
@@ -35,8 +36,7 @@ ggplot(d_sim, aes(x = time, y = prepCurr)) +
 
 # Run in debug mode, more details and examples here:
 # https://github.com/EpiModel/EpiModeling/wiki/Writing-and-Debugging-EpiModel-Code
-debug(hivtrans_msm)
+debugonce(hivtrans_msm)
 sim <- netsim(est, param, init, control)
-undebug(hivtrans_msm)
 
 # for advanced debugging: https://github.com/EpiModel/EpiModeling/wiki/Diagnostic-of-an-EpiModel-Module
