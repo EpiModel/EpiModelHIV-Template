@@ -11,7 +11,8 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = calibration_end
+  nsteps = calibration_end,
+  verbose = FALSE
 )
 
 # Using scenarios --------------------------------------------------------------
@@ -26,10 +27,12 @@ EpiModelHPC::netsim_scenarios(
 
 best <- readRDS(fs::path(calib_dir, "sim__empty_scenario__1.rds"))
 best <- EpiModel::get_sims(best, 1)
-epi_num <- best$epi$num
 
 # Remove all epi except `num`
-best$epi <- list(num = epi_num)
+best$epi <- list(
+  num = best$epi$num,
+  sim.num = best$epi$sim.num
+)
 
 saveRDS(best, path_to_restart)
 

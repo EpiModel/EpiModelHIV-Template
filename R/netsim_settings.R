@@ -27,29 +27,3 @@ init <- init_msm(
 )
 
 
-# # defaul control object - post-calibration
-# control_restart <- control_msm(
-#   start               = restart_time,
-#   nsteps              = intervention_end,
-#   initialize.FUN      = reinit_msm
-# )
-#
-# control_calib_1 <- control_msm(
-#   nsteps              = calibration_end,
-#   nsims               = 1,
-#   ncores              = 1,
-#   .tracker.list       = EpiModelHIV::make_calibration_trackers,
-#   verbose             = FALSE
-# )
-#
-# control_calib_2 <- control_msm(
-#   start               = restart_time,
-#   nsteps              = intervention_start,
-#   nsims               = 1,
-#   ncores              = 1,
-#   initialize.FUN      = reinit_msm,
-#   cumulative.edgelist = TRUE,
-#   truncate.el.cuml    = 0,
-#   .tracker.list       = EpiModelHIV::make_calibration_trackers,
-#   verbose             = FALSE
-# )

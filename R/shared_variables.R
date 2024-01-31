@@ -3,6 +3,7 @@
 ##
 
 # EpiModelHIV-p local directory
+EMHIVp_branch <- "applied_proj"
 EMHIVp_dir <- "../EpiModelHIV-p.git/template"
 
 # Relevant time steps for the simulation

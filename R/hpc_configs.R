@@ -1,5 +1,6 @@
-# TODO:
-#    make into a more generic list with all in it
+current_git_branch <- "rework"
+mail_user <- "aleguil@emory.edu"
+
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
@@ -7,7 +8,6 @@ hpc_node_setup <- c(
   "spack load git@2.35.1"
 )
 
-current_git_branch <- "rework"
 
 make_em_workflow <- function(wf_name, override = FALSE) {
   wf_path <- paste0("workflows/", wf_name)
@@ -19,7 +19,7 @@ make_em_workflow <- function(wf_name, override = FALSE) {
       "partition" = "epimodel", #"preemptable",
       # "account" = "csde",
       "mail-type" = "FAIL",
-      "mail-user" = "aleguil@emory.edu"
+      "mail-user" = mail_user
     )
   )
 

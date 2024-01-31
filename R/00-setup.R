@@ -5,7 +5,7 @@ renv::init(bare = TRUE)
 
 # This code installs the packages only available on GitHub (not CRAN ones)
 renv::install(c(
-  "EpiModel/EpiModelHIV-p@applied_proj",
+  paste0("EpiModel/EpiModelHIV-p@", emhivp_branch),
   "EpiModel/EpiModelHPC"
 ))
 

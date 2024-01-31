@@ -5,8 +5,8 @@
 Make the restart point required to run the final intervention. This step allows
 you to run the final simulations before / while the model is being calibrated.
 
-Run the script locally and the corresponding WF on the HPC and move on to the
-interventions.
+Run the script locally and the corresponding workflow on the HPC and move on to
+the interventions.
 
 ## The scripts
 

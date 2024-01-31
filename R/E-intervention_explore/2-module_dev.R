@@ -4,7 +4,7 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R", local = TRUE)
+source("R/E-intervention_explore/z-context.R", local = TRUE)
 
 # Libraries  -------------------------------------------------------------------
 library("dplyr")
@@ -15,17 +15,19 @@ pkgload::load_all(EMHIVp_dir)
 
 # Necessary files --------------------------------------------------------------
 # set prep start to a low value to test the full model in a few steps
-prep_start <- 2 * year_steps
+prep_start <- restart_time + 1 * year_steps
 source("R/netsim_settings.R", local = TRUE)
-est <- readRDS(path_to_est)
+orig <- readRDS(path_to_restart)
 
 # Control settings
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3
+  start               = restart_time,
+  nsteps              = prep_start + 3 * year_steps,
+  initialize.FUN      = reinit_msm
 )
 
 # Epidemic simulation
-sim <- netsim(est, param, init, control)
+sim <- netsim(orig, param, init, control)
 
 # Simulation exploration (tidyverse)
 d_sim <- as_tibble(sim)
@@ -37,6 +39,6 @@ ggplot(d_sim, aes(x = time, y = prepCurr)) +
 # Run in debug mode, more details and examples here:
 # https://github.com/EpiModel/EpiModeling/wiki/Writing-and-Debugging-EpiModel-Code
 debugonce(hivtrans_msm)
-sim <- netsim(est, param, init, control)
+sim <- netsim(orig, param, init, control)
 
 # for advanced debugging: https://github.com/EpiModel/EpiModeling/wiki/Diagnostic-of-an-EpiModel-Module

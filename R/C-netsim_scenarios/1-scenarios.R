@@ -4,7 +4,7 @@
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-context <- "local"
+source("R/C-netsim_scenarios/z-context.R", local = TRUE)
 
 # Libraries  -------------------------------------------------------------------
 library("EpiModelHIV")

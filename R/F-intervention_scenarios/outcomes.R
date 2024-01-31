@@ -1,6 +1,7 @@
+source("./R/shared_variables.R", local = TRUE)
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
-  d %>%
+  d |>
     mutate(
     cc.prep.B  = s_prep__B / s_prep_elig__B,
     cc.prep.H  = s_prep__H / s_prep_elig__H,
@@ -11,21 +12,21 @@ mutate_outcomes <- function(d) {
 
 # make the outcomes calculated on the same year
 make_last_year_outcomes <- function(d) {
-  d %>%
-    filter(time >= max(time) - 52) %>%
-    group_by(scenario_name, batch_number, sim) %>%
-    summarise(across(starts_with("cc.prep."), mean)) %>%
+  d |>
+    filter(time >= max(time) - 52) |>
+    group_by(scenario_name, batch_number, sim) |>
+    summarise(across(starts_with("cc.prep."), mean)) |>
     ungroup()
 }
 
 # make the outcomes cumulative over the intervention period
 make_cumulative_outcomes <- function(d) {
-  d %>%
-    filter(time >= intervention_start) %>%
-    group_by(scenario_name, batch_number, sim) %>%
+  d |>
+    filter(time >= intervention_start) |>
+    group_by(scenario_name, batch_number, sim) |>
     summarise(
       cuml_prep_users = sum(prep_users, na.rm = TRUE)
-    ) %>%
+    ) |>
     ungroup()
 }
 
