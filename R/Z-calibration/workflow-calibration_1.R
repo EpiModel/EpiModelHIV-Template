@@ -47,7 +47,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
     scenarios_list = scenarios_list,
-    output_dir = scenarios_dir,
+    output_dir = calib_dir,
     save_pattern = "simple",
     n_rep = 128,
     n_cores = max_cores,
@@ -66,8 +66,8 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = scenarios_dir,
-      output_dir = fs::path(scenarios_dir, "merged_tibbles"),
+      sim_dir = calib_dir,
+      output_dir = fs::path(calib_dir, "merged_tibbles"),
       steps_to_keep = Inf, # keep everything
       cols = dplyr::everything(),
       n_cores = max_cores,
