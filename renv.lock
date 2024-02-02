@@ -110,11 +110,11 @@
       "Version": "3.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "applied_proj",
-      "RemoteSha": "0a70bccdc9f9c006e36199368837b1f8bad0027c",
+      "RemoteSha": "1b14438e5116f6dd2049467edb919fada33fc9a9",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::EpiModel/EpiModel@main",
       "Requirements": [
         "EpiModel",
@@ -130,7 +130,7 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "51bd8700c97dd8771da34c609cdeb041"
+      "Hash": "e37cd82bc00950476c253df940bb9b6c"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -226,17 +226,6 @@
         "utils"
       ],
       "Hash": "5ea2700d21e038ace58269ecdbeb9ec0"
-    },
-    "RcppRoll": {
-      "Package": "RcppRoll",
-      "Version": "0.3.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "Rcpp"
-      ],
-      "Hash": "84a03997fbb5acfb3c9b43bad88fea1f"
     },
     "Rdpack": {
       "Package": "Rdpack",
