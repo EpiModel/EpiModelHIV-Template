@@ -15,7 +15,7 @@ wf <- make_em_workflow("restart_point_single", override = TRUE)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "./R/D-restart_point/0-restart_point_single.R",
+    r_script = "./R/D-restart_point/1-restart_point_single.R",
     args = list(hpc_context = TRUE),
     setup_lines = hpc_node_setup
   ),
