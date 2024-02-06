@@ -5,6 +5,12 @@ Info req for the cloning and managing of EMHIVp should be on the wiki *above*:
 - HPC vs local setting
 - 2 stage calibration / restart point
 
+**TODO**
+
+- info on frequent errors
+    - forget to rm files on HPC before WF
+    - object accessibility on HPC (autocalib)
+
 ## Pre-requisite
 
 - EpiModeHIV-p branch created (e.g. `@applied_proj`)
