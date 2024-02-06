@@ -15,9 +15,10 @@ source("./R/hpc_configs.R")
 batch_size <- 8
 
 source("./R/Z-calibration/autocalib-config_1.R")
+# source("./R/Z-calibration/autocalib-config_2.R")
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("swfcalib_1", override = TRUE)
+wf <- make_em_workflow("swfcalib", override = TRUE)
 
 # Calibration step 1
 wf <- add_workflow_step(
