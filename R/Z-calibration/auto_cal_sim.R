@@ -1,6 +1,6 @@
 make_model_fn <- function(restart, calib_steps) {
   force(restart)
-  force(calib_step)
+  force(calib_steps)
 
   function(proposal) {
     # Libraries ------------------------------------------------------------------

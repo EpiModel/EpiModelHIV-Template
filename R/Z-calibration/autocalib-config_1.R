@@ -7,7 +7,7 @@ n_sims <- 512
 calib_object <- list(
   # state = list() # managed internally
   config = list(
-    simulator = model_fun,
+    simulator = model_fn,
     root_directory = "data/calib",
     max_iteration = 100,
     n_sims = n_sims,
@@ -27,7 +27,7 @@ calib_object <- list(
       hiv.trans.scale_1 = 2.5,
       hiv.trans.scale_2 = 0.4,
       hiv.trans.scale_3 = 0.3
-    ),
+    )
   ),
   waves = list(
     wave1 = list(
