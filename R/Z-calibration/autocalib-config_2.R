@@ -57,7 +57,7 @@ calib_object <- list(
       job1 = list(
         targets = "ir100.gc",
         targets_val = 12.81,
-        params = c("ugc.prob", "rgc.prob"), # target:
+        params = c("ugc.prob"), # target:
         initial_proposals = dplyr::tibble(
           ugc.prob = seq(0.2, 0.3, length.out = n_sims),
         ),
@@ -70,7 +70,7 @@ calib_object <- list(
       job2 = list(
         targets = "ir100.ct",
         targets_val = 14.59,
-        params = c("uct.prob", "rct.prob"), # target:
+        params = c("uct.prob"), # target:
         initial_proposals = dplyr::tibble(
           uct.prob = seq(0.15, 0.25, length.out = n_sims),
         ),

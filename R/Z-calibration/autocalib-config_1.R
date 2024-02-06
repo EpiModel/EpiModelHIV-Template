@@ -2,7 +2,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/Z-calibration/auto_cal_sim.R")
 model_fn <- make_model_fn(restart = FALSE, calib_steps = year_steps)
 
-n_sims <- 512
+n_sims <- 32
 
 calib_object <- list(
   # state = list() # managed internally
@@ -74,7 +74,7 @@ calib_object <- list(
       job4 = list(
         targets = "ir100.gc",
         targets_val = 12.81,
-        params = c("ugc.prob", "rgc.prob"), # target:
+        params = c("ugc.prob"), # target:
         initial_proposals = dplyr::tibble(
           ugc.prob = seq(0.2, 0.3, length.out = n_sims),
         ),
@@ -87,7 +87,7 @@ calib_object <- list(
       job5 = list(
         targets = "ir100.ct",
         targets_val = 14.59,
-        params = c("uct.prob", "rct.prob"), # target:
+        params = c("uct.prob"), # target:
         initial_proposals = dplyr::tibble(
           uct.prob = seq(0.15, 0.25, length.out = n_sims),
         ),
