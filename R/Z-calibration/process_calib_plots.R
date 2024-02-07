@@ -1,20 +1,23 @@
+# Libraries --------------------------------------------------------------------
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-
-# make calibraion plots --------------------------------------------------------
-source("./R/shared_variables.R", local = TRUE)
-targets <- EpiModelHIV::get_calibration_targets()
-calib_steps <- year_steps
+#
+# Settings ---------------------------------------------------------------------
+source("R/shared_variables.R", local = TRUE)
 path_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
-plots_dir <- "data/intermediate/calibration_plots/"
-if (!fs::dir_exists(plots_dir)) fs::dir_create(plots_dir)
+plot_data_dir <- fs::path(calib_plot_dir, "data")
+if (!fs::dir_exists(plot_data_dir)) fs::dir_create(plot_data_dir)
 
+calib_steps <- year_steps
+targets <- EpiModelHIV::get_calibration_targets()
 modulo_steps <- 2
 
+# Common plot function for calibration
+#   line plot with IQR
 plot_this_target <- function(d_outcomes, d_tar) {
   theme_set(theme_classic())
-  p <- ggplot(
+  ggplot(
     d_outcomes,
     aes(x = time, y = q2, ymin = q1, ymax = q3, col = name, fill = name)
   ) +
@@ -25,13 +28,12 @@ plot_this_target <- function(d_outcomes, d_tar) {
       aes(yintercept = value, col = name),
       linetype = 2
     ) +
-    xlab("Calibration Weeks") +
+    xlab("Time steps") +
     ylab("Value") +
     theme(legend.title = element_blank())
-  p
 }
 
-targets_plot_infos <- list(
+calib_plot_infos <- list(
   cc.dx = list(
     names = paste0("cc.dx.", c("B", "H", "W")),
     window_size = 13
@@ -70,10 +72,8 @@ d_calibs <- readRDS(path_calibs) |>
   EpiModelHIV::mutate_calibration_targets(year_steps) |>
   dplyr::select(batch_number, sim, time, dplyr::any_of(names(targets)))
 
-
-
-for (plot_name in names(targets_plot_infos)) {
-  plot_infos <- targets_plot_infos[[plot_name]]
+for (plot_name in names(calib_plot_infos)) {
+  plot_infos <- calib_plot_infos[[plot_name]]
   if (!all(plot_infos$names %in% names(d_calibs))) next
 
   d_outcomes <- d_calibs |>
@@ -101,7 +101,5 @@ for (plot_name in names(targets_plot_infos)) {
     )
 
     p <- plot_this_target(d_outcomes, d_tar)
-    saveRDS(p, fs::path(plots_dir, paste0(plot_name, ".rds")))
+    saveRDS(p, fs::path(plot_data_dir, paste0(plot_name, ".rds")))
 }
-
-readRDS("./data/intermediate/calibration_plots/cc.vsupp.rds")

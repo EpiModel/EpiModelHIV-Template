@@ -57,7 +57,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
       sim_dir = calib_dir,
       output_dir = fs::path(calib_dir, "merged_tibbles"),
-      steps_to_keep = year_steps,
+      steps_to_keep = Inf,
       cols = dplyr::everything(),
       n_cores = max_cores,
       setup_lines = hpc_node_setup
@@ -73,6 +73,21 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/Z-calibration/choose_restart.R",
+    args = list(hpc_context = TRUE),
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "mail-type" = "END",
+    "cpus-per-task" = max_cores,
+    "time" = "02:00:00",
+    "mem-per-cpu" = "5G"
+  )
+)
+
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/Z-calibration/process_calib_plots.R",
     args = list(hpc_context = TRUE),
     setup_lines = hpc_node_setup
   ),

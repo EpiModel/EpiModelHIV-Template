@@ -1,5 +1,3 @@
-# can I simply use the manual_1_process.R
-
 # To be run after merge_netsim_tibble
 
 # for each merged_tibble

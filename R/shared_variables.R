@@ -20,5 +20,6 @@ intervention_end   <- intervention_start + 10 * year_steps
 est_dir <- "data/intermediate/estimates/"
 diag_dir <- "data/intermediate/diagnostics/"
 calib_dir <- "data/intermediate/calibration/"
+calib_plot_dir <- "data/intermediate/calibration_plots/"
 scenarios_dir <- "data/intermediate/scenarios/"
 
