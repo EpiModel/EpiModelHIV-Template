@@ -20,7 +20,8 @@ for (i in seq_along(plots)) {
         restart_time,
         prep_start,
         intervention_start
-    ))
+      )
+    )
 
   ggsave(
     plot_file,
