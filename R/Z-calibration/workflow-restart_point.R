@@ -25,7 +25,7 @@ control <- control_msm(
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("calibration_1", override = TRUE)
+wf <- make_em_workflow("restart_point", override = TRUE)
 
 # Using scenarios --------------------------------------------------------------
 
@@ -35,10 +35,10 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
-    scenarios_list = scenarios_list,
-    output_dir = scenarios_dir,
+    scenarios_list = NULL,
+    output_dir = calib_dir,
     save_pattern = "all",
-    n_rep = 512,
+    n_rep = 64, # 512
     n_cores = max_cores,
     max_array_size = 500,
     setup_lines = hpc_node_setup
@@ -55,8 +55,8 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = scenarios_dir,
-      output_dir = fs::path(scenarios_dir, "merged_tibbles"),
+      sim_dir = calib_dir,
+      output_dir = fs::path(calib_dir, "merged_tibbles"),
       steps_to_keep = year_steps,
       cols = dplyr::everything(),
       n_cores = max_cores,
