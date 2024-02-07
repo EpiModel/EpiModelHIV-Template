@@ -1,8 +1,16 @@
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
 # make calibraion plots --------------------------------------------------------
 source("./R/shared_variables.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 calib_steps <- year_steps
-d_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
+path_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
+plots_dir <- "data/intermediate/calibration_plots/"
+if (!fs::dir_exists(plots_dir)) fs::dir_create(plots_dir)
+
+modulo_steps <- 2
 
 plot_this_target <- function(d_outcomes, d_tar) {
   theme_set(theme_classic())
@@ -58,24 +66,17 @@ targets_plot_infos <- list(
   )
 )
 
-d_tar <- readRDS(d_calibs) |>
+d_calibs <- readRDS(path_calibs) |>
   EpiModelHIV::mutate_calibration_targets(year_steps) |>
   dplyr::select(batch_number, sim, time, dplyr::any_of(names(targets)))
 
-plot_dirs <- c()
 
-plot_name <- names(targets_plot_infos)[[1]]
-modulo_steps <- 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
 
 for (plot_name in names(targets_plot_infos)) {
   plot_infos <- targets_plot_infos[[plot_name]]
-  if (!all(plot_infos$names %in% names(d_tar))) next
+  if (!all(plot_infos$names %in% names(d_calibs))) next
 
-  d_outcomes <- d_tar |>
+  d_outcomes <- d_calibs |>
     select(batch_number, sim, time, all_of(plot_infos$names)) |>
     group_by(batch_number, sim) |>
     arrange(time) |>
@@ -100,5 +101,7 @@ for (plot_name in names(targets_plot_infos)) {
     )
 
     p <- plot_this_target(d_outcomes, d_tar)
-    saveRDS(p, paste0(plot_name, ".rds"))
+    saveRDS(p, fs::path(plots_dir, paste0(plot_name, ".rds")))
 }
+
+readRDS("./data/intermediate/calibration_plots/cc.vsupp.rds")
