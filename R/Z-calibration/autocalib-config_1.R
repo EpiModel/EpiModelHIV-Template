@@ -2,7 +2,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/Z-calibration/auto_cal_sim.R")
 model_fn <- make_model_fn(restart = FALSE, calib_steps = year_steps)
 
-n_sims <- 32
+n_sims <- 512
 
 calib_object <- list(
   # state = list() # managed internally
