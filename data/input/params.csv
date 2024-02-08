@@ -2,7 +2,7 @@ param,value,type,source
 hiv.test.rate_1,0.004123238,numeric
 hiv.test.rate_2,0.003771226,numeric
 hiv.test.rate_3,0.005956663,numeric
-hiv.test.late.prob_1,1,numeric
+hiv.test.late.prob_1,0,numeric
 hiv.test.late.prob_2,0,numeric
 hiv.test.late.prob_3,0,numeric
 test.window.int,3,numeric
