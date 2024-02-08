@@ -36,7 +36,7 @@ calib_object <- list(
         targets_val = 0.273,
         params = c("aids.off.tx.mort.rate"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          aids.off.tx.mort.rate = seq(0.0002, 0.0007, length.out = n_sims),
+          aids.off.tx.mort.rate = sample(seq(0.0002, 0.0007, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
@@ -46,7 +46,7 @@ calib_object <- list(
         targets_val = 0.847,
         params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_1 = seq(0.002, 0.006, length.out = n_sims),
+          hiv.test.rate_1 = sample(seq(0.002, 0.006, length.out = n_sims)),
           ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
@@ -56,7 +56,7 @@ calib_object <- list(
         targets_val = 0.818,
         params = c("hiv.test.rate_2"), # target: 0.0038
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_2 = seq(0.002, 0.006, length.out = n_sims),
+          hiv.test.rate_2 = sample(seq(0.002, 0.006, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
@@ -66,7 +66,7 @@ calib_object <- list(
         targets_val = 0.862,
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = dplyr::tibble(
-          hiv.test.rate_3 = seq(0.004, 0.008, length.out = n_sims),
+          hiv.test.rate_3 = sample(seq(0.004, 0.008, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
@@ -76,7 +76,7 @@ calib_object <- list(
         targets_val = 12.81,
         params = c("ugc.prob"), # target:
         initial_proposals = dplyr::tibble(
-          ugc.prob = seq(0.2, 0.3, length.out = n_sims),
+          ugc.prob = sample(seq(0.2, 0.3, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
@@ -89,7 +89,7 @@ calib_object <- list(
         targets_val = 14.59,
         params = c("uct.prob"), # target:
         initial_proposals = dplyr::tibble(
-          uct.prob = seq(0.15, 0.25, length.out = n_sims),
+          uct.prob = sample(seq(0.15, 0.25, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
