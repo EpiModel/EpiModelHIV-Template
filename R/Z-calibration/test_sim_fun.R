@@ -40,7 +40,6 @@ param_sc$rct.prob <- plogis(qlogis(param_sc$uct.prob) + log(1.25))
 sim <- netsim(est, param_sc, init, control)
 dat <- sim[[1]]
 # saveRDS(dat, "dat_test.rds")
-
 at <- get_current_timestep(dat)
 
 hivtest_msm <- function(dat, at) {
