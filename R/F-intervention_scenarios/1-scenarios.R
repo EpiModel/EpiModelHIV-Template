@@ -29,30 +29,28 @@ scenarios_df <- readr::read_csv("./data/input/scenarios.csv")
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
-# Where to save the output of these tests
-sc_test_dir <- "data/intermediate/scenarios_test"
-
 # Here 2 scenarios will be used "scenario_1" and "scenario_2".
 # This will generate 6 files (3 per scenarios)
 EpiModelHPC::netsim_scenarios(
   path_to_restart, param, init, control,
   scenarios_list = scenarios_list, # set to NULL to run with default params
-  n_rep = 3,
-  n_cores = 2,
-  output_dir = sc_test_dir,
+  n_rep = 8,
+  n_cores = 4,
+  output_dir = scenarios_dir,
   save_pattern = "simple"
 )
-fs::dir_ls(sc_test_dir)
+fs::dir_ls(scenarios_dir)
 
 # merge the simulations. Keeping one `tibble` per scenario
 EpiModelHPC::merge_netsim_scenarios_tibble(
-  sim_dir = sc_test_dir,
-  output_dir = fs::path(sc_test_dir, "merged_tibbles"),
+  sim_dir = scenarios_dir,
+  output_dir = fs::path(scenarios_dir, "merged_tibbles"),
   steps_to_keep = intervention_end - intervention_start
 )
 
 # Convert to data frame
-d_sim <- readRDS(fs::path(sc_test_dir, "merged_tibbles", "df__scenario_1.rds"))
+d_path <- fs::dir_ls(fs::path(scenarios_dir, "merged_tibbles"))[[1]]
+d_sim <- readRDS(d_path)
 
 glimpse(d_sim)
 head(d_sim)

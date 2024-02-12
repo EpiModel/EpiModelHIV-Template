@@ -1,13 +1,39 @@
+library(dplyr)
 source("./R/shared_variables.R", local = TRUE)
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
   d |>
     mutate(
-    cc.prep.B  = s_prep__B / s_prep_elig__B,
-    cc.prep.H  = s_prep__H / s_prep_elig__H,
-    cc.prep.W  = s_prep__W / s_prep_elig__W,
-    prep_users = s_prep__B + s_prep__H + s_prep__W
+      lst_ir100_b = ir100.B,
+      lst_ir100_h = ir100.H,
+      lst_ir100_w = ir100.W,
+      cml_incid_b = incid.B,
+      cml_incid_h = incid.H,
+      cml_incid_w = incid.W
     )
+}
+
+make_d_ref <- function(file_path) {
+  readRDS(file_path) |>
+    mutate_outcomes() |>
+    filter(time >= max(time) - 10 * 52) |>
+    select(batch_number, sim, starts_with("cml_incid")) |>
+    group_by(batch_number, sim) |>
+    summarize(across(everything(), \(x) sum(x, na.rm = TRUE))) |>
+    ungroup() |>
+    select(-c(batch_number, sim)) |>
+    summarize(across(everything(), \(x) median(x, na.rm = TRUE)))
+}
+
+mutate_nia_pia <- function(d, ref_val, var, var_nia, var_pia) {
+  d[[var_nia]] <- ref_val - d[[var]]
+  d[[var_pia]] <- d[[var_nia]] / ref_val
+  d
+}
+
+mutate_pia <- function(d, var, var_nia, var_pia) {
+  d[[var_pia]] <- d[[var_nia]] / (d[[var_nia]] + d[[var]])
+  d
 }
 
 # make the outcomes calculated on the same year
@@ -15,7 +41,7 @@ make_last_year_outcomes <- function(d) {
   d |>
     filter(time >= max(time) - 52) |>
     group_by(scenario_name, batch_number, sim) |>
-    summarise(across(starts_with("cc.prep."), mean)) |>
+    summarise(across(starts_with("lst_"), \(x) mean(x, na.rm = TRUE))) |>
     ungroup()
 }
 
@@ -24,9 +50,7 @@ make_cumulative_outcomes <- function(d) {
   d |>
     filter(time >= intervention_start) |>
     group_by(scenario_name, batch_number, sim) |>
-    summarise(
-      cuml_prep_users = sum(prep_users, na.rm = TRUE)
-    ) |>
+    summarise(across(starts_with("cml_"), \(x) sum(x, na.rm = TRUE))) |>
     ungroup()
 }
 
@@ -34,19 +58,26 @@ make_cumulative_outcomes <- function(d) {
 # the output is a data frame with one row per simulation in the batch
 # each simulation can be uniquely identified with `scenario_name`,
 # `batch_number` and `sim` (all 3 are needed)
-process_one_scenario_batch <- function(scenario_infos) {
-  sim <- readRDS(scenario_infos$file_name)
-  d_sim <- as_tibble(sim)
+process_one_scenario <- function(scenario_infos, d_ref) {
+  d_sim <- readRDS(scenario_infos$file_path)
   d_sim <- mutate_outcomes(d_sim)
-  d_sim <- mutate(
-    d_sim,
-    scenario_name = scenario_infos$scenario_name,
-    batch_number = scenario_infos$batch_number
-  )
+  d_sim <- mutate(d_sim, scenario_name = scenario_infos$scenario_name)
 
   d_last <- make_last_year_outcomes(d_sim)
   d_cum <- make_cumulative_outcomes(d_sim)
 
-  left_join(d_last, d_cum, by = c("scenario_name", "batch_number", "sim"))
+  d <-left_join(d_last, d_cum, by = c("scenario_name", "batch_number", "sim"))
+
+  for (pop in c("b", "h", "w")) {
+    d <- mutate_nia_pia(
+      d,
+      d_ref[[paste0("cml_incid_", pop)]],
+      paste0("cml_incid_", pop),
+      paste0("cml_nia_", pop),
+      paste0("cml_pia_", pop)
+    )
+  }
+
+  d
 }
 
