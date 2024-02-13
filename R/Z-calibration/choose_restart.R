@@ -8,6 +8,7 @@
 #   make calibration dist
 #   calc q1, q2, q3
 #   combine calib_dists
+library(EpiModelHIV)
 source("./R/shared_variables.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 calib_steps <- year_steps
