@@ -12,6 +12,8 @@ source("./R/shared_variables.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 calib_steps <- year_steps
 d_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
+hpc_context <- TRUE
+source("./R/Z-calibration/z-context.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 
 d_dist <- readRDS(d_calibs) |>

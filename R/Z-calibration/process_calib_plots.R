@@ -9,6 +9,9 @@ path_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
 plot_data_dir <- fs::path(calib_plot_dir, "data")
 if (!fs::dir_exists(plot_data_dir)) fs::dir_create(plot_data_dir)
 
+hpc_context <- TRUE
+source("./R/Z-calibration/z-context.R", local = TRUE)
+
 calib_steps <- year_steps
 targets <- EpiModelHIV::get_calibration_targets()
 modulo_steps <- 2
