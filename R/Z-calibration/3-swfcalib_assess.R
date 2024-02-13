@@ -48,3 +48,10 @@ results |>
   arrange(se) |>
   filter(B < 0.02, H < 0.02, W < 0.02) |>
   summarise(across(starts_with("hiv.trans"), median))
+
+co <- readRDS("./calib_object.rds")
+
+rgc.prob,0.3002,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
+ugc.prob,0.25546,numeric,CPN-gaps appendix 9.4 | calibrated
+rct.prob,0.2054959,numeric, CPN-plogis(qlogis(1714429) + log(1.25)) #0.3216; # gaps appendix 9.3
+uct.prob,0.1714429,numeric, CPN-gaps appendix 9.3 | calibrated
