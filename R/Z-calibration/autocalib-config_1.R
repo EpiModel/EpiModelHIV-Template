@@ -80,7 +80,7 @@ calib_object <- list(
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
-          thresholds = 1.5,
+          thresholds = 1,
           n_enough = 100
         )
       ),
@@ -93,7 +93,7 @@ calib_object <- list(
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
-          thresholds = 1.5,
+          thresholds = 1,
           n_enough = 100
         )
       ),
@@ -136,9 +136,21 @@ calib_object <- list(
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
-          thresholds = rep(0.02, 3),
+          thresholds = c(0.02, 0.02, 0.01),
           n_enough = 100
         )
+      )
+    ),
+    wave4 = list(
+      job0 = list(
+        targets = "disease.mr100",
+        targets_val = 0.273,
+        params = c("aids.off.tx.mort.rate"), # target: 0.00385
+        initial_proposals = dplyr::tibble(
+          aids.off.tx.mort.rate = sample(seq(0.0002, 0.0007, length.out = n_sims)),
+        ),
+        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
       )
     )
   )
