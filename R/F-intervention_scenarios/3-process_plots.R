@@ -12,13 +12,22 @@ d_ref <- make_d_ref(fs::path(scenarios_tibble_dir, "df__test_1_treat_1.rds"))
 
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(scenarios_info)),
-  \(i) process_one_scenario(scenarios_info[i, ], d_ref)
+  \(i) process_one_scenario_plots(scenarios_info[i, ], d_ref)
 )
 
-d_sc_raw <- dplyr::bind_rows(d_ls)
-glimpse(d_sc_raw)
+d_plots <- dplyr::bind_rows(d_ls)
+glimpse(d_plots)
 
-source("./R/F-intervention_scenarios/labels.R", local = TRUE)
+library(ggplot2)
+theme_set(theme_light())
 
-format_table(d_sc_raw, var_labels, format_patterns) |>
-  readr::write_csv("data/output/table.csv")
+ggplot(d_plots, aes(x = test, y = treat, fill = cml_pia_b, z = cml_pia_b)) +
+  geom_raster(interpolate = TRUE) +
+  geom_contour(col = "white", alpha = 0.5, lwd = 0.5, position = "jitter") +
+  viridis::scale_fill_viridis(
+    discrete = FALSE,
+    alpha = 1,
+    option = "B",
+    direction = 1,
+    labels = scales::label_percent(1)
+  )

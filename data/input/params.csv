@@ -126,7 +126,7 @@ prep.risk.int,26,numeric
 prep.sti.screen.int,26,numeric
 prep.sti.tx.prob,1,numeric
 prep.risk.reassess.int,52,numeric
-prep.require.lnt,TRUE,logical
+prep.require.lnt,FALSE,logical
 part.ident.start,Inf,numeric
 part.index.window.int,0,numeric
 part.index.degree,1,numeric

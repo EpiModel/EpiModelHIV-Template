@@ -12,9 +12,9 @@ calib_object <- list(
     max_iteration = 100,
     n_sims = n_sims,
     default_proposal = dplyr::tibble(
-      prep.start.prob_1 = 0.6,
-      prep.start.prob_2 = 0.6,
-      prep.start.prob_3 = 0.6,
+      prep.start.prob_1 = 0.005,
+      prep.start.prob_2 = 0.005,
+      prep.start.prob_3 = 0.005,
       # remove after
       ugc.prob = 0.25,
       uct.prob = 0.17

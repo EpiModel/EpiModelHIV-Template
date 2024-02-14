@@ -1,4 +1,5 @@
 library(dplyr)
+library(tidyr)
 source("./R/shared_variables.R", local = TRUE)
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
@@ -66,7 +67,7 @@ process_one_scenario <- function(scenario_infos, d_ref) {
   d_last <- make_last_year_outcomes(d_sim)
   d_cum <- make_cumulative_outcomes(d_sim)
 
-  d <-left_join(d_last, d_cum, by = c("scenario_name", "batch_number", "sim"))
+  d <- left_join(d_last, d_cum, by = c("scenario_name", "batch_number", "sim"))
 
   for (pop in c("b", "h", "w")) {
     d <- mutate_nia_pia(
@@ -79,5 +80,13 @@ process_one_scenario <- function(scenario_infos, d_ref) {
   }
 
   d
+}
+
+process_one_scenario_plots <- function(scenario_infos, d_ref) {
+  d_sim <- process_one_scenario(scenario_infos, d_ref)
+  d_sim |>
+    select(scenario_name, starts_with("cml_pia")) |>
+    separate_wider_delim(scenario_name, "_", names = c(NA, "test", NA, "treat")) |>
+    mutate(test = as.numeric(test), treat = as.numeric(treat))
 }
 
