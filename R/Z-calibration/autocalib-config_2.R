@@ -47,7 +47,7 @@ calib_object <- list(
         targets_val = 0.321,
         params = c("prep.start.prob_3"),
         initial_proposals = dplyr::tibble(
-          prep.start.prob_3 = seq(0.001, 0.01, length.out = n_sims),
+          prep.start.prob_3 = seq(0.005, 0.02, length.out = n_sims),
         ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
