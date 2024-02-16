@@ -20,7 +20,9 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = intervention_end,
+  start               = restart_time,
+  nsteps              = intervention_end,
+  initialize.FUN      = reinit_msm,
   .tracker.list = EpiModelHIV::make_calibration_trackers()
 )
 
@@ -34,7 +36,7 @@ wf <- make_em_workflow("final_plots", override = TRUE)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    path_to_est, param, init, control,
+    path_to_restart, param, init, control,
     scenarios_list = NULL,
     output_dir = calib_dir,
     save_pattern = "all",
