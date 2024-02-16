@@ -19,9 +19,9 @@ results |>
   pull(hiv.test.rate_1) |>
   range()
 
-ggplot(results, aes(x = hiv.test.rate_1, y = cc.dx.B, col = as.factor(.iteration))) +
+ggplot(results, aes(x = prep.start.prob_3 , y = cc.prep.W, col = as.factor(.iteration))) +
   geom_point() +
-  geom_hline(yintercept = 0.847)
+  geom_hline(yintercept = 0.321)
 
 
 # range at each iteration
