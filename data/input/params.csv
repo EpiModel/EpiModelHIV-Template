@@ -79,10 +79,10 @@ rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
 uct.sympt.prob,0.95,numeric, CPN- gaps 10.2
 rgc.ntx.int,26,numeric,CPN
 ugc.ntx.int,26,numeric, CPN
-gc.tx.int,1,numeric, 1 in CPN but one in PAF (coherent with lit and CDC)
+gc.tx.int,1.4,numeric, 1 in CPN but one in PAF (coherent with lit and CDC)
 rct.ntx.int,32,numeric, CPN
 uct.ntx.int,32,numeric, CPN
-ct.tx.int,1,numeric, 1 in CPN but one in PAF (coherent with lit and CDC)
+ct.tx.int,1.4,numeric, 1 in CPN but one in PAF (coherent with lit and CDC)
 gc.sympt.tx.prob_1,0.9,numeric,CPN
 gc.sympt.tx.prob_2,0.9,numeric,CPN
 gc.sympt.tx.prob_3,0.9,numeric,CPN
@@ -118,9 +118,9 @@ prep.adhr.dist_3,0.784,numeric
 prep.adhr.or_1,0.69,numeric
 prep.adhr.or_2,0.19,numeric
 prep.adhr.or_3,0.01,numeric
-prep.discont.int_1,32.06053,numeric
-prep.discont.int_2,32.06053,numeric
-prep.discont.int_3,32.06053,numeric
+prep.discont.int_1,33.42,numeric
+prep.discont.int_2,57.48,numeric
+prep.discont.int_3,57.39,numeric
 prep.tst.int,12.8571,numeric
 prep.risk.int,26,numeric
 prep.sti.screen.int,26,numeric
@@ -152,9 +152,9 @@ part.tx.reinit.rate_3,0,numeric
 gc.ntx.int,16.8,numeric,
 ct.ntx.int,32,numeric,
 sti.screening.dist,stochastic,character,
-gc.screen.hivneg.rate,0.008130081,numeric
+gc.screen.hivneg.rate,0.008120081,numeric
 gc.screen.hivpos.rate,0.01492537,numeric
-ct.screen.hivneg.rate,0.008130081,numeric
+ct.screen.hivneg.rate,0.008120081,numeric
 ct.screen.hivpos.rate,0.01492537,numeric
 sti.screen.prep.rate,0.07692308,numeric
 sti.screen.prep.start,1,numeric

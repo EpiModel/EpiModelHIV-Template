@@ -10,12 +10,13 @@ library("dplyr")
 
 # Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
-context <- "hpc"
 
 source("./R/hpc_configs.R")
 max_cores <- 8
 
 # Necessary files --------------------------------------------------------------
+hpc_context <- TRUE
+source("R/Z-calibration/z-context.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
