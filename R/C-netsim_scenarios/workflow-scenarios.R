@@ -1,21 +1,27 @@
+## HPC Workflow: Epidemic Model Scenarios Playground
 ##
-## Epidemic Model Scenarios Playground, HPC setup
-##
+## Define a workflow to run `netsim` via the scenario API on the HPC
 
-# Libraries --------------------------------------------------------------------
-library("slurmworkflow")
-library("EpiModelHPC")
-library("EpiModelHIV")
-library("dplyr")
+# This script should be run in a fresh R session
+rs()
 
-# Settings ---------------------------------------------------------------------
+# Setup ------------------------------------------------------------------------
+library(slurmworkflow)
+library(EpiModelHPC)
+library(EpiModelHIV)
+library(dplyr)
+
+hpc_context <- TRUE
 source("R/shared_variables.R", local = TRUE)
-context <- "hpc"
+source("R/C-netsim_scenarios/z-context.R", local = TRUE)
+source("R/hpc_configs.R", local = TRUE)
 
-source("./R/hpc_configs.R")
 max_cores <- 8
 
-# Necessary files --------------------------------------------------------------
+# Process ----------------------------------------------------------------------
+wf <- make_em_workflow("networks", override = TRUE)
+
+# Necessary files
 prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
@@ -24,11 +30,8 @@ control <- control_msm(
   nsteps = prep_start + year_steps * 3
 )
 
-# Workflow creation ------------------------------------------------------------
+# Workflow creation
 wf <- make_em_workflow("scenarios", override = TRUE)
-
-
-# Using scenarios --------------------------------------------------------------
 
 # Define test scenarios
 scenarios_df <- tibble(
@@ -49,7 +52,6 @@ wf <- add_workflow_step(
     path_to_est, param, init, control,
     scenarios_list = scenarios_list,
     output_dir = scenarios_dir,
-    # libraries = "EpiModelHIV",
     save_pattern = "all",
     n_rep = 32,
     n_cores = max_cores,

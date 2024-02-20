@@ -1,16 +1,21 @@
-## Example interactive epidemic simulation run script with more complex
-## parameterization and parameters defined in spreadsheet, with example of
-## running model scenarios defined with data-frame approach
+## 1. Epidemic Model Scenarios Playground
+##
+## Run `netsim` via the scenario API. This mimics how things will be run on the
+## HPC later on and ensure a smooth transition to the HPC setup.
 
-# Settings ---------------------------------------------------------------------
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(EpiModelHIV)
+library(dplyr)
+
 source("R/shared_variables.R", local = TRUE)
 source("R/C-netsim_scenarios/z-context.R", local = TRUE)
 
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
-library("dplyr")
+# Process ----------------------------------------------------------------------
 
-# Necessary files --------------------------------------------------------------
+# Necessary files
 prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
@@ -19,13 +24,11 @@ control <- control_msm(
   nsteps = prep_start + year_steps * 3
 )
 
-
 # Controls
 # `nsims` and `ncores` will be overridden later
 
 print(control)
 
-# Using scenarios --------------------------------------------------------------
 
 # Define test scenarios
 scenarios_df <- tibble(
