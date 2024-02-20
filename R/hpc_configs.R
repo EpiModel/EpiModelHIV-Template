@@ -1,3 +1,8 @@
+## HPC related configuration
+##
+## This script should not be run directly. But `sourced` the from scripts that
+## interact with the HPC (usually the `workflow-***.R` ones)
+
 current_git_branch <- "rework"
 mail_user <- "aleguil@emory.edu"
 

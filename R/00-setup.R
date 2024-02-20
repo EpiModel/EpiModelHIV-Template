@@ -1,3 +1,5 @@
+## Setup `renv` for the project and install the necessary packages
+
 # Initialize renv but do not install anything yet
 renv::init(bare = TRUE)
 

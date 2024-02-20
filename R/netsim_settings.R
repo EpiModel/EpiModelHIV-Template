@@ -1,3 +1,8 @@
+## Default settings for `netsim`
+##
+## This script should not be run directly. But `sourced` from other scripts
+## using the `netsim` function
+
 if (!context %in% c("local", "hpc")) {
   stop("The `context` variable must be set to either 'local' or 'hpc'")
 }

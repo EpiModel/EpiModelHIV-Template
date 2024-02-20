@@ -1,18 +1,27 @@
-#
 ## 02. Network Model Diagnostics
-#
+##
+## Compute the diagnostics for the estimated network models. They are assessed
+## in the next script.
 
-# Settings ---------------------------------------------------------------------
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
+library(EpiModelHIV)
+
 source("R/A-networks/z-context.R", local = TRUE)
 
+# Process ----------------------------------------------------------------------
+
+# Read in the estimated networks
 est <- readRDS(fs::path(est_dir, paste0("netest-", context, ".rds")))
 
-# Main -------------------------------------------------------------------------
+# 1. Main model diagnostics
 source("R/A-networks/diag_main.R", local = TRUE)
 
-# Casual -----------------------------------------------------------------------
+# 2. Casual model diagnostics
 source("R/A-networks/diag_casl.R", local = TRUE)
 
-# One-Off ----------------------------------------------------------------------
+# 3. One-Off model diagnostics
 source("R/A-networks/diag_ooff.R", local = TRUE)

@@ -1,19 +1,21 @@
+## 03. Network Model Diagnostics: Interactive Assessment
 ##
-## 03. Network Model Diagnostics: Interactive Analysis
-##
+## Assess the diagnosed network models using the diagnostics computed on the
+## previous script.
 
-# Settings ---------------------------------------------------------------------
-#
-source("R/shared_variables.R")
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+source("R/shared_variables.R", local = TRUE)
+library("EpiModel")
+
 hpc_context <- FALSE # set to TRUE to evaluate HPC estimates
 source("R/A-networks/z-context.R")
 
-# Libraries  -------------------------------------------------------------------
-library("EpiModel")
+# Process ----------------------------------------------------------------------
 
-# Interactive Diagnostics Analysis ---------------------------------------------
-
-# Main
+# 1. Main model
 dx <- readRDS(fs::path(diag_dir, paste0("netdx-main-", context, ".rds")))
 print(dx$dynamic, digits = 2)
 plot(dx$dynamic)
@@ -21,7 +23,7 @@ plot(dx$dynamic)
 print(dx$static, digits = 2)
 plot(dx$static)
 
-# Casual
+# 2. Casual model
 dx <- readRDS(fs::path(diag_dir, paste0("netdx-casl-", context, ".rds")))
 print(dx$dynamic, digits = 2)
 plot(dx$dynamic)
@@ -29,7 +31,7 @@ plot(dx$dynamic)
 print(dx$static, digits = 2)
 plot(dx$static)
 
-# Inst
+# 3. One-Off model
 dx <- readRDS(fs::path(diag_dir, paste0("netdx-ooff-", context, ".rds")))
 print(dx$static, digits = 2)
 plot(dx$static)

@@ -1,5 +1,3 @@
-library(ARTnet)
-
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",

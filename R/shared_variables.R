@@ -1,6 +1,6 @@
+## Variables required all over the project
 ##
-## 00. Shared variables setup
-##
+## This script should not be run directly. But `sourced` from other scripts
 
 # EpiModelHIV-p local directory
 EMHIVp_branch <- "applied_proj"
@@ -17,9 +17,9 @@ intervention_start <- prep_start         + 10 * year_steps
 intervention_end   <- intervention_start + 10 * year_steps
 
 # Paths to files and directories
-est_dir <- "data/intermediate/estimates/"
-diag_dir <- "data/intermediate/diagnostics/"
-calib_dir <- "data/intermediate/calibration/"
+est_dir        <- "data/intermediate/estimates/"
+diag_dir       <- "data/intermediate/diagnostics/"
+calib_dir      <- "data/intermediate/calibration/"
 calib_plot_dir <- "data/intermediate/calibration_plots/"
-scenarios_dir <- "data/intermediate/scenarios/"
+scenarios_dir  <- "data/intermediate/scenarios/"
 
