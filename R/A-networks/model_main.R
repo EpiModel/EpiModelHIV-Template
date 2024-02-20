@@ -1,3 +1,7 @@
+## Define and fit the *main* network  model
+##
+## This script should not be run directly. But `sourced` by `1-estimation.R`
+
 # Formula
 model_main <- ~ edges +
   nodematch("age.grp", diff = TRUE) +

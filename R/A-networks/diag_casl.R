@@ -1,3 +1,7 @@
+## Run the diagnostics for the *casual* network model
+##
+## This script should not be run directly. But `sourced` by `2-diagnostics.R`
+
 model_casl_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
   nodefactor("age.grp", levels = TRUE) +

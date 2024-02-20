@@ -1,9 +1,20 @@
-source("./R/hpc_configs.R")
+## HPC Workflow: Networks
+##
+## Define a workflow to run the estimation and diagnostics of the network models
+## on the HPC
+
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(slurmworkflow)
+
 hpc_context <- TRUE
-source("./R/A-networks/z-context.R", local = TRUE)
+source("R/shared_variables.R", local = TRUE)
+source("R/A-networks/z-context.R", local = TRUE)
+source("R/hpc_configs.R", local = TRUE)
 
-library("slurmworkflow")
-
+# Process ----------------------------------------------------------------------
 wf <- make_em_workflow("networks", override = TRUE)
 
 wf <- add_workflow_step(

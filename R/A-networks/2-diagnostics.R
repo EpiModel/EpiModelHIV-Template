@@ -7,9 +7,9 @@
 rs()
 
 # Setup ------------------------------------------------------------------------
-source("R/shared_variables.R", local = TRUE)
 library(EpiModelHIV)
 
+source("R/shared_variables.R", local = TRUE)
 source("R/A-networks/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------

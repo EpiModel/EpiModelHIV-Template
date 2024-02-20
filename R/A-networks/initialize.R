@@ -1,3 +1,7 @@
+## Initialize the ARTnet data objects and the networks to be fitted
+##
+## This script should not be run directly. But `sourced` by `1-estimation.R`
+
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",

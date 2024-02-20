@@ -1,7 +1,7 @@
 ## Different setup for HPC and local context for the `A-networks` step
 ##
 ## This script should not be run directly. But `sourced` from other scripts
-## within the `R/A-networks` directory.
+## within the `R/A-networks/` directory.
 
 if (exists("hpc_context") && hpc_context) {
   context <- "hpc"

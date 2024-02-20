@@ -1,4 +1,8 @@
-model_inst_dx <- ~edges +
+## Run the diagnostics for the *one-off* network model
+##
+## This script should not be run directly. But `sourced` by `2-diagnostics.R`
+
+model_ooff_dx <- ~edges +
   nodematch("age.grp", diff = FALSE) +
   nodefactor("age.grp", levels = TRUE) +
   nodematch("race", diff = TRUE) +
@@ -12,7 +16,7 @@ dx_ooff <- EpiModel::netdx(
   est$fit_ooff,
   nsims = 1e4,
   dynamic = FALSE,
-  nwstats.formula = model_inst_dx,
+  nwstats.formula = model_ooff_dx,
   set.control.ergm = ergm::control.simulate.formula(MCMC.burnin = 1e5)
 )
 

@@ -1,3 +1,7 @@
+## Define and fit the *casual* network  model
+##
+## This script should not be run directly. But `sourced` by `1-estimation.R`
+
 # Formula
 model_casl <- ~ edges +
   nodematch("age.grp", diff = TRUE) +

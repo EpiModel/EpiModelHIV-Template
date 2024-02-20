@@ -1,3 +1,7 @@
+## Define and fit the *one-off* network  model
+##
+## This script should not be run directly. But `sourced` by `1-estimation.R`
+
 # Formula
 model_ooff <- ~ edges +
   nodematch("age.grp", diff = FALSE) +
