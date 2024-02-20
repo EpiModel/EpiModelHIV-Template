@@ -31,7 +31,7 @@ control <- control_msm(
   verbose             = FALSE
 )
 
-# Workflow creation ------------------------------------------------------------
+# Workflow creation
 wf <- make_em_workflow("interventions", override = TRUE)
 
 # Define test scenarios
