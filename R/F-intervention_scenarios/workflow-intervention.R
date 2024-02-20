@@ -1,22 +1,26 @@
+## HPC Workflow: Intervention scenario
 ##
-## Epidemic Model Scenarios Playground, HPC setup
-##
+## Define a workflow to run the intervention scenarios, merge the output,
+## produce formatted tables and plots
 
-# Libraries --------------------------------------------------------------------
-library("slurmworkflow")
-library("EpiModelHPC")
-library("EpiModelHIV")
-library("dplyr")
+# This script should be run in a fresh R session
+rs()
 
-# Settings ---------------------------------------------------------------------
-source("R/shared_variables.R", local = TRUE)
+# Setup ------------------------------------------------------------------------
+library(slurmworkflow)
+library(EpiModelHPC)
+library(EpiModelHIV)
+library(dplyr)
+
 hpc_context <- TRUE
+source("R/shared_variables.R", local = TRUE)
 source("R/F-intervention_scenarios/z-context.R", local = TRUE)
+source("R/hpc_configs.R", local = TRUE)
 
-source("./R/hpc_configs.R")
 max_cores <- 8
 
-# Necessary files --------------------------------------------------------------
+# Process ----------------------------------------------------------------------
+
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
@@ -30,10 +34,8 @@ control <- control_msm(
 # Workflow creation ------------------------------------------------------------
 wf <- make_em_workflow("interventions", override = TRUE)
 
-# Using scenarios --------------------------------------------------------------
-
 # Define test scenarios
-scenarios_df <- readr::read_csv("./data/input/scenarios.csv")
+scenarios_df <- readr::read_csv("data/input/scenarios.csv")
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 wf <- add_workflow_step(
@@ -42,7 +44,6 @@ wf <- add_workflow_step(
     path_to_restart, param, init, control,
     scenarios_list = scenarios_list,
     output_dir = scenarios_dir,
-    # libraries = "EpiModelHIV",
     save_pattern = "simple",
     n_rep = 32,
     n_cores = max_cores,
@@ -76,6 +77,33 @@ wf <- add_workflow_step(
     )
 )
 
-# make plots step
-
 # make tables step
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/F-intervention_scenarios/2-process_tables.R",
+    args = list(hpc_context = TRUE),
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "5G"
+  )
+)
+
+# make plots step
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/F-intervention_scenarios/3-process_plots.R",
+    args = list(hpc_context = TRUE),
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "mail-type" = "END",
+    "cpus-per-task" = max_cores,
+    "time" = "04:00:00",
+    "mem-per-cpu" = "5G"
+  )
+)
