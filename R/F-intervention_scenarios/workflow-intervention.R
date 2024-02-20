@@ -1,4 +1,4 @@
-## HPC Workflow: Intervention scenario
+## HPC Workflow: Intervention scenarios
 ##
 ## Define a workflow to run the intervention scenarios, merge the output,
 ## produce formatted tables and plots
