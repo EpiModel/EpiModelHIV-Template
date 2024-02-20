@@ -1,9 +1,18 @@
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
+## 1. Netsim Interactive Exploration
+##
+## Run `netsim` with estimated network models and interactively explore the
+## content of the a simulation object.
 
-# Settings ---------------------------------------------------------------------
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(EpiModelHIV)
+
 source("R/shared_variables.R", local = TRUE)
 source("R/E-intervention_explore/z-context.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 # set prep start to a low value to test the full model in a few steps
 prep_start <- restart_time + 1 * year_steps

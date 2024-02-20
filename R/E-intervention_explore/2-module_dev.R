@@ -1,19 +1,27 @@
+## 2. Intervention Scenarios: Module Development Script
+##
 ## Example interactive epidemic simulation run script with basic
 ## parameterization and all parameters defined in `param_msm`, with example of
-## writing/debugging modules
+## writing/debugging modules. This script uses a restart point.
 
-# Settings ---------------------------------------------------------------------
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(dplyr)
+library(ggplot2)
+
 source("R/shared_variables.R", local = TRUE)
-source("R/E-intervention_explore/z-context.R", local = TRUE)
+source("R/B-netsim_explore/z-context.R")
 
-# Libraries  -------------------------------------------------------------------
-library("dplyr")
-library("ggplot2")
-theme_set(theme_light())
 # load the local development version of the project
 pkgload::load_all(EMHIVp_dir)
 
-# Necessary files --------------------------------------------------------------
+# default theme for the plots
+theme_set(theme_light())
+
+# Process ----------------------------------------------------------------------
+
 # set prep start to a low value to test the full model in a few steps
 prep_start <- restart_time + 1 * year_steps
 source("R/netsim_settings.R", local = TRUE)
