@@ -1,4 +1,4 @@
-## 01. Network Model Estimation
+## 1. Network Model Estimation
 ##
 ## Fit the network models using data from ARTnet
 

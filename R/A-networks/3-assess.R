@@ -1,4 +1,4 @@
-## 03. Network Model Diagnostics: Interactive Assessment
+## 3. Network Model Diagnostics: Interactive Assessment
 ##
 ## Assess the diagnosed network models using the diagnostics computed on the
 ## previous script.

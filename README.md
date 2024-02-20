@@ -31,6 +31,8 @@ conjunction with `z-context.R`, it sets up HPC specific elements.
 - z-context.R sets the specifics settings for HPC or local context
 - the other scripts are sourced and exist either to compartimentalize and reuse
   code
+- only the numbered and workflow scripts should call `library`. The other one
+should be just the code itself
 
 ## What to edit
 

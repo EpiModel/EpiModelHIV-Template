@@ -1,4 +1,4 @@
-## 02. Network Model Diagnostics
+## 2. Network Model Diagnostics
 ##
 ## Compute the diagnostics for the estimated network models. They are assessed
 ## in the next script.
