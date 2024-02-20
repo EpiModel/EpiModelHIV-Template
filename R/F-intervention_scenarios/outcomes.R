@@ -1,6 +1,3 @@
-library(dplyr)
-library(tidyr)
-source("./R/shared_variables.R", local = TRUE)
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
   d |>

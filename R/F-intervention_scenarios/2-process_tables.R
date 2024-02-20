@@ -1,9 +1,21 @@
-# libraries --------------------------------------------------------------------
-library(dplyr)
+## 2. Intervention Scenarios Process Tables
+##
+## Make the tables using the results of the simulations from the previous step
+## locally or on the HPC (see `workflow-interventions.R`)
 
-# settings ---------------------------------------------------------------------
-source("./R/shared_variables.R", local = TRUE)
-source("./R/F-intervention_scenarios/outcomes.R", local = TRUE)
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(dplyr)
+library(tidyr)
+
+source("R/shared_variables.R", local = TRUE)
+source("R/F-intervention_scenarios/z-context.R", local = TRUE)
+
+source("R/F-intervention_scenarios/outcomes.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 scenarios_tibble_dir <- fs::path(scenarios_dir, "merged_tibbles")
 scenarios_info <- EpiModelHPC::get_scenarios_tibble_infos(scenarios_tibble_dir)
@@ -18,7 +30,7 @@ d_ls <- future.apply::future_lapply(
 d_sc_raw <- dplyr::bind_rows(d_ls)
 glimpse(d_sc_raw)
 
-source("./R/F-intervention_scenarios/labels.R", local = TRUE)
+source("R/F-intervention_scenarios/labels.R", local = TRUE)
 
 format_table(d_sc_raw, var_labels, format_patterns) |>
   readr::write_csv("data/output/table.csv")

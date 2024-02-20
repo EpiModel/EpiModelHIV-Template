@@ -1,5 +1,3 @@
-library(stringr)
-
 # Conversion between variable name and final label
 var_labels <- c(
   # Epi
@@ -48,7 +46,7 @@ format_patterns <- list(
 
 for (nms in names(fmts)) {
   for (fp in format_patterns) {
-    if (any(str_detect(nms, fp$patterns))) {
+    if (any(stringr::str_detect(nms, fp$patterns))) {
       fmts[[nms]] <- fp$fun
       break()
     }

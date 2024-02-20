@@ -1,9 +1,20 @@
-# libraries --------------------------------------------------------------------
-library(dplyr)
+## 3. Intervention Scenarios Process Plots
+##
+## Make the plots using the results of the simulations from the previous step
+## locally or on the HPC (see `workflow-interventions.R`)
 
-# settings ---------------------------------------------------------------------
-source("./R/shared_variables.R", local = TRUE)
-source("./R/F-intervention_scenarios/outcomes.R", local = TRUE)
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(dplyr)
+library(ggplot2)
+theme_set(theme_light())
+
+source("R/shared_variables.R", local = TRUE)
+source("R/F-intervention_scenarios/outcomes.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 scenarios_tibble_dir <- fs::path(scenarios_dir, "merged_tibbles")
 scenarios_info <- EpiModelHPC::get_scenarios_tibble_infos(scenarios_tibble_dir)

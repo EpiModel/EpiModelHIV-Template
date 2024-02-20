@@ -33,6 +33,8 @@ conjunction with `z-context.R`, it sets up HPC specific elements.
   code
 - only the numbered and workflow scripts should call `library`. The other one
 should be just the code itself
+- source files in `setup ----` if they only provide functions and in `process ---`
+if they are the code itself
 
 ## What to edit
 

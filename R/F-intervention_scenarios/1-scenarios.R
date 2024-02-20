@@ -1,16 +1,22 @@
+## 1. Intervention Scenarios Playground
+##
 ## Example interactive epidemic simulation run script with more complex
 ## parameterization and parameters defined in spreadsheet, with example of
 ## running model scenarios defined with data-frame approach
 
-# Settings ---------------------------------------------------------------------
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
+library(EpiModelHIV)
+library(dplyr)
+
 source("R/shared_variables.R", local = TRUE)
 source("R/F-intervention_scenarios/z-context.R", local = TRUE)
 
-# Libraries  -------------------------------------------------------------------
-library("EpiModelHIV")
-library("dplyr")
+# Process ----------------------------------------------------------------------
 
-# Necessary files --------------------------------------------------------------
+# Necessary files
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
@@ -21,19 +27,15 @@ control <- control_msm(
   verbose             = FALSE
 )
 
-# Using scenarios --------------------------------------------------------------
-
 # Define test scenarios
-scenarios_df <- readr::read_csv("./data/input/scenarios.csv")
+scenarios_df <- readr::read_csv("data/input/scenarios.csv")
 
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
-# Here 2 scenarios will be used "scenario_1" and "scenario_2".
-# This will generate 6 files (3 per scenarios)
 EpiModelHPC::netsim_scenarios(
   path_to_restart, param, init, control,
-  scenarios_list = scenarios_list, # set to NULL to run with default params
+  scenarios_list = scenarios_list,
   n_rep = 8,
   n_cores = 4,
   output_dir = scenarios_dir,
