@@ -1,10 +1,20 @@
-# Libraries --------------------------------------------------------------------
+## 1. Intervention Scenarios Playground
+##
+## Example interactive epidemic simulation run script with more complex
+## parameterization and parameters defined in spreadsheet, with example of
+## running model scenarios defined with data-frame approach
+
+# This script should be run in a fresh R session
+rs()
+
+# Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
 library(dplyr)
 
-# Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
 source("R/F-intervention_scenarios/z-context.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 source("R/netsim_settings.R", local = TRUE)
 

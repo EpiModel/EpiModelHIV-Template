@@ -1,7 +1,7 @@
-## 1. Netsim Interactive Exploration
+## 1. Intervention Scenarios: Interactive Exploration
 ##
 ## Run `netsim` with estimated network models and interactively explore the
-## content of the a simulation object.
+## content of the a simulation object. This script uses a restart point.
 
 # This script should be run in a fresh R session
 rs()
