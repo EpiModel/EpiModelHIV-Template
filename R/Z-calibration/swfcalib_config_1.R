@@ -1,5 +1,12 @@
-source("R/shared_variables.R", local = TRUE)
-source("R/Z-calibration/auto_cal_sim.R")
+## swfcalib Configuration 1 (pre-prep)
+##
+## Set up the configuration for the first calibration. This takes place before
+## the restart point and before PrEP is started.
+##
+## This script should not be run directly. But `sourced` from the swfcalib
+## workflow
+
+source("R/Z-calibration/swfcalib_model.R", local = TRUE)
 model_fn <- make_model_fn(restart = FALSE, calib_steps = year_steps)
 
 n_sims <- 512

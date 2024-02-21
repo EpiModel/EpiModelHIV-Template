@@ -1,8 +1,7 @@
-## 1. Intervention Scenarios Playground
+## 0. Generate the scenarios.csv file
 ##
-## Example interactive epidemic simulation run script with more complex
-## parameterization and parameters defined in spreadsheet, with example of
-## running model scenarios defined with data-frame approach
+## Programatically define some scenarios and store them to
+## "data/input/scenarios.csv"
 
 # This script should be run in a fresh R session
 

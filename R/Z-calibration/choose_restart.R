@@ -1,4 +1,10 @@
-# To be run after merge_netsim_tibble
+## Choose Restart Point
+##
+##  Assess the candidates simulations for restart point, pick the best one and
+##  save it in `path_to_restart`.
+##
+## This script should not be run directly. But `sourced` from the restart_point
+## workflow
 
 # for each merged_tibble
 #   make calibration targets
@@ -8,14 +14,21 @@
 #   make calibration dist
 #   calc q1, q2, q3
 #   combine calib_dists
+#
+
+# Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
-source("./R/shared_variables.R", local = TRUE)
-targets <- EpiModelHIV::get_calibration_targets()
-calib_steps <- year_steps
-d_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
+
 hpc_context <- TRUE
-source("./R/Z-calibration/z-context.R", local = TRUE)
+source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+
+calib_steps <- year_steps
+
+# Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
+targets <- EpiModelHIV::get_calibration_targets()
+d_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
 
 d_dist <- readRDS(d_calibs) |>
   dplyr::filter(time >= max(time) - calib_steps) |>

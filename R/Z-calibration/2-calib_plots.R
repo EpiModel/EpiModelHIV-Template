@@ -1,9 +1,20 @@
-# Libraries --------------------------------------------------------------------
+## 2. Calibration Plots
+##
+## Generate the calibration plots using the data produced by the
+## `process_calib_plots.R` script. This is usually run as part of the restart
+## point workflow. The calibration plot data must be downloaded from the HPC and
+## be stored to: `fs::path(calib_plot_dir, "data")`
+
+# This script should be run in a fresh R session
+
+# Setup ------------------------------------------------------------------------
 library(ggplot2)
-#
-# Settings ---------------------------------------------------------------------
+theme_set(theme_light())
+
 source("R/shared_variables.R", local = TRUE)
-theme_set(theme_classic())
+source("R/Z-calibration/z-context.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 plots <- fs::dir_ls(fs::path(calib_plot_dir, "data"))
 plots_dir <- fs::path(calib_plot_dir, "plots")

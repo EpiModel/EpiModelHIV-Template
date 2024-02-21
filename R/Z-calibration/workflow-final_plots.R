@@ -1,22 +1,24 @@
+## HPC Workflow: Final Calibration Plots
 ##
-## Epidemic Model Scenarios Playground, HPC setup
-##
+## Define a workflow to run a few hundred replications of the default paramater
+## and make calibration plots
 
-# Libraries --------------------------------------------------------------------
-library("slurmworkflow")
-library("EpiModelHPC")
-library("EpiModelHIV")
-library("dplyr")
+# This script should be run in a fresh R session
 
 # Settings ---------------------------------------------------------------------
-source("R/shared_variables.R", local = TRUE)
+library(slurmworkflow)
+library(EpiModelHPC)
+library(EpiModelHIV)
+library(dplyr)
 
-source("./R/hpc_configs.R")
+hpc_context <- TRUE
+source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+source("R/hpc_configs.R", local = TRUE)
+
 max_cores <- 8
 
-# Necessary files --------------------------------------------------------------
-hpc_context <- TRUE
-source("R/Z-calibration/z-context.R", local = TRUE)
+# Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
@@ -27,7 +29,6 @@ control <- control_msm(
   .tracker.list = EpiModelHIV::make_calibration_trackers()
 )
 
-# Workflow creation ------------------------------------------------------------
 wf <- make_em_workflow("final_plots", override = TRUE)
 
 # Using scenarios --------------------------------------------------------------

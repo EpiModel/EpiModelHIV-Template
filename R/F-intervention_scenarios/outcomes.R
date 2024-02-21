@@ -1,3 +1,11 @@
+## Intervention Scenarios outcomes
+##
+## Define helper functions to create the scenarios outcome variables and to
+## combine them into digestible tibbles
+##
+## This script should not be run directly. But `sourced` from other scripts
+## within the `R/F-intervention_scenarios/` directory.
+
 # create the elements of the outcomes step by step
 mutate_outcomes <- function(d) {
   d |>

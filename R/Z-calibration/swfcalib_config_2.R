@@ -1,4 +1,11 @@
-source("R/shared_variables.R", local = TRUE)
+## swfcalib Configuration 2 (post restart)
+##
+## Set up the configuration for the second calibration. This takes place after
+## the restart point and will calibrate PrEP.
+##
+## This script should not be run directly. But `sourced` from the swfcalib
+## workflow
+
 source("R/Z-calibration/auto_cal_sim.R")
 model_fn <- make_model_fn(restart = TRUE, calib_steps = year_steps)
 

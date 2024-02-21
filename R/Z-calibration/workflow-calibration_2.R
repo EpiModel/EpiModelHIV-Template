@@ -1,21 +1,25 @@
+## HPC Workflow: Manual Calibration 2
 ##
-## Epidemic Model Scenarios Playground, HPC setup
-##
+## Define a workflow to proposal parameters for calibration. This runs the
+## second part of the model (after the restart point). The values are assessed
+## with the script 1-manual_calib_assess.R
 
-# Libraries --------------------------------------------------------------------
-library("slurmworkflow")
-library("EpiModelHPC")
-library("EpiModelHIV")
-library("dplyr")
+# This script should be run in a fresh R session
 
 # Settings ---------------------------------------------------------------------
-source("R/shared_variables.R", local = TRUE)
-context <- "hpc"
+library(slurmworkflow)
+library(EpiModelHPC)
+library(EpiModelHIV)
+library(dplyr)
 
-source("./R/hpc_configs.R")
+hpc_context <- TRUE
+source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+source("R/hpc_configs.R", local = TRUE)
+
 max_cores <- 8
 
-# Necessary files --------------------------------------------------------------
+# Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
@@ -27,10 +31,10 @@ control <- control_msm(
   verbose        = FALSE
 )
 
-# Workflow creation ------------------------------------------------------------
+# Workflow creation
 wf <- make_em_workflow("calibration_2", override = TRUE)
 
-# Using scenarios --------------------------------------------------------------
+# Using scenarios
 
 # Define calibration scenarios
 # insert test values here

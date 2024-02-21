@@ -1,20 +1,30 @@
-# Libraries --------------------------------------------------------------------
+## Process Calibration Plots
+##
+## Generate a the calibration plots objects (not the images) on the HPC. And
+## make the data available to be downloaded for the image generation on the
+## local machine. *Generating the actual images on the HPC is complex as it is a
+## headless environment*
+##
+## This script should be called by the restart_point workflow
+
+# Setup ------------------------------------------------------------------------
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-#
-# Settings ---------------------------------------------------------------------
+
 source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+
+calib_steps <- year_steps
+modulo_steps <- 2
+
+# Process ----------------------------------------------------------------------
+#
 path_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
 plot_data_dir <- fs::path(calib_plot_dir, "data")
 if (!fs::dir_exists(plot_data_dir)) fs::dir_create(plot_data_dir)
 
-hpc_context <- TRUE
-source("./R/Z-calibration/z-context.R", local = TRUE)
-
-calib_steps <- year_steps
 targets <- EpiModelHIV::get_calibration_targets()
-modulo_steps <- 2
 
 # Common plot function for calibration
 #   line plot with IQR

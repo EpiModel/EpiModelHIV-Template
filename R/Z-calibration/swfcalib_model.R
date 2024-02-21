@@ -1,3 +1,11 @@
+## swfcalib Model Function
+##
+## Define helper functions to create the `model` function for an swfcalib
+## process.
+##
+## This script should not be run directly. But `sourced` from the
+## swfcalib_config scripts.
+
 make_model_fn <- function(restart, calib_steps) {
   force(restart)
   force(calib_steps)

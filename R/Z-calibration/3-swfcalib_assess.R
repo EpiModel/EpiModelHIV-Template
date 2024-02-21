@@ -1,10 +1,22 @@
-# Libraries --------------------------------------------------------------------
+## 3. swfcalib Assessment
+##
+## interactive script to evaluate why an swfcalib process did not returned the
+## expected results. It creates the assessment report and interactively look
+## into the `results.rds` object found in the calibration folder.
+
+# This script should be run in a fresh R session
+
+# Setup ------------------------------------------------------------------------
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+theme_set(theme_light())
 
-# Settings ---------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
+
 swfcalib_dir <- fs::path("data", "intermediate", "swfcalib")
 theme_set(theme_light())
 
@@ -19,7 +31,11 @@ results |>
   pull(hiv.test.rate_1) |>
   range()
 
-ggplot(results, aes(x = prep.start.prob_3 , y = cc.prep.W, col = as.factor(.iteration))) +
+ggplot(results, aes(
+    x = prep.start.prob_3,
+    y = cc.prep.W,
+    col = as.factor(.iteration)
+  )) +
   geom_point() +
   geom_hline(yintercept = 0.321)
 

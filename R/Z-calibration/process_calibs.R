@@ -1,16 +1,18 @@
-# can I simply use the manual_1_process.R
+## Process Calibration
+##
+## Generate a light calibration assessement file to be downloaded locally to
+## check the manual calibration advancement.
+##
+## This script should be called by one of the manual_calibration workflows.
 
-# To be run after merge_netsim_tibble
+# Setup ------------------------------------------------------------------------
+library(dplyr)
+library(tidyr)
 
-# for each merged_tibble
-#   make calibration targets
-#   calc q1, q2, q3
-#   combine calib_vals
-#
-#   make calibration dist
-#   calc q1, q2, q3
-#   combine calib_dists
-source("./R/shared_variables.R", local = TRUE)
+source("R/shared_variables.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
+
+# Process ----------------------------------------------------------------------
 
 process_one_calib_tibble <- function(sc_info, calib_steps) {
   targets <- EpiModelHIV::get_calibration_targets()

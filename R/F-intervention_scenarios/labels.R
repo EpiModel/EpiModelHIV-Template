@@ -1,3 +1,11 @@
+## Tables Labels and Format
+##
+## Define how the name of the variable should be rendered in the tables. Define
+## what number format should be used for each variable
+##
+## This script should not be run directly. But `sourced` from other scripts
+## within the `R/F-intervention_scenarios/` directory.
+
 # Conversion between variable name and final label
 var_labels <- c(
   # Epi
