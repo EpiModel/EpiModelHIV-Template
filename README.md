@@ -75,8 +75,8 @@ sourced by every top level scripts.
 Open it now and edit the following variables:
 
 ```r
-EMHIVp_branch <- "applied_proj"          # the name of your project
-EMHIVp_dir <- "Desktop\git\EpiModeHIV-p" # the path to EpiModeHIV-p  directory
+EMHIVp_branch <- "applied_proj"             # the name of your project
+EMHIVp_dir <- "Desktop\\git\\EpiModelHIV-p" #  path to EpiModeHIV-p  directory
 
 time_unit <- 7     # number of days in a time step (7 for weekly)
 ```
