@@ -17,6 +17,52 @@ This template is divided into several **steps**. They are separated as
 sub-directories under the `R/` folder. They each contain a `README.md` file. We
 will describe each of them below.
 
+## Conventions
+
+Each script in this project is structured in the same way to simplify reading.
+As these applied project are pretty complex, you are advised to read the code
+and make sure you understand what it does before running it. Comments are often
+present to guide you along the way.
+
+### Top level scripts
+
+By *top level scripts* we mean the scripts that will be executed directly by the
+user.
+
+They are all the scripts starting with as number (e.g. `1-estimation.R`) or the
+scripts starting with `workflow` (e.g. `workflow-networks.R`).
+
+These scripts are meant to be run in clean R session. It is advised to restart
+R before running these scripts. This can be done by pressing `Ctrl+Shift+F10`
+on RStudio. (Note, `.rs.restartR()` is **NOT** the same at all).
+
+All other scripts are utilities. They provide variables or functions to the top
+level ones and should not be run on their own.
+
+### The `z-context.R` scripts
+
+Each step contains a `z-context.R`. It defines specific parameters differently
+depending on the context of executions.
+
+The two possible contexts are `local` or `hpc`. Local means *your own computer*
+and *hpc* is the High Performance Computing cluster where you will run your
+large scale simulations.
+
+You will probably not need to edit these files.
+
+Simply know that the context switching is done by setting the following variable
+before these scripts are sourced:
+
+```r
+hpc_context <- TRUE
+```
+
+### General advise on making new scripts
+
+When creating a new top level script you should adhere to the global structure
+used all over this repo. These project of ours are very complex with many moving
+pieces. Trying to keep them as clean as possible helps a lot in not getting lost.
+
 ## Getting started: fitting your project
 
 First of, some scripts will need a few modification to fit your project.
@@ -85,80 +131,17 @@ Below is a list of all the steps with a quick description.
 
 ## Common mistakes
 
-- rm the workflow dir locally and on the HPC before sending a new one.
+Here is a list of commonly made mistakes to help you avoid them as you go:
 
-## Conventions
+### Workflow directories
 
-- one folder per section (e.g. `A-networks/`)
-- README contains the goal and steps of the section as well as what to edit
-- numbered scripts (e.g. 1-network.R) are to be run in order, in new R session
-  each time
-- workflow scripts (e.g. workflow-network.R) create the workflows for the HPC
-  [[link to wiki]]
-- the `shared_variables.R` and `z-context.R` scripts are sourced by all numbered
-and workflow script.
-- An `hpc_context` flag is set for the code that has to be run on the HPC. In
-conjunction with `z-context.R`, it sets up HPC specific elements.
-- z-context.R sets the specifics settings for HPC or local context
-- the other scripts are sourced and exist either to compartimentalize and reuse
-  code
-- only the numbered and workflow scripts should call `library`. The other one
-should be just the code itself
-- source files in `setup ----` if they only provide functions and in `process ---`
-if they are the code itself
+As you start working with the HPC, you will create workflow directories. Do not
+forget to delete them locally AND on the HPC before making a new one with the
+same name.
 
-## What to edit
+On the HPC this can be done with:
 
-Before going into the project's first section, some setup is required.
-
-### R/shared_variables
-
-Set the `EMHIVp_branch` and `EMHIVp_dir` variable with the name of your project
-and the path to your local EpiModelHIV-p repository.
-
-In this example:
-
-```r
-EMHIVp_branch <- "applied_proj"
-EMHIVp_dir <- "~/GitHub/EpiModelHIV-p"
+```sh
+rm -rf workflows/<the name of your workflow>
 ```
-
-If your model is not running weekly time steps, change `time_unit` to the
-relevant value (1 for daily, 7 for weekly, etc).
-
-### R/hpc_configs.R
-
-This script sets up the configuration for running code on the HPC. You can skip
-this section at first and go back to it when you start working with the HPC.
-
-Set the `mail_user` variable with the mail address where you would like to
-receive the notification from the HPC.
-
-The `current_git_branch` is a fail safe preventing the HPC from running the
-wrong code. It's set to `main` by default. If you create a new branch on your
-project, edit this variable accordingly before running things on the HPC.
-
-*hpc_node_setup* and *default_sbatch_opt* -> TODO
-
-## Initialize the project
-
-Open the script `00-setup.R`.
-
-Make sure that R is restarted after `renv::init(bare = TRUE)`
-
-Run the rest of the script.
-
-## Go to first section: A-networks/README.md
-
-## TODO
-
-- at the end: remake a `run all` workflow
-- per step README
-  - goal
-  - desc of each script
-  - what to modify
-
-use `rs()` on top of files that needs restart and make the function  work even
-without rstudio
-
 
