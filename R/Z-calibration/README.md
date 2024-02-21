@@ -1,23 +1,44 @@
 # Calibration
 
-In this step we calibrate the model. It is the most complex step. For starters
-simply run the *0-restart_point_single.R* script and move on to the next step.
+## Introduction
 
-If you intend to calibrate the model yourself or want to understand the
-calibration process more, read on.
+In this step we calibrate the model. It is the most complex step. Most users will
+not calibrate the model themselves. The rest of this document is aimed as the
+person in charge of calibration.
 
-## Goal
+The calibration aims to make the model fit a set of *targets* by modifying the
+input parameters. The steps are always the same:
 
-In this step we run the model with scenarios. We leverage the [scenario API](https://cran.r-project.org/web/packages/EpiModel/vignettes/model-parameters.html)
+1. run the model with a set of parameters
+2. assess how close the model is to the targets
+3. propose a new set of parameters
+4. repeat until calibrated
 
-## The scripts
+This step showcases two approaches for calibration, a "manual" one where each
+of this step is planned by the user. And an automated one leveraging
+[swfcalib](https://github.com/EpiModel/swfcalib).
 
-- **1-scenarios.R**: Run simulation scenarios locally to familiarize with the API.
+## General consideration
 
-## What to edit
+Our models are calibrated in two part. The first one before PrEP is initialized
+and a second one after. In between, the `workflow-restart_point.R` script is
+used to select a good restart point. This approach allow us not to re-simulate
+the 60 year burn-in period for each simulation.
 
-This step is meant for exploration. It is suggested that you duplicate the script and play with the copy. Keep the original one as template.
+## Manual calibration
 
-## On the HPC
+For this one we use the *manual_calib_* workflows. The idea is to:
+- pick some parameters to test
+- download the `calib_assess.csv` file
+- look at the results
+- guestimate a new set
 
-The `workflow-scenarios.R` file create the `slurmworkflow` workflow to run the scenarios on a larger scale on the HPC. This step requires the estimation files to be present on the HPC. (i.e. having run the `workflow-estimation` on the HPC before).
+Until we are happy with the results.
+
+## Automated calibration
+
+Here we define how the calibration should happen in the `swfcalib_config_x.R`
+scripts. See [the `swfcalib`
+vignette](https://epimodel.github.io/swfcalib/articles/swfcalib.html) for
+details.
+

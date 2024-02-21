@@ -1,14 +1,16 @@
 # Netsim Scenarios
 
-## Goal
+## Introduction
 
 In this step we run the model with scenarios. We leverage the [scenario
 API](https://cran.r-project.org/web/packages/EpiModel/vignettes/model-parameters.html)
 
-## The scripts
+## Scripts descriptions
 
 - **1-scenarios.R**: Run simulation scenarios locally to familiarize with the
   API.
+- **2-scenarios_assess.R**: Explore the output of the simulations
+- **workflow-scenarios.R**: create the workflow to run all the steps on the HPC.
 
 ## What to edit
 
@@ -24,3 +26,13 @@ The `workflow-scenarios.R` file create the `slurmworkflow` workflow to run the
 scenarios on a larger scale on the HPC. This step requires the estimation files
 to be present on the HPC. (i.e. having run the `workflow-estimation` on the HPC
 before).
+
+## Common mistakes
+
+The simulations will always be saved in the same directory, here
+`data/intermediate/scenarios/`. If you forget to clear it before running a new
+set of simulation you may get weird results.
+
+On the HPC you would clear it by running `rm -rf data/intermediate/scenarios/*`.
+Beware though, this command will not ask confirmation. So make sure you do not
+need any of it before removing it.

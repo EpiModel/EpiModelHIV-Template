@@ -5,7 +5,7 @@
 In this section we estimate and diagnose the [ERGMs](link?) used by the
 epidemic model.
 
-## The scripts
+## Scripts description
 
 - **1-estimations.R**: Initialize and run the estimation process for the
   3 networks
@@ -32,4 +32,3 @@ long.
 
 The **workflow-networks.R** file create the `slurmworkflow` workflow to estimate
 the full sized networks on the HPC and run the diagnostics associated with them.
-

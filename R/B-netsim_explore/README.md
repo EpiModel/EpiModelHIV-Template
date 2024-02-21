@@ -1,15 +1,15 @@
 # Netsim Explore
 
-## Goal
+## Introduction
 
 In this step we run the model locally to understand its outputs and develop the
 new `EpiModel` modules.
 
-## The scripts
+## Scripts descriptions
 
 - **1-explore_netsim.R**: Run the simulation with the installed `EpiModelHIV`
   package and explore the output.
-- **2-module_dev.R**: Run the simulation with the local version of
+- **2-module_dev.R**: Run the simulation with the locally cloned version of
   `EpiModelHIV`. This script is to test the modules during the development
   process.
 
