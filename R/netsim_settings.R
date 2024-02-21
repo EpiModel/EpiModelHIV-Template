@@ -3,10 +3,6 @@
 ## This script should not be run directly. But `sourced` from other scripts
 ## using the `netsim` function
 
-if (!context %in% c("local", "hpc")) {
-  stop("The `context` variable must be set to either 'local' or 'hpc'")
-}
-
 epistats <- readRDS(fs::path(est_dir, paste0("epistats-", context, ".rds")))
 netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
 path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))

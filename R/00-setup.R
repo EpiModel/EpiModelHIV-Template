@@ -5,9 +5,10 @@
 # Initialize renv but do not install anything yet
 renv::init(bare = TRUE)
 
-# restart R
+# restart R if it has not been done automatically
 
 source("R/shared_variables.R", local = TRUE)
+
 # This code installs the packages only available on GitHub (not CRAN ones)
 renv::install(c(
   paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch),
