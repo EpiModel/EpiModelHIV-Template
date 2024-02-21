@@ -3,7 +3,7 @@
 ## This script should not be run directly. But `sourced` the from scripts that
 ## interact with the HPC (usually the `workflow-***.R` ones)
 
-current_git_branch <- "rework"
+current_git_branch <- "main"
 mail_user <- "user@emory.edu"
 
 hpc_node_setup <- c(
