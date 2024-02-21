@@ -4,7 +4,6 @@
 ## test the next part of the models before the calibration is finished
 
 # This script should be run in a fresh R session
-rs()
 
 # Settings ---------------------------------------------------------------------
 library(slurmworkflow)

@@ -4,7 +4,6 @@
 ## HPC later on and ensure a smooth transition to the HPC setup.
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)

@@ -29,15 +29,7 @@ for (.folder in .folder.struct) {
 rm(.folder.struct, .folder)
 
 # 3. Helpful aliases
-rs <- function() {
-  if (!interactive()) return()
-  if (exists(".rs.restartR")) {
-    .rs.restartR()
-  } else {
-    message("The a restart of the R session was requested.")
-  }
-}
-
+rs <- function() .rs.restartR()
 si <- function() sessioninfo::session_info()
 
 # 4. Standard options

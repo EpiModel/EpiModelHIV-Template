@@ -4,7 +4,6 @@
 ## on the HPC
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)

@@ -3,7 +3,6 @@
 ## Fit the network models using data from ARTnet
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(ARTnet)

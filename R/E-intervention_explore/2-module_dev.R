@@ -5,7 +5,6 @@
 ## writing/debugging modules. This script uses a restart point.
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(dplyr)

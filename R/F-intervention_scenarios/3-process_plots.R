@@ -4,7 +4,6 @@
 ## locally or on the HPC (see `workflow-interventions.R`)
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(dplyr)

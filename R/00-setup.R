@@ -6,7 +6,6 @@
 renv::init(bare = TRUE)
 
 # restart R
-rs()
 
 source("R/shared_variables.R", local = TRUE)
 # This code installs the packages only available on GitHub (not CRAN ones)

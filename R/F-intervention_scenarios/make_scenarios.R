@@ -5,7 +5,6 @@
 ## running model scenarios defined with data-frame approach
 
 # This script should be run in a fresh R session
-rs()
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
