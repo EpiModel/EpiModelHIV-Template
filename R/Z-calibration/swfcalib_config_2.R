@@ -6,7 +6,7 @@
 ## This script should not be run directly. But `sourced` from the swfcalib
 ## workflow
 
-source("R/Z-calibration/auto_cal_sim.R")
+source("R/Z-calibration/swfcalib_model.R")
 model_fn <- make_model_fn(restart = TRUE, calib_steps = year_steps)
 
 n_sims <- 512
@@ -23,8 +23,8 @@ calib_object <- list(
       prep.start.prob_2 = 0.005,
       prep.start.prob_3 = 0.005,
       # remove after
-      ugc.prob = 0.25,
-      uct.prob = 0.17
+      ugc.prob.post.prep = 0.25,
+      uct.prob.post.prep = 0.17
     )
   ),
   waves = list(
@@ -64,7 +64,7 @@ calib_object <- list(
       job1 = list(
         targets = "ir100.gc",
         targets_val = 12.81,
-        params = c("ugc.prob"), # target:
+        params = c("ugc.prob.post.prep"), # target:
         initial_proposals = dplyr::tibble(
           ugc.prob = seq(0.2, 0.3, length.out = n_sims),
         ),
@@ -77,7 +77,7 @@ calib_object <- list(
       job2 = list(
         targets = "ir100.ct",
         targets_val = 14.59,
-        params = c("uct.prob"), # target:
+        params = c("uct.prob.post.prep"), # target:
         initial_proposals = dplyr::tibble(
           uct.prob = seq(0.15, 0.25, length.out = n_sims),
         ),
