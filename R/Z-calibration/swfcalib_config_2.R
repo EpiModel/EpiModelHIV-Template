@@ -66,7 +66,7 @@ calib_object <- list(
         targets_val = 12.81,
         params = c("ugc.prob.post.prep"), # target:
         initial_proposals = dplyr::tibble(
-          ugc.prob = seq(0.2, 0.3, length.out = n_sims),
+          ugc.prob.post.prep = seq(0.2, 0.3, length.out = n_sims),
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
@@ -79,7 +79,7 @@ calib_object <- list(
         targets_val = 14.59,
         params = c("uct.prob.post.prep"), # target:
         initial_proposals = dplyr::tibble(
-          uct.prob = seq(0.15, 0.25, length.out = n_sims),
+          uct.prob.post.prep = seq(0.15, 0.25, length.out = n_sims),
         ),
         make_next_proposals = swfcalib::make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
