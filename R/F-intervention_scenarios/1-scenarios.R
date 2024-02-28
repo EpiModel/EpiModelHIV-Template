@@ -4,7 +4,7 @@
 ## parameterization and parameters defined in spreadsheet, with example of
 ## running model scenarios defined with data-frame approach
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)

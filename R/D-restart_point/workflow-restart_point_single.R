@@ -3,7 +3,7 @@
 ## Define a workflow to generate an uncalibrated restart point on the HPC to
 ## test the next part of the models before the calibration is finished
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Settings ---------------------------------------------------------------------
 library(slurmworkflow)
