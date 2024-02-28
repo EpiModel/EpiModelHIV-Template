@@ -72,7 +72,7 @@ First of, some scripts will need a few modification to fit your project.
 This files contains the generic configuration for the project. It will be
 sourced by every top level scripts.
 
-Open it now and edit the following variables:
+Open it now and modify the following variables to fit your project:
 
 ```r
 EMHIVp_branch <- "applied_proj"             # the name of your project
@@ -85,11 +85,12 @@ time_unit <- 7     # number of days in a time step (7 for weekly)
 
 This scripts contains configuration for running things on the HPC.
 
-Open it now and edit the `mail_user` variable to reflect your own e-mail address.
-It will be used to notify you of the progress of your jobs on the HPC.
+Open it now and modify the `mail_user` variable to reflect your own e-mail
+address. It will be used to notify you of the progress of your jobs on the HPC.
 
 The `current_git_branch` variable should be left to `main` most of the time.
-Modify it only if you created an new branch and want to run code from it on the HPC.
+Modify it only if you created an new branch and want to run code from it on the
+HPC.
 
 If you are working with the RSPH HPC, leave the rest unchanged. Otherwise modify
 the code accordingly.
@@ -97,13 +98,14 @@ the code accordingly.
 ### netsim_settings.R
 
 This script defines the default settings for `netsim`. The default values are
-probably correct. Edit the `init` variable to be `init <- init_msm()` if you
+probably correct. Modify the `init` variable to be `init <- init_msm()` if you
 need to disable the STIs in your model.
 
 ### z-test.R
 
-This file is for you to test code interactively before saving it into a more
-appropriate place once it's tested.
+This file is for you to test code without making another script *dirty*. As a
+reminder, you should **always** write code in a file and not in the R console.
+Even if it's just for a *quick* test.
 
 ## Getting started: setting up the environment
 

@@ -18,6 +18,9 @@ renv::install(c(
 # This code finds and install the libraries used by the project (CRAN version)
 renv::hydrate()
 
+# Snapshot the list of installed packages to the `renv.lock` file
+renv::snapshot()
+
 # Force `renv` to discover the following packages
 if (FALSE) {
   library("rmarkdown")
