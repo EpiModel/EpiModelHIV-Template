@@ -1,6 +1,7 @@
 # Scratchpad for interactive testing before integration in a script
 
 pkgload::load_all("../EpiModelHIV-p.git/new_node_attr")
+# pkgload::load_all("../EpiModelHIV-p.git/template")
 # library(EpiModelHIV)
 
 source("R/shared_variables.R", local = TRUE)
@@ -11,8 +12,8 @@ source("R/netsim_settings.R", local = TRUE)
 
 control <- control_msm(
   nsteps = 4 * year_steps,
-  verbose = TRUE,
-  raw.output = TRUE
+  verbose = FALSE,
+  raw.output = FALSE
 )
 
 # Read in the previously estimated networks and inspect their content
@@ -21,7 +22,7 @@ est <- readRDS(path_to_est)
 # debugonce(EpiModelHIV:::make_computed_attrs)
 # options(error = recover)
 start <- Sys.time()
-dat <- netsim(est, param, init, control)[[1]]
+sim <- netsim(est, param, init, control)
 print(Sys.time() - start)
 
 
