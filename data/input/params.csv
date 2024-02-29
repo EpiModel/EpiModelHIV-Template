@@ -73,10 +73,10 @@ rgc.prob,0.2889556,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps
 ugc.prob,0.2453431,numeric,CPN-gaps appendix 9.4 | calibrated
 rct.prob,0.1986395,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
 uct.prob,0.165486,numeric, CPN-gaps appendix 9.3 | calibrated
-rgc.prob.post.prep,0.3129266,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
-ugc.prob.post.prep,0.267055,numeric,CPN-gaps appendix 9.4 | calibrated
-rct.prob.post.prep,0.215046,numeric, CPN-plogis(qlogis(1714429) + log(1.25)) #0.3216; # gaps appendix 9.3
-uct.prob.post.prep,0.1797685,numeric, CPN-gaps appendix 9.3 | calibrated
+rgc.prob.post.prep,0.3054357,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
+ugc.prob.post.prep,0.2602463,numeric,CPN-gaps appendix 9.4 | calibrated
+rct.prob.post.prep,0.2208134,numeric, CPN-plogis(qlogis(1714429) + log(1.25)) #0.3216; # gaps appendix 9.3
+uct.prob.post.prep,0.1848125,numeric, CPN-gaps appendix 9.3 | calibrated
 rgc.sympt.prob,0.1,numeric, CPN-aps 9.3
 ugc.sympt.prob,0.9333,numeric, CPN-Gaps10.3
 rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
@@ -113,9 +113,9 @@ hiv.uct.or,1.73,numeric
 hiv.dual.rr,0.2,numeric
 riskh.start,Inf,numeric
 prep.start,Inf,numeric
-prep.start.prob_1,0.005574786,numeric
-prep.start.prob_2,0.00428437,numeric
-prep.start.prob_3,0.006642306,numeric
+prep.start.prob_1,0.005585435,numeric
+prep.start.prob_2,0.004288175,numeric
+prep.start.prob_3,0.006643662,numeric
 prep.adhr.dist_1,0.089,numeric
 prep.adhr.dist_2,0.127,numeric
 prep.adhr.dist_3,0.784,numeric
