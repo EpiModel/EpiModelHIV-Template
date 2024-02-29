@@ -24,5 +24,3 @@ est <- readRDS(path_to_est)
 start <- Sys.time()
 sim <- netsim(est, param, init, control)
 print(Sys.time() - start)
-
-
