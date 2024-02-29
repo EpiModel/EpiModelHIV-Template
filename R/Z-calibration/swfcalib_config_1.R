@@ -49,6 +49,38 @@ calib_object <- list(
         get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
       ),
       job1 = list(
+        targets = "cc.prep.B",
+        targets_val = 0.199,
+        params = c("prep.start.prob_1"),
+        initial_proposals = dplyr::tibble(
+          prep.start.prob_1 = seq(0.001, 0.01, length.out = n_sims),
+        ),
+        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+      ),
+      job2 = list(
+        targets = "cc.prep.H",
+        targets_val = 0.229,
+        params = c("prep.start.prob_2"),
+        initial_proposals = dplyr::tibble(
+          prep.start.prob_2 = seq(0.001, 0.01, length.out = n_sims),
+        ),
+        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+      ),
+      job3 = list(
+        targets = "cc.prep.W",
+        targets_val = 0.321,
+        params = c("prep.start.prob_3"),
+        initial_proposals = dplyr::tibble(
+          prep.start.prob_3 = seq(0.005, 0.02, length.out = n_sims),
+        ),
+        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+      )
+    ),
+    wave1 = list(
+      job1 = list(
         targets = "cc.dx.B",
         targets_val = 0.847,
         params = c("hiv.test.rate_1"), # target: 0.00385
