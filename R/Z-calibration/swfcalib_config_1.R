@@ -19,10 +19,10 @@ calib_object <- list(
     max_iteration = 100,
     n_sims = n_sims,
     default_proposal = dplyr::tibble(
-      prep.start.prob_1 = 0.005,
-      prep.start.prob_2 = 0.005,
-      prep.start.prob_3 = 0.005,
-      aids.off.tx.mort.rate = 0.0006,
+      prep.start.prob_1 = 0.00552,
+      prep.start.prob_2 = 0.00423,
+      prep.start.prob_3 = 0.00660,
+      aids.off.tx.mort.rate = 0.0006728,
       hiv.test.rate_1 = 0.004,
       hiv.test.rate_2 = 0.004,
       hiv.test.rate_3 = 0.006,
@@ -40,48 +40,48 @@ calib_object <- list(
     )
   ),
   waves = list(
-    wave1 = list(
-      job0 = list(
-        targets = "disease.mr100",
-        targets_val = 0.273,
-        params = c("aids.off.tx.mort.rate"), # target: 0.00385
-        initial_proposals = dplyr::tibble(
-          aids.off.tx.mort.rate = sample(seq(0.0001, 0.001, length.out = n_sims)),
-        ),
-        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
-      ),
-      job1 = list(
-        targets = "cc.prep.B",
-        targets_val = 0.199,
-        params = c("prep.start.prob_1"),
-        initial_proposals = dplyr::tibble(
-          prep.start.prob_1 = seq(0.001, 0.01, length.out = n_sims),
-        ),
-        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
-      ),
-      job2 = list(
-        targets = "cc.prep.H",
-        targets_val = 0.229,
-        params = c("prep.start.prob_2"),
-        initial_proposals = dplyr::tibble(
-          prep.start.prob_2 = seq(0.001, 0.01, length.out = n_sims),
-        ),
-        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
-      ),
-      job3 = list(
-        targets = "cc.prep.W",
-        targets_val = 0.321,
-        params = c("prep.start.prob_3"),
-        initial_proposals = dplyr::tibble(
-          prep.start.prob_3 = seq(0.005, 0.02, length.out = n_sims),
-        ),
-        make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-        get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
-      )
-    ),
+    # wave1 = list(
+    #   job0 = list(
+    #     targets = "disease.mr100",
+    #     targets_val = 0.273,
+    #     params = c("aids.off.tx.mort.rate"), # target: 0.00385
+    #     initial_proposals = dplyr::tibble(
+    #       aids.off.tx.mort.rate = sample(seq(0.0001, 0.001, length.out = n_sims)),
+    #     ),
+    #     make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+    #     get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+    #   ),
+    #   job1 = list(
+    #     targets = "cc.prep.B",
+    #     targets_val = 0.199,
+    #     params = c("prep.start.prob_1"),
+    #     initial_proposals = dplyr::tibble(
+    #       prep.start.prob_1 = seq(0.001, 0.01, length.out = n_sims),
+    #     ),
+    #     make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+    #     get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+    #   ),
+    #   job2 = list(
+    #     targets = "cc.prep.H",
+    #     targets_val = 0.229,
+    #     params = c("prep.start.prob_2"),
+    #     initial_proposals = dplyr::tibble(
+    #       prep.start.prob_2 = seq(0.001, 0.01, length.out = n_sims),
+    #     ),
+    #     make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+    #     get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+    #   ),
+    #   job3 = list(
+    #     targets = "cc.prep.W",
+    #     targets_val = 0.321,
+    #     params = c("prep.start.prob_3"),
+    #     initial_proposals = dplyr::tibble(
+    #       prep.start.prob_3 = seq(0.005, 0.02, length.out = n_sims),
+    #     ),
+    #     make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
+    #     get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
+    #   )
+    # ),
     wave1 = list(
       job1 = list(
         targets = "cc.dx.B",

@@ -32,12 +32,12 @@ results |>
   range()
 
 ggplot(results, aes(
-    x = uct.prob.post.prep,
-    y = ir100.ct,
+    x = ugc.prob,
+    y = ir100.gc,
     col = as.factor(.iteration)
   )) +
   geom_point() +
-  geom_hline(yintercept = 12)
+  geom_hline(yintercept = 12.81)
 
 
 # range at each iteration

@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.2",
+    "Version": "4.3.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -110,11 +110,11 @@
       "Version": "3.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "applied_proj",
-      "RemoteSha": "f11d26811000840d243e3cfd82689e3169e0ff53",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "template_updts",
+      "RemoteSha": "95be22d93a1de4b307208c60df238196b6e5bed7",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::EpiModel/EpiModel@main",
       "Requirements": [
         "EpiModel",
@@ -130,7 +130,7 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "ba4c3fca3e1a38da9a319c74acc3a841"
+      "Hash": "4ce5f9900d9fbed966dd88f6707e1df3"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",

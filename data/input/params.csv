@@ -52,7 +52,7 @@ vl.tx.down.rate,0.25,numeric
 vl.tx.aids.down.rate,0.25,numeric
 vl.tx.up.rate,0.25,numeric
 aids.on.tx.mort.rate,0,numeric
-aids.off.tx.mort.rate,0.0006120329,numeric
+aids.off.tx.mort.rate,0.0006728,numeric
 a.rate,0.00049,numeric
 arrival.age,15,numeric
 hiv.urai.prob,0.008938,numeric
@@ -113,9 +113,9 @@ hiv.uct.or,1.73,numeric
 hiv.dual.rr,0.2,numeric
 riskh.start,Inf,numeric
 prep.start,Inf,numeric
-prep.start.prob_1,0.005585435,numeric
-prep.start.prob_2,0.004288175,numeric
-prep.start.prob_3,0.006643662,numeric
+prep.start.prob_1,0.00552,numeric
+prep.start.prob_2,0.00423,numeric
+prep.start.prob_3,0.00660,numeric
 prep.adhr.dist_1,0.089,numeric
 prep.adhr.dist_2,0.127,numeric
 prep.adhr.dist_3,0.784,numeric
