@@ -27,10 +27,17 @@ swfcalib::render_assessment(fs::path(swfcalib_dir, "assessments.rds"))
 results <- readRDS(fs::path(swfcalib_dir, "results.rds"))
 
 results |>
+  filter(abs(ir100.gc - 12.81) < 1) |>
+  pull(ugc.prob) |> median()
+
+results |>
   filter(.iteration == max(.iteration)) |>
   pull(hiv.test.rate_1) |>
   range()
 
+# targets = paste0("cc.linked1m.", c("B", "H", "W")),
+# targets_val = c(0.829, 0.898, 0.881),
+# params = paste0("tx.init.rate_", 1:3),
 ggplot(results, aes(
     x = ugc.prob,
     y = ir100.gc,

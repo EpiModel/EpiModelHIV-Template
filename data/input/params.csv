@@ -1,7 +1,7 @@
 param,value,type,source
-hiv.test.rate_1,0.004789763,numeric
-hiv.test.rate_2,0.004211824,numeric
-hiv.test.rate_3,0.005907876,numeric
+hiv.test.rate_1,0.002631920,numeric
+hiv.test.rate_2,0.002232824,numeric
+hiv.test.rate_3,0.002534455,numeric
 hiv.test.late.prob_1,0,numeric
 hiv.test.late.prob_2,0,numeric
 hiv.test.late.prob_3,0,numeric
@@ -15,9 +15,9 @@ tt.full.supp.prob_3,1,numeric
 tt.durable.supp.prob_1,0,numeric
 tt.durable.supp.prob_2,0,numeric
 tt.durable.supp.prob_3,0,numeric
-tx.init.rate_1,0.2983432,numeric
-tx.init.rate_2,0.3679207,numeric
-tx.init.rate_3,0.3478085,numeric
+tx.init.rate_1,0.2982760,numeric
+tx.init.rate_2,0.3674697,numeric
+tx.init.rate_3,0.3474822,numeric
 tx.halt.partial.rate_1,0.005029760,numeric
 tx.halt.partial.rate_2,0.004670065,numeric
 tx.halt.partial.rate_3,0.003083412,numeric
@@ -69,14 +69,11 @@ hiv.circ.prob_3,0.918,numeric
 acts.aids.vl,5.75,numeric
 acts.scale,1,numeric
 cond.scale,1,numeric
-rgc.prob,0.2889556,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps appendix 9.4
-ugc.prob,0.2453431,numeric,CPN-gaps appendix 9.4 | calibrated
-rct.prob,0.1986395,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
-uct.prob,0.165486,numeric, CPN-gaps appendix 9.3 | calibrated
+rgc.prob,0.3134969,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps appendix 9.4
+ugc.prob,0.2675743,numeric,CPN-gaps appendix 9.4 | calibrated
+rct.prob,0.2299050,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
+uct.prob,0.1927886,numeric, CPN-gaps appendix 9.3 | calibrated
 rgc.prob.post.prep,0.3054357,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
-ugc.prob.post.prep,0.2602463,numeric,CPN-gaps appendix 9.4 | calibrated
-rct.prob.post.prep,0.2208134,numeric, CPN-plogis(qlogis(1714429) + log(1.25)) #0.3216; # gaps appendix 9.3
-uct.prob.post.prep,0.1848125,numeric, CPN-gaps appendix 9.3 | calibrated
 rgc.sympt.prob,0.1,numeric, CPN-aps 9.3
 ugc.sympt.prob,0.9333,numeric, CPN-Gaps10.3
 rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
