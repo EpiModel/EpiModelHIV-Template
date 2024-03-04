@@ -47,8 +47,6 @@ make_model_fn <- function(restart, calib_steps) {
 
     param_sc$rgc.prob <- plogis(qlogis(param_sc$ugc.prob) + log(1.25))
     param_sc$rct.prob <- plogis(qlogis(param_sc$uct.prob) + log(1.25))
-    param_sc$rgc.prob.post.prep <- plogis(qlogis(param_sc$ugc.prob.post.prep) + log(1.25))
-    param_sc$rct.prob.post.prep <- plogis(qlogis(param_sc$uct.prob.post.prep) + log(1.25))
 
     # Simulation and processing --------------------------------------------------
     sim <- netsim(est, param_sc, init, control)
