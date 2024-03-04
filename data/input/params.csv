@@ -18,9 +18,9 @@ tt.durable.supp.prob_3,0,numeric
 tx.init.rate_1,0.2982760,numeric
 tx.init.rate_2,0.3674697,numeric
 tx.init.rate_3,0.3474822,numeric
-tx.halt.partial.rate_1,0.005029760,numeric
-tx.halt.partial.rate_2,0.004670065,numeric
-tx.halt.partial.rate_3,0.003083412,numeric
+tx.halt.partial.rate_1,0.004981497,numeric
+tx.halt.partial.rate_2,0.004623870,numeric
+tx.halt.partial.rate_3,0.003067784,numeric
 tx.halt.full.or_1,0.45,numeric
 tx.halt.full.or_2,0.45,numeric
 tx.halt.full.or_3,0.45,numeric
