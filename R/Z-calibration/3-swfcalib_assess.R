@@ -69,7 +69,7 @@ results |>
   ) |>
   select(se, everything()) |>
   arrange(se) |>
-  filter(B < 0.02, H < 0.02, W < 0.02) |>
+  filter(B < 0.02, H < 0.02, W < 0.01) |>
   summarise(across(starts_with("hiv.trans"), median))
 
 co <- readRDS("./calib_object.rds")

@@ -100,9 +100,9 @@ sti.cond.eff.or,0.95,numeric,CPN
 sti.cond.fail.or_1,0.39,numeric,CPN
 sti.cond.fail.or_2,0.3,numeric,CPN
 sti.cond.fail.or_3,0.21,numeric,CPN
-hiv.trans.scale_1,2.8941780,numeric
-hiv.trans.scale_2,0.4517159,numeric
-hiv.trans.scale_3,0.3573581,numeric
+hiv.trans.scale_1,3.510,numeric
+hiv.trans.scale_2,0.561,numeric
+hiv.trans.scale_3,0.486,numeric
 hiv.rgc.or,2.78,numeric
 hiv.ugc.or,1.73,numeric
 hiv.rct.or,2.78,numeric
