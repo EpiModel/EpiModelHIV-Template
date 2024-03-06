@@ -11,13 +11,14 @@ source("R/shared_variables.R", local = TRUE)
 
 # This code installs the packages only available on GitHub (not CRAN ones)
 renv::install(c(
-    paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch),
-    "EpiModel/EpiModelHPC",
-    "EpiModel/ARTnet"
+  paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch),
+  "EpiModel/EpiModelHPC",
+  "EpiModel/ARTnet"
 ))
 
 # This code finds and install the libraries used by the project (CRAN version)
 renv::hydrate(prompt = FALSE)
+renv::snapshot()
 
 # Force `renv` to discover the following packages
 if (FALSE) {

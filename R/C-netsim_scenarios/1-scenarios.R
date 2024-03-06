@@ -54,11 +54,11 @@ EpiModelHPC::netsim_scenarios(
   output_dir = scenarios_dir,
   save_pattern = "all"
 )
-fs::dir_ls(sc_test_dir)
+fs::dir_ls(scenarios_dir)
 
 # merge the simulations. Keeping one `tibble` per scenario
 EpiModelHPC::merge_netsim_scenarios_tibble(
-  sim_dir = sc_test_dir,
+  sim_dir = scenarios_dir,
   output_dir = fs::path(scenarios_dir, "merged_tibbles"),
   steps_to_keep = year_steps * 1
 )
