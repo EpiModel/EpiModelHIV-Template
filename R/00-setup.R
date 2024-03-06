@@ -20,6 +20,9 @@ renv::install(c(
 renv::hydrate(prompt = FALSE)
 renv::snapshot()
 
+# Snapshot the list of installed packages to the `renv.lock` file
+renv::snapshot()
+
 # Force `renv` to discover the following packages
 if (FALSE) {
   library("rmarkdown")
