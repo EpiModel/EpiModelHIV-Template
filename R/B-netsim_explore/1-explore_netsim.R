@@ -13,8 +13,6 @@ source("R/B-netsim_explore/z-context.R")
 
 # Process ----------------------------------------------------------------------
 
-# set prep start to a low value to test the full model in a few steps
-# prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
 # See full listing of parameters

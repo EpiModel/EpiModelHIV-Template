@@ -1,26 +1,2 @@
-# Scratchpad for iteractive testing before integration in a script
+# Scratchpad for interactive testing before integration in a script
 
-pkgload::load_all("../EpiModelHIV-p.git/new_node_attr")
-# pkgload::load_all("../EpiModelHIV-p.git/template")
-# library(EpiModelHIV)
-
-source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R")
-
-prep_start <- 2 * year_steps
-source("R/netsim_settings.R", local = TRUE)
-
-control <- control_msm(
-  nsteps = 4 * year_steps,
-  verbose = FALSE,
-  raw.output = TRUE
-)
-
-# Read in the previously estimated networks and inspect their content
-est <- readRDS(path_to_est)
-# debugonce(initialize_msm)
-debugonce(EpiModelHIV::hivprogress_msm)
-# options(error = recover)
-start <- Sys.time()
-sim <- netsim(est, param, init, control)
-print(Sys.time() - start)
