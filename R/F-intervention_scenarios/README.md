@@ -32,9 +32,9 @@ The `workflow-scenarios.R` file create the `slurmworkflow` workflow to run the s
 ## Common mistakes
 
 The simulations will always be saved in the same directory, here
-`data/intermediate/scenarios/`. If you forget to clear it before running a new
+`data/run/scenarios/`. If you forget to clear it before running a new
 set of simulation you may get weird results.
 
-On the HPC you would clear it by running `rm -rf data/intermediate/scenarios/*`.
+On the HPC you would clear it by running `rm -rf data/run/scenarios/*`.
 Beware though, this command will not ask confirmation. So make sure you do not
 need any of it before removing it.
