@@ -4,7 +4,7 @@
 ## second part of the model (after the restart point). The values are assessed
 ## with the script 1-manual_calib_assess.R
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Settings ---------------------------------------------------------------------
 library(slurmworkflow)

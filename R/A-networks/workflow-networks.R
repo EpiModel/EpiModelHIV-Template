@@ -3,7 +3,7 @@
 ## Define a workflow to run the estimation and diagnostics of the network models
 ## on the HPC
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)

@@ -4,7 +4,7 @@
 ## expected results. It creates the assessment report and interactively look
 ## into the `results.rds` object found in the calibration folder.
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(dplyr)

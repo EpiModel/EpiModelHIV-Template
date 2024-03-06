@@ -6,7 +6,7 @@
 ## This script only runs the simulation. The outputs are explored in the script
 ## 2-scenarios_assess.R
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)

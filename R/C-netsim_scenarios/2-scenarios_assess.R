@@ -3,7 +3,7 @@
 ## Interactively explore the output of the simulation. Be it local or HPC
 ## simulations made by the workflow
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)

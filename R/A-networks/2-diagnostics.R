@@ -3,7 +3,7 @@
 ## Compute the diagnostics for the estimated network models. They are assessed
 ## in the next script.
 
-# This script should be run in a fresh R session
+# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
