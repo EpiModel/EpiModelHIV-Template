@@ -10,20 +10,13 @@ renv::init(bare = TRUE)
 source("R/shared_variables.R", local = TRUE)
 
 # This code installs the packages only available on GitHub (not CRAN ones)
-#     `rebuild = TRUE` and `dependencies = "all"` forces the installation of
-#     the remote dependencies in the DESCRIPTION files
-renv::install(
-  packages = c(
+renv::install(c(
     paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch),
     "EpiModel/EpiModelHPC"
-  ),
-  rebuild = TRUE,
-  dependencies = "all"
-)
+))
 
 # This code finds and install the libraries used by the project (CRAN version)
 renv::hydrate(prompt = FALSE)
-renv::update(prompt = FALSE)
 
 # Force `renv` to discover the following packages
 if (FALSE) {
