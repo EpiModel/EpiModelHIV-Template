@@ -17,7 +17,7 @@ source("R/Z-calibration/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 
-swfcalib_dir <- fs::path("data", "intermediate", "swfcalib")
+swfcalib_dir <- fs::path("data", "run", "swfcalib")
 theme_set(theme_light())
 
 # Assessment -------------------------------------------------------------------
@@ -27,17 +27,24 @@ swfcalib::render_assessment(fs::path(swfcalib_dir, "assessments.rds"))
 results <- readRDS(fs::path(swfcalib_dir, "results.rds"))
 
 results |>
+  filter(abs(ir100.gc - 12.81) < 1) |>
+  pull(ugc.prob) |> median()
+
+results |>
   filter(.iteration == max(.iteration)) |>
   pull(hiv.test.rate_1) |>
   range()
 
+# targets = paste0("cc.linked1m.", c("B", "H", "W")),
+# targets_val = c(0.829, 0.898, 0.881),
+# params = paste0("tx.init.rate_", 1:3),
 ggplot(results, aes(
-    x = prep.start.prob_3,
-    y = cc.prep.W,
+    x = ugc.prob,
+    y = ir100.gc,
     col = as.factor(.iteration)
   )) +
   geom_point() +
-  geom_hline(yintercept = 0.321)
+  geom_hline(yintercept = 12.81)
 
 
 # range at each iteration
@@ -62,7 +69,7 @@ results |>
   ) |>
   select(se, everything()) |>
   arrange(se) |>
-  filter(B < 0.02, H < 0.02, W < 0.02) |>
+  filter(B < 0.02, H < 0.02, W < 0.01) |>
   summarise(across(starts_with("hiv.trans"), median))
 
 co <- readRDS("./calib_object.rds")

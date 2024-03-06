@@ -1,7 +1,7 @@
 param,value,type,source
-hiv.test.rate_1,0.004799,numeric
-hiv.test.rate_2,0.004199,numeric
-hiv.test.rate_3,0.005907,numeric
+hiv.test.rate_1,0.002631920,numeric
+hiv.test.rate_2,0.002232824,numeric
+hiv.test.rate_3,0.002534455,numeric
 hiv.test.late.prob_1,0,numeric
 hiv.test.late.prob_2,0,numeric
 hiv.test.late.prob_3,0,numeric
@@ -15,12 +15,12 @@ tt.full.supp.prob_3,1,numeric
 tt.durable.supp.prob_1,0,numeric
 tt.durable.supp.prob_2,0,numeric
 tt.durable.supp.prob_3,0,numeric
-tx.init.rate_1,0.2984,numeric
-tx.init.rate_2,0.3679,numeric
-tx.init.rate_3,0.3478,numeric
-tx.halt.partial.rate_1,0.005013,numeric
-tx.halt.partial.rate_2,0.004661,numeric
-tx.halt.partial.rate_3,0.003102,numeric
+tx.init.rate_1,0.2982760,numeric
+tx.init.rate_2,0.3674697,numeric
+tx.init.rate_3,0.3474822,numeric
+tx.halt.partial.rate_1,0.004981497,numeric
+tx.halt.partial.rate_2,0.004623870,numeric
+tx.halt.partial.rate_3,0.003067784,numeric
 tx.halt.full.or_1,0.45,numeric
 tx.halt.full.or_2,0.45,numeric
 tx.halt.full.or_3,0.45,numeric
@@ -52,7 +52,7 @@ vl.tx.down.rate,0.25,numeric
 vl.tx.aids.down.rate,0.25,numeric
 vl.tx.up.rate,0.25,numeric
 aids.on.tx.mort.rate,0,numeric
-aids.off.tx.mort.rate,0.000501,numeric
+aids.off.tx.mort.rate,0.0006728,numeric
 a.rate,0.00049,numeric
 arrival.age,15,numeric
 hiv.urai.prob,0.008938,numeric
@@ -69,10 +69,11 @@ hiv.circ.prob_3,0.918,numeric
 acts.aids.vl,5.75,numeric
 acts.scale,1,numeric
 cond.scale,1,numeric
-rgc.prob,0.3014926,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
-ugc.prob,0.256671,numeric,CPN-gaps appendix 9.4 | calibrated
-rct.prob,0.2168114,numeric, CPN-plogis(qlogis(1714429) + log(1.25)) #0.3216; # gaps appendix 9.3
-uct.prob,0.1813112,numeric, CPN-gaps appendix 9.3 | calibrated
+rgc.prob,0.3134969,numeric, CPN-plogis(qlogis(0.19) + log(1.25)) #0.357;  # gaps appendix 9.4
+ugc.prob,0.2675743,numeric,CPN-gaps appendix 9.4 | calibrated
+rct.prob,0.2299050,numeric, CPN-plogis(qlogis(0.17) + log(1.25)) #0.3216; # gaps appendix 9.3
+uct.prob,0.1927886,numeric, CPN-gaps appendix 9.3 | calibrated
+rgc.prob.post.prep,0.3054357,numeric, CPN-plogis(qlogis(0.25546) + log(1.25)) #0.357;  # gaps appendix 9.4
 rgc.sympt.prob,0.1,numeric, CPN-aps 9.3
 ugc.sympt.prob,0.9333,numeric, CPN-Gaps10.3
 rct.sympt.prob,0.1,numeric, CPN- gaps 10.2
@@ -99,9 +100,9 @@ sti.cond.eff.or,0.95,numeric,CPN
 sti.cond.fail.or_1,0.39,numeric,CPN
 sti.cond.fail.or_2,0.3,numeric,CPN
 sti.cond.fail.or_3,0.21,numeric,CPN
-hiv.trans.scale_1,2.827,numeric
-hiv.trans.scale_2,0.4556,numeric
-hiv.trans.scale_3,0.3681,numeric
+hiv.trans.scale_1,3.510,numeric
+hiv.trans.scale_2,0.561,numeric
+hiv.trans.scale_3,0.486,numeric
 hiv.rgc.or,2.78,numeric
 hiv.ugc.or,1.73,numeric
 hiv.rct.or,2.78,numeric
@@ -109,9 +110,9 @@ hiv.uct.or,1.73,numeric
 hiv.dual.rr,0.2,numeric
 riskh.start,Inf,numeric
 prep.start,Inf,numeric
-prep.start.prob_1,0.005574786,numeric
-prep.start.prob_2,0.00428437,numeric
-prep.start.prob_3,0.006642306,numeric
+prep.start.prob_1,0.00552,numeric
+prep.start.prob_2,0.00423,numeric
+prep.start.prob_3,0.00660,numeric
 prep.adhr.dist_1,0.089,numeric
 prep.adhr.dist_2,0.127,numeric
 prep.adhr.dist_3,0.784,numeric

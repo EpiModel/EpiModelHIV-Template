@@ -6,7 +6,7 @@
 .jpeg
 .rda
 data/intermediate
+data/run
 data/output
 renv/
 workflows/
-

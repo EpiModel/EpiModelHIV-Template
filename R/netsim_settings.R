@@ -10,7 +10,7 @@ path_to_restart <- fs::path(est_dir, paste0("restart-", context, ".rds"))
 
 # `netsim` Parameters
 param <- param.net(
-  data.frame.params   = read.csv("data/input/params.csv"),
+  data.frame.params   = read.csv(fs::path(input_dir, "params.csv")),
   netstats            = netstats,
   epistats            = epistats,
   prep.start          = prep_start,

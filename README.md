@@ -63,6 +63,19 @@ When creating a new top level script you should adhere to the global structure
 used all over this repo. These project of ours are very complex with many moving
 pieces. Trying to keep them as clean as possible helps a lot in not getting lost.
 
+### Data directory
+
+The data used and produced by the project are stored in the `data` directory.
+
+It contains 3 sub-directories:
+1. `input/`: data required to make the project from scratch.
+2. `output/`: data used for publication (tables, plot)
+3. `run/`: temporary data produced by the project that become useless once the
+paper is published (raw simulations, estimated models).
+
+Only the `data/input/` directory is managed with git. The rest is ignored and
+**should never** end up on github.
+
 ## Getting started: fitting your project
 
 First of, some scripts will need a few modification to fit your project.

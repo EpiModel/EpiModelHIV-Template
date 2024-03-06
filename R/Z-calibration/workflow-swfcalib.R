@@ -17,8 +17,7 @@ batch_size <- 8
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-source("./R/Z-calibration/autocalib-config_1.R")
-#source("./R/Z-calibration/autocalib-config_2.R")
+source("R/Z-calibration/swfcalib_config_1.R")
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 
