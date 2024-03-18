@@ -33,8 +33,9 @@ They are all the scripts starting with as number (e.g. `1-estimation.R`) or the
 scripts starting with `workflow` (e.g. `workflow-networks.R`).
 
 These scripts are meant to be run in clean R session. It is advised to restart
-R before running these scripts. This can be done by pressing `Ctrl+Shift+F10`
-on RStudio. (Note, `.rs.restartR()` is **NOT** the same at all).
+R before running these scripts. This can be done in RStudio by pressing
+`Ctrl+Shift+F10` on Windows or `Cmd_Shift_0` on MacOSX. (Note, `.rs.restartR()`
+is **NOT** the same at all).
 
 All other scripts are utilities. They provide variables or functions to the top
 level ones and should not be run on their own.
@@ -88,8 +89,8 @@ sourced by every top level scripts.
 Open it now and modify the following variables to fit your project:
 
 ```r
-EMHIVp_branch <- "applied_proj"             # the name of your project
-EMHIVp_dir <- "Desktop\\git\\EpiModelHIV-p" #  path to EpiModeHIV-p  directory
+EMHIVp_branch <- "applied_proj" # the name of your project
+EMHIVp_dir    <- "~/../Desktop/GitHub/EpiModelHIV-p" # local clone of EpiModelHIV-p
 
 time_unit <- 7     # number of days in a time step (7 for weekly)
 ```
