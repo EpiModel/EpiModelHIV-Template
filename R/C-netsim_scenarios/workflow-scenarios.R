@@ -18,7 +18,7 @@ source("R/hpc_configs.R", local = TRUE)
 max_cores <- 8
 
 # Process ----------------------------------------------------------------------
-wf <- make_em_workflow("networks", override = TRUE)
+wf <- make_em_workflow("scenarios", override = TRUE)
 
 # Necessary files
 prep_start <- 2 * year_steps
