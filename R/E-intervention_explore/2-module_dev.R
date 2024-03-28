@@ -1,7 +1,7 @@
 ## 2. Intervention Scenarios: Module Development Script
 ##
 ## Example interactive epidemic simulation run script with basic
-## parameterization and all parameters defined in `param_msm`, with example of
+## parameterization and all parameters defined in data/input/model_parameters.xlsx`, with example of
 ## writing/debugging modules. This script uses a restart point.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)

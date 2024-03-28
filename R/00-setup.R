@@ -29,3 +29,8 @@ if (FALSE) {
   library("pkgload")
   library("sessioninfo")
 }
+
+fs::file_copy(
+  system.file("model_parameters.xlsx", package = "EpiModelHIV"),
+  fs::path(input_dir, "model_parameters.xlsx")
+)

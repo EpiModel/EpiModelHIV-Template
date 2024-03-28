@@ -16,7 +16,7 @@ source("R/B-netsim_explore/z-context.R")
 source("R/netsim_settings.R", local = TRUE)
 
 # See full listing of parameters
-# See ?param_msm for definitions
+# See data/input/model_parameters.xlsx for definitions
 print(param)
 
 # See the initialization object
