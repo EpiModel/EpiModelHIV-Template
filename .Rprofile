@@ -1,3 +1,6 @@
+# 0. Disable `renv` sandboxing if non-interactive
+if (!interactive()) options(renv.config.sandbox.enabled = FALSE)
+
 # 1. renv package management
 if (dir.exists("renv/")) {
   if (file.exists("renv/activate.R")) {
