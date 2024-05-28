@@ -6,9 +6,8 @@
 ## This script should not be run directly. But `sourced` from the
 ## swfcalib_config scripts.
 
-make_model_fn <- function(restart, calib_steps) {
+make_model_fn <- function(calib_steps) {
   force(calib_steps)
-
   function(proposal) {
     # Libraries ------------------------------------------------------------------
     library("EpiModelHIV")
@@ -32,10 +31,6 @@ make_model_fn <- function(restart, calib_steps) {
     # Proposal to scenario -------------------------------------------------------
     scenario <- EpiModelHPC::swfcalib_proposal_to_scenario(proposal)
     param_sc <- EpiModel::use_scenario(param, scenario)
-
-    # param_sc$rgc.prob <- plogis(qlogis(param_sc$ugc.prob) + log(1.25))
-    # param_sc$rct.prob <- plogis(qlogis(param_sc$uct.prob) + log(1.25))
-
 
     # Simulation and processing --------------------------------------------------
     sim <- netsim(est, param_sc, init, control)

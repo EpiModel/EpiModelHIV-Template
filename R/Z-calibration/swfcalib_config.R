@@ -9,10 +9,10 @@
 n_sims <- 256
 
 source("R/Z-calibration/swfcalib_model.R", local = TRUE)
-model_fn <- make_model_fn(restart = FALSE, calib_steps = year_steps)
+model_fn <- make_model_fn(calib_steps = year_steps)
 
-source("./R/shared_variables.R", local = TRUE)
-source("./R/netsim_settings.R", local = TRUE)
+source("R/shared_variables.R", local = TRUE)
+source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
 params_df <- param_df |>
@@ -212,4 +212,5 @@ calib_object <- list(
   )
 )
 
+# # Limit the number of waves to run
 # calib_object$waves <- calib_object$waves[4]

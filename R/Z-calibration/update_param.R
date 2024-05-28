@@ -17,15 +17,13 @@ default_proposal <- swfcalib:::get_default_proposal(calib_object)
 
 scenario <- EpiModelHPC::swfcalib_proposal_to_scenario(default_proposal)
 param_sc <- EpiModel::use_scenario(param, scenario)
-# param_sc$rgc.prob <- plogis(qlogis(param_sc$ugc.prob) + log(1.25))
-# param_sc$rct.prob <- plogis(qlogis(param_sc$uct.prob) + log(1.25))
 
 prm <- c("epistats", "netstats", ".param.updater.list", ".scenario.id")
 param_sc[prm] <- NULL
 
 updt_param <- EpiModel::param.net_to_table(param_sc)
-param_df <- readr::read_csv(fs::path(input_dir, "params.csv"))
 
+# param_df loaded by netsim_settings
 new_params <- replace_join(param_df, updt_param, by = c("param", "type"))
 readr::write_csv(
   new_params,

@@ -30,8 +30,7 @@ make_calib_plots <- function(d_path, out_dir, calib_plot_infos, year_steps) {
   targets <- EpiModelHIV::get_calibration_targets()
 
   d_calibs <- readRDS(d_path) |>
-    EpiModelHIV::mutate_calibration_targets(year_steps) |>
-    dplyr::select(batch_number, sim, time, dplyr::any_of(names(targets)))
+    EpiModelHIV::mutate_calibration_targets(year_steps)
 
   for (plot_name in names(calib_plot_infos)) {
     plot_infos <- calib_plot_infos[[plot_name]]
