@@ -25,7 +25,7 @@ print(init)
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3
+  nsteps = year_steps * 4
 )
 print(control)
 

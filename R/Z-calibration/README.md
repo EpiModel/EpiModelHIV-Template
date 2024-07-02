@@ -18,13 +18,6 @@ This step showcases two approaches for calibration, a "manual" one where each
 of this step is planned by the user. And an automated one leveraging
 [swfcalib](https://github.com/EpiModel/swfcalib).
 
-## General consideration
-
-Our models are calibrated in two part. The first one before PrEP is initialized
-and a second one after. In between, the `workflow-restart_point.R` script is
-used to select a good restart point. This approach allow us not to re-simulate
-the 60 year burn-in period for each simulation.
-
 ## Manual calibration
 
 For this one we use the *manual_calib_* workflows. The idea is to:
