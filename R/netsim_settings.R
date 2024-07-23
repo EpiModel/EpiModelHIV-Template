@@ -27,7 +27,6 @@ init <- init_msm(
   prev.ugc = 0.1,
   prev.rct = 0.1,
   prev.rgc = 0.1,
-  prev.uct = 0.1
+  prev.uct = 0.1,
+  prev.syph = 0.1
 )
-
-

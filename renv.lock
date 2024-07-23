@@ -30,18 +30,18 @@
     },
     "ARTnetData": {
       "Package": "ARTnetData",
-      "Version": "1.1",
+      "Version": "1.1.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnetData",
       "RemoteRef": "main",
-      "RemoteSha": "5220754935e3ddbe3a10ae5c366355d8a987f2fb",
+      "RemoteSha": "3caad7145ff0031667709a9fcdb4abb27ce5a8c3",
       "Requirements": [
         "R"
       ],
-      "Hash": "2eec49921ed5305eb22c20cc85c2b101"
+      "Hash": "6f48918fcb0dd51085bc2b85d233fdee"
     },
     "DBI": {
       "Package": "DBI",
@@ -73,7 +73,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "dev-2.5.x",
-      "RemoteSha": "a2bd6918e33d1356bcf1004a74f6daa02722d64f",
+      "RemoteSha": "5afab1abca64eadb0eea02645c5fac7242c53a32",
       "Requirements": [
         "R",
         "RColorBrewer",
@@ -103,7 +103,7 @@
         "tibble",
         "utils"
       ],
-      "Hash": "d0a71cf5d8cb50e3da10ee359a901194"
+      "Hash": "a749562882a57da346315c39e7286f4b"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -113,8 +113,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "dev-3.2.x",
-      "RemoteSha": "2f45b8eb3dd26167c4f0af9871ca3b63d19aeb85",
+      "RemoteRef": "syphilis-2",
+      "RemoteSha": "a759e4658783e87783c459c05044646d1a33ebd7",
       "Remotes": "github::EpiModel/EpiModel@dev-2.5.x, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::EpiModel/EpiModel@main",
       "Requirements": [
         "EpiModel",
@@ -131,7 +131,7 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "98201d144cb238d5259f641ca58cd214"
+      "Hash": "ca079c03682fe7bf6f997b6879a10e7b"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -230,7 +230,7 @@
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.12.8.4.0",
+      "Version": "14.0.0-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -240,18 +240,18 @@
         "stats",
         "utils"
       ],
-      "Hash": "a535dd90aa8ec9a2e63a8f79b4a1bf43"
+      "Hash": "a711769be34214addf7805278b72d56b"
     },
     "RcppRoll": {
       "Package": "RcppRoll",
-      "Version": "0.3.0",
+      "Version": "0.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "Rcpp"
       ],
-      "Hash": "84a03997fbb5acfb3c9b43bad88fea1f"
+      "Hash": "6659c0ecb7b85f322f93e7f1e6ac7d35"
     },
     "Rdpack": {
       "Package": "Rdpack",
@@ -927,7 +927,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.47",
+      "Version": "1.48",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -939,7 +939,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "7c99b2d55584b982717fcc0950378612"
+      "Hash": "acf380f300c721da9fde7df115a5f86f"
     },
     "labeling": {
       "Package": "labeling",
@@ -1293,14 +1293,14 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.7.6",
+      "Version": "1.7.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "dd2b9319ee0656c8acf45c7f40c59de7"
+      "Hash": "878b467580097e9c383acbb16adab57a"
     },
     "purrr": {
       "Package": "purrr",
@@ -1886,10 +1886,10 @@
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.8",
+      "Version": "2.3.9",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "29240487a071f535f5e5d5a323b7afbd"
+      "Hash": "9cb28d11799d93c953f852083d55ee9e"
     }
   }
 }

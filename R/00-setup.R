@@ -16,8 +16,11 @@ renv::install(c(
   "EpiModel/ARTnet"
 ))
 
+renv::install("EpiModel/EpiModel@dev-2.5.x", rebuild = TRUE, prompt = FALSE)
+renv::install("EpiModel/EpiModelHIV-p@syphilis-2", rebuild = TRUE, prompt = FALSE)
+
 # This code finds and install the libraries used by the project (CRAN version)
-renv::hydrate(prompt = FALSE)
+renv::hydrate(update = FALSE)
 renv::update(prompt = FALSE)
 
 # Snapshot the list of installed packages to the `renv.lock` file
@@ -25,7 +28,7 @@ renv::snapshot()
 
 fs::file_copy(
   system.file("model_parameters.xlsx", package = "EpiModelHIV"),
-  fs::path(input_dir, "model_parameters.xlsx")
+  fs::path(input_dir, "model_parameters-2.xlsx")
 )
 
 # Force `renv` to discover the following packages
