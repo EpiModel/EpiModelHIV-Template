@@ -125,8 +125,11 @@ Even if it's just for a *quick* test.
 
 Go to the `00-setup.R` file.
 
-Run the `renv::init(bare = TRUE)` line **and restart the R session before
-carrying on**.
+Run the `renv::init()` line and select: `1: Restore the project from the
+lockfile.`. This will install all the default packages for the project. *Note:
+you should use the up to date version of R for it to work properly. Current is
+4.4*. Once everything is installed,  **restart the R session before carrying
+on**.
 
 Run the rest of the script. It will install all the necessary packages.
 
