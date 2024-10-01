@@ -19,7 +19,6 @@
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
       "RemoteSha": "d334d43e5a18b960a5dd7c83de3e82250dc2b19c",
-      "Remotes": "github::EpiModel/ARTnetData@main, github::EpiModel/EpiModelHIV-p@main",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
@@ -73,7 +72,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "5340bf31d8bcd8eb3f311ab873f7bf84d8a86d32",
+      "RemoteSha": "a8b1b90e42840eed34fa9bd21c9cee26f0ea197a",
       "Requirements": [
         "R",
         "RColorBrewer",
@@ -103,7 +102,7 @@
         "tibble",
         "utils"
       ],
-      "Hash": "b027c942d8164eb43dcb187e10876812"
+      "Hash": "c58045d0e8bcf4563d714c37b2638934"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -111,11 +110,10 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodelhiv-p",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "dev-3.2.x",
-      "RemoteSha": "31373679ab1114c080d4061003cd6b188b5016c5",
-      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
+      "RemoteSha": "0f0de5916cf96b81ef698fe3b6ad26dcd1d86ecc",
       "Requirements": [
         "EpiModel",
         "R",
@@ -131,19 +129,17 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "73e97fae1792d26574c9b842a3402817"
+      "Hash": "d6576e7ad2973c4027fc392e8c1d9517"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
       "Version": "2.2.0",
       "Source": "GitHub",
-      "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "EpiModelHPC",
       "RemoteUsername": "EpiModel",
       "RemotePkgRef": "EpiModel/EpiModelHPC",
-      "RemoteRef": "HEAD",
       "RemoteSha": "6cab1b941a9121f1a93a4c736408d6e5396f6318",
       "Requirements": [
         "EpiModel",
@@ -287,16 +283,6 @@
       ],
       "Hash": "16b5ff4dff0ead9ea955f62f794b1535"
     },
-    "base64enc": {
-      "Package": "base64enc",
-      "Version": "0.1-3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "543776ae6848fde2f48ff3816d0628bc"
-    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -320,28 +306,6 @@
         "utils"
       ],
       "Hash": "9fe98599ca456d6552421db0d6772d8f"
-    },
-    "bslib": {
-      "Package": "bslib",
-      "Version": "0.8.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "base64enc",
-        "cachem",
-        "fastmap",
-        "grDevices",
-        "htmltools",
-        "jquerylib",
-        "jsonlite",
-        "lifecycle",
-        "memoise",
-        "mime",
-        "rlang",
-        "sass"
-      ],
-      "Hash": "b299c6741ca9746fb227debcb0f9fb6c"
     },
     "cachem": {
       "Package": "cachem",
@@ -668,18 +632,6 @@
       "Repository": "CRAN",
       "Hash": "aa5e1cd11c2d15497494c5292d7ffcc8"
     },
-    "fontawesome": {
-      "Package": "fontawesome",
-      "Version": "0.5.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "htmltools",
-        "rlang"
-      ],
-      "Hash": "c2efdd5f0bcd1ea861c2d4e2a883a67d"
-    },
     "foreach": {
       "Package": "foreach",
       "Version": "1.5.2",
@@ -845,22 +797,6 @@
       ],
       "Hash": "b59377caa7ed00fa41808342002138f9"
     },
-    "htmltools": {
-      "Package": "htmltools",
-      "Version": "0.5.8.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "base64enc",
-        "digest",
-        "fastmap",
-        "grDevices",
-        "rlang",
-        "utils"
-      ],
-      "Hash": "81d371a9cc60640e74e4ab6ac46dcedc"
-    },
     "igraph": {
       "Package": "igraph",
       "Version": "2.0.3",
@@ -905,26 +841,6 @@
         "utils"
       ],
       "Hash": "8954069286b4b2b0d023d1b288dce978"
-    },
-    "jquerylib": {
-      "Package": "jquerylib",
-      "Version": "0.1.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "htmltools"
-      ],
-      "Hash": "5aab57a3bd297eee1c1d862735972182"
-    },
-    "jsonlite": {
-      "Package": "jsonlite",
-      "Version": "1.8.8",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "methods"
-      ],
-      "Hash": "e1b9c55281c5adc4dd113652d9e26768"
     },
     "knitr": {
       "Package": "knitr",
@@ -1056,16 +972,6 @@
         "utils"
       ],
       "Hash": "110ee9d83b496279960e162ac97764ce"
-    },
-    "mime": {
-      "Package": "mime",
-      "Version": "0.12",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "tools"
-      ],
-      "Hash": "18e9c28c1d3ca1560ce30658b22ce104"
     },
     "minqa": {
       "Package": "minqa",
@@ -1318,16 +1224,6 @@
       ],
       "Hash": "1cba04a4e9414bdefc9dcaa99649a8dc"
     },
-    "rappdirs": {
-      "Package": "rappdirs",
-      "Version": "0.3.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
-    },
     "rbibutils": {
       "Package": "rbibutils",
       "Version": "2.2.16",
@@ -1387,13 +1283,13 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.0.7",
+      "Version": "1.0.9",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "utils"
       ],
-      "Hash": "397b7b2a265bc5a7a06852524dabae20"
+      "Hash": "ef233f0e9064fc88c898b340c9add5c2"
     },
     "rlang": {
       "Package": "rlang",
@@ -1416,29 +1312,6 @@
         "methods"
       ],
       "Hash": "f84d8f430c496bb5c6769fed95705562"
-    },
-    "rmarkdown": {
-      "Package": "rmarkdown",
-      "Version": "2.28",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "bslib",
-        "evaluate",
-        "fontawesome",
-        "htmltools",
-        "jquerylib",
-        "jsonlite",
-        "knitr",
-        "methods",
-        "tinytex",
-        "tools",
-        "utils",
-        "xfun",
-        "yaml"
-      ],
-      "Hash": "062470668513dcda416927085ee9bdc7"
     },
     "robustbase": {
       "Package": "robustbase",
@@ -1464,20 +1337,6 @@
         "R"
       ],
       "Hash": "4c8415e0ec1e29f3f4f6fc108bef0144"
-    },
-    "sass": {
-      "Package": "sass",
-      "Version": "0.4.9",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R6",
-        "fs",
-        "htmltools",
-        "rappdirs",
-        "rlang"
-      ],
-      "Hash": "d53dbfddf695303ea4ad66f86e99b95d"
     },
     "scales": {
       "Package": "scales",
@@ -1521,7 +1380,6 @@
       "RemoteRepo": "slurmworkflow",
       "RemoteUsername": "EpiModel",
       "RemotePkgRef": "EpiModel/slurmworkflow",
-      "RemoteRef": "HEAD",
       "RemoteSha": "04935f0cd2ea9f0c468a4627eb7363e0a84415fe",
       "Requirements": [
         "R",
@@ -1636,13 +1494,11 @@
       "Package": "swfcalib",
       "Version": "0.0.0.9000",
       "Source": "GitHub",
-      "Remotes": "github::EpiModel/slurmworkflow",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "swfcalib",
       "RemoteUsername": "EpiModel",
       "RemotePkgRef": "EpiModel/swfcalib",
-      "RemoteRef": "HEAD",
       "RemoteSha": "2902db91c1937921bccdbfaeb315485f4eef3ce7",
       "Requirements": [
         "R",
@@ -1756,16 +1612,6 @@
         "withr"
       ],
       "Hash": "829f27b9c4919c16b593794a6344d6c0"
-    },
-    "tinytex": {
-      "Package": "tinytex",
-      "Version": "0.52",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "xfun"
-      ],
-      "Hash": "cfbad971a71f0e27cec22e544a08bc3b"
     },
     "trust": {
       "Package": "trust",
