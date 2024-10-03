@@ -8,7 +8,7 @@ netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
 path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))
 path_to_restart <- fs::path(est_dir, paste0("restart-", context, ".rds"))
 
-params_df <- readxl::read_xlsx(fs::path(input_dir, "model_parameters.xlsx")) |>
+params_df <- read.csv(fs::path(input_dir, "model_parameters.csv")) |>
   dplyr::select(param, value, type)
 
 # `netsim` Parameters

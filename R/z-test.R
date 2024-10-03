@@ -1,4 +1,8 @@
 # Scratchpad for interactive testing before integration in a script
+#
+# statnet ergm.fit
+# - now running with ergm 4.6.0
+# - then test ergm@@i120-glm-fit
 
 source("R/shared_variables.R", local = TRUE)
 

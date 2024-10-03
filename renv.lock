@@ -69,8 +69,8 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodel",
       "RemoteRef": "main",
       "RemoteSha": "a8b1b90e42840eed34fa9bd21c9cee26f0ea197a",
       "Requirements": [
@@ -102,7 +102,7 @@
         "tibble",
         "utils"
       ],
-      "Hash": "c58045d0e8bcf4563d714c37b2638934"
+      "Hash": "e8b7737b130e0942d65ec4689a0681a6"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -525,12 +525,15 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "4.7-7382",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "ergm",
+      "RemoteRef": "i120-glm-fit",
+      "RemoteSha": "02bfcb49f2af9eab2a75d26388661eb1f2a886b9",
       "Requirements": [
-        "MASS",
-        "Matrix",
         "R",
         "Rdpack",
         "coda",
@@ -550,7 +553,7 @@
         "tibble",
         "trust"
       ],
-      "Hash": "aee1ba632c48b2e4004302a800c301dc"
+      "Hash": "3d888deafa0ac3046758066525466b22"
     },
     "ergm.ego": {
       "Package": "ergm.ego",
@@ -1408,10 +1411,16 @@
     },
     "statnet.common": {
       "Package": "statnet.common",
-      "Version": "4.9.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "4.10.0-447",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "statnet.common",
+      "RemoteRef": "master",
+      "RemoteSha": "3681b80e4305babeeb01bfa0e91d2b50d1db3631",
       "Requirements": [
+        "Matrix",
         "R",
         "coda",
         "methods",
@@ -1419,7 +1428,7 @@
         "tools",
         "utils"
       ],
-      "Hash": "be35aebf512f7b31de12200d5c3d1d67"
+      "Hash": "de6756b89b19abb80246a7a4ff8bc343"
     },
     "stringi": {
       "Package": "stringi",
