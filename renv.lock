@@ -69,8 +69,8 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodel",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
       "RemoteSha": "a8b1b90e42840eed34fa9bd21c9cee26f0ea197a",
       "Requirements": [
@@ -102,7 +102,7 @@
         "tibble",
         "utils"
       ],
-      "Hash": "e8b7737b130e0942d65ec4689a0681a6"
+      "Hash": "c58045d0e8bcf4563d714c37b2638934"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -113,7 +113,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "dev-3.2.x",
-      "RemoteSha": "0f0de5916cf96b81ef698fe3b6ad26dcd1d86ecc",
+      "RemoteSha": "ae566739b6079baadd299372ca079925186f819b",
       "Requirements": [
         "EpiModel",
         "R",
@@ -129,7 +129,7 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "d6576e7ad2973c4027fc392e8c1d9517"
+      "Hash": "3183449858a5f4299510f614f771de4d"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -525,14 +525,14 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.7-7382",
+      "Version": "4.7-7394",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "statnet",
       "RemoteRepo": "ergm",
-      "RemoteRef": "i120-glm-fit",
-      "RemoteSha": "02bfcb49f2af9eab2a75d26388661eb1f2a886b9",
+      "RemoteRef": "master",
+      "RemoteSha": "286bddd6d276a8e51076aad3f646e9e470386155",
       "Requirements": [
         "R",
         "Rdpack",
@@ -553,7 +553,7 @@
         "tibble",
         "trust"
       ],
-      "Hash": "3d888deafa0ac3046758066525466b22"
+      "Hash": "4c382dd4b42774e17d233bf2769e8792"
     },
     "ergm.ego": {
       "Package": "ergm.ego",
