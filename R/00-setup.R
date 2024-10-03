@@ -18,5 +18,6 @@ renv::snapshot()
 # Get the initial set of parameters from EpiModelHIV-p
 fs::file_copy(
   system.file("model_parameters.csv", package = "EpiModelHIV"),
-  fs::path(input_dir, "model_parameters.csv")
+  fs::path(input_dir, "model_parameters.csv"),
+  overwrite = TRUE
 )
