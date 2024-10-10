@@ -1,9 +1,15 @@
-# Scratchpad for interactive testing before integration in a script
-#
-# statnet ergm.fit
-# - now running with ergm 4.6.0
-# - then test ergm@@i120-glm-fit
+---
+title: "Calibration Values"
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+    number_sections: true
+    smart: false
+---
 
+```{r setup, include = FALSE}
 source("R/shared_variables.R", local = TRUE)
 
 library(dplyr)
@@ -80,27 +86,21 @@ make_calib_plot <- function(d, plot_info) {
     text(text_pos, targets[cur_targs[i]] + offset, x[i], col = colors[i])
 }
 
-if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
-for (i in seq_along(calib_plot_infos)) {
-  p <- calib_plot_infos[[i]]
-  jpeg(
-    file = fs::path(calib_plot_dir, names(calib_plot_infos)[[i]], ext = "jpg"),
-    width = 9, height = 5.5,
-    units = "in", res = 250
-  )
-  make_calib_plot(d_outs, p)
-  dev.off()
-}
+```
 
-glimpse(d_outs)
+## cc.dx
+
+### Calib plot
+
+```{r}
+p <- calib_plot_infos[["cc.dx"]]
+make_calib_plot(d_outs, p)
+```
+
+### Calib table
+
+```{r}
+
+```
 
 
-# calib tables:
-#
-#  added med_diag_delay__B/H/W -> supp table 10
-#  rm dx delay figure? (sup fig 5)
-#  added med_linked_delay__B/H/W -> sup table 11
-#  sup table 12: calculated from rate
-#
-#  table sup 13 - STI modifiers??
-#  ==> legacy: I guess they come from a
