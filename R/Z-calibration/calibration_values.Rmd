@@ -13,12 +13,12 @@ output:
 source("R/shared_variables.R", local = TRUE)
 
 library(dplyr)
-library(EpiModel)
+library(EpiModelHIV)
 
 context <- "HPC"
 source("R/netsim_settings.R", local = TRUE)
 
-d_calib <- readRDS("./data/run/calibration/merged_tibbles/df__empty_scenario.rds")
+d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds"))
 
 d_outs <- EpiModelHIV::mutate_calibration_targets(d_calib) |>
   mutate(sim = as.integer(as.factor(paste0(batch_number, "_", sim)))) |>
