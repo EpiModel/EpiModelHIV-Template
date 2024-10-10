@@ -157,7 +157,7 @@ ct.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptoma
 ct.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital STI screening for MSM not diagnosed with HIV and on PrEP.
 sti.screen.prep.rate,0.07692308,numeric,12,,,,Time step to initiate PrEP-based STI screening (may be after `prep.start` to stabilize STI incidence during calibration).
 sti.screen.prep.start,1,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM not diagnosed with HIV and not on PrEP.
-sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV. 
+sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV.
 sti.screen.rect.hivpos.prob,0.63,numeric,12,,,,Probability of rectal site screening for any STI given  urogenital screening for MSM not diagnosed with HIV and on PrEP.
 sti.screen.rect.prep.prob,1,numeric,,,,,Size of the window for counting the positive GC diagnoses.
 gc.dx.window,0,numeric,,,,,Number of GC diagnoses required in the time window.

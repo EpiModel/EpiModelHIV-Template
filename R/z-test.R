@@ -7,7 +7,10 @@
 source("R/shared_variables.R", local = TRUE)
 
 library(dplyr)
-library(EpiModel)
+library(EpiModelHIV)
+
+context <- "HPC"
+source("R/netsim_settings.R", local = TRUE)
 
 d_calib <- readRDS("./data/run/calibration/merged_tibbles/df__empty_scenario.rds")
 
@@ -80,19 +83,61 @@ make_calib_plot <- function(d, plot_info) {
     text(text_pos, targets[cur_targs[i]] + offset, x[i], col = colors[i])
 }
 
-if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
-for (i in seq_along(calib_plot_infos)) {
-  p <- calib_plot_infos[[i]]
-  jpeg(
-    file = fs::path(calib_plot_dir, names(calib_plot_infos)[[i]], ext = "jpg"),
-    width = 9, height = 5.5,
-    units = "in", res = 250
-  )
-  make_calib_plot(d_outs, p)
-  dev.off()
-}
+# if (!fs::dir_exists(calib_plot_dir)) fs::dir_create(calib_plot_dir)
+# for (i in seq_along(calib_plot_infos)) {
+#   p <- calib_plot_infos[[i]]
+#   jpeg(
+#     file = fs::path(calib_plot_dir, names(calib_plot_infos)[[i]], ext = "jpg"),
+#     width = 9, height = 5.5,
+#     units = "in", res = 250
+#   )
+#   make_calib_plot(d_outs, p)
+#   dev.off()
+# }
+
+rmarkdown::render(
+  "R/Z-calibration/calibration_values.Rmd",
+  output_file = "ov.html",
+  knit_root_dir = getwd(),
+  output_dir = "./"
+)
 
 glimpse(d_outs)
+
+targets <- EpiModelHIV::get_calibration_targets()
+races_names <- c("B", "H", "W")
+races <- 1:3
+
+med_iqr <- function(x, fmtr) {
+  vs <- quantile(x, c(0.5, 0.25, 0.75)) |> fmtr()
+  paste0(vs[1], "[", vs[2], "-",  vs[3], "]")
+}
+
+col_names <- "num"
+row_names <- c(
+  "Target Statistic: num",
+  "Simulations: num (med [IQR])",
+  "Calibrated a.rate (per week)"
+)
+
+fmtr <- scales::label_number(0.1)
+tar_names <- c("num")
+tar <- targets[tar_names] |> fmtr()
+p_names <- c("a.rate")
+prms <- unlist(param[p_names]) |> scales::label_scientific()()
+
+sim_vals <- d_outs |>
+  filter(time > max(time) - year_steps) |>
+  select(sim, all_of(tar_names)) |>
+  group_by(sim) |>
+  summarise(across(everything(), mean)) |>
+  select(-sim) |>
+  summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
+  as.character()
+
+tbl <- rbind(tar, sim_vals, prms)
+rownames(tbl) <- row_names
+colnames(tbl) <- col_names
 
 
 # calib tables:
