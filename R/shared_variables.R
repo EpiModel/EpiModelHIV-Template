@@ -4,7 +4,7 @@
 
 # EpiModelHIV-p local directory
 EMHIVp_branch <- "dev-3.2.x"
-EMHIVp_dir    <- "~/../Desktop/GitHub/EpiModelHIV-p"
+EMHIVp_dir    <- "../../EpiModelHIV-p.git/dev-3.2.x"
 
 # Relevant time steps for the simulation
 time_unit  <- 7               # number of days in a time step

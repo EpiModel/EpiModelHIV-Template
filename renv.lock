@@ -60,7 +60,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "c33aaa756350f3263b328571bf52e80a38f76e08",
+      "RemoteSha": "38ce85ec31c9eb43f326b2a85a084ab337274422",
       "Requirements": [
         "R",
         "RColorBrewer",
@@ -88,7 +88,7 @@
         "tibble",
         "utils"
       ],
-      "Hash": "1f07e8e7c0ce5b1bc324e5a86c25421c"
+      "Hash": "b83eea70e1e5490bf2164a427fd0993d"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -98,7 +98,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "dev-3.2.x",
-      "RemoteSha": "88fcc08329fcc661128c191d7038cc4451f95e35",
+      "RemoteSha": "da3e1c90d3154fb9e63285e88fbf9e80fa359c2f",
       "RemoteHost": "api.github.com",
       "Requirements": [
         "EpiModel",
@@ -115,7 +115,7 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "168a0a5aada8c50749f4788061e6b380"
+      "Hash": "aabb4c9fa91bae5cb01ef301383d491e"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",

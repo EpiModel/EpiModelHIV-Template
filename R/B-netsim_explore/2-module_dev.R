@@ -22,13 +22,13 @@ theme_set(theme_light())
 # Process ----------------------------------------------------------------------
 
 # set prep start to a low value to test the full model in a few steps
-prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 
 # Control settings
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3
+  nsteps = 52,
+  .tracker.list = EpiModelHIV::make_calibration_trackers()
 )
 
 # Epidemic simulation
