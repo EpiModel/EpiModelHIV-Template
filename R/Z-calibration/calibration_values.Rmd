@@ -15,7 +15,7 @@ source("R/shared_variables.R", local = TRUE)
 library(dplyr)
 library(EpiModelHIV)
 
-context <- "HPC"
+context <- "hpc"
 source("R/netsim_settings.R", local = TRUE)
 
 d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds"))
@@ -29,42 +29,50 @@ calib_plot_infos <- list(
   cc.dx = list(
     names = paste0("cc.dx.", races),
     ylab = "Proportion",
-    text_offset = 0.01
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
   ),
   cc.linked1m = list(
     names = paste0("cc.linked1m.", races),
     ylab = "Proportion",
-    text_offset = 0.005
+    text_offset = 0.005,
+    fmt_target = scales::percent_format(0.1)
   ),
   cc.vsupp = list(
     names = paste0("cc.vsupp.", races),
     ylab = "Proportion",
-    text_offset = 0.005
+    text_offset = 0.005,
+    fmt_target = scales::percent_format(0.1)
   ),
   i.prev.dx = list(
     names = paste0("i.prev.dx.", races),
     ylab = "Proportion",
-    text_offset = 0.01
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
   ),
   ir100.sti = list(
     names = c("ir100.gc", "ir100.ct"),
     ylab = "Infection Rate per 100 PYAR",
-    text_offset = 0.3
+    text_offset = 0.3,
+    fmt_target = scales::number_format(0.1)
   ),
   cc.prep = list(
     names = paste0("cc.prep.", races),
     ylab = "Proportion",
-    text_offset = 0.005
+    text_offset = 0.005,
+    fmt_target = scales::percent_format(0.1)
   ),
   disease.mr100 = list(
     names = "disease.mr100",
     ylab = "Proportion",
-    text_offset = 0.01
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
   ),
   num = list(
     names = "num",
     ylab = "Population",
-    text_offset = 500
+    text_offset = 500,
+    fmt_target = scales::number_format(1)
   )
 )
 
@@ -76,17 +84,24 @@ make_calib_plot <- function(d, plot_info) {
   par(mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))
   offset <- plot_info$text_offset
   cur_targs <- plot_info$names
+
   plot(
     d,
+    xaxt = "n",
     y = cur_targs,
     legend = TRUE,
     ylab = plot_info$ylab,
-    xlab = "Calibration Weeks"
+    xlab = "Calibration Years"
   )
+  axis(1, seq(0, max(d$time), 10 * year_steps),
+       labels = seq(0, max(d$time), 10 * year_steps) / year_steps)
+
   x <- round(colMeans(tail(d_outs[, cur_targs], 52)), 3)
   abline(h = targets[cur_targs], col = colors, lty = 2)
-  for (i in seq_along(plot_info$names))
-    text(text_pos, targets[cur_targs[i]] + offset, x[i], col = colors[i])
+  for (i in seq_along(plot_info$names)) {
+    v <- plot_info$fmt_target(x[i])
+    text(text_pos, targets[cur_targs[i]] + offset, v, col = colors[i])
+  }
 }
 
 targets <- EpiModelHIV::get_calibration_targets()
@@ -122,8 +137,15 @@ tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("hiv.test.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
 m_int <- (1 / param[[p_names]] / 52) |> scales::label_number(0.1)()
-mdd <- c(99, 99, 99) |> scales::label_number(0.1)()
-
+med_diag_delays <- d_outs |>
+  filter(time > max(time) - year_steps) |>
+  select(sim, starts_with("med_diag_delay_")) |>
+  group_by(sim) |>
+  summarise(across(everything(), mean)) |>
+  select(-sim) |>
+  mutate(across(everything(), \(x) x / year_steps)) |>
+  summarise(across(everything(), \(x) med_iqr(x, scales::label_number(0.01)))) |>
+  as.character()
 
 sim_vals <- d_outs |>
   filter(time > max(time) - year_steps) |>
@@ -134,7 +156,9 @@ sim_vals <- d_outs |>
   summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
   as.character()
 
-tbl <- rbind(tar, sim_vals,  prms, m_int, mdd)
+
+
+tbl <- rbind(tar, sim_vals,  prms, m_int, med_diag_delays)
 rownames(tbl) <- row_names
 colnames(tbl) <- col_names
 
@@ -162,7 +186,48 @@ tar_names <- paste0("cc.linked1m.", races_names)
 tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("tx.init.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
-mdd <- c(99, 99, 99) |> scales::label_number(0.1)()
+mean_time_to_art <- scales::label_number(0.1)(1 / param[[p_names]])
+
+sim_vals <- d_outs |>
+  filter(time > max(time) - year_steps) |>
+  select(sim, all_of(tar_names)) |>
+  group_by(sim) |>
+  summarise(across(everything(), mean)) |>
+  select(-sim) |>
+  summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
+  as.character()
+
+tbl <- rbind(tar, sim_vals,  prms, mean_time_to_art)
+rownames(tbl) <- row_names
+colnames(tbl) <- col_names
+
+knitr::kable(tbl)
+```
+
+## cc.vsupp - section 7.3
+
+```{r}
+p <- calib_plot_infos[["cc.vsupp"]]
+make_calib_plot(d_outs, p)
+```
+
+```{r}
+col_names <- paste0(c("Black", "Hispanic", "White/Other"), "MSM")
+row_names <- c(
+  "Target Statistic: Fraction VL Suppressed",
+  "Simulations: Fraction VL Suppressed (med [IQR])",
+  "Calibrated Halting Rates (per Week)",
+  "Mean Time to First ART Stoppage (in Weeks)",
+  "Mean Time to First ART Stoppage (in Years)"
+)
+
+fmtr <- scales::label_percent(0.1)
+tar_names <- paste0("cc.vsupp.", races_names)
+tar <- targets[tar_names] |> fmtr()
+p_names <- paste0("tx.halt.partial.rate")
+prms <- param[[p_names]] |> scales::label_scientific()()
+mean_time_stop_w <- scales::label_number(1)(1 / param[[p_names]])
+mean_time_stop_y <- scales::label_number(0.1)(1 / param[[p_names]] / 52)
 
 
 sim_vals <- d_outs |>
@@ -174,7 +239,7 @@ sim_vals <- d_outs |>
   summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
   as.character()
 
-tbl <- rbind(tar, sim_vals,  prms, mdd)
+tbl <- rbind(tar, sim_vals,  prms, mean_time_stop_w, mean_time_stop_y)
 rownames(tbl) <- row_names
 colnames(tbl) <- col_names
 
@@ -200,7 +265,7 @@ fmtr <- scales::label_percent(0.1)
 tar_names <- paste0("i.prev.dx.", races_names)
 tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("hiv.trans.scale")
-prms <- param[[p_names]] |> scales::label_scientific()()
+prms <- param[[p_names]] |> scales::label_number(0.01)()
 
 sim_vals <- d_outs |>
   filter(time > max(time) - year_steps) |>
@@ -274,44 +339,7 @@ fmtr <- scales::label_number(0.1)
 tar_names <- c("ir100.gc", "ir100.ct")
 tar <- targets[tar_names] |> fmtr()
 p_names <- c("ugc.prob", "uct.prob")
-prms <- unlist(param[p_names]) |> scales::label_scientific()()
-
-sim_vals <- d_outs |>
-  filter(time > max(time) - year_steps) |>
-  select(sim, all_of(tar_names)) |>
-  group_by(sim) |>
-  summarise(across(everything(), mean)) |>
-  select(-sim) |>
-  summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
-  as.character()
-
-tbl <- rbind(tar, sim_vals, prms)
-rownames(tbl) <- row_names
-colnames(tbl) <- col_names
-
-knitr::kable(tbl)
-```
-
-## STI - section xx
-
-```{r}
-p <- calib_plot_infos[["ir100.sti"]]
-make_calib_plot(d_outs, p)
-```
-
-```{r}
-col_names <- paste0(c("GC", "CT"), " IR100")
-row_names <- c(
-  "Target Statistic: STI IR100",
-  "Simulations: STI IR100 (med [IQR])",
-  "Calibrated Transmission Urethral Probability (per act)"
-)
-
-fmtr <- scales::label_number(0.1)
-tar_names <- c("ir100.gc", "ir100.ct")
-tar <- targets[tar_names] |> fmtr()
-p_names <- c("ugc.prob", "uct.prob")
-prms <- unlist(param[p_names]) |> scales::label_scientific()()
+prms <- unlist(param[p_names]) |> scales::label_number(0.01)()
 
 sim_vals <- d_outs |>
   filter(time > max(time) - year_steps) |>
@@ -381,9 +409,9 @@ row_names <- c(
   "Calibrated a.rate (per week)"
 )
 
-fmtr <- scales::label_number(0.1)
+fmtr <- scales::label_number(1)
 tar_names <- c("num")
-tar <- targets[tar_names] |> fmtr()
+tar <- 1e5 |> fmtr()
 p_names <- c("a.rate")
 prms <- unlist(param[p_names]) |> scales::label_scientific()()
 
