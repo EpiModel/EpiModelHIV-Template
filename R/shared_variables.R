@@ -3,7 +3,7 @@
 ## This script should not be run directly. But `sourced` from other scripts
 
 # EpiModelHIV-p local directory
-EMHIVp_branch <- "dev-3.2.x"
+EMHIVp_branch <- "v3.2.x"
 EMHIVp_dir    <- "../../EpiModelHIV-p.git/dev-3.2.x"
 
 # Relevant time steps for the simulation
