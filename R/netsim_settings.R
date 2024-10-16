@@ -16,8 +16,8 @@ param <- param.net(
   data.frame.params   = params_df,
   netstats            = netstats,
   epistats            = epistats,
-  prep.start          = 0,
-  riskh.start         = 0
+  prep.start          = prep_start,
+  riskh.start         = prep_start - year_steps
 )
 
 # Initial conditions (default prevalence initialized in epistats)
