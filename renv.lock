@@ -26,6 +26,21 @@
       ],
       "Hash": "3c341f075b266b784f4d85b8134ffdd3"
     },
+    "ARTnetData": {
+      "Package": "ARTnetData",
+      "Version": "1.1.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "Epimodel",
+      "RemoteRepo": "ARTnetData",
+      "RemoteRef": "main",
+      "RemoteSha": "3caad7145ff0031667709a9fcdb4abb27ce5a8c3",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "cad40a7a68b74cff91040088b1f34aea"
+    },
     "DEoptimR": {
       "Package": "DEoptimR",
       "Version": "1.1-3",

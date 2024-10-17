@@ -30,3 +30,6 @@ fs::file_copy(
 # ))
 # # If you have access to ARTnetData:
 # renv::install("Epimodel/ARTnetData")
+
+# force ARTnetData to be saved in the lockfile
+if (FALSE) require("ARTnetData")
