@@ -32,4 +32,4 @@ glimpse(d_sc_raw)
 source("R/F-intervention_scenarios/labels.R", local = TRUE)
 
 format_table(d_sc_raw, var_labels, format_patterns) |>
-  readr::write_csv("data/output/table.csv")
+  readr::write_csv(fs::path(output_dir, "table.csv"))

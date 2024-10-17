@@ -16,17 +16,17 @@ param <- param.net(
   data.frame.params   = params_df,
   netstats            = netstats,
   epistats            = epistats,
-  prep.start          = 0,
-  riskh.start         = 0
+  prep.start          = prep_start,
+  riskh.start         = prep_start - year_steps
 )
 
 # Initial conditions (default prevalence initialized in epistats)
 # For models without bacterial STIs, these must be initialized here
 # with non-zero values
 init <- init_msm(
-  prev.ugc = 0.1,
-  prev.rct = 0.1,
-  prev.rgc = 0.1,
-  prev.uct = 0.1,
+  prev.ugc  = 0.1,
+  prev.rct  = 0.1,
+  prev.rgc  = 0.1,
+  prev.uct  = 0.1,
   prev.syph = 0.1
 )

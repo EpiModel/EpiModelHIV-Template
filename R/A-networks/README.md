@@ -2,8 +2,9 @@
 
 ## Introduction
 
-In this section we estimate and diagnose the [ERGMs](link?) used by the
-epidemic model.
+In this section we estimate and diagnose the
+[ERGMs](https://www.jstatsoft.org/article/view/v024i03) used by the epidemic
+model.
 
 ## Scripts description
 
@@ -30,5 +31,7 @@ long.
 
 ## On the HPC
 
-The **workflow-networks.R** file create the `slurmworkflow` workflow to estimate
-the full sized networks on the HPC and run the diagnostics associated with them.
+The **workflow-networks.R** file create the
+[`slurmworkflow`](https://epimodel.github.io/slurmworkflow/) workflow to
+estimate the full sized networks on the HPC and run the diagnostics associated
+with them.

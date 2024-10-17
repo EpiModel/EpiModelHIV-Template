@@ -22,7 +22,7 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = year_steps * 3
+  nsteps = year_steps * 4
 )
 
 # Controls

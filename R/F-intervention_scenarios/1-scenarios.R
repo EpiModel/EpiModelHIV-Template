@@ -27,7 +27,7 @@ control <- control_msm(
 )
 
 # Define test scenarios
-scenarios_df <- readr::read_csv("data/input/scenarios.csv")
+scenarios_df <- readr::read_csv(fs::path(input_dir, "scenarios.csv"))
 
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)

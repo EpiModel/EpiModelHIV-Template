@@ -11,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R")
+source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # load the local development version of the project
 pkgload::load_all(EMHIVp_dir)
@@ -27,8 +27,7 @@ est <- readRDS(path_to_est)
 
 # Control settings
 control <- control_msm(
-  nsteps = 52,
-  .tracker.list = EpiModelHIV::make_calibration_trackers()
+  nsteps = year_steps * 4
 )
 
 # Epidemic simulation

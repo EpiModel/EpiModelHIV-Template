@@ -21,15 +21,13 @@ theme_set(theme_light())
 
 # Process ----------------------------------------------------------------------
 
-# set prep start to a low value to test the full model in a few steps
-prep_start <- restart_time + 1 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 orig <- readRDS(path_to_restart)
 
 # Control settings
 control <- control_msm(
   start               = restart_time,
-  nsteps              = prep_start + 3 * year_steps,
+  nsteps              = restart_time + year_steps * 3,
   initialize.FUN      = reinit_msm
 )
 

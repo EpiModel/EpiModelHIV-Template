@@ -13,8 +13,6 @@ source("R/E-intervention_explore/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 
-# set prep start to a low value to test the full model in a few steps
-prep_start <- restart_time + 1 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
 # See full listing of parameters
@@ -28,7 +26,7 @@ print(init)
 # Module function defaults defined in ?control_msm
 control <- control_msm(
   start               = restart_time,
-  nsteps              = prep_start + 3 * year_steps,
+  nsteps              = restart_time + year_steps * 4,
   initialize.FUN      = reinit_msm
 )
 print(control)
