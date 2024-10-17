@@ -22,3 +22,11 @@ fs::file_copy(
   overwrite = TRUE
 )
 
+# # To install the packages from scratch:
+# renv::install(c(
+#     "Epimodel/EpiModelHIV-p",
+#     "Epimodel/EpiModelHPC",
+#     "readr", "RcppRoll", "viridis"
+# ))
+# # If you have access to ARTnetData:
+# renv::install("Epimodel/ARTnetData")
