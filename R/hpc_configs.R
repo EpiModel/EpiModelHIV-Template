@@ -9,7 +9,7 @@ mail_user <- "aleguil@emory.edu"
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
-  "spack load r@4.4.0"
+  "spack load r@4.4"
 )
 
 

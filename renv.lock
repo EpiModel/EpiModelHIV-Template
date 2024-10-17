@@ -14,32 +14,17 @@
       "Version": "2.9.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "ARTnet",
       "RemoteUsername": "EpiModel",
-      "RemotePkgRef": "EpiModel/ARTnet",
-      "RemoteSha": "8efd467e5b2c55ab2976b480f10d0d7165c109ff",
+      "RemoteRepo": "ARTnet",
+      "RemoteRef": "main",
+      "RemoteSha": "127bd803e5f008724541ee7bdd393e6c7c4cf2ad",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "EpiModel",
         "R",
         "dplyr"
       ],
-      "Hash": "a5fcd6d68be8f27bec8748778fa5ee67"
-    },
-    "ARTnetData": {
-      "Package": "ARTnetData",
-      "Version": "1.1.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "artnetdata",
-      "RemoteRef": "main",
-      "RemoteSha": "3caad7145ff0031667709a9fcdb4abb27ce5a8c3",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "96dda2bc4d413c614b8cdedb676c9b65"
+      "Hash": "479688c4ca0bfc5e628f6dee1caee905"
     },
     "DEoptimR": {
       "Package": "DEoptimR",
@@ -54,13 +39,8 @@
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.5.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
-      "RemoteRef": "main",
-      "RemoteSha": "38ce85ec31c9eb43f326b2a85a084ab337274422",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "RColorBrewer",
@@ -88,19 +68,20 @@
         "tibble",
         "utils"
       ],
-      "Hash": "b83eea70e1e5490bf2164a427fd0993d"
+      "Hash": "c61c37adfc88adaa2b79e099d9f3391d"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
-      "Version": "3.1.0",
+      "Version": "3.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "dev-3.2.x",
-      "RemoteSha": "da3e1c90d3154fb9e63285e88fbf9e80fa359c2f",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "Epimodel",
+      "RemoteRepo": "EpiModelHIV-p",
+      "RemoteRef": "v3.2.x",
+      "RemoteSha": "98fb6bc89c54c5b169b8ed561c5388d9d4502c1c",
       "Requirements": [
+        "ARTnet",
         "EpiModel",
         "R",
         "collections",
@@ -110,12 +91,11 @@
         "networkDynamic",
         "networkLite",
         "progressr",
-        "readxl",
         "rlang",
         "statnet.common",
         "tergm"
       ],
-      "Hash": "aabb4c9fa91bae5cb01ef301383d491e"
+      "Hash": "4f1cc6339336782865ccb33378ae0737"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -123,10 +103,10 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "Epimodel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteUsername": "EpiModel",
-      "RemotePkgRef": "EpiModel/EpiModelHPC",
-      "RemoteSha": "6cab1b941a9121f1a93a4c736408d6e5396f6318",
+      "RemoteRef": "main",
+      "RemoteSha": "3c12666076dbac443e1a8f2b5af784323347d4b2",
       "Requirements": [
         "EpiModel",
         "R",
@@ -146,7 +126,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "ef0c89af8f415657628766836eec1051"
+      "Hash": "8d01327fbd4683fe633069fbed8da2da"
     },
     "MASS": {
       "Package": "MASS",
@@ -334,18 +314,6 @@
         "utils"
       ],
       "Hash": "d7e13f49c19103ece9e58ad2d83a7354"
-    },
-    "cellranger": {
-      "Package": "cellranger",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "rematch",
-        "tibble"
-      ],
-      "Hash": "f61dbaec772ccd2e17705c1e872e9e7c"
     },
     "cli": {
       "Package": "cli",
@@ -558,13 +526,13 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "6b567375113ceb7d9f800de4dd42218e"
+      "Hash": "3fd29944b231036ad67c3edb32e02201"
     },
     "fansi": {
       "Package": "fansi",
@@ -1232,37 +1200,15 @@
       ],
       "Hash": "9de96463d2117f6ac49980577939dfb3"
     },
-    "readxl": {
-      "Package": "readxl",
-      "Version": "1.4.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cellranger",
-        "cpp11",
-        "progress",
-        "tibble",
-        "utils"
-      ],
-      "Hash": "8cf9c239b96df1bbb133b74aef77ad0a"
-    },
-    "rematch": {
-      "Package": "rematch",
-      "Version": "2.0.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "cbff1b666c6fa6d21202f07e2318d4f1"
-    },
     "renv": {
       "Package": "renv",
-      "Version": "1.0.10",
+      "Version": "1.0.11",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "utils"
       ],
-      "Hash": "d0387d5687ec933dd7587efd4cfa2d85"
+      "Hash": "47623f66b4e80b3b0587bc5d7b309888"
     },
     "rlang": {
       "Package": "rlang",
@@ -1387,16 +1333,16 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "slurmworkflow",
       "RemoteUsername": "EpiModel",
-      "RemotePkgRef": "github::EpiModel/slurmworkflow",
+      "RemoteRepo": "slurmworkflow",
+      "RemoteRef": "main",
       "RemoteSha": "04935f0cd2ea9f0c468a4627eb7363e0a84415fe",
       "Requirements": [
         "R",
         "fs",
         "yaml"
       ],
-      "Hash": "61461287b397eddbf817a08695f95089"
+      "Hash": "2b4349b5242f1a516cfa152b94df4a3a"
     },
     "statnet.common": {
       "Package": "statnet.common",
@@ -1449,11 +1395,11 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "swfcalib",
       "RemoteUsername": "EpiModel",
-      "RemotePkgRef": "EpiModel/swfcalib",
+      "RemoteRepo": "swfcalib",
+      "RemoteRef": "main",
       "RemoteSha": "b37d195b3bda3158e6902624d76ccc4d28e6782f",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R",
         "dplyr",
@@ -1463,7 +1409,7 @@
         "lhs",
         "slurmworkflow"
       ],
-      "Hash": "ae87464cc3554b8b97e1f867b0124c3c"
+      "Hash": "d08cc05ff5dc589dd192f29eee9c861b"
     },
     "tergm": {
       "Package": "tergm",
