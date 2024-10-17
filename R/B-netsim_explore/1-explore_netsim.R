@@ -55,8 +55,9 @@ tail(df)
 ## Run 2 simulations on 2 cores
 ## Note: this will not run generate a progress tracker in the console
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3,
-  nsims = 2, ncores = 2
+  nsteps = year_steps * 4,
+  nsims = 2,
+  ncores = 2
 )
 print(control)
 

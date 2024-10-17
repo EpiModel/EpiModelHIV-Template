@@ -21,12 +21,11 @@ max_cores <- 8
 wf <- make_em_workflow("scenarios", override = TRUE)
 
 # Necessary files
-prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3
+  nsteps = year_steps * 4
 )
 
 # Workflow creation

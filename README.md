@@ -2,10 +2,10 @@
 
 ## Introduction
 
-This template is a scaffold for an EpiModeHIV applied project. Before reading on
-make sure you have read the [getting
-started](https://github.com/EpiModel/EpiModeling/wiki/Getting-Started-with-EpiModelHIV) wiki page and done all the
-relevant steps.
+This template is a scaffold for an EpiModeHIV applied project. Before reading
+on make sure you have read the [getting
+started](https://github.com/EpiModel/EpiModeling/wiki/Getting-Started-with-EpiModelHIV)
+wiki page and done all the relevant steps.
 
 From now on, we refer to the **applied project** as `applied_proj` and to your
 custom `EpiModeHIV-p` branch as `EpiModeHIV-p@applied_proj`.
@@ -61,8 +61,9 @@ hpc_context <- TRUE
 ### General advise on making new scripts
 
 When creating a new top level script you should adhere to the global structure
-used all over this repo. These project of ours are very complex with many moving
-pieces. Trying to keep them as clean as possible helps a lot in not getting lost.
+used all over this repo. These project of ours are very complex with many
+moving pieces. Trying to keep them as clean as possible helps a lot in not
+getting lost.
 
 ### Data directory
 

@@ -11,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R")
+source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # load the local development version of the project
 pkgload::load_all(EMHIVp_dir)
@@ -22,13 +22,12 @@ theme_set(theme_light())
 # Process ----------------------------------------------------------------------
 
 # set prep start to a low value to test the full model in a few steps
-prep_start <- 2 * year_steps
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 
 # Control settings
 control <- control_msm(
-  nsteps = prep_start + year_steps * 3
+  nsteps = year_steps * 4
 )
 
 # Epidemic simulation

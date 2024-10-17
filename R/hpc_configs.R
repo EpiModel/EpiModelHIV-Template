@@ -3,13 +3,13 @@
 ## This script should not be run directly. But `sourced` the from scripts that
 ## interact with the HPC (usually the `workflow-***.R` ones)
 
-current_git_branch <- "v3.2"
+current_git_branch <- "main"
 mail_user <- "<user>@emory.edu"
 
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
-  "spack load r@4.4.0"
+  "spack load r@4.4"
 )
 
 
