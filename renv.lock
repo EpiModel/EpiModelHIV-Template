@@ -14,17 +14,17 @@
       "Version": "2.9.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "8efd467e5b2c55ab2976b480f10d0d7165c109ff",
+      "RemoteSha": "127bd803e5f008724541ee7bdd393e6c7c4cf2ad",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "EpiModel",
         "R",
         "dplyr"
       ],
-      "Hash": "3c341f075b266b784f4d85b8134ffdd3"
+      "Hash": "479688c4ca0bfc5e628f6dee1caee905"
     },
     "ARTnetData": {
       "Package": "ARTnetData",
@@ -87,15 +87,16 @@
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
-      "Version": "3.1.0",
+      "Version": "3.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "v3.2.x",
-      "RemoteSha": "ce0ceab355160c760b799c806d886ea92d1114c8",
+      "RemoteSha": "53bb8c46fc34b4575906c9c84fa25db4f222ec90",
+      "RemoteHost": "api.github.com",
       "Requirements": [
+        "ARTnet",
         "EpiModel",
         "R",
         "collections",
@@ -105,12 +106,11 @@
         "networkDynamic",
         "networkLite",
         "progressr",
-        "readxl",
         "rlang",
         "statnet.common",
         "tergm"
       ],
-      "Hash": "3dd120879424e856cb71a59a62e5557b"
+      "Hash": "fc2492d62f13ef82e826377340421a51"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -329,18 +329,6 @@
         "utils"
       ],
       "Hash": "d7e13f49c19103ece9e58ad2d83a7354"
-    },
-    "cellranger": {
-      "Package": "cellranger",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "rematch",
-        "tibble"
-      ],
-      "Hash": "f61dbaec772ccd2e17705c1e872e9e7c"
     },
     "cli": {
       "Package": "cli",
@@ -1226,28 +1214,6 @@
         "vroom"
       ],
       "Hash": "9de96463d2117f6ac49980577939dfb3"
-    },
-    "readxl": {
-      "Package": "readxl",
-      "Version": "1.4.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cellranger",
-        "cpp11",
-        "progress",
-        "tibble",
-        "utils"
-      ],
-      "Hash": "8cf9c239b96df1bbb133b74aef77ad0a"
-    },
-    "rematch": {
-      "Package": "rematch",
-      "Version": "2.0.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "cbff1b666c6fa6d21202f07e2318d4f1"
     },
     "renv": {
       "Package": "renv",
