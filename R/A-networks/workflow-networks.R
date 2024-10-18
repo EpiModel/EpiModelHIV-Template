@@ -38,6 +38,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
+    "mail-type" = "END",
     "cpus-per-task" = est_cores,
     "time" = "24:00:00",
     "mem" = "0"
