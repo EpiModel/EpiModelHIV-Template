@@ -8,7 +8,7 @@
 # Setup ------------------------------------------------------------------------
 library(EpiModelHIV)
 
-hpc_context <- FALSE # set to TRUE to evaluate HPC estimates
+hpc_context <- TRUE # set to TRUE to evaluate HPC estimates
 source("R/shared_variables.R", local = TRUE)
 source("R/A-networks/z-context.R", local = TRUE)
 
