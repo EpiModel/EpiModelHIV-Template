@@ -15,7 +15,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-params_df <- param_df |>
+params_df <- params_df |>
   dplyr::select(value, param) |>
   dplyr::mutate(value = as.numeric(value)) |>
   tidyr::pivot_wider(names_from = param)
