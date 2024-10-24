@@ -34,8 +34,6 @@ pgc <- results |>
   filter(abs(ugc.prob - 0.2584717) < 0.001) |>
   select(ugc.prob, ir100.gc)
 
-
-
 results |>
   filter(.iteration == max(.iteration)) |>
   pull(hiv.test.rate_1) |>
@@ -78,8 +76,9 @@ ggplot(results, aes(
 results |>
   group_by(.iteration) |>
   summarize(
-    lo = min(hiv.test.rate_1),
-    hi = max(hiv.test.rate_1)
+    lo = min(a.rate),
+    med = median(a.rate),
+    hi = max(a.rate)
   )
 
 

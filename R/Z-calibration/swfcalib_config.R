@@ -206,7 +206,7 @@ calib_object <- list(
           a.rate = sample(seq(0.0004, 0.0005, length.out = n_sims)),
         ),
         make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-        get_result = swfcalib::determ_poly_end(1, poly_n = 5)
+        get_result = swfcalib::determ_poly_end(10, poly_n = 3)
       )
     )
   )
