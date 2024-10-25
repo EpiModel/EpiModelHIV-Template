@@ -50,8 +50,7 @@ EpiModelHPC::netsim_scenarios(
   scenarios_list = scenarios_list, # set to NULL to run with default params
   n_rep = 3,
   n_cores = 2,
-  output_dir = scenarios_dir,
-  save_pattern = "all"
+  output_dir = scenarios_dir
 )
 fs::dir_ls(scenarios_dir)
 

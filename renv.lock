@@ -114,14 +114,14 @@
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
-      "Version": "2.2.0",
+      "Version": "2.5.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "main",
-      "RemoteSha": "3c12666076dbac443e1a8f2b5af784323347d4b2",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodelhpc",
+      "RemoteRef": "v2.5.x",
+      "RemoteSha": "388a24844be90d10fdccf30b3ccdd85604b70327",
       "Requirements": [
         "EpiModel",
         "R",
@@ -141,7 +141,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "b6afd5aac7fa5a16c51f056285ca1d96"
+      "Hash": "4f38e72107217bcabaf7a1e404787d46"
     },
     "MASS": {
       "Package": "MASS",
