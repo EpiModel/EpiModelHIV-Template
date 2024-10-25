@@ -19,8 +19,16 @@ source("R/Z-calibration/z-context.R", local = TRUE)
 
 theme_set(theme_light())
 
-# Assessment -------------------------------------------------------------------
+# SWFCalib Assessment ----------------------------------------------------------
 swfcalib::render_assessment(fs::path(swfcalib_dir, "assessments.rds"))
+
+# Finalized calibration assessment  --------------------------------------------
+rmarkdown::render(
+  "R/Z-calibration/calibration_values.Rmd",
+  output_file = "calibration_report.html",
+  knit_root_dir = getwd(),
+  output_dir = "./"
+)
 
 # Results ----------------------------------------------------------------------
 # results <- readRDS(fs::path(swfcalib_dir, "results.rds"))

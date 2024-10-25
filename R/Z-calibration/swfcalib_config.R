@@ -41,16 +41,6 @@ calib_object <- list(
   ),
   waves = list(
     wave1 = list(
-      # job0 = list(
-      #   targets = "disease.mr100",
-      #   targets_val = targets["disease.mr100"],
-      #   params = c("aids.off.tx.mort.rate"), # target: 0.00385
-      #   initial_proposals = dplyr::tibble(
-      #     aids.off.tx.mort.rate = sample(seq(0.0001, 0.001, length.out = n_sims)),
-      #   ),
-      #   make_next_proposals = swfcalib::make_shrink_proposer(n_sims, shrink = 2),
-      #   get_result = swfcalib::determ_poly_end(0.001, poly_n = 5)
-      # ),
       job1 = list(
         targets = "cc.prep.B",
         targets_val = targets["cc.prep.B"],
