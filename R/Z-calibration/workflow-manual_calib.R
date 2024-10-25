@@ -52,7 +52,6 @@ wf <- add_workflow_step(
     path_to_est, param, init, control,
     scenarios_list = scenarios_list,
     output_dir = calib_dir,
-    save_pattern = "simple",
     n_rep = 128,
     n_cores = max_cores,
     max_array_size = 500,

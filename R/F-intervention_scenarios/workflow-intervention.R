@@ -43,7 +43,6 @@ wf <- add_workflow_step(
     path_to_restart, param, init, control,
     scenarios_list = scenarios_list,
     output_dir = scenarios_dir,
-    save_pattern = "simple",
     n_rep = 32,
     n_cores = max_cores,
     max_array_size = 500,

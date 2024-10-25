@@ -19,8 +19,16 @@ source("R/Z-calibration/z-context.R", local = TRUE)
 
 theme_set(theme_light())
 
-# Assessment -------------------------------------------------------------------
+# SWFCalib Assessment ----------------------------------------------------------
 swfcalib::render_assessment(fs::path(swfcalib_dir, "assessments.rds"))
+
+# Finalized calibration assessment  --------------------------------------------
+rmarkdown::render(
+  "R/Z-calibration/calibration_values.Rmd",
+  output_file = "calibration_report.html",
+  knit_root_dir = getwd(),
+  output_dir = "./"
+)
 
 # Results ----------------------------------------------------------------------
 # results <- readRDS(fs::path(swfcalib_dir, "results.rds"))
@@ -33,8 +41,6 @@ pu <- results |>
 pgc <- results |>
   filter(abs(ugc.prob - 0.2584717) < 0.001) |>
   select(ugc.prob, ir100.gc)
-
-
 
 results |>
   filter(.iteration == max(.iteration)) |>
@@ -78,8 +84,9 @@ ggplot(results, aes(
 results |>
   group_by(.iteration) |>
   summarize(
-    lo = min(hiv.test.rate_1),
-    hi = max(hiv.test.rate_1)
+    lo = min(a.rate),
+    med = median(a.rate),
+    hi = max(a.rate)
   )
 
 

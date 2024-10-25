@@ -29,8 +29,7 @@ EpiModelHPC::netsim_scenarios(
   scenarios_list = NULL,
   n_rep = 1,
   n_cores = 1,
-  output_dir = calib_dir,
-  save_pattern = "all" # required to make a restart point
+  output_dir = calib_dir
 )
 
 best <- readRDS(fs::path(calib_dir, "sim__empty_scenario__1.rds"))

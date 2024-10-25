@@ -93,7 +93,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "v3.2.x",
-      "RemoteSha": "53bb8c46fc34b4575906c9c84fa25db4f222ec90",
+      "RemoteSha": "a2aa6b2b3f050b71188d60e5788af3f42771591e",
       "RemoteHost": "api.github.com",
       "Requirements": [
         "ARTnet",
@@ -110,18 +110,18 @@
         "statnet.common",
         "tergm"
       ],
-      "Hash": "fc2492d62f13ef82e826377340421a51"
+      "Hash": "93984e514c1d6ef7e1694d9d8309f672"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
-      "Version": "2.2.0",
+      "Version": "2.5.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "main",
-      "RemoteSha": "3c12666076dbac443e1a8f2b5af784323347d4b2",
+      "RemoteSha": "18af89a4ba4720507820835613135315e9f9e78b",
       "Requirements": [
         "EpiModel",
         "R",
@@ -141,7 +141,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "b6afd5aac7fa5a16c51f056285ca1d96"
+      "Hash": "83cb8939d8e98b01ff8a3625edf764eb"
     },
     "MASS": {
       "Package": "MASS",
@@ -160,7 +160,7 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.7-0",
+      "Version": "1.7-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -173,7 +173,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "1920b2f11133b12350024297d8a4ff4a"
+      "Hash": "5122bb14d8736372411f955e1b16bc8a"
     },
     "R6": {
       "Package": "R6",
