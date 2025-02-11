@@ -46,4 +46,3 @@ nw_main <- EpiModel::set_vertex_attribute(
 
 nw_casl <- nw_main
 nw_inst <- nw_main
-

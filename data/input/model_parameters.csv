@@ -107,9 +107,9 @@ hiv.uct.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection gi
 hiv.dual.rr,0.2,numeric,7.5,,,,"Additive proportional risk, from 0 to 1, for HIV infection given dualinfection with both gonorrhea and chlamydia."
 riskh.start,-52,numeric,7.5,,,,Time step at which behavioral risk history assessment occurs.
 prep.start,0,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.B,,Time step at which the PrEP intervention should start.
-prep.start.prob_1,0.00554146887680583,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.H,,Probability of starting PrEP given current indications for Black MSM.
-prep.start.prob_2,0.00423228372076054,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.W,,Probability of starting PrEP given current indications for Hispanic MSM.
-prep.start.prob_3,0.00662106571520366,numeric,missing?,,,,Probability of starting PrEP given current indications for White MSM.
+prep.start.rate_1,0.00554146887680583,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.H,,Probability of starting PrEP given current indications for Black MSM.
+prep.start.rate_2,0.00423228372076054,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.W,,Probability of starting PrEP given current indications for Hispanic MSM.
+prep.start.rate_3,0.00662106571520366,numeric,missing?,,,,Probability of starting PrEP given current indications for White MSM.
 prep.adhr.dist_1,0.089,numeric,missing?,,,,"Proportion of men who are low, medium, and high adherent to PrEP for Black MSM."
 prep.adhr.dist_2,0.127,numeric,missing?,,,,"Proportion of men who are low, medium, and high adherent to PrEP for Hispanic MSM."
 prep.adhr.dist_3,0.784,numeric,missing?,50,,,"Proportion of men who are low, medium, and high adherent to PrEP for White MSM."
@@ -120,33 +120,9 @@ prep.discont.int_1,33.42,numeric,missing?,https://onlinelibrary.wiley.com/doi/10
 prep.discont.int_2,57.48,numeric,missing?,https://onlinelibrary.wiley.com/doi/10.1002/jia2.25252,,,Median interval until PrEP discontinuation in time steps for Hispanic MSM. Median interval until PrEP discontinuation in time steps for Black MSM. Calculated to get 56% retention 1Y and 41% 2Y
 prep.discont.int_3,57.39,numeric,missing?,,,,Median interval until PrEP discontinuation in time steps for White MSM. Median interval until PrEP discontinuation in time steps for Black MSM. Calculated to get 56% retention 1Y and 41% 2Y
 prep.tst.int,12.8571,numeric,missing?,,,,Testing interval by time steps for those who are actively on PrEP. This overrides the mean testing interval parameters.
-prep.risk.int,26,numeric,missing?,,,,Time window for assessment of risk eligibility for PrEP in time steps.
 prep.sti.screen.int,26,numeric,missing?,,,,Time step to initiate PrEP-based STI screening (may be after `prep.start` to stabilize STI incidence during calibration.
 prep.sti.tx.prob,1,numeric,missing?,,,,Probability of any STI treatment given positive screening during PrEP visit.
 prep.risk.reassess.int,52,numeric,7.5,,,,Interval for reassessment of risk indications of active PrEP users. Default of `52` for yearly reassessment when time unit is weekly -  use `Inf` for no reassessment.
-prep.require.lnt,FALSE,logical,,,,,"If `TRUE`, only start on PrEP if current time step is equal to the last negative test.."
-part.ident.start,Inf,numeric,,,,,Time step to initiate the partner identification process. Default of `Inf` indicates no partner identification.
-part.index.window.int,0,numeric,,,,,Number of prior time steps for which a newly diagnosed index patient is eligible for partner notification. Default of 0 indicates index eligible only if newly diagnosed at current time step.
-part.index.degree,1,numeric,,,,,The minimum number of partnerships an index patient may have for partner elicitation. Default of `1` indicating all partnerships under consideration.
-part.index.prob,0.666,numeric,,,,,Probability that an index patient will initiate partner services.
-part.ident.main.window.int,52,numeric,,,,,The number of time steps in the past that a main partnership qualifies for partner identification.
-part.ident.casl.window.int,52,numeric,,,,,The number of time steps in the past that a casual partnership qualifies for partner identification.
-part.ident.ooff.window.int,52,numeric,,,,,The number of time steps in the past that a one-off partnership qualifies for partner identification.
-part.ident.main.prob,0.157,numeric,,,,,Probability that a main partner is identified through partner identification.
-part.ident.casl.prob,0.08518719,numeric,,,,,Probability that a casual partner is identified through partner identification.
-part.ident.ooff.prob,0.04448852,numeric,,,,,Probability that a one-time partner is identified through partner identification.
-part.hiv.test.rate_1,0.394,numeric,,,,,Mean probability per time step of HIV testing for a Black MSM who has been identified as the partner of an index HIV+ MSM.
-part.hiv.test.rate_2,0.394,numeric,,,,,Mean probability per time step of HIV testing for a Hispanic MSM who has been identified as the partner of an index HIV+ MSM.
-part.hiv.test.rate_3,0.394,numeric,,,,,Mean probability per time step of HIV testing for a White MSM who has been identified as the partner of an index HIV+ MSM.
-part.prep.start.prob_1,0,numeric,,,,,Probability of a Black MSM identified through partner identification starting PrEP given current indications at the current time step.
-part.prep.start.prob_2,0,numeric,,,,,Probability of a Hispanic MSM identified through partner identification starting PrEP given current indications at the current time step.
-part.prep.start.prob_3,0,numeric,,,,,Probability of a White MSM identified through partner identification starting PrEP given current indications at the current time step.
-part.tx.init.rate_1,0.387,numeric,,,,,Probability that a Black MSM who has been identified as the partner of an incident HIV+ MSM will initiate treatment during the current time step.
-part.tx.init.rate_2,0.387,numeric,,,,,Probability that a Hispanic MSM who has been identified as the partner of an incident HIV+ MSM will initiate treatment during the current time step.
-part.tx.init.rate_3,0.387,numeric,,,,,Probability that a White MSM who has been identified as the partner of an incident HIV+ MSM will initiate treatment during the current time step.
-part.tx.reinit.rate_1,0,numeric,,,,,"Probability per time step that a Black MSM who has been identified through partner identification, stopped treatment will restart treatment."
-part.tx.reinit.rate_2,0,numeric,,,,,"Probability per time step that a Hispanic MSM who has been identified through partner identification, stopped treatment will restart treatment."
-part.tx.reinit.rate_3,0,numeric,11,,,,"Probability per time step that a White MSM who has been identified through partner identification, stopped treatment will restart treatment."
 gc.ntx.int,16.8,numeric,11,,,,Average duration in time steps of untreated gonorrhea.
 ct.ntx.int,32,numeric,12,,,,Average duration in time steps of untreated chlamydia.
 sti.screening.dist,stochastic,character,12,,,,"Either `""stochastic""` for random (memoryless) STI screening or `""deterministic""` for screening based on interval since last screening time (1/rates)."
