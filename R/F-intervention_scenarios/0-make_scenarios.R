@@ -25,7 +25,7 @@ sc_list <- list()
 
 for (or_test in ors) {
   for (or_tx in ors) {
-    sc_name <- paste0("test_", or_test, "__treat_", or_tx)
+    sc_name <- paste0("test_", or_test, "_treat_", or_tx)
     sc_list[[sc_name]] <- tibble(
       .scenario.id    = sc_name,
       .at             = intervention_start,
