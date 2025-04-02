@@ -39,4 +39,3 @@ best <- EpiModel::get_sims(best, 1)
 best$epi <- list(num = best$epi$num)
 
 saveRDS(best, path_to_restart)
-

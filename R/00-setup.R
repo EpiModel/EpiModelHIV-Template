@@ -31,5 +31,5 @@ fs::file_copy(
 # # If you have access to ARTnetData:
 # renv::install("Epimodel/ARTnetData")
 
-# To force the snapshoting of ARTnetData
+# If you don't have access to ARTnetData, comment this line
 if (FALSE) library(ARTnetData)

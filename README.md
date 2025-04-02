@@ -27,7 +27,7 @@ present to guide you along the way.
 ### Top level scripts
 
 By *top level scripts* we mean the scripts that will be executed directly by the
-user.
+user (you).
 
 They are all the scripts starting with as number (e.g. `1-estimation.R`) or the
 scripts starting with `workflow` (e.g. `workflow-networks.R`).
@@ -131,6 +131,8 @@ carrying on**.
 
 Run the rest of the script. It will install all the necessary packages.
 
+**Do not remove the last line** unless you don't have access to `ARTnetData`.
+
 At this point you can go the `README.md` file for step **A-networks**
 
 ## Table of content
@@ -144,7 +146,6 @@ Below is a list of all the steps with a quick description.
 - **E-intervention_explore**: Get familiar with restarting network models with `netsim`
 - **F-intervention_scenarios**: Run intervention scenarios and process results for publication
 - **Z-calibration**: *advanced step addressing calibration*
-
 
 ## Common mistakes
 
@@ -161,4 +162,3 @@ On the HPC this can be done with:
 ```sh
 rm -rf workflows/<the name of your workflow>
 ```
-
