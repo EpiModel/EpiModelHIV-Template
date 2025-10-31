@@ -51,7 +51,7 @@ calib_plot_infos <- list(
     fmt_target = scales::percent_format(0.1)
   ),
   ir100.sti = list(
-    names = c("ir100.gc", "ir100.ct"),
+    names = c("ir100.gono", "ir100.chla"),
     ylab = "Infection Rate per 100 PYAR",
     text_offset = 0.3,
     fmt_target = scales::number_format(0.1)
@@ -127,8 +127,7 @@ row_names <- c(
   "Target Statistic: Diagnosed Fraction",
   "Simulations: Diagnosed Fractions (med [IQR])",
   "Calibrated Rates (per Week)",
-  "Mean Inter-Test Interval (Years)",
-  "Median Diagnostic Delay (Years)"
+  "Mean Inter-Test Interval (Years)"
 )
 
 fmtr <- scales::label_percent(0.1)
@@ -137,15 +136,6 @@ tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("hiv.test.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
 m_int <- (1 / param[[p_names]] / 52) |> scales::label_number(0.1)()
-med_diag_delays <- d_outs |>
-  filter(time > max(time) - year_steps) |>
-  select(sim, starts_with("med_diag_delay_")) |>
-  group_by(sim) |>
-  summarise(across(everything(), mean)) |>
-  select(-sim) |>
-  mutate(across(everything(), \(x) x / year_steps)) |>
-  summarise(across(everything(), \(x) med_iqr(x, scales::label_number(0.01)))) |>
-  as.character()
 
 sim_vals <- d_outs |>
   filter(time > max(time) - year_steps) |>
@@ -156,9 +146,7 @@ sim_vals <- d_outs |>
   summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
   as.character()
 
-
-
-tbl <- rbind(tar, sim_vals,  prms, m_int, med_diag_delays)
+tbl <- rbind(tar, sim_vals,  prms, m_int)
 rownames(tbl) <- row_names
 colnames(tbl) <- col_names
 
@@ -301,7 +289,7 @@ row_names <- c(
 fmtr <- scales::label_percent(0.1)
 tar_names <- paste0("cc.prep.", races_names)
 tar <- targets[tar_names] |> fmtr()
-p_names <- paste0("prep.start.prob")
+p_names <- paste0("prep.start.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
 
 sim_vals <- d_outs |>
@@ -328,7 +316,7 @@ make_calib_plot(d_outs, p)
 ```
 
 ```{r}
-col_names <- paste0(c("GC", "CT"), " IR100")
+col_names <- paste0(c("gono", "chla"), " IR100")
 row_names <- c(
   "Target Statistic: STI IR100",
   "Simulations: STI IR100 (med [IQR])",
@@ -336,9 +324,9 @@ row_names <- c(
 )
 
 fmtr <- scales::label_number(0.1)
-tar_names <- c("ir100.gc", "ir100.ct")
+tar_names <- c("ir100.gono", "ir100.chla")
 tar <- targets[tar_names] |> fmtr()
-p_names <- c("ugc.prob", "uct.prob")
+p_names <- c("gono.uret.prob", "chla.uret.prob")
 prms <- unlist(param[p_names]) |> scales::label_number(0.01)()
 
 sim_vals <- d_outs |>
