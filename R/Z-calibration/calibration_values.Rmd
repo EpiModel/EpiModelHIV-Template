@@ -430,4 +430,3 @@ colnames(tbl) <- col_names
 
 knitr::kable(tbl)
 ```
-
