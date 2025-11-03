@@ -93,12 +93,11 @@ prep.discont.int_1,33.42,numeric,missing?,https://onlinelibrary.wiley.com/doi/10
 prep.discont.int_2,57.48,numeric,missing?,https://onlinelibrary.wiley.com/doi/10.1002/jia2.25252,,,Median interval until PrEP discontinuation in time steps for Hispanic MSM. Median interval until PrEP discontinuation in time steps for Black MSM. Calculated to get 56% retention 1Y and 41% 2Y
 prep.discont.int_3,57.39,numeric,missing?,,,,Median interval until PrEP discontinuation in time steps for White MSM. Median interval until PrEP discontinuation in time steps for Black MSM. Calculated to get 56% retention 1Y and 41% 2Y
 prep.tst.int,12.8571,numeric,missing?,,,,Testing interval by time steps for those who are actively on PrEP. This overrides the mean testing interval parameters.
-prep.sti.screen.int,26,numeric,missing?,,,,Time step to initiate PrEP-based STI screening (may be after `prep.start` to stabilize STI incidence during calibration.
 prep.sti.tx.prob,1,numeric,missing?,,,,Probability of any STI treatment given positive screening during PrEP visit.
 prep.risk.reassess.int,52,numeric,7.5,,,,Interval for reassessment of risk indications of active PrEP users. Default of `52` for yearly reassessment when time unit is weekly -  use `Inf` for no reassessment.
 sti.prep.tx.prob,1,numeric,,,,,Probability of any STI treatment given positive screening during PrEP visit.
 sti.screening.dist,stochastic,character,12,,,,"Either `""stochastic""` for random (memoryless) STI screening or `""deterministic""` for screening based on interval since last screening time (1/rates)."
-sti.screen.prep.rate,0.07692308,numeric,12,,,,Rate per time step for asymptomatic urogenital STI screening for MSM not diagnosed with HIV and on PrEP.
+sti.screen.prep.rate,0.07692308,numeric,12,,,,Rate per time step for asymptomatic urogenital STI screening for MSM not diagnosed with HIV and on PrEP. (mean interval = 13 weeks - 3months)
 sti.screen.prep.start,1,numeric,12,,,,Time step to initiate PrEP-based STI screening (may be after `prep.start` to stabilize STI incidence during calibration).
 sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM not diagnosed with HIV and not on PrEP.
 sti.screen.rect.hivpos.prob,0.63,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV.
