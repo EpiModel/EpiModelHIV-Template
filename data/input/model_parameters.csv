@@ -1,7 +1,7 @@
 param,value,type,Appendix.Section,source,relevant.calibration.target,geography,definition
-hiv.test.rate_1,0.00278141013714234,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV testing per time step for Black MSM.
-hiv.test.rate_2,0.00247564425933642,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
-hiv.test.rate_3,0.00292477834560212,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
+hiv.test.rate_1,0.001502146,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV testing per time step for Black MSM.
+hiv.test.rate_2,0.001471541,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
+hiv.test.rate_3,0.001466421,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
 hiv.test.late.prob_1,0,numeric,assumption,,,,Proportion of Black MSM who test only during AIDS stage infection.
 hiv.test.late.prob_2,0,numeric,assumption,,,,Proportion of Hispanic MSM who test only during AIDS stage infection.
 hiv.test.late.prob_3,0,numeric,assumption,,,,Proportion of White MSM who test only during AIDS stage infection.
