@@ -78,4 +78,3 @@ best$epi <- list(
 )
 
 saveRDS(best, path_to_restart)
-

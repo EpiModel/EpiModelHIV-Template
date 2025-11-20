@@ -13,6 +13,11 @@ hpc_node_setup <- c(
 )
 
 
+# `update_renv = TRUE` makes a lighter "renv.lock.hpc" file that will be used on
+# the HPC. This simplifies the setup on HPC by only installing what's required
+# to running the model itself and not the packages only used for later analyses.
+# Make sure to `push` this "renv.lock.hpc" file to your `git` repo before
+# running the HPC workflows.
 make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
   if (update_renv) {
     renv::snapshot(
