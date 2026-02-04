@@ -14,6 +14,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # load the local development version of the project
+# library(EpiModelHIV)
 pkgload::load_all(EMHIVp_dir)
 
 # default theme for the plots

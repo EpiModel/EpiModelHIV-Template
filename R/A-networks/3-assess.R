@@ -13,6 +13,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/A-networks/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
+message("\n", "Reading network diagnostics from: \"", diag_dir, "\"")
 
 # 1. Main model
 dx <- readRDS(fs::path(diag_dir, paste0("netdx-main-", context, ".rds")))

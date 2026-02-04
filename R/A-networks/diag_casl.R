@@ -33,5 +33,6 @@ dx_casl_static <- EpiModel::netdx(
 )
 
 dx <- list(dynamic = dx_casl, static = dx_casl_static)
-saveRDS(dx, fs::path(diag_dir, paste0("netdx-casl-", context, ".rds")))
+dx_path <- fs::path(diag_dir, paste0("netdx-casl-", context, ".rds"))
+saveRDS(dx, dx_path)
 rm(dx, dx_casl, dx_casl_static)

@@ -38,6 +38,8 @@ if (system.file(package = "ARTnetData") == "") {
 
 
 nw <- EpiModel::network_initialize(netstats$demog$num)
+# rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
+names(netstats$attr)[11] <- "hiv.dx"
 nw_main <- EpiModel::set_vertex_attribute(
   nw,
   names(netstats$attr),

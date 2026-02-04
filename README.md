@@ -40,6 +40,14 @@ is **NOT** the same at all).
 All other scripts are utilities. They provide variables or functions to the top
 level ones and should not be run on their own.
 
+### The `shared_variables.R` script
+
+Some variables are defined once in the `shared_variables.R` script. This
+mechanism prevents common errors where different files using the same variables
+would have different values, resulting in useless runs and complex debugging.
+It is highly recommended to only modify these variables in `shared_variables.R`
+and source it on every script in the project.
+
 ### The `z-context.R` scripts
 
 Each step contains a `z-context.R`. It defines specific parameters differently
@@ -51,7 +59,7 @@ large scale simulations.
 
 You will probably not need to edit these files.
 
-Simply know that the context switching is done by setting the following variable
+Key takeaway: the context switching is done by setting the following variable
 before these scripts are sourced:
 
 ```r

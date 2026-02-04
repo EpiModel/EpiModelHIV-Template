@@ -25,7 +25,10 @@ control <- control_msm(
 
 # Using no scenarios
 EpiModelHPC::netsim_scenarios(
-  path_to_est, param, init, control,
+  path_to_est,
+  param,
+  init,
+  control,
   scenarios_list = NULL,
   n_rep = 1,
   n_cores = 1,
@@ -39,3 +42,9 @@ best <- EpiModel::get_sims(best, 1)
 best$epi <- list(num = best$epi$num)
 
 saveRDS(best, path_to_restart)
+
+attrs <- names(sim$run$sim1$attr)
+restart_point <- make_restart_point(
+  sim,
+  time_attrs = attrs[endsWith(attrs, ".time") | endsWith(attrs, ".last")]
+)

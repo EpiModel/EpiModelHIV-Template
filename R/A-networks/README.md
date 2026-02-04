@@ -9,9 +9,11 @@ model.
 ## Scripts description
 
 - **1-estimations.R**: Initialize and run the estimation process for the
-  3 networks
+  3 networks. It saves it's output in the "data/run/estimates/" folder.
+  Depending on the `context`, the files are prefixed with either "-local" or
+  "-hpc"
 - **2-diagnostics.R**: Run the diagnostics on all 3 networks and save the
-  results for later assessments
+  results for later assessments in "data/run/diagnostics"
 - **3-assess.R**: Examine the output of the diagnostics.
 - `initialize.R`: scripts setup the networks and `ARTnet` objects.
 - `model_*.R`: defines and fit the main, casual and one-off models.
@@ -35,3 +37,5 @@ The **workflow-networks.R** file create the
 [`slurmworkflow`](https://epimodel.github.io/slurmworkflow/) workflow to
 estimate the full sized networks on the HPC and run the diagnostics associated
 with them.
+
+## Files Produced
