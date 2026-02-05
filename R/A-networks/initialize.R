@@ -36,10 +36,11 @@ if (system.file(package = "ARTnetData") == "") {
   )
 }
 
+# rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
+diag_status_pos <- which(names(netstats$attr) == "diag.status")
+names(netstats$attr)[diag_status_pos] <- "hiv.dx"
 
 nw <- EpiModel::network_initialize(netstats$demog$num)
-# rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
-names(netstats$attr)[11] <- "hiv.dx"
 nw_main <- EpiModel::set_vertex_attribute(
   nw,
   names(netstats$attr),

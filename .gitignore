@@ -11,3 +11,6 @@ data/run
 data/output
 renv/
 workflows/
+# pixi environments
+.pixi/*
+!.pixi/config.toml
