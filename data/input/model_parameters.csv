@@ -2,43 +2,17 @@ param,value,type,Appendix.Section,source,relevant.calibration.target,geography,d
 hiv.test.rate_1,0.001502146,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV testing per time step for Black MSM.
 hiv.test.rate_2,0.001471541,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
 hiv.test.rate_3,0.001466421,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
-hiv.test.late.prob_1,0,numeric,assumption,,,,Proportion of Black MSM who test only during AIDS stage infection.
-hiv.test.late.prob_2,0,numeric,assumption,,,,Proportion of Hispanic MSM who test only during AIDS stage infection.
-hiv.test.late.prob_3,0,numeric,assumption,,,,Proportion of White MSM who test only during AIDS stage infection.
 test.window.int,3,numeric,7.1,,,,Length of the HIV test window period in time steps.(i.e. the number of time steps between infection and test positivity).
-tt.partial.supp.prob_1,0,numeric,assumption,,,,Proportion of Black MSM who enter partial viral suppression category after ART initiation.
-tt.partial.supp.prob_2,0,numeric,assumption,,,,Proportion of Hispanic MSM who enter partial viral suppression category after ART initiation.
-tt.partial.supp.prob_3,0,numeric,assumption,,,,Proportion of White MSM who enter partial viral suppression category after ART initiation.
-tt.full.supp.prob_1,1,numeric,assumption,,,,Proportion of Black MSM who enter full viral suppression category after ART initiation.
-tt.full.supp.prob_2,1,numeric,assumption,,,,Proportion of Hispanic MSM who enter full viral suppression category after ART initiation.
-tt.full.supp.prob_3,1,numeric,assumption,,,,Proportion of White MSM who enter full viral suppression category after ART initiation.
-tt.durable.supp.prob_1,0,numeric,assumption,,,,Proportion of Black MSM who enter durable viral suppression category after ART initiation.
-tt.durable.supp.prob_2,0,numeric,assumption,,,,Proportion of Hispanic MSM who enter durable viral suppression category after ART initiation.
-tt.durable.supp.prob_3,0,numeric,assumption,,,,Proportion of White MSM who enter durable viral suppression category after ART initiation.
 tx.init.rate_1,0.298361113628911,numeric,7.2,,cc.linked1m.B,atlanta,Probability per time step that a Black MSM who has tested positive will initiate treatment.
 tx.init.rate_2,0.368208639586171,numeric,7.2,,cc.linked1m.H,atlanta,Probability per time step that a Hispanic MSM who has tested positive will initiate treatment.
 tx.init.rate_3,0.347998730409527,numeric,7.2,,cc.linked1m.W,atlanta,Probability per time step that a White MSM who has tested positive will initiate treatment.
-tx.halt.partial.rate_1,0.00532779300510705,numeric,7.2,,cc.vsupp.B,atlanta,Probability per time step that Black MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
-tx.halt.partial.rate_2,0.00487215626435732,numeric,7.2,,cc.vsupp.H,atlanta,Probability per time step that Hispanic MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
-tx.halt.partial.rate_3,0.00269785261583336,numeric,7.2,,cc.vsupp.W,atlanta,Probability per time step that White MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
-tx.halt.full.or_1,0.45,numeric,assumption,,,,Odds ratio comparing the odds of stopping treatment for Black MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.halt.full.or_2,0.45,numeric,assumption,,,,Odds ratio comparing the odds of stopping treatment for Hispanic MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.halt.full.or_3,0.45,numeric,assumption,,,,Odds ratio comparing the odds of stopping treatment for White MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.halt.durable.or_1,0.45,numeric,unused,,,,Odds ratio comparing the odds of stopping treatment for Black MSM in the durable VL suppression category vs. in the partial VL suppression category.
-tx.halt.durable.or_2,0.45,numeric,unused,,,,Odds ratio comparing the odds of stopping treatment for Hispanic MSM in the durable VL suppression category vs. in the partial VL suppression category.
-tx.halt.durable.or_3,0.45,numeric,unused,,,,Odds ratio comparing the odds of stopping treatment for White MSM in the durable VL suppression category vs. in the partial VL suppression category.
-tx.reinit.partial.rate_1,0.00255,numeric,7.3,,,United-states,Probability per time step that a Black MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
-tx.reinit.partial.rate_2,0.00255,numeric,7.3,,,United-states,Probability per time step that a Hispanic MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
-tx.reinit.partial.rate_3,0.00255,numeric,7.3,,,United-states,Probability per time step that a White MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
-tx.reinit.full.or_1,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for Black MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.reinit.full.or_2,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for Hispanic MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.reinit.full.or_3,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for White MSM in the full VL suppression category vs. in the partial VL suppression category.
-tx.reinit.durable.or_1,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for Black MSM in the durable VL suppression category vs. in the partial VL suppression category.
-tx.reinit.durable.or_2,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for Hispanic MSM in the durable VL suppression category vs. in the partial VL suppression category.
-tx.reinit.durable.or_3,1,numeric,assumption,,,,Odds ratio comparing the odds of re-starting treatment for White MSM in the durable VL suppression category vs. in the partial VL suppression category.
-max.time.off.tx.full.int,780,numeric,7.4,,,United-states,"Number of time steps off treatment for a full suppressor before onset of AIDS, including time before diagnosis."
-max.time.on.tx.partial.int,520,numeric,7.4,,,United-states,Number of time steps on treatment for a partial suppressor before onset of AIDS.
-max.time.off.tx.partial.int,520,numeric,7.4,,,United-states,"Number of time steps off treatment for a partial suppressor before onset of AIDS, including time before diagnosis."
+tx.halt.rate_1,0.002404553,numeric,7.2,,cc.vsupp.B,atlanta,Probability per time step that Black MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.halt.rate_2,0.002198361,numeric,7.2,,cc.vsupp.H,atlanta,Probability per time step that Hispanic MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.halt.rate_3,0.001215838,numeric,7.2,,cc.vsupp.W,atlanta,Probability per time step that White MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.reinit.rate_1,0.00255,numeric,7.3,,,United-states,Probability per time step that a Black MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
+tx.reinit.rate_2,0.00255,numeric,7.3,,,United-states,Probability per time step that a Hispanic MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
+tx.reinit.rate_3,0.00255,numeric,7.3,,,United-states,Probability per time step that a White MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
+max.time.off.tx.int,780,numeric,7.4,,,United-states,"Number of time steps off treatment for a full suppressor before onset of AIDS, including time before diagnosis."
 vl.acute.rise.int,3,numeric,6,,,,Number of time steps to peak viremia during acute infection.
 vl.acute.peak,6.886,numeric,6,,,,Peak viral load (in log10 units) at the height of acute infection.
 vl.acute.fall.int,3,numeric,6,,,,Number of time steps from peak viremia to set-point viral load during the acute infection period.
@@ -46,7 +20,7 @@ vl.set.point,4.5,numeric,6,,,,Set point viral load (in log10 units).
 vl.aids.onset.int,520,numeric,6,,,,Number of time steps to AIDS for a treatment-naive patient.
 vl.aids.int,104,numeric,6,,,,Duration of AIDS stage infection in time steps.
 vl.aids.peak,7,numeric,6,,,,Maximum viral load during AIDS stage.
-vl.full.supp,1.5,numeric,6,,,,"Log10 viral load at full suppression on ART. (VL = 50, undetectable)"
+vl.supp,1.5,numeric,6,,,,"Log10 viral load at full suppression on ART. (VL = 50, undetectable)"
 vl.part.supp,3.5,numeric,6,,,,Log10 viral load at partial suppression on ART.
 vl.tx.down.rate,0.25,numeric,7.3,,,,Number of log10 units that viral load falls per time step from treatment initiation or re-initiation until the suppression level is reached (pre-AIDS stages). Calculated so 3 months (12 weeks) between suppressed and set point
 vl.tx.aids.down.rate,0.25,numeric,7.3,,,,Number of log10 units that viral load falls per time step fromtreatment initiation or re-initiation until the suppression level is reached (AIDS stage). . Calculated so 3 months (12 weeks) between suppressed and set point

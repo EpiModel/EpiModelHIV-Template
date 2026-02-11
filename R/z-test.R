@@ -1,10 +1,20 @@
 # Scratchpad for interactive testing before integration in a script
-library(dplyr)
 source("R/shared_variables.R", local = TRUE)
-source("R/B-netsim_explore/z-context.R", local = TRUE)
 # library(EpiModelHIV)
+pkgload::load_all("../../EpiModel.git/main/")
 pkgload::load_all(EMHIVp_dir)
+context <- "local"
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
-control <- control_msm( nsteps = year_steps * 2)
-sim <- netsim(est, param, init, control)
+
+# options(error = recover)
+
+control <- control_msm(
+  nsteps = 10 * year_steps,
+  # check.attrs.types = TRUE,
+  verbose = FALSE
+)
+
+system.time({
+  sim <- netsim(est, param, init, control)
+})
