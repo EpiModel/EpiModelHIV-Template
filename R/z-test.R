@@ -12,9 +12,12 @@ est <- readRDS(path_to_est)
 control <- control_msm(
   nsteps = 10 * year_steps,
   # check.attrs.types = TRUE,
-  verbose = FALSE
+  .tracker.list = EpiModelHIV::make_calibration_trackers(),
+  verbose = TRUE
 )
 
 system.time({
   sim <- netsim(est, param, init, control)
 })
+
+d <- as.data.frame(sim)
