@@ -162,7 +162,7 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "main",
-      "RemoteSha": "2d221983fb45b5c6a7d5a3bd0a548645f1be5a5b",
+      "RemoteSha": "48a5be215b6f30ac370ce69bdd872216230f85ec",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
@@ -210,7 +210,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "reworks",
-      "RemoteSha": "3b897e956c952382eb9fc2d5f558185026860243",
+      "RemoteSha": "017098272f71d249ec9bc38863fcb1421bd0f8f6",
       "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main"
     },
@@ -1813,11 +1813,13 @@
     },
     "lpSolveAPI": {
       "Package": "lpSolveAPI",
-      "Version": "5.5.2.0-17.14",
+      "Version": "5.5.2.0-17.15",
       "Source": "Repository",
       "Title": "R Interface to 'lp_solve' Version 5.5.2.0",
       "Authors@R": "c(person(family = \"lp_solve\", role = \"aut\", email = \"https://lpsolve.sourceforge.net/\"), person(given = \"Kjell\", family = \"Konis\", role = \"aut\"), person(given = \"Florian\", family = \"Schwendinger\", role = c(\"aut\", \"cre\"), email = \"FlorianSchwendinger@gmx.at\"), person(given = \"Kurt\", family = \"Hornik\", role = \"ctb\"))",
       "Description": "The lpSolveAPI package provides an R interface to 'lp_solve', a Mixed Integer Linear Programming (MILP) solver with support for pure linear, (mixed) integer/binary, semi-continuous and special ordered sets (SOS) models.",
+      "URL": "https://github.com/FlorianSchwendinger/lpSolveAPI",
+      "BugReports": "https://github.com/FlorianSchwendinger/lpSolveAPI/issues",
       "License": "LGPL-2",
       "RoxygenNote": "7.2.0",
       "NeedsCompilation": "yes",

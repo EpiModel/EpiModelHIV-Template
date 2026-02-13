@@ -23,6 +23,7 @@ theme_set(theme_light())
 swfcalib::render_assessment(fs::path(swfcalib_dir, "assessments.rds"))
 
 # Finalized calibration assessment  --------------------------------------------
+source("R/shared_variables.R", local = TRUE)
 rmarkdown::render(
   "R/Z-calibration/calibration_values.Rmd",
   output_file = "calibration_report.html",
@@ -130,4 +131,3 @@ plot(mod)
 
 loss_fun <- function(par, t)  abs(predict(mod, data.frame(ugc.prob = par)) - t)
 optimize(interval = c(0.24, 0.3), f = loss_fun, t = 12.81)
-

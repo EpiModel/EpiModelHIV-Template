@@ -32,12 +32,6 @@ calib_plot_infos <- list(
     text_offset = 0.01,
     fmt_target = scales::percent_format(0.1)
   ),
-  cc.linked1m = list(
-    names = paste0("cc.linked1m.", races),
-    ylab = "Proportion",
-    text_offset = 0.005,
-    fmt_target = scales::percent_format(0.1)
-  ),
   cc.vsupp = list(
     names = paste0("cc.vsupp.", races),
     ylab = "Proportion",
@@ -51,7 +45,7 @@ calib_plot_infos <- list(
     fmt_target = scales::percent_format(0.1)
   ),
   ir100.sti = list(
-    names = c("ir100.gono", "ir100.chla"),
+    names = c("ir100.gono", "ir100.chla", "ir100.syph"),
     ylab = "Infection Rate per 100 PYAR",
     text_offset = 0.3,
     fmt_target = scales::number_format(0.1)
@@ -153,45 +147,6 @@ colnames(tbl) <- col_names
 knitr::kable(tbl)
 ```
 
-## cc.linked1m - section 7.2
-
-```{r}
-p <- calib_plot_infos[["cc.linked1m"]]
-make_calib_plot(d_outs, p)
-```
-
-```{r}
-col_names <- paste0(c("Black", "Hispanic", "White/Other"), "MSM")
-row_names <- c(
-  "Target Statistic: Fraction Linked within 1m",
-  "Simulations: Fraction Linked (med [IQR])",
-  "Calibrated Rates (per Week)",
-  "Mean Time to ART (in Weeks)"
-)
-
-fmtr <- scales::label_percent(0.1)
-tar_names <- paste0("cc.linked1m.", races_names)
-tar <- targets[tar_names] |> fmtr()
-p_names <- paste0("tx.init.rate")
-prms <- param[[p_names]] |> scales::label_scientific()()
-mean_time_to_art <- scales::label_number(0.1)(1 / param[[p_names]])
-
-sim_vals <- d_outs |>
-  filter(time > max(time) - year_steps) |>
-  select(sim, all_of(tar_names)) |>
-  group_by(sim) |>
-  summarise(across(everything(), mean)) |>
-  select(-sim) |>
-  summarise(across(everything(), \(x) med_iqr(x, fmtr))) |>
-  as.character()
-
-tbl <- rbind(tar, sim_vals,  prms, mean_time_to_art)
-rownames(tbl) <- row_names
-colnames(tbl) <- col_names
-
-knitr::kable(tbl)
-```
-
 ## cc.vsupp - section 7.3
 
 ```{r}
@@ -212,7 +167,7 @@ row_names <- c(
 fmtr <- scales::label_percent(0.1)
 tar_names <- paste0("cc.vsupp.", races_names)
 tar <- targets[tar_names] |> fmtr()
-p_names <- paste0("tx.halt.partial.rate")
+p_names <- paste0("tx.halt.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
 mean_time_stop_w <- scales::label_number(1)(1 / param[[p_names]])
 mean_time_stop_y <- scales::label_number(0.1)(1 / param[[p_names]] / 52)
@@ -316,7 +271,7 @@ make_calib_plot(d_outs, p)
 ```
 
 ```{r}
-col_names <- paste0(c("gono", "chla"), " IR100")
+col_names <- paste0(c("gono", "chla", "syph"), " IR100")
 row_names <- c(
   "Target Statistic: STI IR100",
   "Simulations: STI IR100 (med [IQR])",
@@ -326,7 +281,7 @@ row_names <- c(
 fmtr <- scales::label_number(0.1)
 tar_names <- c("ir100.gono", "ir100.chla")
 tar <- targets[tar_names] |> fmtr()
-p_names <- c("gono.uret.prob", "chla.uret.prob")
+p_names <- c("gono.uret.prob", "chla.uret.prob", "syph.prob")
 prms <- unlist(param[p_names]) |> scales::label_number(0.01)()
 
 sim_vals <- d_outs |>
