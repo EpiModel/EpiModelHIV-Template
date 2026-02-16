@@ -77,7 +77,7 @@ sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screen
 sti.screen.rect.hivpos.prob,0.63,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV.
 sti.screen.rect.prep.prob,1,numeric,,,,,Probability of rectal site screening for any STI given  urogenital screening for MSM not diagnosed with HIV and on PrEP.
 sti.cond.eff.or,0.95,numeric,"9.3,9.4",,,,Odds ratio comparing the odds of STI infection from anal sex when a condom is used vs. not used properly (biological efficacy)..
-gono.uret.prob,0.20,numeric,9.4,,ir100.gc,atlanta,Probability of urethral gonorrhea infection per act.
+gono.uret.prob,0.2138,numeric,9.4,,ir100.gc,atlanta,Probability of urethral gonorrhea infection per act.
 gono.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal gonorrhea.
 gono.uret.sympt.prob,0.9333,numeric,10,,,,Probability of symptoms given infection with urethral gonorrhea.
 gono.tx.recov.int,1.4,numeric,11,,,,Average duration in time steps of treated gonorrhea.
@@ -90,7 +90,7 @@ gono.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomat
 gono.asympt.tx.prob_3,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for White MSM.
 gono.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening  for MSM not diagnosed with HIV and not on PrEP.
 gono.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening for MSM diagnosed with HIV.
-chla.uret.prob,0.19,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
+chla.uret.prob,0.2122,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
 chla.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal chlamydia.
 chla.uret.sympt.prob,0.95,numeric,11,,,,Probability of symptoms given infection with urethral chlamydia.
 chla.tx.recov.int,1.4,numeric,10,,,,Average duration in time steps of treated chlamydia.

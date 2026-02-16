@@ -38,9 +38,9 @@ n_scenarios <- 10
 scenarios_df <- tibble(
   .scenario.id = as.character(seq_len(n_scenarios)),
   .at = 1,
-  gono.uret.prob = seq(0.2, 0.25, length.out = n_scenarios),
-  chla.uret.prob = seq(0.19, 0.24, length.out = n_scenarios),
-  syph.prob = seq(0.15, 0.2, length.out = n_scenarios)
+  # gono.uret.prob = seq(0.20, 0.22, length.out = n_scenarios),
+  # chla.uret.prob = seq(0.2, 0.22, length.out = n_scenarios),
+  syph.prob = seq(0.115, 0.15, length.out = n_scenarios)
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
