@@ -10,7 +10,7 @@ library(EpiModelHIV)
 library(dplyr)
 
 source("R/shared_variables.R", local = TRUE)
-source("R/C-netsim_scenarios/z-context.R", local = TRUE)
+source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 
@@ -18,3 +18,13 @@ d_sim <- readRDS(fs::path(scenarios_dir, "merged_tibbles", "df__scenario_1.rds")
 
 glimpse(d_sim)
 head(d_sim)
+
+d_sim <- d_sim |>
+  mutate_calibration_targets() |>
+  as.epi.data.frame()
+
+plot(
+  d_sim,
+  y = paste0("cc.dx.", c("B", "H", "W")),
+  main = "Proportion of Diagnosed (Black)"
+)

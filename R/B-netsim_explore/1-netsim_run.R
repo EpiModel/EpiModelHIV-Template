@@ -44,8 +44,8 @@ print(sim)
 
 # Plot outcomes
 par(mar = c(3, 3, 2, 2), mgp = c(2, 1, 0))
-plot(sim, y = "i.num", main = "Prevalence")
-plot(sim, y = "ir100", main = "Incidence")
+plot(sim, y = "hiv.inf", main = "Number of Infected with HIV")
+plot(sim, y = "syph.inf", main = "Number of Infected with Syphilis")
 
 # Convert to data frame
 df <- as.data.frame(sim)
@@ -69,7 +69,14 @@ library("ggplot2")
 theme_set(theme_light())
 
 d_sim <- as_tibble(sim)
+d_sim <- mutate_calibration_targets(d_sim)
 glimpse(d_sim)
 
-ggplot(d_sim, aes(x = time, y = prepCurr, col = as.factor(sim))) +
+ggplot(d_sim, aes(x = time, y = cc.dx.B, col = as.factor(sim))) +
   geom_line()
+
+ggplot(d_sim, aes(x = time, y = prep, col = as.factor(sim))) +
+  geom_line()
+
+d_sim <- as.epi.data.frame(d_sim)
+plot(d_sim, y = "cc.dx.B", main = "Proportion of Diagnosed (Black)")

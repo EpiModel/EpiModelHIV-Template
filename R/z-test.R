@@ -9,9 +9,13 @@ theme_set(theme_light())
 d_sim <- readRDS("./data/run/calibration/merged_tibbles/df__empty_scenario.rds")
 glimpse(d_sim)
 
-with(d_sim, {
-  tail(i_dx__B / i__B)
-})
+d_sim |>
+  mutate_calibration_targets() |>
+  filter(time > max(time) - 52) |>
+  group_by(sim) |>
+  summarise(ir100.syph = mean(ir100.syph))
+
+
 
 sim <- readRDS("./data/run/calibration/sim__empty_scenario__1.rds")
 
@@ -43,6 +47,5 @@ d <- as.data.frame(sim)
 glimpse(d)
 
 mutate_calibration_targets(d) |> tail() |> glimpse()
-
 
 

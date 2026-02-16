@@ -13,7 +13,7 @@ library(EpiModelHIV)
 library(dplyr)
 
 source("R/shared_variables.R", local = TRUE)
-source("R/C-netsim_scenarios/z-context.R", local = TRUE)
+source("R/B-netsim_explore/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 
@@ -35,9 +35,9 @@ print(control)
 scenarios_df <- tibble(
   .scenario.id    = c("scenario_1", "scenario_2"),
   .at             = 1,
-  hiv.test.rate_1 = c(0.004, 0.005),
-  hiv.test.rate_2 = c(0.004, 0.005),
-  hiv.test.rate_3 = c(0.007, 0.008)
+  gono.uret.prob = c(0.25, 0.3),
+  chla.uret.prob = c(0.25, 0.3),
+  syph.prob = c(0.15, 0.2)
 )
 
 glimpse(scenarios_df)

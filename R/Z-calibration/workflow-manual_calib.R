@@ -34,14 +34,13 @@ wf <- make_em_workflow("calibration_1", override = TRUE)
 
 # Define calibration scenarios
 # insert test values here
-n_scenarios <- 2
+n_scenarios <- 10
 scenarios_df <- tibble(
   .scenario.id = as.character(seq_len(n_scenarios)),
   .at = 1,
-  ugc.prob = seq(0.3225, 0.3275, length.out = n_scenarios), # best 0.325
-  rgc.prob = plogis(qlogis(ugc.prob) + log(1.25)),
-  uct.prob = seq(0.29, 0.294, length.out = n_scenarios), # best 0.291
-  rct.prob = plogis(qlogis(uct.prob) + log(1.25))
+  gono.uret.prob = seq(0.2, 0.25, length.out = n_scenarios),
+  chla.uret.prob = seq(0.19, 0.24, length.out = n_scenarios),
+  syph.prob = seq(0.15, 0.2, length.out = n_scenarios)
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
@@ -49,8 +48,8 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
-    # scenarios_list = scenarios_list,
-    scenarios_list = NULL,
+    scenarios_list = scenarios_list,
+    # scenarios_list = NULL,
     output_dir = calib_dir,
     n_rep = 32,
     n_cores = max_cores,
