@@ -148,12 +148,12 @@ At this point you can go the `README.md` file for step **A-networks**
 Below is a list of all the steps with a quick description.
 
 - **A-networks**: Estimate and diagnosed the network models.
-- **B-netsim_explore**: Get familiar with running network models with `netsim`
+- **B-model_dev**: Get familiar with running network models with `netsim`
 - **C-netsim_scenarios**: Run network models with the scenario API
 - **D-restart_point**: Mandatory non interactive step
-- **E-intervention_explore**: Get familiar with restarting network models with `netsim`
-- **F-intervention_scenarios**: Run intervention scenarios and process results for publication
-- **Z-calibration**: *advanced step addressing calibration*
+- **D-interventions**: Get familiar with restarting network models with `netsim`
+- **D-interventions**: Run intervention scenarios and process results for publication
+- **C-calibration**: *advanced step addressing calibration*
 
 ## Common mistakes
 
