@@ -3,13 +3,13 @@
 ## Introduction
 
 In this section we estimate and diagnose the
-[ERGMs](https://www.jstatsoft.org/article/view/v024i03) used by the epidemic
+[TERGMs](https://www.jstatsoft.org/article/view/v024i03) used by the epidemic
 model.
 
 ## Scripts description
 
 - **1-estimations.R**: Initialize and run the estimation process for the
-  3 networks. It saves it's output in the "data/run/estimates/" folder.
+  3 networks. It saves its output in the "data/run/estimates/" folder.
   Depending on the `context`, the files are prefixed with either "-local" or
   "-hpc"
 - **2-diagnostics.R**: Run the diagnostics on all 3 networks and save the
@@ -28,7 +28,7 @@ The `initialize.R`, `model_*.R` and `diag_*.R` scripts should be modified if
 different parameterizations are required.
 
 The network sizes are set in the `z-context.R` scripts. Avoid going above 10k
-nodes for the local networks as the estimation and run of the models get very
+nodes for the local networks as the estimation and run of the models gets very
 long.
 
 ## On the HPC
@@ -37,5 +37,3 @@ The **workflow-networks.R** file create the
 [`slurmworkflow`](https://epimodel.github.io/slurmworkflow/) workflow to
 estimate the full sized networks on the HPC and run the diagnostics associated
 with them.
-
-## Files Produced

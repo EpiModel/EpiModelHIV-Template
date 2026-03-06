@@ -12,7 +12,6 @@ source("R/shared_variables.R", local = TRUE)
 source("R/B-model_dev/z-context.R")
 
 # Process ----------------------------------------------------------------------
-
 source("R/netsim_settings.R", local = TRUE)
 
 # See full listing of parameters
@@ -53,7 +52,7 @@ head(df)
 tail(df)
 
 ## Run 2 simulations on 2 cores
-## Note: this will not run generate a progress tracker in the console
+## Note: this run will not generate a progress tracker in the console
 control <- control_msm(
   nsteps = year_steps * 4,
   nsims = 2,

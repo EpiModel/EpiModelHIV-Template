@@ -14,7 +14,6 @@ source("R/shared_variables.R", local = TRUE)
 source("R/B-model_dev/z-context.R", local = TRUE)
 
 # load the local development version of the project
-# library(EpiModelHIV)
 pkgload::load_all(EMHIVp_dir)
 
 # default theme for the plots
@@ -30,6 +29,9 @@ est <- readRDS(path_to_est)
 control <- control_msm(
   nsteps = year_steps * 4
 )
+# NOTE: do not use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`. The
+# parallel environment would load the installed version of the package and not
+# the dev one loaded by `load_all`.
 
 # Epidemic simulation
 sim <- netsim(est, param, init, control)
