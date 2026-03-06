@@ -23,6 +23,7 @@ param <- param.net(
 # Initial conditions (default prevalence initialized in epistats)
 # For models without bacterial STIs, these must be initialized here
 # with non-zero values
+
 init <- init_msm(
   prev.gono.rect  = 0.1,
   prev.gono.uret  = 0.1,
@@ -30,3 +31,11 @@ init <- init_msm(
   prev.chla.uret  = 0.1,
   prev.syph       = 0.1
 )
+
+# init <- init_msm(
+#   prev.gono.rect  = 0,
+#   prev.gono.uret  = 0,
+#   prev.chla.rect  = 0,
+#   prev.chla.uret  = 0,
+#   prev.syph       = 0
+# )

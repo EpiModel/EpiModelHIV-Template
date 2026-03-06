@@ -1,5 +1,16 @@
 # TODO
 
+## Huge analysis of all processes
+
+- make many (many) outcomes
+-
+
+## New acts list:
+
+Do I have parity?
+- check in with claude?
+- run many tests on HPC - many outcomes idea
+
 ## Reorganising Template
 
 1. network Estimation
