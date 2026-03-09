@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this section we estimate and diagnose the
+In this chapter we estimate and diagnose the
 [TERGMs](https://www.jstatsoft.org/article/view/v024i03) used by the epidemic
 model.
 

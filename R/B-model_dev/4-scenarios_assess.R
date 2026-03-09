@@ -14,6 +14,7 @@ source("R/B-model_dev/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 
+# Load the results of a single scenario
 d_sim <- readRDS(fs::path(scenarios_dir, "merged_tibbles", "df__scenario_1.rds"))
 
 glimpse(d_sim)
@@ -21,7 +22,7 @@ head(d_sim)
 
 d_sim <- d_sim |>
   mutate_calibration_targets() |>
-  as.epi.data.frame()
+  as.epi.data.frame() # ensure the data.frame can be used with `plot`
 
 plot(
   d_sim,

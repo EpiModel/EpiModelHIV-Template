@@ -12,9 +12,9 @@ hpc_node_setup <- c(
   "spack load r@4.4.1"
 )
 
-# `update_renv = TRUE` makes a lighter "renv.lock.hpc" file that will be used on
+# `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be used on
 # the HPC. This simplifies the setup on HPC by only installing what's required
-# to running the model itself and not the packages only used for later analyses.
+# to run the model itself and not the packages used for the analysis.
 # Make sure to `push` this "renv.lock.hpc" file to your `git` repo before
 # running the HPC workflows.
 make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {

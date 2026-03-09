@@ -1,4 +1,4 @@
-## 1. Epidemic Model Scenarios Playground
+## 3. Epidemic Model Scenarios Playground
 ##
 ## Run `netsim` via the scenario API. This mimics how things will be run on the
 ## HPC later on and ensure a smooth transition to the HPC setup.

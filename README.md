@@ -13,7 +13,7 @@ custom `EpiModeHIV-p` branch as `EpiModeHIV-p@applied_proj`.
 At this point, we assume that you have your applied project cloned on your local
 computer and your `EpiModeHIV-p` branch checked out as well.
 
-This template is divided into several **steps**. They are separated as
+This template is divided into several **chapters**. They are separated as
 sub-directories under the `R/` folder. They each contain a `README.md` file. We
 will describe each of them below.
 
@@ -26,16 +26,16 @@ present to guide you along the way.
 
 ### Top level scripts
 
-By *top level scripts* we mean the scripts that will be executed directly by the
+*Top level scripts* are the scripts that will be executed directly by the
 user (you).
 
-They are all the scripts starting with as number (e.g. `1-estimation.R`) or the
+They are the scripts starting with as number (e.g. `1-estimation.R`) or the
 scripts starting with `workflow` (e.g. `workflow-networks.R`).
 
-These scripts are meant to be run in clean R session. It is advised to restart
+These scripts are meant to be run in a fresh R session. It is advised to restart
 R before running these scripts. This can be done in RStudio by pressing
 `Ctrl+Shift+F10` on Windows or `Cmd_Shift_0` on MacOSX. (Note, `.rs.restartR()`
-is **NOT** the same at all).
+**is NOT the same thing**).
 
 All other scripts are utilities. They provide variables or functions to the top
 level ones and should not be run on their own.
@@ -57,14 +57,9 @@ The two possible contexts are `local` or `hpc`. Local means *your own computer*
 and *hpc* is the High Performance Computing cluster where you will run your
 large scale simulations.
 
-You will probably not need to edit these files.
-
-Key takeaway: the context switching is done by setting the following variable
-before these scripts are sourced:
-
-```r
-hpc_context <- TRUE
-```
+The context switching is done by setting `r hpc_context <- TRUE` before these
+scripts are sourced to use the HPC setup. The workflows script are doing it for
+you.
 
 ### General advise on making new scripts
 

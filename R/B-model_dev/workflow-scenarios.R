@@ -25,7 +25,7 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = year_steps * 4
+  nsteps = year_steps * 70
 )
 
 # Workflow creation
@@ -69,8 +69,8 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
       sim_dir = scenarios_dir,
       output_dir = fs::path(scenarios_dir, "merged_tibbles"),
-      steps_to_keep = year_steps * 3, # keep the last 3 years
-      cols = dplyr::everything(),
+      steps_to_keep = year_steps * 10, # keep the last 10 years
+      cols = dplyr::everything(), # keep all columns
       n_cores = max_cores,
       setup_lines = hpc_node_setup
     ),

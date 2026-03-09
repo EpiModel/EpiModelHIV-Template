@@ -21,26 +21,32 @@ theme_set(theme_light())
 
 # Process ----------------------------------------------------------------------
 
-# set prep start to a low value to test the full model in a few steps
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 
 # Control settings
 control <- control_msm(
-  nsteps = year_steps * 4
+  nsteps = year_steps * 4,
+  ncores = 1 # never use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`
+             # otherwise the parallel environment will load the installed version
+             # of the package and not the dev one loaded by `load_all`.
 )
-# NOTE: do not use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`. The
-# parallel environment would load the installed version of the package and not
-# the dev one loaded by `load_all`.
 
 # Epidemic simulation
 sim <- netsim(est, param, init, control)
 
 # Simulation exploration (tidyverse)
 d_sim <- as_tibble(sim)
-glimpse(d_sim)
 
-ggplot(d_sim, aes(x = time, y = prepCurr)) +
+# See all tracked values
+glimpse(tail(d_sim))
+
+d_sim <- d_sim |>
+  mutate(
+    prep_cov = prep / prep.indic
+  )
+
+ggplot(d_sim, aes(x = time, y = prep_cov)) +
   geom_line()
 
 # Run in debug mode, more details and examples here:
