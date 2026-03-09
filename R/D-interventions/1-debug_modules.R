@@ -1,4 +1,4 @@
-## 1. Intervention Scenarios: Interactive Exploration
+## 2. Netsim Module Development Script - post calibration
 ##
 ## Run `netsim` with estimated network models and interactively explore the
 ## content of the a simulation object. This script uses a restart point.
@@ -6,30 +6,26 @@
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
 # Setup ------------------------------------------------------------------------
-library(EpiModelHIV)
-
 source("R/shared_variables.R", local = TRUE)
 source("R/D-interventions/z-context.R", local = TRUE)
+
+# load the local development version of the project
+pkgload::load_all(EMHIVp_dir)
 
 # Process ----------------------------------------------------------------------
 
 source("R/netsim_settings.R", local = TRUE)
-
-# See full listing of parameters
-# See data/input/model_parameters.xlsx for definitions
-print(param)
-
-# See the initialization object
-print(init)
 
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 control <- control_msm(
   start               = restart_time,
   nsteps              = restart_time + year_steps * 4,
-  initialize.FUN      = reinit_msm
+  initialize.FUN      = reinit_msm,
+  ncores = 1 # never use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`
+             # otherwise the parallel environment will load the installed version
+             # of the package and not the dev one loaded by `load_all`.
 )
-print(control)
 
 # Read in the previously run model and inspect its content
 orig <- readRDS(path_to_restart)
@@ -37,26 +33,18 @@ print(orig)
 str(orig, max.level = 1)
 
 # Epidemic simulation
-sim <- netsim(orig, param, init, control)
-
-# Examine the model object output
-print(sim)
-
-# Plot outcomes
-# par(mar = c(3, 3, 2, 2), mgp = c(2, 1, 0))
-plot(sim, y = "i.num", main = "Prevalence")
-plot(sim, y = "ir100", main = "Incidence")
+sim <- netsim(est, param, init, control)
 
 # Simulation exploration (tidyverse)
-library("dplyr")
-library("ggplot2")
-theme_set(theme_light())
-
 d_sim <- as_tibble(sim)
-glimpse(d_sim)
 
-ggplot(d_sim, aes(x = time, y = prepCurr, col = as.factor(sim))) +
-  geom_line()
+# See all tracked values
+glimpse(tail(d_sim))
 
-ggplot(d_sim, aes(x = time, y = num, col = as.factor(sim))) +
+d_sim <- d_sim |>
+  mutate(
+    prep_cov = prep / prep.indic
+  )
+
+ggplot(d_sim, aes(x = time, y = prep_cov)) +
   geom_line()

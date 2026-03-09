@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this step we calibrate the model. It is the most complex step. Most users will
-not calibrate the model themselves. The rest of this document is aimed as the
-person in charge of calibration.
+In this chapter we calibrate the model.
+It is a very technical step an most users will not calibrate the model
+themselves. The rest of this document is aimed as the person in charge of calibration.
 
 The calibration aims to make the model fit a set of *targets* by modifying the
 input parameters. The steps are always the same:
@@ -30,8 +30,15 @@ Until we are happy with the results.
 
 ## Automated calibration
 
-Here we define how the calibration should happen in the `swfcalib_config_x.R`
+Here we define how the calibration should happen in the `swfcalib_config.R`
 scripts. See [the `swfcalib`
 vignette](https://epimodel.github.io/swfcalib/articles/swfcalib.html) for
 details.
 
+# TODO
+
+1. make a restart point where all diseases are present and initial population
+has departed
+2. from this restart point, assess how long to reach equilibrium again on my
+   targets
+3. have swfcalib pick the best starting sim to improve convergence time

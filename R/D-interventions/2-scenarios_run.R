@@ -1,4 +1,4 @@
-## 1. Intervention Scenarios Playground
+## 2. Intervention Scenarios Playground
 ##
 ## Example interactive epidemic simulation run script with more complex
 ## parameterization and parameters defined in spreadsheet, with example of

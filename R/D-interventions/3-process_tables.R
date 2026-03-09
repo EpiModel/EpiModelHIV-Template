@@ -23,7 +23,7 @@ d_ref <- make_d_ref(fs::path(scenarios_tibble_dir, "df__test_1_treat_1.rds"))
 
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(scenarios_info)),
-  \(i) process_one_scenario(scenarios_info[i, ], d_ref)
+  function(i) process_one_scenario(scenarios_info[i, ], d_ref)
 )
 
 d_sc_raw <- dplyr::bind_rows(d_ls)

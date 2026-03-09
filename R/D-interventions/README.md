@@ -2,17 +2,19 @@
 
 ## Introduction
 
-In this step we run the model locally from the restart point with scenarios. We
-leverage the [scenario API](https://cran.r-project.org/web/packages/EpiModel/vignettes/model-parameters.html)
-and then process the simulations to make tables and plots.
+In this chapter the model has been calibrated and we focus on defining the
+actual research scenarios and then process the simulations to make tables and
+plots.
 
 ## Scripts descriptions
 
 
-- **0-make_scenarios.R**: Create a `scenarios.csv` files from code.
-- **1-scenarios.R**: Run simulation scenarios locally .
-- **2-process_tables.R**: Create a formatted table out of the simulations.
-- **3-process_plots.R**: Create plots out of the simulations.
+- **1-debug_modules.R**: Similarly to chapter B, run the model with your custom
+  `EpiModeHIV-p@applied_proj`. But this time with the calibrated parameters.
+- **2-scenarios_run.R**: Run simulation scenarios locally to get a few results
+  to start implementing the output pipeline.
+- **3-process_tables.R**: Create a formatted table out of the simulations.
+- **4-process_plots.R**: Create plots out of the simulations.
 - `labels.R`: Utilities to rename and format the outcomes.
 - `outcomes.R`: Utilities to create the outcomes of interest out of the raw
 simulations.

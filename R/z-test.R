@@ -28,6 +28,7 @@ d |>
   select(
     hiv.inf,
     gono.uret.inf, gono.rect.inf, chla.uret.inf, chla.rect.inf, syph.inf,
+    prep, prep.incid, prep.indic,
     n_acts, n_cond, n_cond_acts, n_ins,
     starts_with("dbg_")) |>
   summarise(across(everything(), mean)) |> glimpse()
