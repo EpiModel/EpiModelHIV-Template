@@ -34,5 +34,7 @@ fit_ooff <- EpiModel::netest(
   verbose = FALSE
 ) |> trim_netest()
 
+fit_ooff$summary <- NULL
+
 # Keep only the necessary objects
 rm(model_ooff, netstats_ooff)

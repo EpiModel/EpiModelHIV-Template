@@ -36,5 +36,7 @@ fit_casl <- EpiModel::netest(
   verbose = FALSE
 ) |> trim_netest()
 
+fit_casl$summary <- NULL
+
 # Keep only the necessary objects
 rm(model_casl, netstats_casl)

@@ -9,7 +9,8 @@ mail_user <- "aleguil@emory.edu"
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
-  "spack load r@4.4.1"
+  "spack load r@4.5.1",
+  "export R_FUTURE_GLOBALS_MAXSIZE=Inf"
 )
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be used on
