@@ -36,7 +36,5 @@ fit_main <- EpiModel::netest(
   verbose = FALSE
 ) |> EpiModel::trim_netest()
 
-fit_main$summary <- NULL
-
 # Keep only the necessary objects
 rm(model_main, netstats_main)

@@ -37,28 +37,28 @@ d |>
   summarise(across(everything(), mean)) |> glimpse()
 
 # NEW
-# $ hiv.inf       <dbl> 3210.254
-# $ hiv.dx        <dbl> 2536.112
-# $ hiv.tx        <dbl> 1596.388
-# $ hiv.supp      <dbl> 1568.265
-# $ gono.uret.inf <dbl> 230.4212
-# $ gono.rect.inf <dbl> 407.2423
-# $ chla.uret.inf <dbl> 285.9308
-# $ chla.rect.inf <dbl> 520.1577
-# $ syph.inf      <dbl> 610.8365
-# $ prep          <dbl> 910.075
-# $ prep.incid    <dbl> 14.92115
-# $ prep.indic    <dbl> 3455.383
-# $ num           <dbl> 9914.233
-# $ n_acts        <dbl> 5524.715
-# $ n_cond        <dbl> 1833.519
-# $ n_cond_acts   <dbl> 5524.715
-# $ n_ins         <dbl> 2796.125
-# $ dbg_mdur      <dbl> 175.2017
-# $ dbg_rc        <dbl> 3.36796
-# $ dbg_ac        <dbl> 77.83458
-# $ dbg_hc        <dbl> 0.1292698
-# $ dbg_pa        <dbl> 0.2370664
+# $ hiv.inf       <dbl> 3210.254 <dbl> 3043.054
+# $ hiv.dx        <dbl> 2536.112 <dbl> 2665.254
+# $ hiv.tx        <dbl> 1596.388 <dbl> 1658.358
+# $ hiv.supp      <dbl> 1568.265 <dbl> 1630.463
+# $ gono.uret.inf <dbl> 230.4212 <dbl> 229.0673
+# $ gono.rect.inf <dbl> 407.2423 <dbl> 402.6635
+# $ chla.uret.inf <dbl> 285.9308 <dbl> 284.9865
+# $ chla.rect.inf <dbl> 520.1577 <dbl> 514.25
+# $ syph.inf      <dbl> 610.8365 <dbl> 649.9135
+# $ prep          <dbl> 910.075  <dbl> 1265.604
+# $ prep.incid    <dbl> 14.92115 <dbl> 20.98269
+# $ prep.indic    <dbl> 3455.383 <dbl> 4829.946
+# $ num           <dbl> 9914.233 <dbl> 10009.3
+# $ n_acts        <dbl> 5524.715 <dbl> 5676.508
+# $ n_cond        <dbl> 1833.519 <dbl> 1826.629
+# $ n_cond_acts   <dbl> 5524.715 <dbl> 5676.508
+# $ n_ins         <dbl> 2796.125 <dbl> 2717.379
+# $ dbg_mdur      <dbl> 175.2017 <dbl> 176.7658
+# $ dbg_rc        <dbl> 3.36796  <dbl> 3.218675
+# $ dbg_ac        <dbl> 77.83458 <dbl> 78.40062
+# $ dbg_hc        <dbl> 0.129269 <dbl> 0.1397717
+# $ dbg_pa        <dbl> 0.237066 <dbl> 0.3018283
 # OLD
 # $ hiv.inf       <dbl> 3043.054
 # $ hiv.dx        <dbl> 2665.254
@@ -82,3 +82,10 @@ d |>
 # $ dbg_ac        <dbl> 78.40062
 # $ dbg_hc        <dbl> 0.1397717
 # $ dbg_pa        <dbl> 0.3018283
+
+lobstr::obj_size(param)
+lobstr::obj_size(control)
+lobstr::obj_size(init)
+lapply(control, lobstr::obj_size)
+
+lapply(est[[3]]$newnetwork, lobstr::obj_size)
