@@ -6,7 +6,7 @@
 library(dplyr)
 source("R/shared_variables.R", local = TRUE)
 pkgload::load_all("../../EpiModel.git/main/")
-pkgload::load_all("../../EpiModelHIV-p.git/main/")
+pkgload::load_all("../../EpiModelHIV-p.git/main/") # use branch `main_plus_epi`
 # pkgload::load_all("../../EpiModelHIV-p.git/reworks/")
 # library(EpiModelHIV)
 context <- "local"
