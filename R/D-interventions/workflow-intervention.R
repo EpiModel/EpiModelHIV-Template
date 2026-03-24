@@ -60,18 +60,18 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = scenarios_dir,
-      output_dir = fs::path(scenarios_dir, "merged_tibbles"),
-      steps_to_keep = intervention_end - intervention_start,
-      cols = dplyr::everything(),
-      n_cores = max_cores,
-      setup_lines = hpc_node_setup
-    ),
-    sbatch_opts = list(
-      "cpus-per-task" = max_cores,
-      "time" = "02:00:00",
-      "mem-per-cpu" = "5G"
-    )
+    sim_dir = scenarios_dir,
+    output_dir = fs::path(scenarios_dir, "merged_tibbles"),
+    steps_to_keep = intervention_end - intervention_start,
+    cols = dplyr::everything(),
+    n_cores = max_cores,
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "02:00:00",
+    "mem-per-cpu" = "5G"
+  )
 )
 
 # make tables step

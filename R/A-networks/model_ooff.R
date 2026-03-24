@@ -12,7 +12,7 @@ model_ooff <- ~ edges +
   nodematch("race", diff = FALSE) +
   nodefactor("race", levels = -1) +
   nodefactor("risk.grp", levels = -5) +
-  nodefactor("deg.tot", levels = -1) +   # effect of total degree (main + casual)
+  nodefactor("deg.tot", levels = -1) +   # total degree (main+casl)
   nodematch("role.class", diff = TRUE, levels = c(1, 2))
 
 # Target Stats

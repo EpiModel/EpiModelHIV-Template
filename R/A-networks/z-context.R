@@ -27,7 +27,7 @@ if (exists("hpc_context") && hpc_context) {
   context <- "local"
   networks_size   <- 10 * 1e3
   control_ergm <- ergm::control.ergm(
-    # Stochastic-Approximation is faster but less precise; fine for small local runs
+    # Stochastic-Approximation is faster but less precise; fine for local runs
     main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
     SAN.maxit = 3,

@@ -43,7 +43,7 @@ if (system.file(package = "ARTnetData") == "") {
   )
 }
 
-# Rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
+# Rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions.
 diag_status_pos <- which(names(netstats$attr) == "diag.status")
 names(netstats$attr)[diag_status_pos] <- "hiv.dx"
 

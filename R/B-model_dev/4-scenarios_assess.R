@@ -1,7 +1,7 @@
 ## 4. Epidemic Model Scenarios Assessment
 ##
-## Interactively explore the output of the simulation. Works with both local
-## and HPC results (change `hpc_context` and download the merged_tibbles/ from
+## Interactively explore the output of the simulation. Works with both local and
+## HPC results (change `hpc_context` and download the merged_tibbles/ files from
 ## the HPC first).
 ##
 ## Change the scenario name below to inspect different scenarios.
@@ -18,7 +18,10 @@ source("R/B-model_dev/z-context.R", local = TRUE)
 # Process ----------------------------------------------------------------------
 
 # Load the results of a single scenario
-d_sim <- readRDS(fs::path(scenarios_dir, "merged_tibbles", "df__scenario_1.rds"))
+d_sim <- readRDS(fs::path(
+  scenarios_dir, "merged_tibbles",
+  "df__scenario_1.rds"
+))
 
 glimpse(d_sim)
 head(d_sim)

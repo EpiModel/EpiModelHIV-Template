@@ -14,7 +14,7 @@ model_main <- ~ edges +
   degrange(from = 3) +                    # constrain max degree
   nodematch("role.class", diff = TRUE, levels = c(1, 2)) # sexual role homophily
 
-# Target Stats — values from ARTnet that the fitting algorithm tries to match
+# Target Stats — values from ARTnet the fitting algorithm tries to match
 netstats_main <- c(
   edges                = netstats$main$edges,
   nodematch_age.grp    = netstats$main$nodematch_age.grp,
@@ -29,9 +29,8 @@ netstats_main <- c(
 
 # Fit model
 # - coef.diss: dissolution coefficients — control partnership duration
-#   (age-dependent: older partnerships tend to last longer)
-# - trim_netest(): removes network snapshots to save disk space; coefficients
-#   are retained
+#              (age-dependent: older partnerships last longer)
+# - trim_netest(): removes unnecessary elements to save disk space and RAM
 fit_main <- EpiModel::netest(
   nw_main,
   formation = model_main,

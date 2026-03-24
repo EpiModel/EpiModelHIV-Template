@@ -1,8 +1,8 @@
 ## 2. Intervention Scenarios Playground
 ##
 ## Example interactive epidemic simulation run script with more complex
-## parameterization and parameters defined in spreadsheet, with example of
-## running model scenarios defined with data-frame approach
+## parameterization and parameters defined in spreadsheet, with example
+## of running model scenarios defined with data-frame approach
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 

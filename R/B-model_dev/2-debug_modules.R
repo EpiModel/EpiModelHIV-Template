@@ -1,7 +1,7 @@
 ## 2. Netsim Module Development Script
 ##
-## Run the model with your local development version of
-## EpiModelHIV-p and debug modules interactively.
+## Run the model with your local development version of EpiModelHIV-p
+## and debug modules interactively.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -26,8 +26,8 @@ est <- readRDS(path_to_est)
 # Control settings
 control <- control_msm(
   nsteps = year_steps * 4,
-  # Always ncores = 1 with load_all(): parallel workers
-  # load the installed package, not the dev version.
+  # Always ncores = 1 with load_all(): parallel workers load
+  # the installed package, not the dev version.
   ncores = 1
 )
 
@@ -48,7 +48,7 @@ d_sim <- d_sim |>
 ggplot(d_sim, aes(x = time, y = prep_cov)) +
   geom_line()
 
-# Run in debug mode: steps into the module on
-# the first call. See the README for more resources.
+# Run in debug mode: steps into the module on the first call.
+# See the README for more resources.
 debugonce(hivtrans_msm)
 sim <- netsim(est, param, init, control)

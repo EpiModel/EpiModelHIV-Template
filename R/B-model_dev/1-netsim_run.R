@@ -1,7 +1,7 @@
 ## 1. Netsim Interactive Exploration
 ##
-## Run `netsim` with estimated network models and interactively explore the
-## content of the a simulation object.
+## Run `netsim` with estimated network models and interactively explore
+## the content of a simulation object.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -68,9 +68,8 @@ library("ggplot2")
 theme_set(theme_light())
 
 d_sim <- as_tibble(sim)
-# Add derived columns used for calibration assessment
-# (e.g., cc.dx.B = proportion of HIV-diagnosed among
-# Black MSM). Computed from the raw epi trackers.
+# Add derived columns used for calibration assessment (e.g.,
+# cc.dx.B = proportion of HIV-diagnosed among Black MSM).
 d_sim <- EpiModelHIV::mutate_calibration_targets(d_sim)
 glimpse(d_sim)
 
@@ -80,6 +79,6 @@ ggplot(d_sim, aes(x = time, y = cc.dx.B, col = as.factor(sim))) +
 ggplot(d_sim, aes(x = time, y = prep, col = as.factor(sim))) +
   geom_line()
 
-# Convert back to an epi data frame so we can use base R plot() on it
+# Convert back to an epi data frame to use base R plot() on it
 d_sim <- as.epi.data.frame(d_sim)
 plot(d_sim, y = "cc.dx.B", main = "Proportion of Diagnosed (Black)")

@@ -1,10 +1,10 @@
 ## HPC related configuration
 ##
-## This script should not be run directly. But `sourced` the from scripts that
-## interact with the HPC (usually the `workflow-***.R` ones)
+## This script should not be run directly. But `sourced` from the
+## scripts that interact with the HPC (the `workflow-*.R` ones)
 
-current_git_branch <- "main"              # <- USER: your git branch on GitHub
-mail_user          <- "you@emory.edu"     # <- USER: your Emory email for HPC job alerts
+current_git_branch <- "main"          # <- USER: your git branch
+mail_user          <- "you@emory.edu" # <- USER: your email
 
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
@@ -13,11 +13,11 @@ hpc_node_setup <- c(
   "export R_FUTURE_GLOBALS_MAXSIZE=Inf"
 )
 
-# `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be used on
-# the HPC. This simplifies the setup on HPC by only installing what's required
-# to run the model itself and not the packages used for the analysis.
-# Make sure to `push` this "renv.lock.hpc" file to your `git` repo before
-# running the HPC workflows.
+# `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
+# used on the HPC. This simplifies the setup by only installing
+# what's required to run the model itself and not the packages used
+# for analysis. Make sure to `push` this "renv.lock.hpc" file to
+# your `git` repo before running the HPC workflows.
 make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
   if (update_renv) {
     renv::snapshot(
@@ -33,7 +33,8 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
   wf <- slurmworkflow::create_workflow(
     wf_name = wf_name,
     default_sbatch_opts = list(
-      "partition" = "epimodel,short-cpu,day-long-cpu,week-long-cpu,month-long-cpu",
+      "partition" =
+        "epimodel,short-cpu,day-long-cpu,week-long-cpu,month-long-cpu",
       "mail-type" = "FAIL",
       "mail-user" = mail_user
     )

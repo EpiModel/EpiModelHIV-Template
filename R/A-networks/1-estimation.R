@@ -4,13 +4,13 @@
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
-# Setup ---
+# Setup ------------------------------------------------------------------------
 library(ARTnet)
 library(EpiModelHIV)
 source("R/shared_variables.R", local = TRUE)
 source("R/A-networks/z-context.R", local = TRUE)
 
-# Process ---
+# Process ----------------------------------------------------------------------
 
 # Create the shared objects required by the project
 source("R/A-networks/initialize.R", local = TRUE)
@@ -20,7 +20,7 @@ source("R/A-networks/model_main.R", local = TRUE)
 source("R/A-networks/model_casl.R", local = TRUE)
 source("R/A-networks/model_ooff.R", local = TRUE)
 
-# Save the data ---
+# Save the data ----------------------------------------------------------------
 netest <- list(fit_main = fit_main, fit_casl = fit_casl, fit_ooff = fit_ooff)
 netest_path <- fs::path(est_dir, paste0("netest-", context, ".rds"))
 saveRDS(netest, netest_path)
@@ -35,7 +35,7 @@ epistats_path <- fs::path(est_dir, paste0("epistats-", context, ".rds"))
 saveRDS(epistats, epistats_path)
 
 message(
-  "\nEstimation files where saved to \"", est_dir , "\":\n",
+  "\nEstimation files where saved to \"", est_dir, "\":\n",
   "    `netest`   -> \"", netest_path, "\"\n",
   "    `netstats` -> \"", netstats_path, "\"\n",
   "    `epistats` -> \"", epistats_path, "\"\n"

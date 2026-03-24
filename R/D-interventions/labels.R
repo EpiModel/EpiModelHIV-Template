@@ -1,10 +1,14 @@
 ## Tables Labels and Format
 ##
-## Define how the name of the variable should be rendered in the tables. Define
-## what number format should be used for each variable
+## Maps outcome variable names (e.g., lst_ir100_b) to publication labels and
+## defines number formatting.
 ##
-## This script should not be run directly. But `sourced` from other scripts
-## within the `R/D-interventions/` directory.
+## - var_labels: variable name -> display label
+## - format_patterns: regex patterns -> number formatters
+##   (first match wins; "default" catches the rest)
+##
+## This script should not be run directly. But `sourced` from other scripts in
+## `R/D-interventions/`.
 
 # Conversion between variable name and final label
 var_labels <- c(
@@ -110,7 +114,6 @@ make_formatters <- function(var_labels, format_patterns) {
   fmts
 }
 
-
 sum_quants <- function(d, ql = 0.025, qm = 0.5, qh = 0.975) {
   d |>
     ungroup() |>
@@ -128,7 +131,6 @@ sum_quants <- function(d, ql = 0.025, qm = 0.5, qh = 0.975) {
     .groups = "drop"
   )
 }
-
 
 reorder_cols <- function(d, var_labels) {
   missing_cols <- setdiff(names(d), var_labels)

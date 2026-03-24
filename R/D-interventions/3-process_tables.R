@@ -1,7 +1,7 @@
 ## 2. Intervention Scenarios Process Tables
 ##
-## Make the tables using the results of the simulations from the previous step
-## locally or on the HPC (see `workflow-interventions.R`)
+## Make the tables using the results of the simulations from the
+## previous step locally or on the HPC (see `workflow-interventions.R`)
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -19,7 +19,14 @@ source("R/D-interventions/outcomes.R", local = TRUE)
 scenarios_tibble_dir <- fs::path(scenarios_dir, "merged_tibbles")
 scenarios_info <- EpiModelHPC::get_scenarios_tibble_infos(scenarios_tibble_dir)
 
-d_ref <- make_d_ref(fs::path(scenarios_tibble_dir, "df__test_1_treat_1.rds"))
+# Reference (baseline) scenario — NIA/PIA are computed relative to this.
+# Update if your baseline has a different name.
+d_ref <- make_d_ref(
+  fs::path(
+    scenarios_tibble_dir,
+    "df__test_1_treat_1.rds"
+  )
+)
 
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(scenarios_info)),

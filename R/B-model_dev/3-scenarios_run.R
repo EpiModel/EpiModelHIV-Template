@@ -1,10 +1,10 @@
 ## 3. Epidemic Model Scenarios Playground
 ##
 ## Run `netsim` via the scenario API. This mimics how things will be run on the
-## HPC later on and ensure a smooth transition to the HPC setup.
+## HPC later on and ensures a smooth transition to the HPC setup.
 ##
-## This script only runs the simulation. The outputs are explored in the script
-## 2-scenarios_assess.R
+## This script only runs the simulation. The outputs are explored in
+## the script 4-scenarios_assess.R
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -33,8 +33,8 @@ print(control)
 
 # Define test scenarios
 # Each row is one scenario. Required columns:
-#   .scenario.id  — unique name (used in output filenames)
-#   .at           — time step at which parameter changes are applied
+#   .scenario.id — unique name (used in output filenames)
+#   .at          — time step when parameter changes are applied
 # All other columns are parameter names with their new values.
 # Valid parameter names are those in data/input/model_parameters.csv or any
 # argument accepted by param.net().
@@ -49,10 +49,11 @@ scenarios_df <- tibble(
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
-# Run all scenarios. Each scenario is replicated `n_rep` times (independent
-# simulations) to quantify stochastic variability. Replicates are saved in
-# batches of up to `n_cores` per file. With n_rep = 3 and n_cores = 2, each
-# scenario produces 2 files (a batch of 2 and a batch of 1).
+# Run all scenarios. Each scenario is replicated `n_rep` times
+# (independent simulations) to quantify stochastic variability.
+# Replicates are saved in batches of up to `n_cores` per file.
+# With n_rep = 3 and n_cores = 2, each scenario produces 2 files
+# (a batch of 2 and a batch of 1).
 EpiModelHPC::netsim_scenarios(
   path_to_est, param, init, control,
   scenarios_list = scenarios_list, # set to NULL to run with default params
@@ -62,9 +63,9 @@ EpiModelHPC::netsim_scenarios(
 )
 fs::dir_ls(scenarios_dir)
 
-# Merge all batches into one tibble per scenario.
-# `steps_to_keep` controls how many time steps are retained (from the end of
-# the simulation). Keeping fewer steps saves memory.
+# Merge all batches into one tibble per scenario. `steps_to_keep` controls how
+# many time steps are retained (from the end of the simulation).
+# Keeping fewer steps saves memory.
 EpiModelHPC::merge_netsim_scenarios_tibble(
   sim_dir = scenarios_dir,
   output_dir = fs::path(scenarios_dir, "merged_tibbles"),

@@ -1,33 +1,34 @@
-## 2. Netsim Module Development Script - post calibration
+## 1. Module Development — Post Calibration
 ##
-## Run `netsim` with estimated network models and interactively explore the
-## content of the a simulation object. This script uses a restart point.
+## Same as B-model_dev/2-debug_modules.R but starting from the calibrated
+## restart point (produced by Chapter C). Use this to test module changes
+## with calibrated parameters before running intervention scenarios.
 
-# Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
+# Restart R before running this script
 
 # Setup ------------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
 source("R/D-interventions/z-context.R", local = TRUE)
 
-# load the local development version of the project
+# Load the local development version of EpiModelHIV-p
 pkgload::load_all(EMHIVp_dir)
 
 # Process ----------------------------------------------------------------------
 
 source("R/netsim_settings.R", local = TRUE)
 
-# See listing of modules and other control settings
-# Module function defaults defined in ?control_msm
+# Start from the restart point (end of calibration) and run 4 years forward.
+# reinit_msm re-initializes the simulation state from the saved restart object.
 control <- control_msm(
-  start               = restart_time,
-  nsteps              = restart_time + year_steps * 4,
-  initialize.FUN      = reinit_msm,
-  ncores = 1 # never use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`
-             # otherwise the parallel environment will load the installed version
-             # of the package and not the dev one loaded by `load_all`.
+  start          = restart_time,
+  nsteps         = restart_time + year_steps * 4,
+  initialize.FUN = reinit_msm,
+  # Always ncores = 1 with load_all(): parallel workers load the installed
+  # package, not the dev version.
+  ncores         = 1
 )
 
-# Read in the previously run model and inspect its content
+# Inspect the restart point
 orig <- readRDS(path_to_restart)
 print(orig)
 str(orig, max.level = 1)
