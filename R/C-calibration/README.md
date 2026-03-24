@@ -35,10 +35,9 @@ scripts. See [the `swfcalib`
 vignette](https://epimodel.github.io/swfcalib/articles/swfcalib.html) for
 details.
 
-# TODO
+## Restart point
 
-1. make a restart point where all diseases are present and initial population
-has departed
-2. from this restart point, assess how long to reach equilibrium again on my
-   targets
-3. have swfcalib pick the best starting sim to improve convergence time
+After calibration is complete, use `workflow-restart_point.R` to create a
+checkpoint simulation. This restart point is used by Chapter D as the starting
+state for intervention runs — it saves time by not re-simulating the burn-in
+period.

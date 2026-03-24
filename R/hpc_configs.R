@@ -3,8 +3,8 @@
 ## This script should not be run directly. But `sourced` the from scripts that
 ## interact with the HPC (usually the `workflow-***.R` ones)
 
-current_git_branch <- "dev_EM2.5.1"
-mail_user <- "aleguil@emory.edu"
+current_git_branch <- "main"              # <- USER: your git branch on GitHub
+mail_user          <- "you@emory.edu"     # <- USER: your Emory email for HPC job alerts
 
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",

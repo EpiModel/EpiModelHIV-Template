@@ -1,167 +1,93 @@
-# EpiModeHIV-Template
+# EpiModelHIV-Template
 
-## Introduction
+This template is a scaffold for an EpiModelHIV applied project. It walks you
+through every step from cloning the repo to publication-ready tables and plots.
 
-This template is a scaffold for an EpiModeHIV applied project. Before reading
-on make sure you have read the [getting
-started](https://github.com/EpiModel/EpiModeling/wiki/Getting-Started-with-EpiModelHIV)
-wiki page and done all the relevant steps.
+This project relies on several tools:
 
-From now on, we refer to the **applied project** as `applied_proj` and to your
-custom `EpiModeHIV-p` branch as `EpiModeHIV-p@applied_proj`.
+- [EpiModel](https://epimodel.github.io/EpiModel/) — network-based epidemic simulation framework
+- [EpiModelHIV](https://github.com/EpiModel/EpiModelHIV-p) — HIV/STI modules built on EpiModel
+- [ARTnet](https://github.com/EpiModel/ARTnet) — sexual partnership survey data used for network estimation
+- [slurmworkflow](https://epimodel.github.io/slurmworkflow/) — HPC job pipeline generation
+- [renv](https://rstudio.github.io/renv/) — R package version management
 
-At this point, we assume that you have your applied project cloned on your local
-computer and your `EpiModeHIV-p` branch checked out as well.
+See the [EpiModeling wiki](https://github.com/EpiModel/EpiModeling/wiki) for
+how we use these tools in practice.
 
-This template is divided into several **chapters**. They are separated as
-sub-directories under the `R/` folder. They each contain a `README.md` file. We
-will describe each of them below.
+## Setup
+
+Before running any scripts, complete these steps in order.
+
+### 1. Prerequisites
+
+This project has two components that work together:
+
+- **Your applied project** (this repo) — scripts, parameters, and analysis for your research question.
+- **`EpiModelHIV-p@<your_branch>`** — your custom branch of the EpiModelHIV-p package containing the simulation modules.
+
+From now on, we refer to your applied project as `<applied_project>` and to
+your package branch as `EpiModelHIV-p@<applied_project>`.
+
+- [ ] Create a new repository `<applied_project>` from the [`EpiModelHIV-Template`](https://github.com/EpiModel/EpiModelHIV-Template) ("Use this template" green button above) and clone it to your local machine
+- [ ] Create a new branch on [`EpiModelHIV-p`](https://github.com/EpiModel/EpiModelHIV-p) for your project and clone it to your local machine
+- [ ] Have access to [ARTnetData](https://github.com/EpiModel/EpiModeling/wiki#artnetdata)
+- [ ] Have an RSPH HPC account ([instructions](https://github.com/EpiModel/EpiModeling/wiki#hpc-setup)) for the HPC parts
+
+### 2. Personalize
+
+A few configuration files need to be edited before you can run any scripts.
+These files are documented with inline comments — look for `# <- USER` markers
+to find the values you need to change.
+
+Open the following two files and edit every variable marked with `# <- USER`.
+**The project will not work until this is done.**
+
+- **`R/shared_variables.R`**
+- **`R/hpc_configs.R`**
+
+### 3. Initialize the R environment
+
+Open **`R/00-setup.R`** and run it step by step (read the comments — there is
+a required R restart in the middle).
+
+This installs all R packages and copies the default parameter file into
+`data/input/`.
+
+### 4. Start Chapter A
+
+You are now ready to begin. Head to [`R/A-networks/README.md`](R/A-networks/README.md).
+
+---
+
+## Project overview
+
+The project is organized into four sequential chapters under `R/`:
+
+| Chapter | What it does | Output |
+|---|---|---|
+| [**A — Networks**](R/A-networks/README.md) | Estimate partnership network models from ARTnet data | `data/run/estimates/` |
+| [**B — Model Dev**](R/B-model_dev/README.md) | Run simulations, develop and debug custom modules | — |
+| [**C — Calibration**](R/C-calibration/README.md) | Fit parameters to epidemiological targets | `data/run/calibration/` |
+| [**D — Interventions**](R/D-interventions/README.md) | Run intervention scenarios, produce tables and plots | `data/run/scenarios/` & `data/output/` |
+
+In practice the workflow is iterative — you will cycle between B, C, and D as
+the project evolves.
 
 ## Conventions
 
-Each script in this project is structured in the same way to simplify reading.
-As these applied project are pretty complex, you are advised to read the code
-and make sure you understand what it does before running it. Comments are often
-present to guide you along the way.
+**Script types** — Each chapter contains:
 
-### Top level scripts
+- **Numbered scripts** (`1-*.R`, `2-*.R`): top-level scripts, run in a fresh R session (`Ctrl+Shift+F10`), in order.
+- **`workflow-*.R`**: generate HPC job files via [slurmworkflow](https://github.com/EpiModel/EpiModeling/wiki#slurmworkflow). Run locally.
+- **`z-context.R`**: switches between local (small, fast) and HPC (full-scale) settings. Sourced, never run directly.
+- **Other scripts**: utilities sourced by numbered scripts. Never run directly.
 
-*Top level scripts* are the scripts that will be executed directly by the
-user (you).
+**Shared variables** — `R/shared_variables.R` is sourced by every top-level
+script and is the single source of truth for paths, time steps, and milestones.
+Never redefine its variables in other scripts.
 
-They are the scripts starting with as number (e.g. `1-estimation.R`) or the
-scripts starting with `workflow` (e.g. `workflow-networks.R`).
+**Data directories:**
 
-These scripts are meant to be run in a fresh R session. It is advised to restart
-R before running these scripts. This can be done in RStudio by pressing
-`Ctrl+Shift+F10` on Windows or `Cmd_Shift_0` on MacOSX. (Note, `.rs.restartR()`
-**is NOT the same thing**).
-
-All other scripts are utilities. They provide variables or functions to the top
-level ones and should not be run on their own.
-
-### The `shared_variables.R` script
-
-Some variables are defined once in the `shared_variables.R` script. This
-mechanism prevents common errors where different files using the same variables
-would have different values, resulting in useless runs and complex debugging.
-It is highly recommended to only modify these variables in `shared_variables.R`
-and source it on every script in the project.
-
-### The `z-context.R` scripts
-
-Each step contains a `z-context.R`. It defines specific parameters differently
-depending on the context of executions.
-
-The two possible contexts are `local` or `hpc`. Local means *your own computer*
-and *hpc* is the High Performance Computing cluster where you will run your
-large scale simulations.
-
-The context switching is done by setting `r hpc_context <- TRUE` before these
-scripts are sourced to use the HPC setup. The workflows script are doing it for
-you.
-
-### General advise on making new scripts
-
-When creating a new top level script you should adhere to the global structure
-used all over this repo. These project of ours are very complex with many
-moving pieces. Trying to keep them as clean as possible helps a lot in not
-getting lost.
-
-### Data directory
-
-The data used and produced by the project are stored in the `data` directory.
-
-It contains 3 sub-directories:
-1. `input/`: data required to make the project from scratch.
-2. `output/`: data used for publication (tables, plot)
-3. `run/`: temporary data produced by the project that become useless once the
-paper is published (raw simulations, estimated models).
-
-Only the `data/input/` directory is managed with git. The rest is ignored and
-**should never** end up on github.
-
-## Getting started: fitting your project
-
-First of, some scripts will need a few modification to fit your project.
-
-### shared_variables.R
-
-This files contains the generic configuration for the project. It will be
-sourced by every top level scripts.
-
-Open it now and modify the following variables to fit your project:
-
-```r
-EMHIVp_branch <- "applied_proj" # the name of your project
-EMHIVp_dir    <- "~/../Desktop/GitHub/EpiModelHIV-p" # local clone of EpiModelHIV-p
-
-time_unit <- 7     # number of days in a time step (7 for weekly)
-```
-
-### hpc_configs.R
-
-This scripts contains configuration for running things on the HPC.
-
-Open it now and modify the `mail_user` variable to reflect your own e-mail
-address. It will be used to notify you of the progress of your jobs on the HPC.
-
-The `current_git_branch` variable should be left to `main` most of the time.
-Modify it only if you created an new branch and want to run code from it on the
-HPC.
-
-If you are working with the RSPH HPC, leave the rest unchanged. Otherwise modify
-the code accordingly.
-
-### netsim_settings.R
-
-This script defines the default settings for `netsim`. The default values are
-probably correct. Modify the `init` variable to be `init <- init_msm()` if you
-need to disable the STIs in your model.
-
-### z-test.R
-
-This file is for you to test code without making another script *dirty*. As a
-reminder, you should **always** write code in a file and not in the R console.
-Even if it's just for a *quick* test.
-
-## Getting started: setting up the environment
-
-Go to the `00-setup.R` file.
-
-Run the `renv::init(bare = TRUE)` line **and restart the R session before
-carrying on**.
-
-Run the rest of the script. It will install all the necessary packages.
-
-**Do not remove the last line** unless you don't have access to `ARTnetData`.
-
-At this point you can go the `README.md` file for step **A-networks**
-
-## Table of content
-
-Below is a list of all the steps with a quick description.
-
-- **A-networks**: Estimate and diagnosed the network models.
-- **B-model_dev**: Get familiar with running network models with `netsim`
-- **C-netsim_scenarios**: Run network models with the scenario API
-- **D-restart_point**: Mandatory non interactive step
-- **D-interventions**: Get familiar with restarting network models with `netsim`
-- **D-interventions**: Run intervention scenarios and process results for publication
-- **C-calibration**: *advanced step addressing calibration*
-
-## Common mistakes
-
-Here is a list of commonly made mistakes to help you avoid them as you go:
-
-### Workflow directories
-
-As you start working with the HPC, you will create workflow directories. Do not
-forget to delete them locally AND on the HPC before making a new one with the
-same name.
-
-On the HPC this can be done with:
-
-```sh
-rm -rf workflows/<the name of your workflow>
-```
+- `data/input/` — parameters, scenario definitions (**git-tracked**)
+- `data/run/` — estimates, calibration, raw simulations (not tracked)
+- `data/output/` — publication tables and plots (not tracked)

@@ -3,8 +3,8 @@
 ## This script should not be run directly. But `sourced` from other scripts
 
 # EpiModelHIV-p local directory
-EMHIVp_branch <- "reworks"
-EMHIVp_dir    <- "../../EpiModelHIV-p.git/reworks/"
+EMHIVp_branch <- "v3.2.x"    # <- USER: your EpiModelHIV-p branch name
+EMHIVp_dir    <- "../EMHIV/"  # <- USER: path to your local EpiModelHIV-p clone
 
 # Relevant time steps for the simulation
 time_unit  <- 7               # number of days in a time step
@@ -20,7 +20,6 @@ intervention_end   <- intervention_start + 10 * year_steps
 input_dir      <- "data/input/"
 run_dir        <- "data/run/"
 output_dir     <- "data/output/"
-
 est_dir        <- paste0(run_dir, "estimates/")
 diag_dir       <- paste0(run_dir, "diagnostics/")
 calib_dir      <- paste0(run_dir, "calibration/")

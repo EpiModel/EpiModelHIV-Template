@@ -1,35 +1,33 @@
-## 0. Projet Initial Setup
+## 0. Project Initial Setup
 ##
-## Activate `renv` and install the required packages
+## Run this script step by step in a fresh R session.
+## Do NOT source the whole file at once — there is a required restart in the
+## middle.
 
-# Initialize renv and install the packages logged in the `renv.lock` file
+## Step 1: Initialize renv ----
+## This sets up package version management for the project and install the
+## required packages using the "renv.lock" file.
 renv::init()
 
-# restart R if it has not been done automatically
+## >>> RESTART R NOW (Ctrl+Shift+F10 in RStudio) before continuing <<<
 
+## Step 2: Install packages ----
 source("R/shared_variables.R", local = TRUE)
 
-# This code installs the correct version of EpiModelHIV-p for your project
+# Install the correct version of EpiModelHIV-p for your project
 renv::install(paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch))
 
-# Snapshot the list of installed packages to the `renv.lock` file
+# Lock the installed package versions
 renv::snapshot()
 
-# Get the initial set of parameters from EpiModelHIV-p
+## Step 3: Copy the default parameter file ----
 fs::file_copy(
   system.file("model_parameters.csv", package = "EpiModelHIV"),
   fs::path(input_dir, "model_parameters.csv"),
   overwrite = TRUE
 )
 
-# # To install the packages from scratch:
-# renv::install(c(
-#     "Epimodel/EpiModelHIV-p",
-#     "Epimodel/EpiModelHPC",
-#     "readr", "RcppRoll", "viridis"
-# ))
-# # If you have access to ARTnetData:
-# renv::install("Epimodel/ARTnetData")
-
-# If you don't have access to ARTnetData, comment this line
-if (FALSE) library(ARTnetData)
+## Step 4: Verify ARTnetData access ----
+## This line will error if you don't have access to ARTnetData.
+## If it does, ask a lab member for access.
+library(ARTnetData)

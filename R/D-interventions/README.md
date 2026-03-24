@@ -29,7 +29,10 @@ code already there as a scaffold for your own.
 
 ## On the HPC
 
-The `workflow-scenarios.R` file create the `slurmworkflow` workflow to run the scenarios on a larger scale on the HPC. This step requires the estimation files to be present on the HPC. (i.e. having run the `workflow-estimation` on the HPC before).
+The `workflow-intervention.R` file creates the `slurmworkflow` workflow to run
+the intervention scenarios on the HPC. This requires the estimation files and a
+calibrated restart point to be present on the HPC (i.e. having completed
+chapters A and C first).
 
 ## Common mistakes
 

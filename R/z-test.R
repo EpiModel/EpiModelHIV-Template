@@ -5,18 +5,17 @@
 #
 library(dplyr)
 source("R/shared_variables.R", local = TRUE)
-pkgload::load_all("../../EpiModel.git/main/")
-pkgload::load_all("../../EpiModelHIV-p.git/main/") # use branch `main_plus_epi`
-# pkgload::load_all("../../EpiModelHIV-p.git/reworks/")
+# pkgload::load_all("../EMHIV/")
+pkgload::load_all("../mainplus/") # use branch `main_plus_epi`
 # library(EpiModelHIV)
 context <- "local"
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 control <- control_msm(
   nsteps = 70 * year_steps,
-  nsims = 10,
+  nsims = 8,
   ncores = 1,
-  future.use.plan = future::tweak("multicore", workers = 10),
+  future.use.plan = future::tweak("multicore", workers = 8),
   verbose = FALSE
 )
 start <- Sys.time()
@@ -37,51 +36,51 @@ d |>
   summarise(across(everything(), mean)) |> glimpse()
 
 # NEW
-# $ hiv.inf       <dbl> 3210.254 <dbl> 3043.054
-# $ hiv.dx        <dbl> 2536.112 <dbl> 2665.254
-# $ hiv.tx        <dbl> 1596.388 <dbl> 1658.358
-# $ hiv.supp      <dbl> 1568.265 <dbl> 1630.463
-# $ gono.uret.inf <dbl> 230.4212 <dbl> 229.0673
-# $ gono.rect.inf <dbl> 407.2423 <dbl> 402.6635
-# $ chla.uret.inf <dbl> 285.9308 <dbl> 284.9865
-# $ chla.rect.inf <dbl> 520.1577 <dbl> 514.25
-# $ syph.inf      <dbl> 610.8365 <dbl> 649.9135
-# $ prep          <dbl> 910.075  <dbl> 1265.604
-# $ prep.incid    <dbl> 14.92115 <dbl> 20.98269
-# $ prep.indic    <dbl> 3455.383 <dbl> 4829.946
-# $ num           <dbl> 9914.233 <dbl> 10009.3
-# $ n_acts        <dbl> 5524.715 <dbl> 5676.508
-# $ n_cond        <dbl> 1833.519 <dbl> 1826.629
-# $ n_cond_acts   <dbl> 5524.715 <dbl> 5676.508
-# $ n_ins         <dbl> 2796.125 <dbl> 2717.379
-# $ dbg_mdur      <dbl> 175.2017 <dbl> 176.7658
-# $ dbg_rc        <dbl> 3.36796  <dbl> 3.218675
-# $ dbg_ac        <dbl> 77.83458 <dbl> 78.40062
-# $ dbg_hc        <dbl> 0.129269 <dbl> 0.1397717
-# $ dbg_pa        <dbl> 0.237066 <dbl> 0.3018283
+# $ hiv.inf       <dbl> 2757.339
+# $ hiv.dx        <dbl> 2415.615
+# $ hiv.tx        <dbl> 1501.332
+# $ hiv.supp      <dbl> 1475.885
+# $ gono.uret.inf <dbl> 173.4736
+# $ gono.rect.inf <dbl> 303.9688
+# $ chla.uret.inf <dbl> 185.75
+# $ chla.rect.inf <dbl> 340.75
+# $ syph.inf      <dbl> 608.6731
+# $ prep          <dbl> 1319.274
+# $ prep.incid    <dbl> 21.625
+# $ prep.indic    <dbl> 5024.925
+# $ num           <dbl> 9989.373
+# $ n_acts        <dbl> 5899.209
+# $ n_cond        <dbl> 1900.392
+# $ n_cond_acts   <dbl> 5899.209
+# $ n_ins         <dbl> 2954.534
+# $ dbg_mdur      <dbl> 178.4946
+# $ dbg_rc        <dbl> 3.392896
+# $ dbg_ac        <dbl> 78.86831
+# $ dbg_hc        <dbl> 0.117868
+# $ dbg_pa        <dbl> 0.3176751
 # OLD
-# $ hiv.inf       <dbl> 3043.054
-# $ hiv.dx        <dbl> 2665.254
-# $ hiv.tx        <dbl> 1658.358
-# $ hiv.supp      <dbl> 1630.463
-# $ gono.uret.inf <dbl> 229.0673
-# $ gono.rect.inf <dbl> 402.6635
-# $ chla.uret.inf <dbl> 284.9865
-# $ chla.rect.inf <dbl> 514.25
-# $ syph.inf      <dbl> 649.9135
-# $ prep          <dbl> 1265.604
-# $ prep.incid    <dbl> 20.98269
-# $ prep.indic    <dbl> 4829.946
-# $ num           <dbl> 10009.3
-# $ n_acts        <dbl> 5676.508
-# $ n_cond        <dbl> 1826.629
-# $ n_cond_acts   <dbl> 5676.508
-# $ n_ins         <dbl> 2717.379
-# $ dbg_mdur      <dbl> 176.7658
-# $ dbg_rc        <dbl> 3.218675
-# $ dbg_ac        <dbl> 78.40062
-# $ dbg_hc        <dbl> 0.1397717
-# $ dbg_pa        <dbl> 0.3018283
+# $ hiv.inf       <dbl> 2774.707
+# $ hiv.dx        <dbl> 2423.8
+# $ hiv.tx        <dbl> 1516.728
+# $ hiv.supp      <dbl> 1490.947
+# $ gono.uret.inf <dbl> 163.6899
+# $ gono.rect.inf <dbl> 288.0913
+# $ chla.uret.inf <dbl> 196.4375
+# $ chla.rect.inf <dbl> 355.7933
+# $ syph.inf      <dbl> 642.6827
+# $ prep          <dbl> 1302.245
+# $ prep.incid    <dbl> 21.58894
+# $ prep.indic    <dbl> 4979.933
+# $ num           <dbl> 9955.401
+# $ n_acts        <dbl> 5844.803
+# $ n_cond        <dbl> 1904.002
+# $ n_cond_acts   <dbl> 5844.803
+# $ n_ins         <dbl> 2785.113
+# $ dbg_mdur      <dbl> 178.0929
+# $ dbg_rc        <dbl> 3.249304
+# $ dbg_ac        <dbl> 78.61422
+# $ dbg_hc        <dbl> 0.1176957
+# $ dbg_pa        <dbl> 0.3156603
 
 lobstr::obj_size(param)
 lobstr::obj_size(control)
