@@ -1,6 +1,9 @@
-## Define and fit the *one-off* network  model
+## Define and fit the *one-off* (instantaneous) network model
 ##
 ## This script should not be run directly. But `sourced` by `1-estimation.R`
+##
+## One-off partnerships dissolve every time step (duration = 1). They represent
+## single sexual encounters with no ongoing relationship.
 
 # Formula
 model_ooff <- ~ edges +
@@ -9,7 +12,7 @@ model_ooff <- ~ edges +
   nodematch("race", diff = FALSE) +
   nodefactor("race", levels = -1) +
   nodefactor("risk.grp", levels = -5) +
-  nodefactor("deg.tot", levels = -1) +
+  nodefactor("deg.tot", levels = -1) +   # effect of total degree (main + casual)
   nodematch("role.class", diff = TRUE, levels = c(1, 2))
 
 # Target Stats
@@ -25,8 +28,9 @@ netstats_ooff <- c(
 ) |> unname()
 
 # Fit model
+# dissolution_coefs(~ offset(edges), 1) = dissolve all edges each time step
 fit_ooff <- EpiModel::netest(
-  nw_inst,
+  nw_ooff,
   formation = model_ooff,
   target.stats = netstats_ooff,
   coef.diss = dissolution_coefs(~ offset(edges), 1),

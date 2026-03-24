@@ -9,6 +9,7 @@ if (exists("hpc_context") && hpc_context) {
   est_cores <- 10
 
   control_ergm <- ergm::control.ergm(
+    # MCMLE is more accurate but slower; suitable for large networks on HPC
     main.method = "MCMLE",
     MCMLE.maxit = 500,
     SAN.maxit = 3,
@@ -26,6 +27,7 @@ if (exists("hpc_context") && hpc_context) {
   context <- "local"
   networks_size   <- 10 * 1e3
   control_ergm <- ergm::control.ergm(
+    # Stochastic-Approximation is faster but less precise; fine for small local runs
     main.method = "Stochastic-Approximation",
     MCMLE.maxit = 500,
     SAN.maxit = 3,

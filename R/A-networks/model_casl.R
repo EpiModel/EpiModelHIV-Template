@@ -1,6 +1,7 @@
-## Define and fit the *casual* network  model
+## Define and fit the *casual* (short-term) network model
 ##
 ## This script should not be run directly. But `sourced` by `1-estimation.R`
+## Must be fitted AFTER model_main.R (uses cross-network degree terms)
 
 # Formula
 model_casl <- ~ edges +
@@ -8,7 +9,7 @@ model_casl <- ~ edges +
   nodefactor("age.grp", levels = -5) +
   nodematch("race", diff = FALSE) +
   nodefactor("race", levels = -1) +
-  nodefactor("deg.main", levels = -3) +
+  nodefactor("deg.main", levels = -3) +   # effect of main degree on casual
   concurrent +
   degrange(from = 4) +
   nodematch("role.class", diff = TRUE, levels = c(1, 2))

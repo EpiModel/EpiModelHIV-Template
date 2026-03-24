@@ -1,7 +1,14 @@
 ## Run the diagnostics for the *main* network model
 ##
 ## This script should not be run directly. But `sourced` by `2-diagnostics.R`
+##
+## Produces two types of diagnostics:
+## - Dynamic: simulates the network forward in time to check temporal stability
+## - Static: samples from the ERGM once to check target statistic reproduction
 
+# Diagnostic formula — uses `levels = TRUE` to show all levels (more detail
+# than the estimation formula) and adds `degree(0:3)` to inspect the degree
+# distribution directly
 model_main_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
   nodefactor("age.grp", levels = TRUE) +
@@ -13,6 +20,7 @@ model_main_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:3)
 
+# Dynamic diagnostics: simulate network over time
 dx_main <- EpiModel::netdx(
   est$fit_main,
   nsims = diag_nsims,
@@ -24,6 +32,7 @@ dx_main <- EpiModel::netdx(
     tergm::control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
+# Static diagnostics: sample from the fitted ERGM (no temporal dynamics)
 dx_main_static <- EpiModel::netdx(
   est$fit_main,
   dynamic = FALSE,

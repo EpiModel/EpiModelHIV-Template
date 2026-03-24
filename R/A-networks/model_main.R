@@ -1,19 +1,20 @@
-## Define and fit the *main* network  model
+## Define and fit the *main* (long-term) network model
 ##
 ## This script should not be run directly. But `sourced` by `1-estimation.R`
 
-# Formula
+# Formula — each term targets a specific network feature from ARTnet data.
+# See the wiki for a reference of ERGM terms.
 model_main <- ~ edges +
-  nodematch("age.grp", diff = TRUE) +
-  nodefactor("age.grp", levels = -1) +
-  nodematch("race", diff = FALSE) +
-  nodefactor("race", levels = -1) +
-  nodefactor("deg.casl", levels = -1) +
-  concurrent +
-  degrange(from = 3) +
-  nodematch("role.class", diff = TRUE, levels = c(1, 2))
+  nodematch("age.grp", diff = TRUE) +     # age homophily (separate by group)
+  nodefactor("age.grp", levels = -1) +    # age group activity levels
+  nodematch("race", diff = FALSE) +       # racial homophily (single parameter)
+  nodefactor("race", levels = -1) +       # race activity levels
+  nodefactor("deg.casl", levels = -1) +   # effect of casual degree on main
+  concurrent +                            # count of nodes with 2+ partnerships
+  degrange(from = 3) +                    # constrain max degree
+  nodematch("role.class", diff = TRUE, levels = c(1, 2)) # sexual role homophily
 
-# Target Stats
+# Target Stats — values from ARTnet that the fitting algorithm tries to match
 netstats_main <- c(
   edges                = netstats$main$edges,
   nodematch_age.grp    = netstats$main$nodematch_age.grp,
@@ -27,6 +28,10 @@ netstats_main <- c(
 ) |> unname()
 
 # Fit model
+# - coef.diss: dissolution coefficients — control partnership duration
+#   (age-dependent: older partnerships tend to last longer)
+# - trim_netest(): removes network snapshots to save disk space; coefficients
+#   are retained
 fit_main <- EpiModel::netest(
   nw_main,
   formation = model_main,

@@ -1,6 +1,13 @@
 ## Initialize the ARTnet data objects and the networks to be fitted
 ##
 ## This script should not be run directly. But `sourced` by `1-estimation.R`
+##
+## Creates:
+##   epistats  - epidemiological statistics (age, race, HIV prevalence)
+##   netstats  - target network statistics derived from ARTnet survey data
+##   nw_main   - empty network for main partnership model
+##   nw_casl   - empty network for casual partnership model
+##   nw_ooff   - empty network for one-off partnership model
 
 if (system.file(package = "ARTnetData") == "") {
   message(
@@ -18,7 +25,7 @@ if (system.file(package = "ARTnetData") == "") {
   epistats <- build_epistats(
     geog.lvl = "city",
     geog.cat = "Atlanta",
-    init.hiv.prev = c(0.33, 0.137, 0.084),
+    init.hiv.prev = c(0.33, 0.137, 0.084), # by race: Black, Hispanic, White
     race = TRUE,
     time.unit = time_unit
   )
@@ -36,10 +43,12 @@ if (system.file(package = "ARTnetData") == "") {
   )
 }
 
-# rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
+# Rename "diag.status" -> "hiv.dx" to match EpiModelHIV conventions
 diag_status_pos <- which(names(netstats$attr) == "diag.status")
 names(netstats$attr)[diag_status_pos] <- "hiv.dx"
 
+# Build the three network objects. Each starts as an empty network with node
+# attributes (age, race, degree, role, etc.) from the ARTnet survey data.
 nw <- EpiModel::network_initialize(netstats$demog$num)
 nw_main <- EpiModel::set_vertex_attribute(
   nw,
@@ -48,4 +57,4 @@ nw_main <- EpiModel::set_vertex_attribute(
 )
 
 nw_casl <- nw_main
-nw_inst <- nw_main
+nw_ooff <- nw_main

@@ -1,6 +1,8 @@
 ## Run the diagnostics for the *casual* network model
 ##
 ## This script should not be run directly. But `sourced` by `2-diagnostics.R`
+##
+## Produces dynamic and static diagnostics (see diag_main.R for explanation)
 
 model_casl_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
@@ -13,6 +15,7 @@ model_casl_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:4)
 
+# Dynamic diagnostics
 dx_casl <- EpiModel::netdx(
   est$fit_casl,
   nsims = diag_nsims,
@@ -24,6 +27,7 @@ dx_casl <- EpiModel::netdx(
     tergm::control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
+# Static diagnostics
 dx_casl_static <- EpiModel::netdx(
   est$fit_casl,
   dynamic = FALSE,
