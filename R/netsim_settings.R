@@ -1,8 +1,14 @@
 ## Default settings for `netsim`
 ##
 ## This script should not be run directly. But `sourced` from other scripts
-## using the `netsim` function
+## using the `netsim` function.
+##
+## Requires:
+##   - `context` (from z-context.R)
+##   -  paths from shared_variables.R
+## Creates:  `param`, `init`, `path_to_est`, `path_to_restart`
 
+# Load the network statistics and estimation outputs from Chapter A
 epistats <- readRDS(fs::path(est_dir, paste0("epistats-", context, ".rds")))
 netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
 path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))

@@ -1,8 +1,7 @@
 ## 2. Netsim Module Development Script
 ##
-## Example interactive epidemic simulation run script with basic
-## parameterization and all parameters defined in data/input/model_parameters.xlsx`, with example of
-## writing/debugging modules
+## Run the model with your local development version of
+## EpiModelHIV-p and debug modules interactively.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -27,9 +26,9 @@ est <- readRDS(path_to_est)
 # Control settings
 control <- control_msm(
   nsteps = year_steps * 4,
-  ncores = 1 # never use `ncores > 1` whith `pkgload::load_all(EMHIVp_dir)`
-             # otherwise the parallel environment will load the installed version
-             # of the package and not the dev one loaded by `load_all`.
+  # Always ncores = 1 with load_all(): parallel workers
+  # load the installed package, not the dev version.
+  ncores = 1
 )
 
 # Epidemic simulation
@@ -49,9 +48,7 @@ d_sim <- d_sim |>
 ggplot(d_sim, aes(x = time, y = prep_cov)) +
   geom_line()
 
-# Run in debug mode, more details and examples here:
-# https://github.com/EpiModel/EpiModeling/wiki/Writing-and-Debugging-EpiModel-Code
+# Run in debug mode: steps into the module on
+# the first call. See the README for more resources.
 debugonce(hivtrans_msm)
 sim <- netsim(est, param, init, control)
-
-# for advanced debugging: https://github.com/EpiModel/EpiModeling/wiki/Diagnostic-of-an-EpiModel-Module

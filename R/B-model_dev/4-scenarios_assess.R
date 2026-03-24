@@ -1,7 +1,10 @@
-## 2. Epidemic Model Scenarios Assessment
+## 4. Epidemic Model Scenarios Assessment
 ##
-## Interactively explore the output of the simulation. Be it local or HPC
-## simulations made by the workflow
+## Interactively explore the output of the simulation. Works with both local
+## and HPC results (change `hpc_context` and download the merged_tibbles/ from
+## the HPC first).
+##
+## Change the scenario name below to inspect different scenarios.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 

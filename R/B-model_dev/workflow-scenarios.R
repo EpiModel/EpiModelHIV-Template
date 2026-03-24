@@ -12,13 +12,12 @@ library(dplyr)
 
 hpc_context <- TRUE
 source("R/shared_variables.R", local = TRUE)
-source("R/C-netsim_scenarios/z-context.R", local = TRUE)
+source("R/B-model_dev/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
 
 max_cores <- 8
 
 # Process ----------------------------------------------------------------------
-wf <- make_em_workflow("scenarios", override = TRUE)
 
 # Necessary files
 source("R/netsim_settings.R", local = TRUE)

@@ -31,3 +31,11 @@ fs::file_copy(
 ## This line will error if you don't have access to ARTnetData.
 ## If it does, ask a lab member for access.
 library(ARTnetData)
+
+## Manually install all dependencies
+# renv::install(
+#   paste0(
+#     "epimodel/", c("artnetdata", "epimodelhpc", "slurmworkflow", "swfcalib")
+#   )
+# )
+# renv::hydrate()
