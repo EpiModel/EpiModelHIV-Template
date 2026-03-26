@@ -1,5 +1,14 @@
 # TODO
 
+- add a set of instruction for when I hand the calibration results
+    - where do files go
+    - what to do with alg_calib
+    - hpc + local files
+    - update hpc configs
+- validate email in hpc_config and warning if not correct?
+    - make a validator that forces the user to interact?
+    - usethis style? ask questions?
+
 ## Huge analysis of all processes
 
 - make many (many) outcomes
