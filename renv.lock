@@ -68,8 +68,8 @@
       "Author": "Samuel Jenness [cre, aut], Kevin Weiss [ctb], Pragati Prasad [ctb]",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "artnetdata",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "ARTnetData",
       "RemoteRef": "main",
       "RemoteSha": "3caad7145ff0031667709a9fcdb4abb27ce5a8c3"
     },
@@ -100,7 +100,7 @@
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.6.0",
-      "Source": "GitHub",
+      "Source": "Repository",
       "Date": "2026-03-17",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
       "Description": "Tools for simulating mathematical models of infectious disease dynamics. Epidemic model classes include deterministic compartmental models, stochastic individual-contact models, and stochastic network models. Network models use the robust statistical methods of exponential-family random graph models (ERGMs) from the Statnet suite of software packages in R. Standard templates for epidemic modeling include SI, SIR, and SIS disease types. EpiModel features an API for extending these templates to address novel scientific research aims. Full methods for EpiModel are detailed in Jenness et al. (2018, <doi:10.18637/jss.v084.i08>).",
@@ -158,18 +158,13 @@
       ],
       "RoxygenNote": "7.3.3",
       "Encoding": "UTF-8",
-      "Roxygen": "list(markdown = TRUE)",
+      "NeedsCompilation": "yes",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
-      "RemoteRef": "main",
-      "RemoteSha": "fa90f515680bbdf953f6a8f60b9e7ece22764dbe"
+      "Repository": "CRAN"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
-      "Version": "3.2.0",
+      "Version": "3.3.0",
       "Source": "GitHub",
       "Date": "2025-03-26",
       "Type": "Package",
@@ -209,12 +204,12 @@
       "Roxygen": "list(markdown = TRUE)",
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
+      "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "v3.2.x",
-      "RemoteSha": "b5120a1662f38b18ea8ff92015ca14c8298c6e83",
-      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main"
+      "RemoteRef": "reworks_next",
+      "RemoteSha": "7c5f52a6fc229e8f9625c0573d60dc2c34d094d6"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -306,10 +301,10 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.7-4",
+      "Version": "1.7-5",
       "Source": "Repository",
       "VersionNote": "do also bump src/version.h, inst/include/Matrix/version.h",
-      "Date": "2025-08-27",
+      "Date": "2026-03-20",
       "Priority": "recommended",
       "Title": "Sparse and Dense Matrix Classes and Methods",
       "Description": "A rich hierarchy of sparse and dense matrix classes, including general, symmetric, triangular, and diagonal matrices with numeric, logical, or pattern entries.  Efficient methods for operating on such matrices, often wrapping the 'BLAS', 'LAPACK', and 'SuiteSparse' libraries.",
@@ -997,7 +992,7 @@
     },
     "deSolve": {
       "Package": "deSolve",
-      "Version": "1.41",
+      "Version": "1.42",
       "Source": "Repository",
       "Title": "Solvers for Initial Value Problems of Differential Equations ('ODE', 'DAE', 'DDE')",
       "Authors@R": "c(person(\"Karline\",\"Soetaert\", role = c(\"aut\"),  email = \"karline.soetaert@nioz.nl\", comment = c(ORCID = \"0000-0003-4603-7100\")), person(\"Thomas\",\"Petzoldt\", role = c(\"aut\", \"cre\"), email = \"thomas.petzoldt@tu-dresden.de\", comment = c(ORCID = \"0000-0002-4951-6468\")), person(\"R. Woodrow\",\"Setzer\", role = c(\"aut\"), email = \"setzer.woodrow@epa.gov\", comment = c(ORCID = \"0000-0002-6709-9186\")), person(\"Peter N.\",\"Brown\", role = \"ctb\",  comment = \"files ddaspk.f, dvode.f, zvode.f\"), person(\"George D.\",\"Byrne\", role = \"ctb\",  comment = \"files dvode.f, zvode.f\"), person(\"Ernst\",\"Hairer\", role = \"ctb\",  comment = \"files radau5.f, radau5a\"), person(\"Alan C.\",\"Hindmarsh\", role = \"ctb\",  comment = \"files ddaspk.f, dlsode.f, dvode.f, zvode.f, opdkmain.f, opdka1.f\"), person(\"Cleve\",\"Moler\", role = \"ctb\",  comment = \"file dlinpck.f\"), person(\"Linda R.\",\"Petzold\", role = \"ctb\",  comment = \"files ddaspk.f, dlsoda.f\"), person(\"Youcef\", \"Saad\", role = \"ctb\",  comment = \"file dsparsk.f\"), person(\"Clement W.\",\"Ulrich\", role = \"ctb\",  comment = \"file ddaspk.f\") )",
@@ -1453,7 +1448,7 @@
     },
     "fs": {
       "Package": "fs",
-      "Version": "1.6.7",
+      "Version": "2.0.1",
       "Source": "Repository",
       "Title": "Cross-Platform File System Operations Based on 'libuv'",
       "Authors@R": "c( person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Hadley\", \"Wickham\", role = \"aut\"), person(\"Gábor\", \"Csárdi\", role = \"aut\"), person(\"Jeroen\", \"Ooms\", , \"jeroenooms@gmail.com\", role = \"cre\"), person(\"libuv project contributors\", role = \"cph\", comment = \"libuv library\"), person(\"Joyent, Inc. and other Node contributors\", role = \"cph\", comment = \"libuv library\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")) )",
@@ -1480,7 +1475,7 @@
         "withr"
       ],
       "VignetteBuilder": "knitr",
-      "ByteCompile": "true",
+      "SystemRequirements": "libuv: libuv-devel (rpm) or libuv1-dev (deb). Alternatively to build the vendored libuv 'cmake' is required. GNU make.",
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Config/testthat/edition": "3",
       "Config/usethis/last-upkeep": "2025-04-23",
@@ -1488,7 +1483,6 @@
       "Encoding": "UTF-8",
       "Language": "en-US",
       "RoxygenNote": "7.3.3",
-      "SystemRequirements": "GNU make",
       "NeedsCompilation": "yes",
       "Author": "Jim Hester [aut], Hadley Wickham [aut], Gábor Csárdi [aut], Jeroen Ooms [cre], libuv project contributors [cph] (libuv library), Joyent, Inc. and other Node contributors [cph] (libuv library), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
@@ -3104,7 +3098,7 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.1.8",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Project Environments",
@@ -3146,9 +3140,9 @@
         "webfakes"
       ],
       "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
       "RoxygenNote": "7.3.3",
       "VignetteBuilder": "knitr",
-      "NeedsCompilation": "yes",
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Config/testthat/edition": "3",
       "Config/testthat/parallel": "true",
@@ -3685,11 +3679,11 @@
       "Author": "Adrien Le Guillou [aut, cre] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "397cde3a0a82487aa216b130f20f5d8393a010bf",
+      "RemoteSha": "da80645197e4e9e95c5a5331497fc5f5bd76daf6",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::EpiModel/slurmworkflow"
     },
     "tergm": {
@@ -4245,7 +4239,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.56",
+      "Version": "0.57",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Supporting Functions for Packages Maintained by 'Yihui Xie'",
