@@ -9,31 +9,32 @@
 make_model_fn <- function(calib_steps) {
   force(calib_steps)
   function(proposal) {
-    # Libraries ------------------------------------------------------------------
+    # Libraries - --------------------------------------------------------------
     library("EpiModelHIV")
     library("dplyr")
 
-    # Settings -------------------------------------------------------------------
+    # Settings -----------------------------------------------------------------
     source("R/shared_variables.R", local = TRUE)
     hpc_context <- TRUE
-    source("R/C-calibration/z-context.R", local = TRUE)
+    source("R/Z-calibration/z-context.R", local = TRUE)
 
-    # Inputs ---------------------------------------------------------------------
+    # Inputs -------------------------------------------------------------------
     source("R/netsim_settings.R", local = TRUE)
 
-    est <- readRDS(path_to_est)
+    orig <- readRDS(path_to_restart)
     control <- control_msm(
       nsteps              = calibration_end,
-      .tracker.list       = EpiModelHIV::make_calibration_trackers(),
-      verbose             = FALSE
+      start               = restart_time,
+      initialize.FUN      = reinit_msm,
+      verbose = FALSE
     )
 
-    # Proposal to scenario -------------------------------------------------------
+    # Proposal to scenario -----------------------------------------------------
     scenario <- EpiModelHPC::swfcalib_proposal_to_scenario(proposal)
     param_sc <- EpiModel::use_scenario(param, scenario)
 
-    # Simulation and processing --------------------------------------------------
-    sim <- netsim(est, param_sc, init, control)
+    # Simulation and processing ------------------------------------------------
+    sim <- netsim(orig, param_sc, init, control)
     targets <- EpiModelHIV::get_calibration_targets()
 
     as_tibble(sim) |>

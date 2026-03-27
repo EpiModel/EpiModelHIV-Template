@@ -30,9 +30,16 @@ param <- param.net(
 # For models without bacterial STIs, these must be initialized
 # here with non-zero values.
 init <- init_msm(
-  prev.gono.rect  = 0.1,
-  prev.gono.uret  = 0.1,
-  prev.chla.rect  = 0.1,
-  prev.chla.uret  = 0.1,
-  prev.syph       = 0.1
+  prev.gono.rect = 0.1,
+  prev.gono.uret = 0.1,
+  prev.chla.rect = 0.1,
+  prev.chla.uret = 0.1,
+  prev.syph      = 0.1
+)
+
+# Flags to now weather each disease is enabled
+has_sti <- c(
+  gono = init$prev.gono.rect > 0 | init$prev.gono.uret > 0,
+  chla = init$prev.chla.rect > 0 | init$prev.chla.uret > 0,
+  syph = init$prev.syph > 0
 )

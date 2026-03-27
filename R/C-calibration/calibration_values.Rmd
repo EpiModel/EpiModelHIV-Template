@@ -7,6 +7,8 @@ output:
     toc_float: true
     number_sections: true
     smart: false
+params:
+  sc_df: FALSE
 ---
 
 ```{r setup, include = FALSE}
@@ -17,8 +19,7 @@ library(EpiModelHIV)
 
 context <- "hpc"
 source("R/netsim_settings.R", local = TRUE)
-
-d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds"))
+d_calib <- sc_df
 
 d_outs <- EpiModelHIV::mutate_calibration_targets(d_calib) |>
   mutate(sim = as.integer(as.factor(paste0(batch_number, "_", sim)))) |>
@@ -90,7 +91,17 @@ make_calib_plot <- function(d, plot_info) {
   axis(1, seq(0, max(d$time), 10 * year_steps),
        labels = seq(0, max(d$time), 10 * year_steps) / year_steps)
 
-  x <- round(colMeans(tail(d_outs[, cur_targs], 52)), 3)
+  # x <- round(colMeans(tail(d_outs[, cur_targs], year_steps)), 3)
+
+  x <- d |>
+    filter(time > max(time) - year_steps) |>
+    select(sim, all_of(cur_targs)) |>
+    group_by(sim) |>
+    summarise(across(everything(), mean)) |>
+    select(-sim) |>
+    summarise(across(everything(), median)) |>
+    unlist()
+
   abline(h = targets[cur_targs], col = colors, lty = 2)
   for (i in seq_along(plot_info$names)) {
     v <- plot_info$fmt_target(x[i])
@@ -129,7 +140,7 @@ tar_names <- paste0("cc.dx.", races_names)
 tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("hiv.test.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
-m_int <- (1 / param[[p_names]] / 52) |> scales::label_number(0.1)()
+m_int <- (1 / param[[p_names]] / year_steps) |> scales::label_number(0.1)()
 
 sim_vals <- d_outs |>
   filter(time > max(time) - year_steps) |>
@@ -170,7 +181,7 @@ tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("tx.halt.rate")
 prms <- param[[p_names]] |> scales::label_scientific()()
 mean_time_stop_w <- scales::label_number(1)(1 / param[[p_names]])
-mean_time_stop_y <- scales::label_number(0.1)(1 / param[[p_names]] / 52)
+mean_time_stop_y <- scales::label_number(0.1)(1 / param[[p_names]] / year_steps)
 
 
 sim_vals <- d_outs |>
@@ -279,7 +290,7 @@ row_names <- c(
 )
 
 fmtr <- scales::label_number(0.1)
-tar_names <- c("ir100.gono", "ir100.chla")
+tar_names <- c("ir100.gono", "ir100.chla", "ir100.syph")
 tar <- targets[tar_names] |> fmtr()
 p_names <- c("gono.uret.prob", "chla.uret.prob", "syph.prob")
 prms <- unlist(param[p_names]) |> scales::label_number(0.01)()

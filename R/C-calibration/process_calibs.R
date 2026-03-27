@@ -18,21 +18,18 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
   targets <- EpiModelHIV::get_calibration_targets()
 
   d_dist <- readRDS(sc_info$file_path) |>
-    dplyr::filter(time >= max(time) - calib_steps) |>
+    filter(time >= max(time) - calib_steps) |>
     EpiModelHIV::mutate_calibration_distances() |>
-    dplyr::select(batch_number, sim, dplyr::any_of(names(targets)))
+    select(batch_number, sim, any_of(names(targets)))
 
   d_dist <- d_dist |>
-    dplyr::group_by(batch_number, sim) |>
-    dplyr::summarize(
-      dplyr::across(dplyr::everything(), mean),
-      .groups = "drop"
-    ) |>
-    dplyr::select(-c(batch_number, sim))
+    group_by(batch_number, sim) |>
+    summarize(across(everything(), mean), .groups = "drop") |>
+    select(-c(batch_number, sim))
 
   d_dist <- d_dist |>
-    dplyr::summarize(dplyr::across(
-      dplyr::everything(),
+    summarize(across(
+      everything(),
       .fns = list(
         q1 = \(x) quantile(x, 0.25, na.rm = TRUE),
         q2 = \(x) quantile(x, 0.50, na.rm = TRUE),
@@ -40,8 +37,8 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
       ),
       .names = "{.col}__{.fn}"
     )) |>
-    dplyr::mutate(scenario_name = sc_info$scenario_name) |>
-    dplyr::select(scenario_name, dplyr::everything())
+    mutate(scenario_name = sc_info$scenario_name) |>
+    select(scenario_name, everything())
 }
 
 future::plan("multisession", workers = 8)
@@ -54,5 +51,5 @@ d_ls <- future.apply::future_lapply(
   \(i) process_one_calib_tibble(calib_info_tbl[i, ], year_steps)
 )
 
-d_calib <- dplyr::bind_rows(d_ls)
+d_calib <- bind_rows(d_ls)
 write.csv(d_calib, fs::path(calib_dir, "calib_assess.csv"), row.names = FALSE)

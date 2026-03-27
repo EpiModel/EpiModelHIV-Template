@@ -42,7 +42,7 @@ sim <- netsim(est, param, init, control)
 print(sim)
 
 # Plot outcomes
-par(mar = c(3, 3, 2, 2), mgp = c(2, 1, 0))
+par(mar = c(3, 3, 2, 2), mgp = c(2, 1, 0), mfrow = c(2, 1))
 plot(sim, y = "hiv.inf", main = "Number of Infected with HIV")
 plot(sim, y = "syph.inf", main = "Number of Infected with Syphilis")
 
@@ -81,4 +81,5 @@ ggplot(d_sim, aes(x = time, y = prep, col = as.factor(sim))) +
 
 # Convert back to an epi data frame to use base R plot() on it
 d_sim <- as.epi.data.frame(d_sim)
+par(mfrow = c(1, 1))
 plot(d_sim, y = "cc.dx.B", main = "Proportion of Diagnosed (Black)")

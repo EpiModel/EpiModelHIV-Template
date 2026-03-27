@@ -45,12 +45,11 @@ cond.scale,1,numeric,4,,,,Scalar for condom use probability for model calibratio
 hiv.trans.scale_1,3.47101560667349,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.dx.H,,Relative scalar on base infection probabilities for model calibration for Black men.
 hiv.trans.scale_2,0.512976760905261,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.dx.W,,Relative scalar on base infection probabilities for model calibration for Hispanic men.
 hiv.trans.scale_3,0.457558450979665,numeric,8.2,,,,Relative scalar on base infection probabilities for model calibration for White men.
-hiv.gono.rect.or,2.78,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current rectal gonorrhea to the odds of HIV infection in the absence of current rectal gonorrhea.
-hiv.gono.uret.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current urethral gonorrhea to the odds of HIV infection in the absence of current urethral gonorrhea.
-hiv.chla.rect.or,2.78,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current rectal chlamydia to the odds of HIV infection in the absence of current rectal chlamydia.
-hiv.chla.uret.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current urethral chlamydia to the odds of HIV infection in the absence of current urethral chlamydia.
-hiv.dual.rr,0.2,numeric,7.5,,,,"Additive proportional risk, from 0 to 1, for HIV infection given dualinfection with both gonorrhea and chlamydia."
+hiv.gono.chla.rect.or,2.78,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current rectal gonorrhea XOR chlamydia to the odds of HIV infection without.
+hiv.gono.chla.uret.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current urethral gonorrhea XOR chlamydia to the odds of HIV infection without.
+hiv.gono.chla.dual.rr,1.2,numeric,7.5,,,,Discnount on second STI related HIV Transmission Odds Ratio when dual infection with both gonorrhea and chlamydia.
 hiv.syph.or,2.67,numeric,,,,,Odds ratio comparing the odds of HIV infection given current syphilis to the odds of HIV infection in the absence of current syphilis. (PMC8543214)
+hiv.syph.dual.rr,0.5,numeric,,,,,Discount on lower STI related HIV Transmission Odds ratio with multiple STI infection implicating Syphilis.
 riskh.start,-52,numeric,7.5,,,,Time step at which behavioral risk history assessment occurs.
 prep.start,0,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.B,,Time step at which the PrEP intervention should start.
 prep.start.rate_1,0.00554146887680583,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.H,,Probability of starting PrEP given current indications for Black MSM.

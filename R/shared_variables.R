@@ -3,7 +3,7 @@
 ## This script should not be run directly. But `sourced` from other scripts
 
 # EpiModelHIV-p local directory
-EMHIVp_branch <- "v3.2.x"    # <- USER: your EpiModelHIV-p branch name
+EMHIVp_branch <- "scaling_distance"    # <- USER: your EpiModelHIV-p branch name
 EMHIVp_dir    <- "../EMHIV/"  # <- USER: path to your local EpiModelHIV-p clone
 
 # Relevant time steps for the simulation
