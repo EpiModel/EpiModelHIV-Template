@@ -7,49 +7,27 @@
 ## workflow
 
 # Setup ------------------------------------------------------------------------
+scenario_name <- "empty_scenario"
+hpc_context <- TRUE
+
 library(EpiModelHIV)
 library(dplyr)
-
 source("R/shared_variables.R", local = TRUE)
-hpc_context <- TRUE
 source("R/C-calibration/z-context.R", local = TRUE)
-source("R/C-calibration/utils-calib_distance.R", local = TRUE)
+source("R/C-calibration/utils-restart.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
-d_calibs <- fs::path(calib_dir, "merged_tibbles", "df__empty_scenario.rds")
+path_df <- fs::path(
+  calib_dir,
+  "merged_tibbles",
+  paste0("df__", scenario_name, ".rds")
+)
 
-d_dist <- readRDS(d_calibs) |>
-  filter(time >= max(time) - year_steps) |>
-  EpiModelHIV::mutate_calibration_distances(scaled = TRUE) |>
-  select(batch_number, sim_number, any_of(names(targets)))
-
-d_dist <- d_dist |>
+d_dist <- readRDS(path_df) |>
   group_by(batch_number, sim_number) |>
-  summarize(
-    across(everything(), mean),
-    .groups = "drop"
-  )
-
-d_dist$cost <- 0
-
-
-# calculate Squared Error - distances are scaled by the targets value
-for (nme in names(targets)) {
-  if (nme %in% names(d_dist) && !any(is.na(d_dist[[nme]]))) {
-    d_dist$cost <- d_dist$cost + d_dist[[nme]]
-  }
-}
-
-# Ensure every STI ir100 is at least 25% of the targets.
-# (d_dist contains distances from targets)
-for (sti in names(has_sti)) {
-  if (has_sti[sti]) {
-    sti_tar <- paste0("ir100.", sti)
-    d_dist$cost <- ifelse(d_dist[[sti_tar]] < -0.75, Inf, d_dist$cost)
-  }
-}
+  mutate_sim_cost(has_sti, year_steps)
 
 if (all(d_dist$cost == Inf))
   stop("No simulation has all the STI epidemics ongoing. Aborting")
@@ -57,51 +35,22 @@ if (all(d_dist$cost == Inf))
 # pick best sim
 best_sim <- d_dist |>
   arrange(cost) |>
-  select(batch_number, sim_number) |>
   head(1)
 
-# Check the values manually
-d_dist |>
-  arrange(cost) |>
-  head(1) |>
-  as.list()
+glimpse(best_sim)
 
-print(best_sim)
-
-# Get best sim
-best <- readRDS(
-  fs::path(
-    calib_dir,
-    paste0("sim__empty_scenario__", best_sim$batch_number, ".rds")
-  )
+sim_path <- fs::path(
+  calib_dir,
+  paste0("sim__", scenario_name, "__", best_sim$batch_number, ".rds")
 )
 
-attrs_names <- names(EpiModelHIV::get_default_attrs())
-time_prefixes <- c(".last$", ".time$")
+if (!fs::file_exists(sim_path))
+  stop("`sim` file: '", sim_path, "' not present. Download it from HPC")
 
-time_attrs <- Reduce(
-  function(a, prefix) c(a, grepv(prefix, attrs_names)),
-  time_prefixes,
-  init = character(0)
-)
-
-restart_point <- make_restart_point(
-  best,
-  time_attrs,
+restart_point <- make_restart_point_hiv(
+  sim = readRDS(sim_path),
   sim_num = best_sim$sim_number,
-  keep_steps = 1
+  sim_cost = best_sim$cost
 )
 
 saveRDS(restart_point, path_to_restart)
-
-# Test Restart point
-orig <- readRDS(path_to_restart)
-control <- control_msm(
-  nsims = 1,
-  ncores = 1,
-  start               = restart_time,
-  nsteps              = restart_time + 12,
-  initialize.FUN      = reinit_msm,
-  verbose = TRUE
-)
-sim <- netsim(orig, param, init, control)
