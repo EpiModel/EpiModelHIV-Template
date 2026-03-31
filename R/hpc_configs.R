@@ -3,14 +3,13 @@
 ## This script should not be run directly. But `sourced` from the
 ## scripts that interact with the HPC (the `workflow-*.R` ones)
 
-current_git_branch <- "main"          # <- USER: your git branch
-mail_user          <- "you@emory.edu" # <- USER: your email
+current_git_branch <- "dev_v3.3"          # <- USER: your git branch
+mail_user          <- "aleguil@emory.edu" # <- USER: your email
 
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
-  "spack load r@4.5.1",
-  "export R_FUTURE_GLOBALS_MAXSIZE=Inf"
+  "spack load r@4.5.1"
 )
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
