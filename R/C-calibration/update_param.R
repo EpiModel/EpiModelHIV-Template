@@ -25,7 +25,8 @@ updt_param <- EpiModel::param.net_to_table(param_sc)
 
 # param_df loaded by netsim_settings
 new_params <- replace_join(params_df, updt_param, by = c("param", "type"))
-readr::write_csv(
+write.csv(
   new_params,
-  fs::path(swfcalib:::get_root_dir(calib_object), "params.csv")
+  fs::path(swfcalib:::get_root_dir(calib_object), "params.csv"),
+  row.names = FALSE
 )

@@ -35,7 +35,7 @@ calib_object <- list(
       prep.start.rate_1, prep.start.rate_2, prep.start.rate_3,
       aids.off.tx.mort.rate,
       hiv.test.rate_1, hiv.test.rate_2, hiv.test.rate_3,
-      gono.uret.prob, chla.uret.prob,
+      gono.uret.prob, chla.uret.prob, syph.prob,
       tx.halt.rate_1, tx.halt.rate_2, tx.halt.rate_3,
       hiv.trans.scale_1, hiv.trans.scale_2, hiv.trans.scale_3,
       a.rate
