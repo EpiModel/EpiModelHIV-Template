@@ -8,7 +8,8 @@ output:
     number_sections: true
     smart: false
 params:
-  sc_df: FALSE
+  path_df: ""
+  context: "hpc"
 ---
 
 ```{r setup, include = FALSE}
@@ -17,97 +18,12 @@ source("R/shared_variables.R", local = TRUE)
 library(dplyr)
 library(EpiModelHIV)
 
-context <- "hpc"
+context <- params$context
 source("R/netsim_settings.R", local = TRUE)
-d_calib <- sc_df
+source("R/C-calibration/utils-calib_plots.R", local = TRUE)
 
-d_outs <- EpiModelHIV::mutate_calibration_targets(d_calib) |>
-  mutate(sim = as.integer(as.factor(paste0(batch_number, "_", sim)))) |>
-  as.epi.data.frame()
-
-races <- c("B", "H", "W")
-calib_plot_infos <- list(
-  cc.dx = list(
-    names = paste0("cc.dx.", races),
-    ylab = "Proportion",
-    text_offset = 0.01,
-    fmt_target = scales::percent_format(0.1)
-  ),
-  cc.vsupp = list(
-    names = paste0("cc.vsupp.", races),
-    ylab = "Proportion",
-    text_offset = 0.005,
-    fmt_target = scales::percent_format(0.1)
-  ),
-  i.prev.dx = list(
-    names = paste0("i.prev.dx.", races),
-    ylab = "Proportion",
-    text_offset = 0.01,
-    fmt_target = scales::percent_format(0.1)
-  ),
-  ir100.sti = list(
-    names = c("ir100.gono", "ir100.chla", "ir100.syph"),
-    ylab = "Infection Rate per 100 PYAR",
-    text_offset = 0.3,
-    fmt_target = scales::number_format(0.1)
-  ),
-  cc.prep = list(
-    names = paste0("cc.prep.", races),
-    ylab = "Proportion",
-    text_offset = 0.005,
-    fmt_target = scales::percent_format(0.1)
-  ),
-  disease.mr100 = list(
-    names = "disease.mr100",
-    ylab = "Proportion",
-    text_offset = 0.01,
-    fmt_target = scales::percent_format(0.1)
-  ),
-  num = list(
-    names = "num",
-    ylab = "Population",
-    text_offset = 500,
-    fmt_target = scales::number_format(1)
-  )
-)
-
-make_calib_plot <- function(d, plot_info) {
-  targets <- EpiModelHIV::get_calibration_targets()
-  targets["num"] <- 1e5
-  colors <-  c("steelblue", "firebrick", "seagreen")
-  text_pos <- max(d$time) - 500
-  par(mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))
-  offset <- plot_info$text_offset
-  cur_targs <- plot_info$names
-
-  plot(
-    d,
-    xaxt = "n",
-    y = cur_targs,
-    legend = TRUE,
-    ylab = plot_info$ylab,
-    xlab = "Calibration Years"
-  )
-  axis(1, seq(0, max(d$time), 10 * year_steps),
-       labels = seq(0, max(d$time), 10 * year_steps) / year_steps)
-
-  # x <- round(colMeans(tail(d_outs[, cur_targs], year_steps)), 3)
-
-  x <- d |>
-    filter(time > max(time) - year_steps) |>
-    select(sim, all_of(cur_targs)) |>
-    group_by(sim) |>
-    summarise(across(everything(), mean)) |>
-    select(-sim) |>
-    summarise(across(everything(), median)) |>
-    unlist()
-
-  abline(h = targets[cur_targs], col = colors, lty = 2)
-  for (i in seq_along(plot_info$names)) {
-    v <- plot_info$fmt_target(x[i])
-    text(text_pos, targets[cur_targs[i]] + offset, v, col = colors[i])
-  }
-}
+d_outs <- readRDS(params$path_df) |>
+  EpiModelHIV::mutate_calibration_targets()
 
 targets <- EpiModelHIV::get_calibration_targets()
 races_names <- c("B", "H", "W")

@@ -16,7 +16,7 @@ make_model_fn <- function(calib_steps) {
     # Settings -----------------------------------------------------------------
     source("R/shared_variables.R", local = TRUE)
     hpc_context <- TRUE
-    source("R/Z-calibration/z-context.R", local = TRUE)
+    source("R/C-calibration/z-context.R", local = TRUE)
 
     # Inputs -------------------------------------------------------------------
     source("R/netsim_settings.R", local = TRUE)
@@ -42,6 +42,12 @@ make_model_fn <- function(calib_steps) {
       filter(time >= max(time) - calib_steps) |>
       select(c(sim, num, any_of(names(targets)))) |>
       group_by(sim) |>
-      summarise(across(everything(), ~ mean(.x, na.rm = TRUE)), .groups = "drop")
+      summarise(
+        across(
+          everything(),
+          \(x) mean(x, na.rm = TRUE)
+        ),
+        .groups = "drop"
+      )
   }
 }

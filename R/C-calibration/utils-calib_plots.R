@@ -1,96 +1,87 @@
-library(tidyr)
 library(dplyr)
-library(ggplot2)
+library(EpiModel)
 
-# Common plot function for calibration
-#   line plot with IQR
-plot_this_target <- function(d_outcomes, d_tar) {
-  theme_set(theme_classic())
-  ggplot(
-    d_outcomes,
-    aes(x = time, y = q2, ymin = q1, ymax = q3, col = name, fill = name)
-  ) +
-    geom_line() +
-    geom_ribbon(alpha = 0.6, linetype = 0) +
-    geom_hline(
-      data = d_tar,
-      aes(yintercept = value, col = name),
-      linetype = 2
-    ) +
-    xlab("Time steps") +
-    ylab("Value") +
-    theme(legend.title = element_blank())
-}
-
-
-make_calib_plots <- function(d_path, out_dir, calib_plot_infos, year_steps) {
-  modulo_steps <- 2
-  plot_data_dir <- fs::path(out_dir, "data")
-  if (!fs::dir_exists(plot_data_dir)) fs::dir_create(plot_data_dir)
+make_calib_plot <- function(d, plot_info, year_steps = 52) {
   targets <- EpiModelHIV::get_calibration_targets()
+  targets["num"] <- 1e5
+  colors <-  c("steelblue", "firebrick", "seagreen")
+  text_pos <- max(d$time) - 500
+  par(mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))
+  offset <- plot_info$text_offset
+  cur_targs <- plot_info$names
 
-  d_calibs <- readRDS(d_path) |>
-    EpiModelHIV::mutate_calibration_targets(year_steps)
+  d <- as.epi.data.frame(d)
 
-  for (plot_name in names(calib_plot_infos)) {
-    plot_infos <- calib_plot_infos[[plot_name]]
-    if (!all(plot_infos$names %in% names(d_calibs))) next
+  plot(
+    d,
+    xaxt = "n",
+    y = cur_targs,
+    legend = TRUE,
+    ylab = plot_info$ylab,
+    xlab = "Calibration Years"
+  )
+  axis(1, seq(0, max(d$time), 10 * year_steps),
+       labels = seq(0, max(d$time), 10 * year_steps) / year_steps)
 
-    d_outcomes <- d_calibs |>
-      select(batch_number, sim, time, all_of(plot_infos$names)) |>
-      group_by(batch_number, sim) |>
-      arrange(time) |>
-      mutate(across(
-          all_of(plot_infos$names),
-          ~ RcppRoll::roll_meanl(.x, n = plot_infos$window_size, by = 1)
-          )) |>
-      ungroup() |>
-      select(-c(batch_number, sim)) |>
-      pivot_longer(- time, names_to = "name", values_to = "value") |>
-      filter(time == 1 | time %% modulo_steps == 0) |>
-      group_by(name, time) |>
-      summarise(
-        q1 = quantile(value, 0.25, na.rm = TRUE),
-        q2 = quantile(value, 0.50, na.rm = TRUE),
-        q3 = quantile(value, 0.75, na.rm = TRUE)
-      )
+  x <- d |>
+    filter(time > max(time) - year_steps) |>
+    select(sim, all_of(cur_targs)) |>
+    group_by(sim) |>
+    summarise(across(everything(), mean)) |>
+    select(-sim) |>
+    summarise(across(everything(), median)) |>
+    unlist()
 
-      d_tar <- tibble(
-        name = plot_infos$names,
-        value = targets[name]
-      )
-
-      p <- plot_this_target(d_outcomes, d_tar)
-      saveRDS(p, fs::path(plot_data_dir, paste0(plot_name, ".rds")))
-  }
+  ts <- targets[cur_targs]
+  abline(h = ts, col = colors, lty = 2)
+  text(text_pos, ts + offset, plot_info$fmt_target(x), col = colors)
+  text(1, ts - offset, plot_info$fmt_target(ts), col = colors)
 }
 
-generate_calib_plots <- function(out_dir) {
-  plots <- fs::dir_ls(fs::path(out_dir, "data"))
-  plots_dir <- fs::path(out_dir, "plots")
-  if (!fs::dir_exists(plots_dir)) fs::dir_create(plots_dir)
+races <- c("B", "H", "W")
+calib_plot_infos <- list(
+  cc.dx = list(
+    names = paste0("cc.dx.", races),
+    ylab = "Proportion",
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
+  ),
+  cc.vsupp = list(
+    names = paste0("cc.vsupp.", races),
+    ylab = "Proportion",
+    text_offset = 0.005,
+    fmt_target = scales::percent_format(0.1)
+  ),
+  i.prev.dx = list(
+    names = paste0("i.prev.dx.", races),
+    ylab = "Proportion",
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
+  ),
+  ir100.sti = list(
+    names = c("ir100.gono", "ir100.chla", "ir100.syph"),
+    ylab = "Infection Rate per 100 PYAR",
+    text_offset = 0.3,
+    fmt_target = scales::number_format(0.1)
+  ),
+  cc.prep = list(
+    names = paste0("cc.prep.", races),
+    ylab = "Proportion",
+    text_offset = 0.005,
+    fmt_target = scales::percent_format(0.1)
+  ),
+  disease.mr100 = list(
+    names = "disease.mr100",
+    ylab = "Proportion",
+    text_offset = 0.01,
+    fmt_target = scales::percent_format(0.1)
+  ),
+  num = list(
+    names = "num",
+    ylab = "Population",
+    text_offset = 500,
+    fmt_target = scales::number_format(1)
+  )
+)
 
-  for (i in seq_along(plots)) {
-    plot_name <- plots[[i]] |> fs::path_file() |> fs::path_ext_remove()
-    plot_file <- fs::path(plots_dir, plot_name, ext = "jpg")
-
-    p <- readRDS(plots[[i]]) +
-      scale_x_continuous(breaks = seq(0, intervention_end, year_steps * 5)) +
-      geom_vline(
-        xintercept = c(
-          calibration_end,
-          restart_time,
-          prep_start,
-          intervention_start
-        )
-      )
-
-      ggsave(
-        plot_file,
-        plot = p,
-        width = 30, height = 20,
-        unit = "cm", dpi = "retina"
-      )
-  }
-
-}
+rm(races)

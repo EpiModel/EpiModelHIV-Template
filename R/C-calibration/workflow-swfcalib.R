@@ -132,13 +132,13 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = calib_dir,
-      output_dir = fs::path(calib_dir, "merged_tibbles"),
-      steps_to_keep = Inf,
-      cols = dplyr::everything(),
-      n_cores = batch_size,
-      setup_lines = hpc_node_setup
-    ),
+    sim_dir = calib_dir,
+    output_dir = fs::path(calib_dir, "merged_tibbles"),
+    steps_to_keep = Inf,
+    cols = dplyr::everything(),
+    n_cores = batch_size,
+    setup_lines = hpc_node_setup
+  ),
   sbatch_opts = list(
     "cpus-per-task" = batch_size,
     "time" = "02:00:00",

@@ -19,25 +19,24 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
 
   d_dist <- readRDS(sc_info$file_path) |>
     filter(time >= max(time) - calib_steps) |>
-    EpiModelHIV::mutate_calibration_distances() |>
-    select(batch_number, sim, any_of(names(targets)))
+    EpiModelHIV::mutate_calibration_distances(scaled = TRUE) |>
+    select(sim, any_of(names(targets)))
 
   d_dist <- d_dist |>
-    group_by(batch_number, sim) |>
+    group_by(sim) |>
     summarize(across(everything(), mean), .groups = "drop") |>
-    select(-c(batch_number, sim))
+    select(-c(sim))
+
+  fmtr <- scales::label_percent(0.1)
 
   d_dist <- d_dist |>
     summarize(across(
       everything(),
-      .fns = list(
-        q1 = \(x) quantile(x, 0.25, na.rm = TRUE),
-        q2 = \(x) quantile(x, 0.50, na.rm = TRUE),
-        q3 = \(x) quantile(x, 0.75, na.rm = TRUE)
-      ),
-      .names = "{.col}__{.fn}"
+      \(x) paste0(fmtr(mean(x)), " (", fmtr(sd(x)), ")")
     )) |>
-    mutate(scenario_name = sc_info$scenario_name) |>
+    mutate(
+      scenario_name = sc_info$scenario_name,
+    ) |>
     select(scenario_name, everything())
 }
 

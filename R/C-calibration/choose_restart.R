@@ -7,13 +7,13 @@
 ## workflow
 
 # Setup ------------------------------------------------------------------------
-# library(EpiModelHIV)
-source("R/shared_variables.R", local = TRUE)
-pkgload::load_all(EMHIVp_dir)
+library(EpiModelHIV)
 library(dplyr)
 
+source("R/shared_variables.R", local = TRUE)
 hpc_context <- TRUE
 source("R/C-calibration/z-context.R", local = TRUE)
+source("R/C-calibration/utils-calib_distance.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)

@@ -1,7 +1,6 @@
 ## 3. Epidemic Model Scenarios Playground
 ##
-## Run `netsim` via the scenario API. This mimics how things will be run on the
-## HPC later on and ensures a smooth transition to the HPC setup.
+## Run `netsim` via the scenario API. This mimics how things will be run on the HPC later on and ensures a smooth transition to the HPC setup.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -63,5 +62,7 @@ EpiModelHPC::merge_netsim_scenarios_tibble(
   steps_to_keep = Inf
 )
 
+# Process the calibration to give the mean (sd) deviance from the target in %
+# of the target
 source("R/C-calibration/process_calibs.R")
 
