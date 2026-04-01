@@ -19,8 +19,12 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
 
   d_dist <- readRDS(sc_info$file_path) |>
     filter(time >= max(time) - calib_steps) |>
-    EpiModelHIV::mutate_calibration_distances(scaled = TRUE) |>
+    EpiModelHIV::mutate_calibration_distances() |>
     select(sim, any_of(names(targets)))
+
+  # Scale distances
+  for (t_name in intersect(names(targets), names(d_dist)))
+    d_dist[[t_name]] <- d_dist[[t_name]] / abs(targets[[t_name]])
 
   d_dist <- d_dist |>
     group_by(sim) |>

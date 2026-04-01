@@ -4,6 +4,8 @@
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
+# TODO: rename, scenarios should be kept for post calibration
+
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 library(EpiModelHPC)

@@ -19,15 +19,44 @@ source("R/C-calibration/utils-restart.R", local = TRUE)
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
+
 path_df <- fs::path(
   calib_dir,
   "merged_tibbles",
   paste0("df__", scenario_name, ".rds")
 )
 
-d_dist <- readRDS(path_df) |>
-  group_by(batch_number, sim_number) |>
-  mutate_sim_cost(has_sti, year_steps)
+d_calibs <- readRDS(path_df) |>
+  filter(time >= max(time) - year_steps) |>
+  EpiModelHIV::mutate_calibration_targets()
+targets <- targets[intersect(names(targets), names(d_calibs))]
+
+d_dist <- d_calibs |>
+  select(batch_number, sim_number, any_of(names(targets))) |>
+  mutate(across(names(targets), \(x) x - targets[cur_column()])) |>
+  summarize(
+    across(everything(), mean),
+    .by = c("batch_number", "sim_number")
+  ) |>
+  mutate(cost = 0)
+
+# calculate Squared Error
+for (nme in names(targets)) {
+  d_dist$cost <- d_dist$cost + d_dist[[nme]]^2
+}
+
+# Ensure every STI ir100 is at least 25% of the targets.
+# (d_dist contains distances from targets)
+for (sti in names(has_sti)) {
+  if (has_sti[sti]) {
+    sti_tar <- paste0("ir100.", sti)
+    d_dist$cost <- ifelse(
+      d_dist[[sti_tar]] < -0.75 * targets[[sti_tar]],
+      Inf,
+      d_dist$cost
+    )
+  }
+}
 
 if (all(d_dist$cost == Inf))
   stop("No simulation has all the STI epidemics ongoing. Aborting")
@@ -45,12 +74,11 @@ sim_path <- fs::path(
 )
 
 if (!fs::file_exists(sim_path))
-  stop("`sim` file: '", sim_path, "' not present. Download it from HPC")
+  stop("`sim` file: '", sim_path, "' not present.")
 
 restart_point <- make_restart_point_hiv(
   sim = readRDS(sim_path),
-  sim_num = best_sim$sim_number,
-  sim_cost = best_sim$cost
+  sim_num = best_sim$sim_number
 )
 
 saveRDS(restart_point, path_to_restart)
