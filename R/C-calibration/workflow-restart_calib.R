@@ -1,8 +1,9 @@
-## HPC Workflow: Manual Calibration 1
+## HPC Workflow: Restart Calibration (Phase 3 — manual)
 ##
-## Define a workflow to proposal parameters for calibration. This runs the first
-## part of the model (before the restart point). The values are assessed with
-## the script 1-manual_calib_assess.R
+## Test parameter adjustments starting from the restart point. More stable than
+## ballpark calibration since the population is simulation-born rather than
+## completely synthetic. When better parameters are found, re-create the restart
+## point before moving to swfcalib.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -14,7 +15,7 @@ library(dplyr)
 
 hpc_context <- TRUE
 source("R/shared_variables.R", local = TRUE)
-source("R/Z-calibration/z-context.R", local = TRUE)
+source("R/C-calibration/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
 
 max_cores <- 8
@@ -102,7 +103,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/Z-calibration/process_calibs.R",
+    r_script = "R/C-calibration/process_calibs.R",
     args = list(hpc_context = TRUE),
     setup_lines = hpc_node_setup
   ),
@@ -112,8 +113,3 @@ wf <- add_workflow_step(
     "mem-per-cpu" = "5G"
   )
 )
-
-# TODO:
-# - check notes
-# - edit Rmd to get filename param
-# - check how fast to model stabilize

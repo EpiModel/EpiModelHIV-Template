@@ -1,8 +1,9 @@
-## HPC Workflow: Manual Calibration 1
+## HPC Workflow: Ballpark Calibration (Phase 1)
 ##
-## Define a workflow to proposal parameters for calibration. This runs the first
-## part of the model (before the restart point). The values are assessed with
-## the script 1-manual_calib_assess.R
+## Run the model from scratch with parameter grids to get all epidemics present
+## and targets in the right ballpark. Results are assessed with
+## `2-manual_calib_assess.R` and reused by `3-choose_restart.R` to create a
+## restart point.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 

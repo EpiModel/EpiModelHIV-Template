@@ -1,6 +1,8 @@
-## 3. Epidemic Model Scenarios Playground
+## 1. Ballpark Calibration (local)
 ##
-## Run `netsim` via the scenario API. This mimics how things will be run on the HPC later on and ensures a smooth transition to the HPC setup.
+## Local equivalent of `workflow-ballpark_calib.R`. Explore parameter grids
+## locally and produce simulations that can be used by `3-choose_restart.R`
+## to create a restart point.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 

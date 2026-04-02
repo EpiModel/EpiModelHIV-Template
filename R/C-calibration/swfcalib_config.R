@@ -12,7 +12,7 @@ library(tidyr)
 n_sims <- 256
 ors_calib <- seq(0.7, 1.3, length.out = n_sims)
 
-source("R/Z-calibration/swfcalib_model.R", local = TRUE)
+source("R/C-calibration/swfcalib_model.R", local = TRUE)
 model_fn <- make_model_fn(calib_steps = year_steps)
 
 source("R/shared_variables.R", local = TRUE)
@@ -209,5 +209,5 @@ calib_object <- list(
   )
 )
 
-# # Limit the number of waves to run
-calib_object$waves <- calib_object$waves[5]
+# Uncomment to run a single wave for testing
+# calib_object$waves <- calib_object$waves[5]
