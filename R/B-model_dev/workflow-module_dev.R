@@ -4,7 +4,6 @@
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
-# TODO: rename, scenarios should be kept for post calibration
 
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
@@ -30,7 +29,7 @@ control <- control_msm(
 )
 
 # Workflow creation
-wf <- make_em_workflow("scenarios", override = TRUE)
+wf <- make_em_workflow("module_dev", override = TRUE)
 
 # Define test scenarios
 scenarios_df <- tibble(

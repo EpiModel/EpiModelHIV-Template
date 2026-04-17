@@ -8,12 +8,11 @@
 # Setup ------------------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
+# load the local development version of the project
+load_local_EpiModelHIV()
 
 source("R/shared_variables.R", local = TRUE)
 source("R/B-model_dev/z-context.R", local = TRUE)
-
-# load the local development version of the project
-pkgload::load_all(EMHIVp_dir)
 
 # default theme for the plots
 theme_set(theme_light())
@@ -26,8 +25,8 @@ est <- readRDS(path_to_est)
 # Control settings
 control <- control_msm(
   nsteps = year_steps * 4,
-  # Always ncores = 1 with load_all(): parallel workers load
-  # the installed package, not the dev version.
+  # Always ncores = 1 with load_local_EpiModelHIV():
+  # parallel workers load the installed package, not the dev version.
   ncores = 1
 )
 

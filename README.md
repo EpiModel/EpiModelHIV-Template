@@ -33,7 +33,28 @@ your package branch as `EpiModelHIV-p@<applied_project>`.
 - [ ] Have access to [ARTnetData](https://github.com/EpiModel/EpiModeling/wiki#artnetdata)
 - [ ] Have an RSPH HPC account ([instructions](https://github.com/EpiModel/EpiModeling/wiki#hpc-setup)) for the HPC parts
 
-### 2. Personalize
+### 2. Set project environment variables
+
+Two variables must be defined in the project-level `.Renviron` file:
+
+- **`EPIMODELHIV_DIR`** — the path to your local clone of `EpiModelHIV-p@<applied_project>`. Used by `.Rprofile` to locate the sibling package.
+- **`HPC_MAIL_USER`** — the email address SLURM should notify for HPC job status. Used by `R/hpc_configs.R`.
+
+Open the project `.Renviron` with:
+
+```r
+usethis::edit_r_environ("project")
+```
+
+(This opens the `.Renviron` scoped to this project, not your user-wide one.)
+Add these two lines, adjust them to your setup, save, then **restart R**:
+
+```
+EPIMODELHIV_DIR="/path/to/EpiModelHIV-p"
+HPC_MAIL_USER="you@emory.edu"
+```
+
+### 3. Personalize
 
 A few configuration files need to be edited before you can run any scripts.
 These files are documented with inline comments — look for `# <- USER` markers
@@ -45,7 +66,7 @@ Open the following two files and edit every variable marked with `# <- USER`.
 - **`R/shared_variables.R`**
 - **`R/hpc_configs.R`**
 
-### 3. Initialize the R environment
+### 4. Initialize the R environment
 
 Open **`R/00-setup.R`** and run it step by step (read the comments — there is
 a required R restart in the middle).
@@ -53,7 +74,7 @@ a required R restart in the middle).
 This installs all R packages and copies the default parameter file into
 `data/input/`.
 
-### 4. Start Chapter A
+### 5. Start Chapter A
 
 You are now ready to begin. Head to [`R/A-networks/README.md`](R/A-networks/README.md).
 
