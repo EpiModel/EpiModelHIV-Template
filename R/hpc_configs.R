@@ -32,7 +32,7 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
       "  then save the file and restart R."
     )
   }
-  message("HPC notifications will be mailed to: ", hpc_mail_user)
+  message("HPC notifications will be mailed to:\n    \"", hpc_mail_user, "\"")
 
   if (update_renv) {
     renv::snapshot(
