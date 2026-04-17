@@ -18,6 +18,23 @@ hpc_node_setup <- c(
 # for analysis. Make sure to `push` this "renv.lock.hpc" file to
 # your `git` repo before running the HPC workflows.
 make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
+
+  # Check that `mail-user` is configured
+  hpc_mail_user <- Sys.getenv("HPC_MAIL_USER", unset = "")
+  if (!nzchar(hpc_mail_user)) {
+    stop(
+      "\n",
+      "  The mail address for HPC notification is not correctly set.\n",
+      "  Define the `HPC_MAIL_USER` variable in '.Renviron'.\n\n",
+      "  Open '.Renviron' with: \n",
+      "    `usethis::edit_r_environ(\"project\")`.\n\n",
+      "  Write in it: \n",
+      "    HPC_MAIL_USER=\"user@emoy.edu\"\n\n",
+      "  then save the file and restart R."
+    )
+  }
+  message("HPC notifications will be mailed to: ", hpc_mail_user)
+
   if (update_renv) {
     renv::snapshot(
       packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
@@ -35,7 +52,7 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
       "partition" =
         "epimodel,short-cpu,day-long-cpu,week-long-cpu,month-long-cpu",
       "mail-type" = "FAIL",
-      "mail-user" = mail_user
+      "mail-user" = hpc_mail_user
     )
   )
 

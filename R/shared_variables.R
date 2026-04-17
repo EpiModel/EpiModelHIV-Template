@@ -4,7 +4,6 @@
 
 # EpiModelHIV-p local directory
 EMHIVp_branch <- "v3.3.x"    # <- USER: your EpiModelHIV-p branch name
-EMHIVp_dir    <- "../EMHIV/"  # <- USER: path to your local EpiModelHIV-p clone
 
 # Relevant time steps for the simulation
 time_unit  <- 7               # number of days in a time step

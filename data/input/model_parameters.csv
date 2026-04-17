@@ -47,7 +47,7 @@ hiv.trans.scale_2,0.512976760905261,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.
 hiv.trans.scale_3,0.457558450979665,numeric,8.2,,,,Relative scalar on base infection probabilities for model calibration for White men.
 hiv.gono.chla.rect.or,2.78,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current rectal gonorrhea XOR chlamydia to the odds of HIV infection without.
 hiv.gono.chla.uret.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current urethral gonorrhea XOR chlamydia to the odds of HIV infection without.
-hiv.gono.chla.dual.rr,1.2,numeric,7.5,,,,Discnount on second STI related HIV Transmission Odds Ratio when dual infection with both gonorrhea and chlamydia.
+hiv.gono.chla.dual.rr,0.2,numeric,7.5,,,,Discnount on second STI related HIV Transmission Odds Ratio when dual infection with both gonorrhea and chlamydia.
 hiv.syph.or,2.67,numeric,,,,,Odds ratio comparing the odds of HIV infection given current syphilis to the odds of HIV infection in the absence of current syphilis. (PMC8543214)
 hiv.syph.dual.rr,0.5,numeric,,,,,Discount on lower STI related HIV Transmission Odds ratio with multiple STI infection implicating Syphilis.
 riskh.start,-52,numeric,7.5,,,,Time step at which behavioral risk history assessment occurs.

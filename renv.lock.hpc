@@ -99,9 +99,9 @@
     },
     "EpiModel": {
       "Package": "EpiModel",
-      "Version": "2.6.1",
-      "Source": "GitHub",
-      "Date": "2026-03-27",
+      "Version": "2.6.0",
+      "Source": "Repository",
+      "Date": "2026-03-17",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
       "Description": "Tools for simulating mathematical models of infectious disease dynamics. Epidemic model classes include deterministic compartmental models, stochastic individual-contact models, and stochastic network models. Network models use the robust statistical methods of exponential-family random graph models (ERGMs) from the Statnet suite of software packages in R. Standard templates for epidemic modeling include SI, SIR, and SIS disease types. EpiModel features an API for extending these templates to address novel scientific research aims. Full methods for EpiModel are detailed in Jenness et al. (2018, <doi:10.18637/jss.v084.i08>).",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -158,14 +158,9 @@
       ],
       "RoxygenNote": "7.3.3",
       "Encoding": "UTF-8",
-      "Roxygen": "list(markdown = TRUE)",
+      "NeedsCompilation": "yes",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodel",
-      "RemoteRef": "main",
-      "RemoteSha": "abe82de8472a4358a5f5658b863a101c586b48d4"
+      "Repository": "CRAN"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -212,8 +207,8 @@
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "scaling_distance",
-      "RemoteSha": "7df1555e0ecff8acae4dd6c55f6ceda8c11e874f",
+      "RemoteRef": "v3.3.x",
+      "RemoteSha": "07832992b504b8360c5287d6a74ad6d60901d4b7",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHPC": {
