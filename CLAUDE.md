@@ -23,6 +23,10 @@ pkgload::load_all("../EMHIV/")
 
 **Important:** When using `pkgload::load_all()`, always run with `ncores = 1` in `control_msm()`. Parallel workers load the installed package version, not the dev version.
 
+## Code Conventions
+
+- Do not use `call. = FALSE` in `stop()` or `warning()` calls. Keep the call context in error messages so the originating function stays visible in traces.
+
 ## Script Conventions
 
 ### Script types

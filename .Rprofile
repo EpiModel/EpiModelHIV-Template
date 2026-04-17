@@ -39,3 +39,28 @@ si <- function() sessioninfo::session_info()
 
 # 4. Standard options
 options(deparse.max.lines = 5)
+
+#' Load EpiModelHIV-p from the local development clone.
+#'
+#' Reads the `EPIMODELHIV_DIR` environment variable (set in the project's
+#' `.Renviron`) and calls `pkgload::load_all()` on it. If that variable is
+#' missing or does not point to an existing folder, the function stops with
+#' instructions to set it up.
+load_local_EpiModelHIV <- function() {
+  dev_dir <- Sys.getenv("EPIMODELHIV_DIR", unset = "")
+  if (!dir.exists(dev_dir)) {
+    stop(
+      "\n",
+      "  The path to your local copy of EpiModelHIV-p is not correctly set.\n",
+      "  Define the `EPIMODELHIV_DIR` variable in '.Renviron'.\n\n",
+      "  Open '.Renviron' with: \n",
+      "    `usethis::edit_r_environ(\"project\")`.\n\n",
+      "  Write in it: \n",
+      "    EPIMODELHIV_DIR=\"<path to the cloned repository>\"\n\n",
+      "  then save the file and restart R."
+    )
+  }
+  message("Loading EpiModelHIV-p from: ", dev_dir)
+  pkgload::load_all(dev_dir)
+}
+
