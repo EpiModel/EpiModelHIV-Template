@@ -22,23 +22,17 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
     EpiModelHIV::mutate_calibration_targets() |>
     select(sim, any_of(names(targets)))
 
-  # Scale distances
-  for (t_name in intersect(names(targets), names(d_dist)))
-    d_dist[[t_name]] <- (d_dist[[t_name]] - targets[[t_name]]) /
-                          abs(targets[[t_name]])
+  targets <- targets[intersect(names(targets), names(d_dist))]
 
   d_dist <- d_dist |>
-    group_by(sim) |>
-    summarize(across(everything(), mean), .groups = "drop") |>
+    mutate(across(names(targets), \(x) x - targets[cur_column()])) |>
+    summarize(across(everything(), mean), .by = c("sim")) |>
     select(-c(sim))
 
-  fmtr <- scales::label_percent(0.1)
+  fmtr <- scales::label_scientific(3)
 
-  d_dist <- d_dist |>
-    summarize(across(
-      everything(),
-      \(x) paste0(fmtr(mean(x)), " (", fmtr(sd(x)), ")")
-    )) |>
+  d_dist |>
+    summarize(across(everything(), \(x) fmtr(mean(x)))) |>
     mutate(
       scenario_name = sc_info$scenario_name,
     ) |>
