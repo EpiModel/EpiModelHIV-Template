@@ -5,13 +5,16 @@
 ## with calibrated parameters before running intervention scenarios.
 
 # Restart R before running this script
+#
+# Load the local development version of EpiModelHIV-p
+load_local_EpiModelHIV()
+library(dplyr)
+library(ggplot2)
+theme_set(theme_light())
 
 # Setup ------------------------------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
 source("R/D-interventions/z-context.R", local = TRUE)
-
-# Load the local development version of EpiModelHIV-p
-pkgload::load_all(EMHIVp_dir)
 
 # Process ----------------------------------------------------------------------
 
@@ -34,7 +37,7 @@ print(orig)
 str(orig, max.level = 1)
 
 # Epidemic simulation
-sim <- netsim(est, param, init, control)
+sim <- netsim(orig, param, init, control)
 
 # Simulation exploration (tidyverse)
 d_sim <- as_tibble(sim)

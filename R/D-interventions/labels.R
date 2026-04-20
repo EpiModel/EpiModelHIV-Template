@@ -13,28 +13,28 @@
 # Conversion between variable name and final label
 var_labels <- c(
   # Epi
-  "lst_ir100_b"  = "HIV IR100 Black (ly)",
-  "lst_ir100_h"  = "HIV IR100 Hispanic (ly)",
-  "lst_ir100_w"  = "HIV IR100 White (ly)",
+  "lst_ir100_B"  = "HIV IR100 Black (ly)",
+  "lst_ir100_H"  = "HIV IR100 Hispanic (ly)",
+  "lst_ir100_W"  = "HIV IR100 White (ly)",
 
-  "cml_incid_b"  = "HIV Cumulative Incidence Black (10y)",
-  "cml_incid_h"  = "HIV Cumulative Incidence Hispanic (10y)",
-  "cml_incid_w"  = "HIV Cumulative Incidence White (10y)",
+  "cml_incid_B"  = "HIV Cumulative Incidence Black (10y)",
+  "cml_incid_H"  = "HIV Cumulative Incidence Hispanic (10y)",
+  "cml_incid_W"  = "HIV Cumulative Incidence White (10y)",
 
-  "cml_nia_b"    = "HIV NIA Black (10y)",
-  "cml_nia_h"    = "HIV NIA Hispanic (10y)",
-  "cml_nia_w"    = "HIV NIA White (10y)",
+  "cml_nia_B"    = "HIV NIA Black (10y)",
+  "cml_nia_H"    = "HIV NIA Hispanic (10y)",
+  "cml_nia_W"    = "HIV NIA White (10y)",
 
-  "cml_pia_b"    = "HIV PIA Black (10y)",
-  "cml_pia_h"    = "HIV PIA Hispanic (10y)",
-  "cml_pia_w"    = "HIV PIA White (10y)"
+  "cml_pia_B"    = "HIV PIA Black (10y)",
+  "cml_pia_H"    = "HIV PIA Hispanic (10y)",
+  "cml_pia_W"    = "HIV PIA White (10y)"
 
 )
 
 unused_labels <- c(
-  "cml_nnt_b"    = "HIV NNT Black (10y)",
-  "cml_nnt_h"    = "HIV NNT Hispanic (10y)",
-  "cml_nnt_w"    = "HIV NNT White (10y)"
+  "cml_nnt_B"    = "HIV NNT Black (10y)",
+  "cml_nnt_H"    = "HIV NNT Hispanic (10y)",
+  "cml_nnt_W"    = "HIV NNT White (10y)"
 )
 
 # Formatters for the variables
@@ -116,20 +116,18 @@ make_formatters <- function(var_labels, format_patterns) {
 
 sum_quants <- function(d, ql = 0.025, qm = 0.5, qh = 0.975) {
   d |>
-    ungroup() |>
-    select(-c(batch_number, sim)) |>
-    group_by(scenario_name) |>
+    select(-c(sim)) |>
     summarise(across(
-      everything(),
-      list(
-        l = ~ quantile(.x, ql, na.rm = TRUE),
-        m = ~ quantile(.x, qm, na.rm = TRUE),
-        h = ~ quantile(.x, qh, na.rm = TRUE)
-      ),
-      .names = "{.col}_/_{.fn}"
-    ),
-    .groups = "drop"
-  )
+        everything(),
+        list(
+          l = \(x) quantile(x, ql, na.rm = TRUE),
+          m = \(x) quantile(x, qm, na.rm = TRUE),
+          h = \(x) quantile(x, qh, na.rm = TRUE)
+          ),
+        .names = "{.col}_/_{.fn}"
+        ),
+      .by = "scenario_name"
+    )
 }
 
 reorder_cols <- function(d, var_labels) {

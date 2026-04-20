@@ -27,6 +27,7 @@ d_ref <- make_d_ref(
   )
 )
 
+intervention_start = 0
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(scenarios_info)),
   \(i) process_one_scenario_plots(scenarios_info[i, ], d_ref)
@@ -38,7 +39,7 @@ glimpse(d_plots)
 library(ggplot2)
 theme_set(theme_light())
 
-ggplot(d_plots, aes(x = test, y = treat, fill = cml_pia_b, z = cml_pia_b)) +
+ggplot(d_plots, aes(x = test, y = treat, fill = cml_pia_B, z = cml_pia_B)) +
   geom_raster(interpolate = TRUE) +
   geom_contour(col = "white", alpha = 0.5, lwd = 0.5, position = "jitter") +
   viridis::scale_fill_viridis(

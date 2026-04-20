@@ -39,4 +39,4 @@ glimpse(d_sc_raw)
 source("R/D-interventions/labels.R", local = TRUE)
 
 format_table(d_sc_raw, var_labels, format_patterns) |>
-  readr::write_csv(fs::path(output_dir, "table.csv"))
+  write.csv(fs::path(output_dir, "table.csv"), row.names = FALSE)
