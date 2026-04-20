@@ -29,7 +29,7 @@ control <- control_msm(
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("calibration_1", override = TRUE)
+wf <- make_em_workflow("ballpark_calib", override = TRUE)
 
 # Using scenarios --------------------------------------------------------------
 
@@ -41,16 +41,19 @@ scenarios_df <- tibble(
   .at = 1,
   # gono.uret.prob = seq(0.20, 0.22, length.out = n_scenarios),
   # chla.uret.prob = seq(0.2, 0.22, length.out = n_scenarios),
-  syph.prob = seq(0.115, 0.15, length.out = n_scenarios)
+  # syph.prob = seq(0.115, 0.15, length.out = n_scenarios)
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    path_to_est, param, init, control,
-    scenarios_list = scenarios_list,
-    # scenarios_list = NULL,
+    path_to_est,
+    param,
+    init,
+    control,
+    # scenarios_list = scenarios_list,
+    scenarios_list = NULL,
     output_dir = calib_dir,
     n_rep = 32,
     n_cores = max_cores,
@@ -69,19 +72,19 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = calib_dir,
-      output_dir = fs::path(calib_dir, "merged_tibbles"),
-      steps_to_keep = Inf, # keep everything
-      cols = dplyr::everything(),
-      n_cores = max_cores,
-      setup_lines = hpc_node_setup
-    ),
-    sbatch_opts = list(
-      "mail-type" = "END",
-      "cpus-per-task" = max_cores,
-      "time" = "02:00:00",
-      "mem-per-cpu" = "5G"
-    )
+    sim_dir = calib_dir,
+    output_dir = fs::path(calib_dir, "merged_tibbles"),
+    steps_to_keep = Inf, # keep everything
+    cols = dplyr::everything(),
+    n_cores = max_cores,
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "mail-type" = "END",
+    "cpus-per-task" = max_cores,
+    "time" = "02:00:00",
+    "mem-per-cpu" = "5G"
+  )
 )
 
 wf <- add_workflow_step(

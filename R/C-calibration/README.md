@@ -3,8 +3,8 @@
 ## Introduction
 
 In this chapter we calibrate the model. This is a technical step and most users
-will not calibrate the model themselves. The rest of this document is aimed at
-the person in charge of calibration.
+will not perform the calibration themselves. The rest of this document is aimed
+at the person in charge of calibration.
 
 The calibration aims to make the model fit a set of *targets* (defined in the
 `EpiModelHIV` package via `get_calibration_targets()`) by modifying input

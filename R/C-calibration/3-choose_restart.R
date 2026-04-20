@@ -7,7 +7,7 @@
 ## workflow
 
 # Setup ------------------------------------------------------------------------
-scenario_name <- "empty_scenario"
+scenario_name <- "scenario_2"
 hpc_context <- TRUE
 
 library(EpiModelHIV)

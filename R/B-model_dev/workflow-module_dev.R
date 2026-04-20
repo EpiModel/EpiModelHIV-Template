@@ -49,7 +49,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_scenarios(
     path_to_est, param, init, control,
     scenarios_list = scenarios_list,
-    output_dir = scenarios_dir,
+    output_dir = calib_dir,
     n_rep = 32,
     n_cores = max_cores,
     max_array_size = 500,
@@ -67,17 +67,17 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_merge_netsim_scenarios_tibble(
-      sim_dir = scenarios_dir,
-      output_dir = fs::path(scenarios_dir, "merged_tibbles"),
-      steps_to_keep = year_steps * 10, # keep the last 10 years
-      cols = dplyr::everything(), # keep all columns
-      n_cores = max_cores,
-      setup_lines = hpc_node_setup
-    ),
-    sbatch_opts = list(
-      "mail-type" = "END",
-      "cpus-per-task" = max_cores,
-      "time" = "02:00:00",
-      "mem-per-cpu" = "5G"
-    )
+    sim_dir = calib_dir,
+    output_dir = fs::path(scenarios_dir, "merged_tibbles"),
+    steps_to_keep = year_steps * 10, # keep the last 10 years
+    cols = dplyr::everything(), # keep all columns
+    n_cores = max_cores,
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "mail-type" = "END",
+    "cpus-per-task" = max_cores,
+    "time" = "02:00:00",
+    "mem-per-cpu" = "5G"
+  )
 )
