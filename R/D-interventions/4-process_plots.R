@@ -27,6 +27,7 @@ d_ref <- make_d_ref(
   )
 )
 
+# TODO: fix
 intervention_start = 0
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(scenarios_info)),
