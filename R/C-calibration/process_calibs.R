@@ -3,6 +3,9 @@
 ## Generate a light calibration assessement file to be downloaded locally to
 ## check the manual calibration advancement.
 ##
+## For each target the mean distance to the target value is reported (positive
+## means too high and negative too low)
+##
 ## This script should be called by one of the manual_calibration workflows.
 
 # Setup ------------------------------------------------------------------------

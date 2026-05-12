@@ -57,6 +57,8 @@ Chapters B and D scripts can start from it.
 
 All subsequent runs use `reinit_msm` to start from this checkpoint.
 
+**Don't forget to copy the restart point to the HPC as well"**
+
 ## Phase 3: Fine-Tuning
 
 Starting from the restart point, two approaches are available and are used in
