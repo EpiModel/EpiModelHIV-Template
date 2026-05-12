@@ -12,6 +12,10 @@ library(tidyr)
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 
+if (!exists("n_cores")) {
+  stop( "The 'process_calibs.R' script requires an `n_cores` variable")
+}
+
 # Process ----------------------------------------------------------------------
 
 process_one_calib_tibble <- function(sc_info, calib_steps) {
@@ -39,7 +43,7 @@ process_one_calib_tibble <- function(sc_info, calib_steps) {
     select(scenario_name, everything())
 }
 
-future::plan("multisession", workers = 8)
+future::plan("multisession", workers = n_cores)
 
 calib_merged_dir <- fs::path(calib_dir, "merged_tibbles")
 calib_info_tbl <- EpiModelHPC::get_scenarios_tibble_infos(calib_merged_dir)

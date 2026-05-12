@@ -39,9 +39,9 @@ n_scenarios <- 10
 scenarios_df <- tibble(
   .scenario.id = as.character(seq_len(n_scenarios)),
   .at = 1,
-  # gono.uret.prob = seq(0.20, 0.22, length.out = n_scenarios),
-  # chla.uret.prob = seq(0.2, 0.22, length.out = n_scenarios),
-  # syph.prob = seq(0.115, 0.15, length.out = n_scenarios)
+  gono.uret.prob = seq(0.20, 0.22, length.out = n_scenarios),
+  chla.uret.prob = seq(0.2, 0.22, length.out = n_scenarios),
+  syph.prob = seq(0.115, 0.15, length.out = n_scenarios)
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
@@ -52,8 +52,7 @@ wf <- add_workflow_step(
     param,
     init,
     control,
-    # scenarios_list = scenarios_list,
-    scenarios_list = NULL,
+    scenarios_list = scenarios_list,
     output_dir = calib_dir,
     n_rep = 32,
     n_cores = max_cores,
@@ -90,7 +89,7 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/C-calibration/process_calibs.R",
-    args = list(hpc_context = TRUE),
+    args = list(hpc_context = TRUE, n_cores = max_cores),
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(

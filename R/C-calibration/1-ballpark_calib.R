@@ -13,6 +13,7 @@ library(dplyr)
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 
+n_cores <- 4
 # Process ----------------------------------------------------------------------
 
 # Necessary files
@@ -53,8 +54,8 @@ scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 EpiModelHPC::netsim_scenarios(
   path_to_est, param, init, control,
   scenarios_list = scenarios_list,
-  n_rep = 6,
-  n_cores = 6,
+  n_rep = n_cores,
+  n_cores = n_cores,
   output_dir = calib_dir
 )
 
