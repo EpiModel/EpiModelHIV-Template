@@ -34,7 +34,7 @@ control <- control_msm(
 wf <- make_em_workflow("interventions", override = TRUE)
 
 # Define test scenarios
-scenarios_df <- readr::read_csv("data/input/scenarios.csv")
+scenarios_df <- read.csv("data/input/scenarios.csv")
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 wf <- add_workflow_step(

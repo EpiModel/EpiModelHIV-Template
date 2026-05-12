@@ -202,7 +202,7 @@ col_names <- paste0(c("gono", "chla", "syph"), " IR100")
 row_names <- c(
   "Target Statistic: STI IR100",
   "Simulations: STI IR100 (med [IQR])",
-  "Calibrated Transmission Urethral Probability (per act)"
+  "Calibrated Transmission Probability (per act)"
 )
 
 fmtr <- scales::label_number(0.1)

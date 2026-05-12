@@ -61,6 +61,7 @@ EpiModelHPC::netsim_scenarios(
   n_cores = 2,
   output_dir = scenarios_dir
 )
+# Inspect the files produced
 fs::dir_ls(scenarios_dir)
 
 # Merge all batches into one tibble per scenario. `steps_to_keep` controls how
@@ -71,3 +72,5 @@ EpiModelHPC::merge_netsim_scenarios_tibble(
   output_dir = fs::path(scenarios_dir, "merged_tibbles"),
   steps_to_keep = year_steps * 1 # keep only the last year
 )
+# Inspect the files produced
+fs::dir_ls(fs::path(scenarios_dir, "merged_tibbles"))
