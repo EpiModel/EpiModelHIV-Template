@@ -29,7 +29,7 @@ i2r_p <- function(i, p) 1 - (1 - p)^(1 / i)
 
 priors <- list(
   # 50% of elig start prep in 3 months -> 4 years
-  prep.start.rate = i2r_p(c(0.25 * 4) * year_steps, 0.5),
+  prep.start.rate = i2r_p(c(0.25, 4) * year_steps, 0.5),
   # 50% of HIV_dx neg test within 2 years -> 12 years
   hiv.test.rate = i2r_p(c(2, 12) * year_steps, 0.5),
   # 50% of ART user stop test within 2 years -> 8 years
@@ -47,6 +47,8 @@ priors <- list(
   # Arrival per 1000 nodes in the model per week: 0.2 -> 0.6
   a.rate = c(0.0002, 0.0006)
 )
+
+priors <- lapply(priors, \(x) seq(x[1], x[2], length.out = n_sims))
 
 calib_object <- list(
   config = list(

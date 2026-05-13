@@ -1,45 +1,54 @@
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-theme_set(theme_light())
-source("R/shared_variables.R", local = TRUE)
-source("R/C-calibration/z-context.R", local = TRUE)
-
-results <- readRDS(fs::path(swfcalib_dir, "waves/1/", "results.rds"))
-proposals <- readRDS(fs::path(swfcalib_dir, "waves/1/", "proposals.rds"))
-calib_object <- readRDS(fs::path(swfcalib_dir, "calib_object.rds"))
-
 pkgload::load_all("../swfcalib/")
+source("R/shared_variables.R", local = TRUE)
+calib_object <- readRDS(fs::path(swfcalib_dir, "calib_object.rds"))
 
 calib_object <- swfcalib:::load_calib_object(calib_object)
 calib_object <- swfcalib:::process_sim_results(calib_object)
 results <- swfcalib:::load_results(calib_object)
 swfcalib:::update_assessments(calib_object, results)
 
-  out <- swfcalib:::load_assessments(calib_object)
-  if (nrow(results) == 0) {
-    swfcalib:::save_assessments(calib_object, out)
-    return(invisible(calib_object))
-  }
+calib_object <- swfcalib:::update_calibration_state(calib_object, results)
 
-  cur_wave <- paste0("wave", swfcalib:::get_current_wave(calib_object))
 
-  assessments <- lapply(
-    swfcalib:::get_current_jobs(calib_object),
-    swfcalib:::make_job_assessment,
-    calib_object = calib_object,
-    results = results
+update_calibration_state <- function(calib_object, results) {
+  # Do not check the results on the first iteration
+  if (get_current_iteration(calib_object) > 0) {
+    jobs_results <- get_jobs_results(calib_object, results)
+
+get_jobs_results <- function(calib_object, results) {
+  lapply(
+    jobs <- get_current_jobs(calib_object)
+    job = jobs[[1]]
+    co = calib_object
+    res = results
+    function(co, job, res) job$get_result(co, job, res),
+    res = results,
+    co = calib_object
   )
-
-  out[[cur_wave]] <- merge_wave_assements(assessments, out[[cur_wave]])
-  save_assessments(calib_object, out)
-  invisible(calib_object)
+}
 
 
-results <- swfcalib::load_results(calib_object)
-swfcalib::update_assessments(calib_object, results)
 
-calib_object <- swfcalib::update_calibration_state(calib_object, results)
+    calib_object <- update_done_status(calib_object, jobs_results)
+    calib_object <- update_default_proposal(calib_object, jobs_results)
+  }
+  calib_object <- update_wave_iteration(calib_object)
+  calib_object
+}
+
+is_valid_iteration <- function(calib_object) {
+  get_current_iteration(calib_object) <= get_max_iteration(calib_object)
+}
+
+is_calibration_complete <- function(calib_object) {
+  is_last_wave(calib_object) && is_wave_done(calib_object)
+}
+
+
+
+
+
+
 
 if (is_calibration_complete(calib_object)) {
   # When the calibration is done, skip the next step
