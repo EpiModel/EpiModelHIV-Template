@@ -101,7 +101,7 @@
       "Package": "EpiModel",
       "Version": "2.6.1",
       "Source": "GitHub",
-      "Date": "2026-03-27",
+      "Date": "2026-05-12",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
       "Description": "Tools for simulating mathematical models of infectious disease dynamics. Epidemic model classes include deterministic compartmental models, stochastic individual-contact models, and stochastic network models. Network models use the robust statistical methods of exponential-family random graph models (ERGMs) from the Statnet suite of software packages in R. Standard templates for epidemic modeling include SI, SIR, and SIS disease types. EpiModel features an API for extending these templates to address novel scientific research aims. Full methods for EpiModel are detailed in Jenness et al. (2018, <doi:10.18637/jss.v084.i08>).",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -161,11 +161,11 @@
       "Config/roxygen2/version": "8.0.0",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "7a159733ec655868a7f25d9d98f9ac3957e810ad"
+      "RemoteSha": "3f9d3571b08ef019ab493f75abfc89149b0f3090",
+      "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -2710,11 +2710,11 @@
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "ff35ebac67035d3764e1ebf02bb8f3b11ddaf16c"
+      "RemoteSha": "5a7cd3c61dbdf9ddf64251e32e4713efa65cb0bb",
+      "RemoteHost": "api.github.com"
     },
     "tergm": {
       "Package": "tergm",
