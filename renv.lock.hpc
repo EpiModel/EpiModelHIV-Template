@@ -2713,7 +2713,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "5a7cd3c61dbdf9ddf64251e32e4713efa65cb0bb",
+      "RemoteSha": "b80e9c6b82f1daa986900d68f2db56a4cc6f8650",
       "RemoteHost": "api.github.com"
     },
     "tergm": {
