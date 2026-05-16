@@ -2,40 +2,26 @@ pkgload::load_all("../swfcalib/")
 source("R/shared_variables.R", local = TRUE)
 calib_object <- readRDS(fs::path(swfcalib_dir, "calib_object.rds"))
 
-calib_object <- swfcalib:::load_calib_object(calib_object)
-calib_object <- swfcalib:::process_sim_results(calib_object)
-results <- swfcalib:::load_results(calib_object)
-swfcalib:::update_assessments(calib_object, results)
+  oplan <- future::plan("multicore", workers = n_cores)
+  on.exit(future::plan(oplan), add = TRUE)
 
-calib_object <- swfcalib:::update_calibration_state(calib_object, results)
+  calib_object <- load_calib_object(calib_object)
 
+  calib_object <- process_sim_results(calib_object)
+  results <- load_results(calib_object)
+  update_assessments(calib_object, results)
 
-  function(calib_object, job, results) {
-    centers <- swfcalib::load_sideload(calib_object, job)$centers
-    if (is.null(centers)) {
-      stop("No centers were provided for shrinkage, abort!")
-    }
+  calib_object <- update_calibration_state(calib_object, results)
 
-    outs <- list()
-    for (i in seq_along(job$params)) {
-      tar_range <- range(
-        results[[job$params[i]]][
-          results[[".iteration"]] == max(results[[".iteration"]])
-        ]
-      )
-      spread <- (tar_range[2] - tar_range[1]) / shrink / 2
-
-      proposals <- seq(
-        max(centers[i] - spread, tar_range[1]),
-        min(centers[i] + spread, tar_range[2]),
-        length.out = n_new
-      )
-
-      proposals <- sample(proposals)
-
-      out <- list(proposals)
-      names(out) <- job$params[i]
-      outs[[i]] <- dplyr::as_tibble(out)
-    }
-    dplyr::bind_cols(outs)
+  if (is_calibration_complete(calib_object)) {
+    # When the calibration is done, skip the next step
+    next_step <- slurmworkflow::get_current_workflow_step() + 2
+    slurmworkflow::change_next_workflow_step(next_step)
+    message("Calibration complete")
+  } else {
+    proposals <- make_proposals(calib_object, results)
+    save_proposals(calib_object, proposals)
   }
+  save_calib_object(calib_object)
+
+  print_log(calib_object)
