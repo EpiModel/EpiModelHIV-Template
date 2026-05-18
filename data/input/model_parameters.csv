@@ -52,9 +52,9 @@ hiv.syph.or,2.67,numeric,,,,,Odds ratio comparing the odds of HIV infection give
 hiv.syph.dual.rr,0.5,numeric,,,,,Discount on lower STI related HIV Transmission Odds ratio with multiple STI infection implicating Syphilis.
 riskh.start,-52,numeric,7.5,,,,Time step at which behavioral risk history assessment occurs.
 prep.start,0,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.B,,Time step at which the PrEP intervention should start.
-prep.start.rate_1,0.00554146887680583,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.H,,Probability of starting PrEP given current indications for Black MSM.
-prep.start.rate_2,0.00423228372076054,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.W,,Probability of starting PrEP given current indications for Hispanic MSM.
-prep.start.rate_3,0.00662106571520366,numeric,missing?,,,,Probability of starting PrEP given current indications for White MSM.
+prep.start.rate_1,0.00605,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.H,,Probability of starting PrEP given current indications for Black MSM.
+prep.start.rate_2,0.00433,numeric,missing?,"2020 CDC HIV surveillance data , 2017 National HIV Behavioral Surveillance findings",cc.prep.W,,Probability of starting PrEP given current indications for Hispanic MSM.
+prep.start.rate_3,0.00669,numeric,missing?,,,,Probability of starting PrEP given current indications for White MSM.
 prep.adhr.dist_1,0.089,numeric,missing?,,,,"Proportion of men who are low, medium, and high adherent to PrEP for Black MSM."
 prep.adhr.dist_2,0.127,numeric,missing?,,,,"Proportion of men who are low, medium, and high adherent to PrEP for Hispanic MSM."
 prep.adhr.dist_3,0.784,numeric,missing?,50,,,"Proportion of men who are low, medium, and high adherent to PrEP for White MSM."

@@ -31,7 +31,7 @@ priors <- list(
   # 50% of elig start prep in 3 months -> 4 years
   prep.start.rate = i2r_p(c(0.25, 4) * year_steps, 0.5),
   # 50% of HIV_dx neg test within 2 years -> 12 years
-  hiv.test.rate = i2r_p(c(2, 20) * year_steps, 0.5),
+  hiv.test.rate = i2r_p(c(10, 30) * year_steps, 0.5),
   # 50% of ART user stop test within 2 years -> 8 years
   tx.halte.rate = i2r_p(c(2, 8) * year_steps, 0.5),
   # HIV transmission scaler: B needs to be high, H & W needs to be low
@@ -212,4 +212,4 @@ calib_object <- list(
 )
 
 # Uncomment to run a single wave for testing
-# calib_object$waves <- calib_object$waves[5]
+calib_object$waves <- calib_object$waves[-1]

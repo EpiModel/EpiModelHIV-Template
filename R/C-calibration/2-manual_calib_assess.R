@@ -5,7 +5,7 @@
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/utils-calib_plots.R", local = TRUE)
 
-d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles/df__scenario_2.rds")) |>
+d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles/df__empty_scenario.rds")) |>
   EpiModelHIV::mutate_calibration_targets()
 
 make_calib_plot(d_calib, calib_plot_infos[["cc.dx"]], year_steps)

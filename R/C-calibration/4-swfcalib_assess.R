@@ -26,13 +26,13 @@ results |>
   range()
 
 ggplot(results, aes(
-  x = hiv.test.rate_1,
-  y = cc.dx.B,
+  x = hiv.test.rate_3,
+  y = cc.dx.W,
   col = as.factor(.iteration)
 )) +
 geom_point() +
-geom_hline(yintercept = 0.847) +
-geom_vline(xintercept = 0.002688045)
+geom_hline(yintercept = 0.862) +
+geom_vline(xintercept = 0.0013)
 
 # range at each iteration
 results |>
