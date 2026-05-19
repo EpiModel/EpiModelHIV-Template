@@ -1,14 +1,14 @@
 param,value,type,Appendix.Section,source,relevant.calibration.target,geography,definition
-hiv.test.rate_1,0.001502146,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV testing per time step for Black MSM.
-hiv.test.rate_2,0.001471541,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
-hiv.test.rate_3,0.001466421,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
+hiv.test.rate_1,0.000631,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV testing per time step for Black MSM.
+hiv.test.rate_2,0.001105,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
+hiv.test.rate_3,0.000868,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
 test.window.int,3,numeric,7.1,,,,Length of the HIV test window period in time steps.(i.e. the number of time steps between infection and test positivity).
 tx.init.rate_1,0.298361113628911,numeric,7.2,,cc.linked1m.B,atlanta,Probability per time step that a Black MSM who has tested positive will initiate treatment.
 tx.init.rate_2,0.368208639586171,numeric,7.2,,cc.linked1m.H,atlanta,Probability per time step that a Hispanic MSM who has tested positive will initiate treatment.
 tx.init.rate_3,0.347998730409527,numeric,7.2,,cc.linked1m.W,atlanta,Probability per time step that a White MSM who has tested positive will initiate treatment.
-tx.halt.rate_1,0.002404553,numeric,7.2,,cc.vsupp.B,atlanta,Probability per time step that Black MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
-tx.halt.rate_2,0.002198361,numeric,7.2,,cc.vsupp.H,atlanta,Probability per time step that Hispanic MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
-tx.halt.rate_3,0.001215838,numeric,7.2,,cc.vsupp.W,atlanta,Probability per time step that White MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.halt.rate_1,0.002264,numeric,7.2,,cc.vsupp.B,atlanta,Probability per time step that Black MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.halt.rate_2,0.002108,numeric,7.2,,cc.vsupp.H,atlanta,Probability per time step that Hispanic MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
+tx.halt.rate_3,0.001406,numeric,7.2,,cc.vsupp.W,atlanta,Probability per time step that White MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
 tx.reinit.rate_1,0.00255,numeric,7.3,,,United-states,Probability per time step that a Black MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
 tx.reinit.rate_2,0.00255,numeric,7.3,,,United-states,Probability per time step that a Hispanic MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
 tx.reinit.rate_3,0.00255,numeric,7.3,,,United-states,Probability per time step that a White MSM who has stopped treatment and assigned to the partial VL suppression category will restart treatment. 0.1326 per year / 52 = 0.00255
@@ -74,7 +74,7 @@ sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screen
 sti.screen.rect.hivpos.prob,0.63,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV.
 sti.screen.rect.prep.prob,1,numeric,,,,,Probability of rectal site screening for any STI given  urogenital screening for MSM not diagnosed with HIV and on PrEP.
 sti.cond.eff.or,0.95,numeric,"9.3,9.4",,,,Odds ratio comparing the odds of STI infection from anal sex when a condom is used vs. not used properly (biological efficacy)..
-gono.uret.prob,0.20,numeric,9.4,,ir100.gc,atlanta,Probability of urethral gonorrhea infection per act.
+gono.uret.prob,0.213,numeric,9.4,,ir100.gc,atlanta,Probability of urethral gonorrhea infection per act.
 gono.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal gonorrhea.
 gono.uret.sympt.prob,0.9333,numeric,10,,,,Probability of symptoms given infection with urethral gonorrhea.
 gono.tx.recov.int,1.4,numeric,11,,,,Average duration in time steps of treated gonorrhea.
@@ -87,7 +87,7 @@ gono.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomat
 gono.asympt.tx.prob_3,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for White MSM.
 gono.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening  for MSM not diagnosed with HIV and not on PrEP.
 gono.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening for MSM diagnosed with HIV.
-chla.uret.prob,0.19,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
+chla.uret.prob,0.199,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
 chla.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal chlamydia.
 chla.uret.sympt.prob,0.95,numeric,11,,,,Probability of symptoms given infection with urethral chlamydia.
 chla.tx.recov.int,1.4,numeric,10,,,,Average duration in time steps of treated chlamydia.
@@ -100,7 +100,7 @@ chla.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomat
 chla.asympt.tx.prob_3,0.95,numeric,"9.3,9.4",,,,Probability of treatment for asymptomatic chlamydia for White MSM.
 chla.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital chlamydia screening for MSM not diagnosed with HIV and not on PrEP.
 chla.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital chlamydia screening for MSM diagnosed with HIV.
-syph.prob,0.115,numeric,,,,,Probability of syphilis infection per act given that the infected partner is infectious.
+syph.prob,0.1157,numeric,,,,,Probability of syphilis infection per act given that the infected partner is infectious.
 syph.sympt.prob_1,0,numeric,,,,,Probability of syphilis symptomes given infection (exposed).
 syph.sympt.prob_2,0.22,numeric,,,,,Probability of syphilis symptomes given infection (primary). prim | sec == 0.4
 syph.sympt.prob_3,0.22,numeric,,,,,Probability of syphilis symptomes given infection (secondary).

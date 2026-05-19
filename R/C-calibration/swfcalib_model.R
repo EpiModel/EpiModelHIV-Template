@@ -48,6 +48,12 @@ make_model_fn <- function(calib_steps) {
           \(x) mean(x, na.rm = TRUE)
         ),
         .groups = "drop"
+      ) |>
+      mutate(
+        across(
+          c("ir100.syph", "ir100.gono", "ir100.chla"),
+          \(x) ifelse(x == 0, NA, x)
+        )
       )
   }
 }
