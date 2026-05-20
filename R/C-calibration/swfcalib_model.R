@@ -10,12 +10,12 @@ make_model_fn <- function(calib_steps) {
   force(calib_steps)
   function(proposal) {
     # Libraries - --------------------------------------------------------------
-    library("EpiModelHIV")
-    library("dplyr")
+    library(EpiModelHIV)
+    library(dplyr)
 
     # Settings -----------------------------------------------------------------
-    source("R/shared_variables.R", local = TRUE)
     hpc_context <- TRUE
+    source("R/shared_variables.R", local = TRUE)
     source("R/C-calibration/z-context.R", local = TRUE)
 
     # Inputs -------------------------------------------------------------------
@@ -23,9 +23,9 @@ make_model_fn <- function(calib_steps) {
 
     orig <- readRDS(path_to_restart)
     control <- control_msm(
-      nsteps              = calibration_end,
-      start               = restart_time,
-      initialize.FUN      = reinit_msm,
+      nsteps = calibration_end,
+      start = restart_time,
+      initialize.FUN = reinit_msm,
       verbose = FALSE
     )
 
