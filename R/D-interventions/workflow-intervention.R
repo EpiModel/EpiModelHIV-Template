@@ -78,7 +78,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/D-interventions/2-process_tables.R",
+    r_script = "R/D-interventions/3-process_tables.R",
     args = list(hpc_context = TRUE),
     setup_lines = hpc_node_setup
   ),
@@ -93,7 +93,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/D-interventions/3-process_plots.R",
+    r_script = "R/D-interventions/4-process_plots.R",
     args = list(hpc_context = TRUE),
     setup_lines = hpc_node_setup
   ),
