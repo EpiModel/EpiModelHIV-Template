@@ -26,8 +26,8 @@ control <- control_msm(
   start          = restart_time,
   nsteps         = restart_time + year_steps * 4,
   initialize.FUN = reinit_msm,
-  # Always ncores = 1 with load_all(): parallel workers load the installed
-  # package, not the dev version.
+  # Always ncores = 1 with `load_local_EpiModelHIV()`
+  # parallel workers load the installed package, not the dev version.
   ncores         = 1
 )
 
