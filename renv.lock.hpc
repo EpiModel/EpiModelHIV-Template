@@ -99,9 +99,9 @@
     },
     "EpiModel": {
       "Package": "EpiModel",
-      "Version": "2.6.1",
+      "Version": "2.6.2",
       "Source": "GitHub",
-      "Date": "2026-05-12",
+      "Date": "2026-05-18",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
       "Description": "Tools for simulating mathematical models of infectious disease dynamics. Epidemic model classes include deterministic compartmental models, stochastic individual-contact models, and stochastic network models. Network models use the robust statistical methods of exponential-family random graph models (ERGMs) from the Statnet suite of software packages in R. Standard templates for epidemic modeling include SI, SIR, and SIS disease types. EpiModel features an API for extending these templates to address novel scientific research aims. Full methods for EpiModel are detailed in Jenness et al. (2018, <doi:10.18637/jss.v084.i08>).",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -164,7 +164,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "3f9d3571b08ef019ab493f75abfc89149b0f3090",
+      "RemoteSha": "8f3a5d6ea92ed56f645e942b5477e8aa57a7396d",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
@@ -210,11 +210,11 @@
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "v3.3.x",
-      "RemoteSha": "07832992b504b8360c5287d6a74ad6d60901d4b7"
+      "RemoteSha": "8e6c2995f4558d65c58af76e8d7b6feac65d59c1",
+      "RemoteHost": "api.github.com"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -2698,7 +2698,7 @@
       ],
       "Encoding": "UTF-8",
       "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.2.3",
+      "RoxygenNote": "7.3.3",
       "Suggests": [
         "ggplot2",
         "knitr",
@@ -2713,7 +2713,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "b80e9c6b82f1daa986900d68f2db56a4cc6f8650",
+      "RemoteSha": "9fb74853114cc5b821d3e981bfd78b69001f4edc",
       "RemoteHost": "api.github.com"
     },
     "tergm": {

@@ -39,9 +39,9 @@ priors <- list(
   hiv.trans.scale_2 = c(0.2, 0.9),
   hiv.trans.scale_3 = c(0.2, 0.9),
   # Priors for STI transmission risk per unprotected acts
-  gono.uret.prob = c(0.1, 0.5),
-  chla.uret.prob = c(0.1, 0.5),
-  syph.prob = c(0.05, 0.25),
+  gono.uret.prob = c(0.17, 0.23),
+  chla.uret.prob = c(0.17, 0.23),
+  syph.prob = c(0.10, 0.13),
   # Median to death in AIDS stage: 15 years -> 40 years
   aids.off.tx.mort.rate = i2r_p(c(15, 40) * year_steps, 0.5),
   # Arrival per 1000 nodes in the model per week: 0.2 -> 0.6
@@ -140,16 +140,22 @@ calib_object <- list(
         targets_val = targets["ir100.gono"],
         params = c("gono.uret.prob"), # target:
         initial_proposals = tibble(gono.uret.prob = priors$gono.uret.prob),
-        make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
-        get_result = determ_poly_end(0.01, poly_n = 3)
+        make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
+        get_result = swfcalib::determ_end_thresh(
+          thresholds = 1,
+          n_enough = 100
+        )
       ),
       job2 = list(
         targets = "ir100.chla",
         targets_val = targets["ir100.chla"],
         params = c("chla.uret.prob"), # target:
         initial_proposals = tibble(chla.uret.prob = priors$chla.uret.prob),
-        make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
-        get_result = determ_poly_end(0.01, poly_n = 3)
+        make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
+        get_result = determ_end_thresh(
+          thresholds = 1,
+          n_enough = 100
+        )
       ),
       job3 = list(
         targets = "ir100.syph",
@@ -157,45 +163,12 @@ calib_object <- list(
         params = c("syph.prob"), # target:
         initial_proposals = tibble(syph.prob = priors$syph.prob),
         make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
-        make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
-        get_result = determ_poly_end(0.01, poly_n = 3)
+        get_result = determ_end_thresh(
+          thresholds = 0.2,
+          n_enough = 100
+        )
       )
     ),
-    # wave4 = list(
-    #   job1 = list(
-    #     targets = "ir100.gono",
-    #     targets_val = targets["ir100.gono"],
-    #     params = c("gono.uret.prob"), # target:
-    #     initial_proposals = tibble(gono.uret.prob = priors$gono.uret.prob),
-    #     make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
-    #     get_result = swfcalib::determ_end_thresh(
-    #       thresholds = 1,
-    #       n_enough = 100
-    #     )
-    #   ),
-    #   job2 = list(
-    #     targets = "ir100.chla",
-    #     targets_val = targets["ir100.chla"],
-    #     params = c("chla.uret.prob"), # target:
-    #     initial_proposals = tibble(chla.uret.prob = priors$chla.uret.prob),
-    #     make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
-    #     get_result = determ_end_thresh(
-    #       thresholds = 1,
-    #       n_enough = 100
-    #     )
-    #   ),
-    #   job3 = list(
-    #     targets = "ir100.syph",
-    #     targets_val = targets["ir100.syph"],
-    #     params = c("syph.prob"), # target:
-    #     initial_proposals = tibble(syph.prob = priors$syph.prob),
-    #     make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
-    #     get_result = determ_end_thresh(
-    #       thresholds = 0.2,
-    #       n_enough = 100
-    #     )
-    #   )
-    # ),
     wave5 = list(
       job1 = list(
         targets = paste0("i.prev.dx.", c("B", "H", "W")),
@@ -239,4 +212,4 @@ calib_object <- list(
 )
 
 # Uncomment to run a single wave for testing
-# calib_object$waves <- calib_object$waves[-1]
+# calib_object$waves <- calib_object$waves[-c(1, 2, 3)]

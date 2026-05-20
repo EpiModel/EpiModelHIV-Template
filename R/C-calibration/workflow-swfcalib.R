@@ -30,7 +30,6 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call(
     what = swfcalib::calibration_step1,
     args = list(
-      n_cores = 8,
       calib_object = calib_object
     ),
     setup_lines = hpc_node_setup
