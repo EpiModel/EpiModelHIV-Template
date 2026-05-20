@@ -3,7 +3,7 @@
 ## This script should not be run directly. But `sourced` from the
 ## scripts that interact with the HPC (the `workflow-*.R` ones)
 
-current_git_branch <- "dev_v3.3"          # <- USER: your git branch
+current_git_branch <- "dev_v3.3_test"          # <- USER: your git branch
 
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
