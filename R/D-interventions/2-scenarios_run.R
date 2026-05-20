@@ -56,4 +56,4 @@ glimpse(d_sim)
 head(d_sim)
 
 ## Clean folder
-# fs::dir_delete(sc_test_dir)
+# fs::dir_delete(scenarios_dir)

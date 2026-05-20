@@ -30,7 +30,6 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call(
     what = swfcalib::calibration_step1,
     args = list(
-      n_cores = 8,
       calib_object = calib_object
     ),
     setup_lines = hpc_node_setup
@@ -106,14 +105,16 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = calibration_end + 10 * year_steps,
-  .tracker.list = EpiModelHIV::make_calibration_trackers()
+  nsteps              = calibration_end,
+  start               = restart_time,
+  initialize.FUN      = reinit_msm,
+  verbose = FALSE
 )
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_swfcalib_output(
-    path_to_est, param, init, control, calib_object,
+    path_to_restart, param, init, control, calib_object,
     output_dir = calib_dir,
     n_rep = 256,
     n_cores = batch_size,
@@ -160,4 +161,3 @@ wf <- add_workflow_step(
     "mem-per-cpu" = "5G"
   )
 )
-

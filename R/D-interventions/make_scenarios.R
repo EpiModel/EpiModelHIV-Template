@@ -61,4 +61,4 @@ for (or_test in ors) {
 }
 
 sc_df <- bind_rows(sc_list)
-readr::write_csv(sc_df, "data/input/scenarios.csv")
+write.csv(sc_df, "data/input/scenarios.csv", row.names = FALSE)

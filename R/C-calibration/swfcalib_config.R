@@ -29,24 +29,26 @@ i2r_p <- function(i, p) 1 - (1 - p)^(1 / i)
 
 priors <- list(
   # 50% of elig start prep in 3 months -> 4 years
-  prep.start.rate = i2r_p(c(0.25 * 4) * year_steps, 0.5),
+  prep.start.rate = i2r_p(c(0.25, 4) * year_steps, 0.5),
   # 50% of HIV_dx neg test within 2 years -> 12 years
-  hiv.test.rate = i2r_p(c(2, 12) * year_steps, 0.5),
+  hiv.test.rate = i2r_p(c(10, 30) * year_steps, 0.5),
   # 50% of ART user stop test within 2 years -> 8 years
-  tx.halte.rate = i2r_p(c(2, 8) * year_steps, 0.5),
+  tx.halt.rate = i2r_p(c(5, 15) * year_steps, 0.5),
   # HIV transmission scaler: B needs to be high, H & W needs to be low
   hiv.trans.scale_1 = c(1.5, 5),
   hiv.trans.scale_2 = c(0.2, 0.9),
   hiv.trans.scale_3 = c(0.2, 0.9),
   # Priors for STI transmission risk per unprotected acts
-  gono.uret.prob = c(0.1, 0.5),
-  chla.uret.prob = c(0.1, 0.5),
-  syph.prob = c(0.05, 0.25),
+  gono.uret.prob = c(0.17, 0.23),
+  chla.uret.prob = c(0.17, 0.23),
+  syph.prob = c(0.10, 0.13),
   # Median to death in AIDS stage: 15 years -> 40 years
   aids.off.tx.mort.rate = i2r_p(c(15, 40) * year_steps, 0.5),
   # Arrival per 1000 nodes in the model per week: 0.2 -> 0.6
   a.rate = c(0.0002, 0.0006)
 )
+
+priors <- lapply(priors, \(x) seq(x[1], x[2], length.out = n_sims))
 
 calib_object <- list(
   config = list(
@@ -210,4 +212,4 @@ calib_object <- list(
 )
 
 # Uncomment to run a single wave for testing
-# calib_object$waves <- calib_object$waves[5]
+# calib_object$waves <- calib_object$waves[-c(1, 2, 3)]

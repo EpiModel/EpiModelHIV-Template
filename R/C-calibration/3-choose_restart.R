@@ -9,6 +9,8 @@
 # Setup ------------------------------------------------------------------------
 scenario_name <- "empty_scenario"
 hpc_context <- TRUE
+# scenario_name <- "scenario_2"
+# hpc_context <- FALSE
 
 library(EpiModelHIV)
 library(dplyr)

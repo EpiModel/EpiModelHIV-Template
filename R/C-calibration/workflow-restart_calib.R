@@ -93,7 +93,6 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
-    "mail-type" = "END",
     "cpus-per-task" = max_cores,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"
@@ -104,10 +103,11 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/C-calibration/process_calibs.R",
-    args = list(hpc_context = TRUE),
+    args = list(hpc_context = TRUE, n_cores = max_cores),
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
+    "mail-type" = "END",
     "cpus-per-task" = max_cores,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"

@@ -33,9 +33,12 @@ fs::file_copy(
 library(ARTnetData)
 
 ## Manually install all dependencies
+# source("R/shared_variables.R", local = TRUE)
 # renv::install(
 #   paste0(
-#     "epimodel/", c("artnetdata", "epimodelhpc", "slurmworkflow", "swfcalib")
+#     "epimodel/",
+#     c("artnetdata", "epimodelhpc", "slurmworkflow", "swfcalib",
+#        paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch))
 #   )
 # )
 # renv::hydrate()

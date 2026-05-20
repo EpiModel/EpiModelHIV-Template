@@ -40,7 +40,7 @@ scenarios_df <- tibble(
   hiv.test.rate_3 = c(0.007, 0.008)
 )
 # or read them from CSV
-# scenarios_df <- readr::read_csv("./data/input/scenarios.csv")
+# scenarios_df <- read.csv("./data/input/scenarios.csv")
 
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
