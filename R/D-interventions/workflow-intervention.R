@@ -33,6 +33,11 @@ control <- control_msm(
 # Workflow creation
 wf <- make_em_workflow("interventions", override = TRUE)
 
+# Register this campaign in the deploy-doctor watch list. Pairs with the teardown
+# step at the end; together they stop the shared deploy doctor (launched from the
+# deploy script) once this is the last campaign still running. Requires EpiModelHPC.
+wf <- add_doctor_register_step(wf, "interventions")
+
 # Define test scenarios
 scenarios_df <- read.csv("data/input/scenarios.csv")
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
@@ -104,3 +109,7 @@ wf <- add_workflow_step(
     "mem-per-cpu" = "5G"
   )
 )
+
+# Final step: deregister from the deploy-doctor watch list and stop the shared
+# doctor once this is the last campaign still running (EpiModelHPC).
+wf <- add_doctor_teardown_step(wf, "interventions")
