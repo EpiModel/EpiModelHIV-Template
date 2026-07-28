@@ -3634,11 +3634,11 @@
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "RemoteUsername": "EpiModel",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
-      "RemoteRef": "main",
-      "RemoteSha": "9fb74853114cc5b821d3e981bfd78b69001f4edc",
-      "RemoteHost": "api.github.com"
+      "RemoteRef": "flexible-futures",
+      "RemoteSha": "d0f515bf841a1fe7243a71df8bdd1aca88122e2d"
     },
     "tergm": {
       "Package": "tergm",

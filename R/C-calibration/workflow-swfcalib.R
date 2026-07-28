@@ -54,7 +54,8 @@ wf <- add_workflow_step(
     MoreArgs = list(
       n_cores = batch_size,
       n_batches = max(batch_numbers),
-      calib_object = calib_object
+      calib_object = calib_object,
+      future_use_plan = future::tweak("multicore", workers = batch_size)
     )
   ),
   sbatch_opts = list(
