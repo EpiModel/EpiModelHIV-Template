@@ -49,7 +49,7 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
     wf_name = wf_name,
     default_sbatch_opts = list(
       "partition" =
-        "epimodel,short-cpu,day-long-cpu,week-long-cpu,month-long-cpu",
+        "epimodel,short-cpu", # ",day-long-cpu,week-long-cpu,month-long-cpu",
       "mail-type" = "FAIL",
       "mail-user" = hpc_mail_user
     )
