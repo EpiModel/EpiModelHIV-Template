@@ -9,7 +9,7 @@ library(swfcalib)
 library(dplyr)
 library(tidyr)
 
-n_sims <- 16
+n_sims <- 64
 ors_calib <- seq(0.7, 1.3, length.out = n_sims)
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)

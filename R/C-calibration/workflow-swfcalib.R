@@ -54,7 +54,7 @@ wf <- add_workflow_step(
     MoreArgs = list(
       n_cores = batch_size,
       n_batches = max(batch_numbers),
-      future_use_plan = future::tweak("multisession", workers = batch_size),
+      future_use_plan = "multisession",
       calib_object = calib_object
     )
   ),

@@ -3372,7 +3372,7 @@
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
+      "RemoteUsername": "epimodel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
       "RemoteSha": "84e5f11f125681ddf23a835c86f298c665f2136c"
