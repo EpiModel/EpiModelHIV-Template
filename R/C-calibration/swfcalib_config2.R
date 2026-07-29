@@ -18,7 +18,7 @@ source("R/netsim_settings.R", local = TRUE)
 
 source("./R/z-test.R")
 
-n_sims <- 8
+n_sims <- 16
 ors_calib <- seq(0.7, 1.3, length.out = n_sims)
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
@@ -182,7 +182,7 @@ calib_object <- make_calib_object(
   n_sims = n_sims,
   default_proposal = params_df,
   target_list = targets,
-  waves_specs[c(8:10)]
+  waves_specs
 )
 calib_object
 

@@ -20,7 +20,8 @@ max_cores <- batch_size
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-source("R/C-calibration/swfcalib_config.R", local = TRUE)
+# source("R/C-calibration/swfcalib_config.R", local = TRUE)
+source("R/C-calibration/swfcalib_config2.R", local = TRUE)
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 
@@ -54,7 +55,6 @@ wf <- add_workflow_step(
     MoreArgs = list(
       n_cores = batch_size,
       n_batches = max(batch_numbers),
-      future_use_plan = "multisession",
       calib_object = calib_object
     )
   ),
