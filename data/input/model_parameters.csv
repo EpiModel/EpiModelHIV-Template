@@ -68,6 +68,8 @@ prep.tst.int,12.8571,numeric,missing?,,,,Testing interval by time steps for thos
 prep.risk.reassess.int,52,numeric,7.5,,,,Interval for reassessment of risk indications of active PrEP users. Default of `52` for yearly reassessment when time unit is weekly -  use `Inf` for no reassessment.
 sti.prep.tx.prob,1,numeric,,,,,Probability of any STI treatment given positive screening during PrEP visit.
 sti.screening.dist,stochastic,character,12,,,,"Either `""stochastic""` for random (memoryless) STI screening or `""deterministic""` for screening based on interval since last screening time (1/rates)."
+sti.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea and chlamydia screening for MSM not diagnosed with HIV and not on PrEP. Shared by GC and CT: a single combined NAAT specimen tests both organisms at a sampled site.
+sti.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea and chlamydia screening for MSM diagnosed with HIV. Shared by GC and CT: a single combined NAAT specimen tests both organisms at a sampled site.
 sti.screen.prep.rate,0.07692308,numeric,12,,,,Rate per time step for asymptomatic urogenital STI screening for MSM not diagnosed with HIV and on PrEP. (mean interval = 13 weeks - 3months)
 sti.screen.prep.start,1,numeric,12,,,,Time step to initiate PrEP-based STI screening (may be after `prep.start` to stabilize STI incidence during calibration).
 sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM not diagnosed with HIV and not on PrEP.
@@ -85,8 +87,6 @@ gono.sympt.tx.prob_3,0.9,numeric,10,,,,Probability of treatment for symptomatic 
 gono.asympt.tx.prob_1,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for Black MSM.
 gono.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for Hispanic MSM.
 gono.asympt.tx.prob_3,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for White MSM.
-gono.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening  for MSM not diagnosed with HIV and not on PrEP.
-gono.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital gonorrhea screening for MSM diagnosed with HIV.
 chla.uret.prob,0.199,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
 chla.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal chlamydia.
 chla.uret.sympt.prob,0.95,numeric,11,,,,Probability of symptoms given infection with urethral chlamydia.
@@ -98,8 +98,6 @@ chla.sympt.tx.prob_3,0.9,numeric,10,,,,Probability of treatment for symptomatic 
 chla.asympt.tx.prob_1,0.95,numeric,10,,,,Probability of treatment for asymptomatic chlamydia for Black MSM.
 chla.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomatic chlamydia for Hispanic MSM.
 chla.asympt.tx.prob_3,0.95,numeric,"9.3,9.4",,,,Probability of treatment for asymptomatic chlamydia for White MSM.
-chla.screen.hivneg.rate,0.008120081,numeric,12,,,,Rate per time step for asymptomatic urogenital chlamydia screening for MSM not diagnosed with HIV and not on PrEP.
-chla.screen.hivpos.rate,0.01492537,numeric,12,,,,Rate per time step for asymptomatic urogenital chlamydia screening for MSM diagnosed with HIV.
 syph.prob,0.1157,numeric,,,,,Probability of syphilis infection per act given that the infected partner is infectious.
 syph.sympt.prob_1,0,numeric,,,,,Probability of syphilis symptomes given infection (exposed).
 syph.sympt.prob_2,0.22,numeric,,,,,Probability of syphilis symptomes given infection (primary). prim | sec == 0.4
