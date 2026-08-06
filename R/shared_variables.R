@@ -3,7 +3,7 @@
 ## This script should not be run directly. But `sourced` from other scripts
 
 # EpiModelHIV-p local directory
-EMHIVp_branch <- "v3.3.x"    # <- USER: your EpiModelHIV-p branch name
+EMHIVp_branch <- "v4.0.x"    # <- USER: your EpiModelHIV-p branch name
 
 # Relevant time steps for the simulation
 time_unit  <- 7               # number of days in a time step

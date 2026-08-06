@@ -32,9 +32,12 @@ scenarios_df <- tibble(
   prep.start.rate_1 = param$prep.start.rate[[1]] * ors_calib,
   prep.start.rate_2 = param$prep.start.rate[[2]] * ors_calib,
   prep.start.rate_3 = param$prep.start.rate[[3]] * ors_calib,
-  hiv.test.rate_1 = param$hiv.test.rate[[1]] * ors_calib,
-  hiv.test.rate_2 = param$hiv.test.rate[[2]] * ors_calib,
-  hiv.test.rate_3 = param$hiv.test.rate[[3]] * ors_calib,
+  # hiv.test.int is a mean waiting time in timesteps, not a per-step rate.
+  # The sweep is symmetric about 1 so the span is unchanged by the rename,
+  # but the DIRECTION is inverted: a multiplier above 1 now means less testing.
+  hiv.test.int_1 = param$hiv.test.int[[1]] * ors_calib,
+  hiv.test.int_2 = param$hiv.test.int[[2]] * ors_calib,
+  hiv.test.int_3 = param$hiv.test.int[[3]] * ors_calib,
   tx.halt.rate_1 = param$tx.halt.rate[[1]] * ors_calib,
   tx.halt.rate_2 = param$tx.halt.rate[[2]] * ors_calib,
   tx.halt.rate_3 = param$tx.halt.rate[[3]] * ors_calib,

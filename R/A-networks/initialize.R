@@ -35,11 +35,27 @@ if (system.file(package = "ARTnetData") == "") {
     smooth.main.dur = TRUE
   )
 
+  # Race composition of the modeled population, ordered Black, Hispanic,
+  # White/Other. Leaving this NULL falls back to `ARTnetData::race.dist`, whose
+  # `city` rows are MUNICIPALITY figures rather than metro ones: its "Atlanta"
+  # row is 0.515 / 0.046 / 0.439, which is the city proper, while men aged 15-64
+  # across the four-county EHE metro are 0.366 / 0.166 / 0.468. A Hispanic share
+  # of 4.6 percent is not attainable for the metro. Set this explicitly for the
+  # geography your project actually models.
+  #
+  # This is not only a calibration input. It sets num.B / num.H / num.W and
+  # therefore the in-model denominator of every race-specific target.
+  #
+  # Reproduce the numbers with, in the EpiModelHIV-p repo:
+  #   python3 inst/AHEAD/scripts/02-census-race-distribution.py
+  race_prop <- c(0.3662, 0.1661, 0.4678) # <- USER: Black, Hispanic, White/Other
+
   netstats <- build_netstats(
     epistats,
     netparams,
     expect.mort = 0.000478213,
-    network.size = networks_size
+    network.size = networks_size,
+    race.prop = race_prop
   )
 }
 

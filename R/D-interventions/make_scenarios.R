@@ -38,15 +38,12 @@ for (or_test in ors) {
     sc_list[[sc_name]] <- tibble(
       .scenario.id    = sc_name,
       .at             = intervention_start,
-      hiv.test.rate_1 = apply_or(
-        param$hiv.test.rate[[1]], or_test
-      ),
-      hiv.test.rate_2 = apply_or(
-        param$hiv.test.rate[[2]], or_test
-      ),
-      hiv.test.rate_3 = apply_or(
-        param$hiv.test.rate[[2]], or_test
-      ),
+      # hiv.test.int is a mean waiting time. Apply the odds ratio to the
+      # implied per-step probability and invert back, so OR > 1 still means
+      # more testing. (The third line also used [[2]] before 4.0; fixed.)
+      hiv.test.int_1 = 1 / apply_or(1 / param$hiv.test.int[[1]], or_test),
+      hiv.test.int_2 = 1 / apply_or(1 / param$hiv.test.int[[2]], or_test),
+      hiv.test.int_3 = 1 / apply_or(1 / param$hiv.test.int[[3]], or_test),
       tx.init.rate_1  = apply_or(
         param$tx.init.rate[[1]], or_tx
       ),

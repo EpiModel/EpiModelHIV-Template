@@ -22,7 +22,7 @@ results <- readRDS(fs::path(swfcalib_dir, "results.rds"))
 
 results |>
   filter(.iteration == max(.iteration)) |>
-  pull(hiv.test.rate_1) |>
+  pull(hiv.test.int_1) |>
   range()
 
 filter(results, .iteration > 2) |>

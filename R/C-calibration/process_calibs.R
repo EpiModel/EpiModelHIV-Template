@@ -13,16 +13,19 @@ library(dplyr)
 library(tidyr)
 
 source("R/shared_variables.R", local = TRUE)
+source("R/calibration_targets.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 
+# Callers may or may not set this: workflow-swfcalib.R does not, the ballpark
+# and restart workflows do.
 if (!exists("n_cores")) {
-  stop( "The 'process_calibs.R' script requires an `n_cores` variable")
+  n_cores <- 8
 }
 
 # Process ----------------------------------------------------------------------
 
 process_one_calib_tibble <- function(sc_info, calib_steps) {
-  targets <- EpiModelHIV::get_calibration_targets()
+  targets <- project_calibration_targets()
 
   d_dist <- readRDS(sc_info$file_path) |>
     filter(time >= max(time) - calib_steps) |>

@@ -15,12 +15,13 @@ hpc_context <- TRUE
 library(EpiModelHIV)
 library(dplyr)
 source("R/shared_variables.R", local = TRUE)
+source("R/calibration_targets.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 source("R/C-calibration/utils-restart.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
-targets <- EpiModelHIV::get_calibration_targets()
+targets <- project_calibration_targets()
 
 path_df <- fs::path(
   calib_dir,

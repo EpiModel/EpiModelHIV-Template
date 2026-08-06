@@ -35,9 +35,10 @@ wf <- make_em_workflow("module_dev", override = TRUE)
 scenarios_df <- tibble(
   .scenario.id    = c("scenario_1", "scenario_2"),
   .at             = 1,
-  hiv.test.rate_1 = c(0.004, 0.005),
-  hiv.test.rate_2 = c(0.004, 0.005),
-  hiv.test.rate_3 = c(0.007, 0.008)
+  # Reciprocals of the pre-4.0 rate grid (0.004/0.005 and 0.007/0.008).
+  hiv.test.int_1 = c(200, 250),
+  hiv.test.int_2 = c(200, 250),
+  hiv.test.int_3 = c(125, 143)
 )
 # or read them from CSV
 # scenarios_df <- read.csv("./data/input/scenarios.csv")

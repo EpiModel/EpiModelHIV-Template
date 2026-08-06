@@ -43,7 +43,7 @@ wf <- add_workflow_step(
     "cpus-per-task" = 8,
     "time" = "00:20:00",
     "mem-per-cpu" = "4G",
-    "mail-type" = "FAIL"
+    "mail-type" = "FAIL,TIME_LIMIT"
   )
 )
 
@@ -66,7 +66,7 @@ wf <- add_workflow_step(
     "cpus-per-task" = batch_size,
     "time" = "05:00:00",
     "mem-per-cpu" = "5G",
-    "mail-type" = "FAIL"
+    "mail-type" = "FAIL,TIME_LIMIT"
   )
 )
 
@@ -127,7 +127,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
-    "mail-type" = "FAIL",
+    "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = batch_size,
     "time" = "08:00:00",
     "mem-per-cpu" = "5G"

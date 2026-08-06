@@ -47,9 +47,12 @@ n_scenarios <- 1
 scenarios_df <- tibble(
   .scenario.id = as.character(seq_len(n_scenarios)),
   .at = 1,
-  hiv.test.rate_1 = param$hiv.test.rate[[1]] * 0.475, # 0.6
-  hiv.test.rate_2 = param$hiv.test.rate[[2]] * 0.7,
-  hiv.test.rate_3 = param$hiv.test.rate[[3]] * 0.625,
+  # Multipliers inverted from the pre-4.0 rate parameterization: these scaled a
+  # per-step RATE, and hiv.test.int is a mean waiting time, so the same intent
+  # (less testing) is now a multiplier above 1. Re-tune for your own project.
+  hiv.test.int_1 = param$hiv.test.int[[1]] / 0.475,
+  hiv.test.int_2 = param$hiv.test.int[[2]] / 0.7,
+  hiv.test.int_3 = param$hiv.test.int[[3]] / 0.625,
   tx.halt.rate_1 = param$tx.halt.rate[[1]] * 0.850,
   tx.halt.rate_2 = param$tx.halt.rate[[2]] * 0.925,
   tx.halt.rate_3 = param$tx.halt.rate[[3]] * 1.089,

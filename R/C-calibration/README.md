@@ -77,6 +77,8 @@ before moving to swfcalib.
 
 ### Automated via swfcalib (`workflow-swfcalib.R`)
 
+See **`RECALIBRATION.md`** for what goes wrong in a campaign and how to avoid it.
+
 Uses `swfcalib_config.R` to define a wave-based sequential optimization. Waves
 run in order (later parameters depend on earlier ones being correct); jobs
 within a wave run in parallel.
@@ -84,10 +86,10 @@ within a wave run in parallel.
 | Wave | Targets | Parameters | Rationale |
 |------|---------|------------|-----------|
 | 1 | `cc.prep.{B,H,W}` | `prep.start.rate_{1,2,3}` | PrEP coverage by race |
-| 2 | `cc.dx.{B,H,W}` | `hiv.test.rate_{1,2,3}` | HIV diagnosis rates |
+| 2 | `cc.dx.{B,H,W}` | `hiv.test.int_{1,2,3}` | HIV diagnosis rates |
 | 3 | `cc.vsupp.{B,H,W}` | `tx.halt.rate_{1,2,3}` | Viral suppression (joint) |
 | 4 | `ir100.{gono,chla,syph}` | `{gono,chla,syph}.*prob` | STI incidence rates |
-| 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint) |
+| 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint). **Under revision for v4.0**: moving to `ir100.dx.{B,H,W}`, a diagnosis rate rather than a prevalence stock. See `RECALIBRATION.md`. |
 | 6 | `disease.mr100` | `aids.off.tx.mort.rate` | Disease mortality |
 | 7 | `num` | `a.rate` | Population size (~100k) |
 

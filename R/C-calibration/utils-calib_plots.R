@@ -2,7 +2,7 @@ library(dplyr)
 library(EpiModel)
 
 make_calib_plot <- function(d, plot_info, year_steps = 52) {
-  targets <- EpiModelHIV::get_calibration_targets()
+  targets <- project_calibration_targets()
   targets["num"] <- 1e5
   colors <-  c("steelblue", "firebrick", "seagreen")
   text_pos <- max(d$time) - 500

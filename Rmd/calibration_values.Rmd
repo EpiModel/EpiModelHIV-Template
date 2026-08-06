@@ -54,7 +54,7 @@ row_names <- c(
 fmtr <- scales::label_percent(0.1)
 tar_names <- paste0("cc.dx.", races_names)
 tar <- targets[tar_names] |> fmtr()
-p_names <- paste0("hiv.test.rate")
+p_names <- paste0("hiv.test.int")
 prms <- param[[p_names]] |> scales::label_scientific()()
 m_int <- (1 / param[[p_names]] / year_steps) |> scales::label_number(0.1)()
 

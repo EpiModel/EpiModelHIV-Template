@@ -1,6 +1,9 @@
 make_restart_point_hiv <- function(sim, sim_num, sim_cost = Inf) {
   attrs_names <- names(EpiModelHIV::get_default_attrs())
-  time_prefixes <- c(".last$", ".time$")
+  # ".due$" matters: EpiModelHIV >= 3.6.0 defines prep.inj.due as an absolute
+  # timestep. Omitting it carries a step-3640 value into a run whose clock
+  # restarts at 2, so injections never come due again, silently.
+  time_prefixes <- c(".last$", ".time$", ".due$")
 
   time_attrs <- Reduce(
     function(a, prefix) c(a, grepv(prefix, attrs_names)),

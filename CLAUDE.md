@@ -15,7 +15,7 @@ Uses `renv` for R package management. The pixi environment in the parent workspa
 Rscript -e 'renv::restore()'
 
 # Install/update EpiModelHIV-p from GitHub
-Rscript -e 'renv::install("EpiModel/EpiModelHIV-p@v3.2.x")'
+Rscript -e 'renv::install("EpiModel/EpiModelHIV-p@v4.0.x")'
 
 # Quick-reload local EpiModelHIV-p during development (in R)
 pkgload::load_all("../EMHIV/")

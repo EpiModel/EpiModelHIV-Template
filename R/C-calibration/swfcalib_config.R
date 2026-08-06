@@ -16,10 +16,16 @@ source("R/C-calibration/swfcalib_model.R", local = TRUE)
 model_fn <- make_model_fn(calib_steps = year_steps)
 
 source("R/shared_variables.R", local = TRUE)
+source("R/calibration_targets.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
-targets <- EpiModelHIV::get_calibration_targets()
+targets <- project_calibration_targets()
 
+# Only the numeric parameters are swept, but coercing the whole table would
+# silently NA the character and logical ones (prep.lai.efficacy.model,
+# prep.reinit.enable and friends). Keep those out of the wide frame rather than
+# turning them into NA.
 params_df <- params_df |>
+  filter(is.na(type) | type == "numeric") |>
   select(value, param) |>
   mutate(value = as.numeric(value)) |>
   pivot_wider(names_from = param)
@@ -30,8 +36,9 @@ i2r_p <- function(i, p) 1 - (1 - p)^(1 / i)
 priors <- list(
   # 50% of elig start prep in 3 months -> 4 years
   prep.start.rate = i2r_p(c(0.25, 4) * year_steps, 0.5),
-  # 50% of HIV_dx neg test within 2 years -> 12 years
-  hiv.test.rate = i2r_p(c(10, 30) * year_steps, 0.5),
+  # Mean waiting time to an HIV test, in timesteps: roughly 8 to 38 years.
+  # This is hiv.test.int, not a rate, so it is not built with i2r_p().
+  hiv.test.int = c(400, 2000),
   # 50% of ART user stop test within 2 years -> 8 years
   tx.halt.rate = i2r_p(c(5, 15) * year_steps, 0.5),
   # HIV transmission scaler: B needs to be high, H & W needs to be low
@@ -59,7 +66,7 @@ calib_object <- list(
     default_proposal = select(
       params_df,
       prep.start.rate_1, prep.start.rate_2, prep.start.rate_3,
-      hiv.test.rate_1, hiv.test.rate_2, hiv.test.rate_3,
+      hiv.test.int_1, hiv.test.int_2, hiv.test.int_3,
       tx.halt.rate_1, tx.halt.rate_2, tx.halt.rate_3,
       hiv.trans.scale_1, hiv.trans.scale_2, hiv.trans.scale_3,
       gono.uret.prob, chla.uret.prob, syph.prob,
@@ -98,24 +105,24 @@ calib_object <- list(
       job1 = list(
         targets = "cc.dx.B",
         targets_val = targets["cc.dx.B"],
-        params = c("hiv.test.rate_1"), # target: 0.00385
-        initial_proposals = tibble(hiv.test.rate_1 = priors$hiv.test.rate),
+        params = c("hiv.test.int_1"), # target: 0.00385
+        initial_proposals = tibble(hiv.test.int_1 = priors$hiv.test.int),
         make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
         get_result = determ_poly_end(0.001, poly_n = 5)
       ),
       job2 = list(
         targets = "cc.dx.H",
         targets_val = targets["cc.dx.H"],
-        params = c("hiv.test.rate_2"), # target: 0.0038
-        initial_proposals = tibble(hiv.test.rate_2 = priors$hiv.test.rate),
+        params = c("hiv.test.int_2"), # target: 0.0038
+        initial_proposals = tibble(hiv.test.int_2 = priors$hiv.test.int),
         make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
         get_result = determ_poly_end(0.001, poly_n = 5)
       ),
       job3 = list(
         targets = "cc.dx.W",
         targets_val = targets["cc.dx.W"],
-        params = c("hiv.test.rate_3"), # target: 0.0069
-        initial_proposals = tibble(hiv.test.rate_3 = priors$hiv.test.rate),
+        params = c("hiv.test.int_3"), # target: 0.0069
+        initial_proposals = tibble(hiv.test.int_3 = priors$hiv.test.int),
         make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
         get_result = determ_poly_end(0.001, poly_n = 5)
       )
