@@ -36,3 +36,11 @@ Waves run in order because later parameters depend on earlier ones being right. 
 
 - Wave ordering encodes the causal chain: the care cascade (PrEP, testing, suppression) must be right before transmission outcomes are tuned.
 - Skipping early waves after a late-wave target moves is a measurement, not an assumption. Regress each early-wave outcome on the quantity that changed, over the range the previous campaign swept, and show the implied drift is below the tolerance those waves converged to. Diagnosed HIV prevalence is materially sensitive to STI incidence, so wave 5 and everything downstream of it must be re-run whenever the STI targets move.
+
+## Known gaps in this scaffold
+
+Recorded so they are not rediscovered. Both are ports from LA-PrEP-2026 rather than new work.
+
+**`workflow-3-restart_point.R` does not exist.** `README.md` documents it at the restart-point phase and lists it among the workflows, and `3-choose_restart.R` says in its own header that it is meant to be sourced from it. Neither `3-choose_restart.R` nor `utils-restart.R` currently has any caller in this repo, so phase 2 of the documented three-phase pipeline has no HPC path at all. LA-PrEP-2026 has a working five-step version.
+
+**The bracket check is not here.** LA-PrEP-2026 carries it as two near-duplicate scripts, one for the STI probabilities and one for `prep.start.rate`. They should collapse into a single script taking a caller-supplied list of (target, parameter) pairs, since the analysis core is already generic: summarize the mean response curve, filter to replicates below the extinction threshold, invert for the root, and report the root's position within the swept range. This matters more than it looks. Every target move relocates its root, and swfcalib reports a boundary-pinned job as converged.
