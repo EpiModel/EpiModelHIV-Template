@@ -35,16 +35,16 @@ hiv.circ.or,0.4,numeric,8.2,,,,Odds ratio comparing the odds of infection from i
 hiv.cond.eff.or,0.95,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection from anal sex when a condom is used properly vs. not used (biological efficacy).
 cond.fail.or_1,0.3,numeric,"9.3,9.4",,,,condom failures for Black MSM. (assumption)
 cond.fail.or_2,0.3,numeric,"9.3,9.4",,,,condom failures for Hispanic MSM. (assumption)
-cond.fail.or_3,0.3,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.dx.B,,condom failures for white MSM. (assumption)
+cond.fail.or_3,0.3,numeric,8.2,Rosenberg 2018 (Ann Epi),,,condom failures for white MSM. (assumption)
 hiv.circ.prob_1,0.874,numeric,5.2,19,,,Probability that a Black new arrival in the population will be circumcised.
 hiv.circ.prob_2,0.874,numeric,5.2,19,,,Probability that a Hispanic new arrival in the population will be circumcised.
 hiv.circ.prob_3,0.918,numeric,5.2,19,,,Probability that a White new arrival in the population will be circumcised.
 acts.aids.vl,5.75,numeric,4,17,,,Viral load level after which sexual act rate goes to zero.
 acts.scale,1,numeric,4,,,,Scalar for main/casual act rate for model calibration.
 cond.scale,1,numeric,4,,,,Scalar for condom use probability for model calibration.
-hiv.trans.scale_1,3.34184182335375,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.dx.H,,Relative scalar on base infection probabilities for model calibration for Black men.
-hiv.trans.scale_2,0.554040769699907,numeric,8.2,Rosenberg 2018 (Ann Epi),I.prev.dx.W,,Relative scalar on base infection probabilities for model calibration for Hispanic men.
-hiv.trans.scale_3,0.473483346296316,numeric,8.2,,,,Relative scalar on base infection probabilities for model calibration for White men.
+hiv.trans.scale_1,3.34184182335375,numeric,8.2,Rosenberg 2018 (Ann Epi),i.prev.dx.B,,Relative scalar on base infection probabilities for model calibration for Black men.
+hiv.trans.scale_2,0.554040769699907,numeric,8.2,Rosenberg 2018 (Ann Epi),i.prev.dx.H,,Relative scalar on base infection probabilities for model calibration for Hispanic men.
+hiv.trans.scale_3,0.473483346296316,numeric,8.2,,i.prev.dx.W,,Relative scalar on base infection probabilities for model calibration for White men.
 hiv.gono.chla.rect.or,2.78,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current rectal gonorrhea XOR chlamydia to the odds of HIV infection without.
 hiv.gono.chla.uret.or,1.73,numeric,8.2,,,,Odds ratio comparing the odds of HIV infection given current urethral gonorrhea XOR chlamydia to the odds of HIV infection without.
 hiv.gono.chla.dual.rr,0.2,numeric,7.5,,,,Discnount on second STI related HIV Transmission Odds Ratio when dual infection with both gonorrhea and chlamydia.
@@ -121,7 +121,7 @@ sti.screen.rect.hivneg.prob,0.48,numeric,12,,,,Probability of rectal site screen
 sti.screen.rect.hivpos.prob,0.63,numeric,12,,,,Probability of rectal site screening for any STI given urogenital screening for MSM diagnosed with HIV.
 sti.screen.rect.prep.prob,1,numeric,,,,,Probability of rectal site screening for any STI given  urogenital screening for MSM not diagnosed with HIV and on PrEP.
 sti.cond.eff.or,0.95,numeric,"9.3,9.4",,,,Odds ratio comparing the odds of STI infection from anal sex when a condom is used vs. not used properly (biological efficacy)..
-gono.uret.prob,0.213410233527315,numeric,9.4,,ir100.gc,atlanta,Probability of urethral gonorrhea infection per act.
+gono.uret.prob,0.213410233527315,numeric,9.4,,ir100.gono,atlanta,Probability of urethral gonorrhea infection per act.
 gono.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal gonorrhea.
 gono.uret.sympt.prob,0.9333,numeric,10,,,,Probability of symptoms given infection with urethral gonorrhea.
 gono.tx.recov.int,1.4,numeric,11,,,,Average duration in time steps of treated gonorrhea.
@@ -132,7 +132,7 @@ gono.sympt.tx.prob_3,0.9,numeric,10,,,,Probability of treatment for symptomatic 
 gono.asympt.tx.prob_1,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for Black MSM.
 gono.asympt.tx.prob_2,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for Hispanic MSM.
 gono.asympt.tx.prob_3,0.95,numeric,10,,,,Probability of treatment for asymptomatic gonorrhea for White MSM.
-chla.uret.prob,0.141282930209188,numeric,9.3,,ir100.ct,atlanta,Probability of urethral chlamydia infection per act.
+chla.uret.prob,0.141282930209188,numeric,9.3,,ir100.chla,atlanta,Probability of urethral chlamydia infection per act.
 chla.rect.sympt.prob,0.1,numeric,10,,,,Probability of symptoms given infection with rectal chlamydia.
 chla.uret.sympt.prob,0.50,numeric,11,,,,"Probability of symptoms given infection with urethral chlamydia. Urethral chlamydia symptom fractions among MSM are 29/48 (60%) at Melbourne Sexual Health Centre (Lister 2004 Sex Health 1:47-50) and 105/155 (67.7%) in a London series (Ward 2009 Sex Transm Infect 85:173-5), inverted through the model's symptomatic-treatment machinery. The previous 0.95 had no source; ECDC states at least 50% of male genital chlamydia is asymptomatic."
 chla.tx.recov.int,1.4,numeric,10,,,,Average duration in time steps of treated chlamydia.
