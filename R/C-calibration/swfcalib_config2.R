@@ -16,10 +16,9 @@ library(EpiModelHIV)
 source("R/shared_variables.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 
-source("./R/z-test.R")
+source("./R/C-calibration/utils-swfcalib.R")
 
-n_sims <- 16
-ors_calib <- seq(0.7, 1.3, length.out = n_sims)
+n_sims <- 64
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
 model_fn <- make_model_fn(calib_steps = year_steps)
@@ -178,11 +177,11 @@ waves_specs <- list(
 calib_object <- make_calib_object(
   simulator = model_fn,
   root_directory = swfcalib_dir,
-  max_iteration = 100,
+  max_iteration = 1,
   n_sims = n_sims,
   default_proposal = params_df,
   target_list = targets,
-  waves_specs
+  waves_specs[5]
 )
 calib_object
 

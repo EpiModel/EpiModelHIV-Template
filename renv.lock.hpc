@@ -265,11 +265,11 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-65",
+      "Version": "7.3-66",
       "Source": "Repository",
       "Priority": "recommended",
-      "Date": "2025-02-19",
-      "Revision": "$Rev: 3681 $",
+      "Date": "2026-07-15",
+      "Revision": "$Rev: 3693 $",
       "Depends": [
         "R (>= 4.4.0)",
         "grDevices",
