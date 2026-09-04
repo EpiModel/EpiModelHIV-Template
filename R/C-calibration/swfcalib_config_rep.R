@@ -43,7 +43,8 @@ calib_object <- list(
         targets = "ir100.gono",
         targets_val = targets["ir100.gono"],
         params = c("gono.uret.prob"), # target:
-        initial_proposals = tibble(gono.uret.prob = rep(seq(0.1, 0.3, length.out = 8), 8)),
+        # initial_proposals = tibble(gono.uret.prob = rep(seq(0.1, 0.3, length.out = 16), 4)),
+        initial_proposals = tibble(gono.uret.prob = readRDS("gono-props.rds")),
         make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = swfcalib::determ_end_thresh(
           thresholds = 1,
@@ -54,7 +55,8 @@ calib_object <- list(
         targets = "ir100.chla",
         targets_val = targets["ir100.chla"],
         params = c("chla.uret.prob"), # target:
-        initial_proposals = tibble(chla.uret.prob = rep(seq(0.1, 0.3, length.out = 8), 8)),
+        # initial_proposals = tibble(chla.uret.prob = rep(seq(0.1, 0.3, length.out = 16), 4)),
+        initial_proposals = tibble(chla.uret.prob = readRDS("chla-props.rds")),
         make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = determ_end_thresh(
           thresholds = 1,
@@ -65,7 +67,8 @@ calib_object <- list(
         targets = "ir100.syph",
         targets_val = targets["ir100.syph"],
         params = c("syph.prob"), # target:
-        initial_proposals = tibble(syph.prob = rep(seq(0.1, 0.3, length.out = 8), 8)),
+        # initial_proposals = tibble(syph.prob = rep(seq(0.1, 0.3, length.out = 16), 4)),
+        initial_proposals = tibble(syph.prob = readRDS("syph-props.rds")),
         make_next_proposals = make_proposer_se_range(n_sims, retain_prop = 0.3),
         get_result = determ_end_thresh(
           thresholds = 0.2,
