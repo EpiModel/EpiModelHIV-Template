@@ -57,7 +57,7 @@ determ_gp_end <- function(tolerance, extended_range) {
       }
     }
 
-    n_sims <- get_n_sims(calib_object)
+    n_sims <- calib_object$config$n_sims
     s_new_p <- get_new_gp_prop(mod, n_sims)
     new_p <- munscale(s_new_p, params_range)
 

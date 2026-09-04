@@ -5,7 +5,9 @@ library(mvtnorm)
 theme_set(theme_light())
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
-results <- readRDS(fs::path(swfcalib_dir, "sti_results.rds"))
+
+results <- readRDS("./gp_res.rds")
+props <- readRDS("./props.rds")
 results <- readRDS(fs::path(swfcalib_dir, "prev_results.rds"))
 # ---- data ----
 d <- tibble(

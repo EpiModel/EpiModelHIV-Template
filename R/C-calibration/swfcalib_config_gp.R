@@ -47,7 +47,7 @@ calib_object <- list(
         targets_val = targets["ir100.gono"],
         params = c("gono.uret.prob"), # target:
         initial_proposals = tibble(
-          gono.uret.prob = rep(seq(0.1, 0.3, length.out = 16), 4)
+          gono.uret.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end(
@@ -59,6 +59,9 @@ calib_object <- list(
         targets = "ir100.chla",
         targets_val = targets["ir100.chla"],
         params = c("chla.uret.prob"), # target:
+        initial_proposals = tibble(
+          chla.uret.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end(
           tolerance = 0.5,
@@ -70,7 +73,7 @@ calib_object <- list(
         targets_val = targets["ir100.syph"],
         params = c("syph.prob"), # target:
         initial_proposals = tibble(
-          syph.prob = rep(seq(0.1, 0.3, length.out = 16), 4)
+          syph.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end(
