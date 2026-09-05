@@ -135,13 +135,13 @@ plot_gp <- function(mod, val, par_range) {
     geom_hline(yintercept = tar)
 }
 
-get_new_gp_prop <- function(mod, n_batch) {
+get_new_gp_prop <- function(mod, n_batch, target) {
   new_p <- numeric(n_batch)
   for (i in seq_len(n_batch)) {
     opt <- hetGP::crit_optim(
       mod,
       crit = "crit_cSUR",
-      thres = tar, # + rnorm(1, 0, 0.1),
+      thres = target,
       h = 0,
       control = list(multi.start = 10, maxit = 100)
     )
