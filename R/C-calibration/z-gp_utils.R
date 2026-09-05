@@ -138,7 +138,7 @@ plot_gp <- function(mod, val, par_range) {
 get_new_gp_prop <- function(mod, n_batch) {
   new_p <- numeric(n_batch)
   for (i in seq_len(n_batch)) {
-    opt <- crit_optim(
+    opt <- hetGP::crit_optim(
       mod,
       crit = "crit_cSUR",
       thres = tar, # + rnorm(1, 0, 0.1),
