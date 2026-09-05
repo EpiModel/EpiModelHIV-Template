@@ -14,6 +14,8 @@ determ_gp_end <- function(tolerance, extended_range) {
   force(tolerance)
   force(extended_range)
   function(calib_object, job, results) {
+    library(hetGP)
+    library(MASS)
     source("./R/C-calibration/z-gp_utils.R", local = TRUE)
 
     values <- results[[job$targets[1]]]
