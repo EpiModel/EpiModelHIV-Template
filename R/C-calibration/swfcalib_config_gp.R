@@ -44,7 +44,7 @@ calib_object <- list(
     wave4 = list(
       job1 = list(
         targets = "ir100.gono",
-        targets_val = targets["ir100.gono"],
+        targets_val = 12.81,
         params = c("gono.uret.prob"), # target:
         initial_proposals = tibble(
           gono.uret.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))
@@ -57,7 +57,7 @@ calib_object <- list(
       ),
       job2 = list(
         targets = "ir100.chla",
-        targets_val = targets["ir100.chla"],
+        targets_val = 14.59,
         params = c("chla.uret.prob"), # target:
         initial_proposals = tibble(
           chla.uret.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))
@@ -70,7 +70,7 @@ calib_object <- list(
       ),
       job3 = list(
         targets = "ir100.syph",
-        targets_val = targets["ir100.syph"],
+        targets_val = 1,
         params = c("syph.prob"), # target:
         initial_proposals = tibble(
           syph.prob = sample(rep(seq(0.1, 0.3, length.out = 16), 4))

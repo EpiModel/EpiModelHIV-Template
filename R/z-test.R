@@ -6,8 +6,31 @@ theme_set(theme_light())
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 
-results <- readRDS("./gp_res.rds")
 props <- readRDS("./props.rds")
+print(props, n = 200)
+sort(props$gono.uret.prob)
+sort(props$chla.uret.prob)
+sort(props$syph.prob)
+
+
+results <- readRDS("./gp_res.rds")
+
+ggplot(results, aes(x = gono.uret.prob, y = ir100.gono)) +
+  geom_hline(yintercept = 12.81) +
+  geom_smooth() +
+  geom_point(aes(col = factor(.iteration)))
+
+ggplot(results, aes(x = chla.uret.prob, y = ir100.chla)) +
+  geom_hline(yintercept = 14.59) +
+  geom_smooth() +
+  geom_point(aes(col = factor(.iteration)))
+
+ggplot(results, aes(x = syph.prob, y = ir100.syph)) +
+  geom_hline(yintercept = 1) +
+  geom_smooth() +
+  geom_point(aes(col = factor(.iteration)))
+
+
 results <- readRDS(fs::path(swfcalib_dir, "prev_results.rds"))
 # ---- data ----
 d <- tibble(

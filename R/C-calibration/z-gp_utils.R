@@ -116,9 +116,15 @@ contour_ci <- function(
   )
 }
 
-plot_gp <- function(mod, val, par_range) {
+plot_gp <- function(mod, val, par_range, tar) {
   d_pred <- tibble(x = seq(0, 1, length.out = 100))
   p_mod <- predict(x = matrix(d_pred$x, ncol = 1), object = mod)
+
+  f_mean <- function(x) predict(mod, matrix(x, ncol = 1))$mean - tar
+  root <- uniroot(f_mean, interval = c(0, 1))
+  par_star <- munscale(root$root, par_range)
+
+
   d_pred <- d_pred |>
     mutate(
       x = munscale(x, par_range),
@@ -132,7 +138,8 @@ plot_gp <- function(mod, val, par_range) {
     # geom_vline(xintercept = 0.203) +
     geom_ribbon(aes(ymin = y_min, ymax = y_max), alpha = 0.1) +
     geom_point(data = d_vals, aes(x = x, y = y), alpha = 0.5) +
-    geom_hline(yintercept = tar)
+    geom_hline(yintercept = tar) +
+    geom_vline(xintercept = par_star)
 }
 
 get_new_gp_prop <- function(mod, n_batch, target) {
