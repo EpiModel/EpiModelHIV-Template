@@ -10,6 +10,7 @@ library(dplyr)
 library(tidyr)
 
 n_sims <- 64
+n_reps <- 4
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
 model_fn <- make_model_fn(calib_steps = year_steps)
@@ -45,7 +46,12 @@ calib_object <- list(
         targets = "cc.prep.B",
         targets_val = targets["cc.prep.B"],
         params = c("prep.start.rate_1"),
-        initial_proposals = tibble(prep.start.rate_1 = c(0.002, 0.06)),
+        initial_proposals = tibble(
+          prep.start.rate_1 = sample(rep(
+            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.005, 0.1))
       ),
@@ -53,7 +59,12 @@ calib_object <- list(
         targets = "cc.prep.H",
         targets_val = targets["cc.prep.H"],
         params = c("prep.start.rate_2"),
-        initial_proposals = tibble(prep.start.rate_2 = c(0.002, 0.06)),
+        initial_proposals = tibble(
+          prep.start.rate_2 = sample(rep(
+            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.005, 0.1))
       ),
@@ -61,7 +72,12 @@ calib_object <- list(
         targets = "cc.prep.W",
         targets_val = targets["cc.prep.W"],
         params = c("prep.start.rate_3"),
-        initial_proposals = tibble(prep.start.rate_3 = c(0.002, 0.06)),
+        initial_proposals = tibble(
+          prep.start.rate_3 = sample(rep(
+            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.005, 0.1))
       )
@@ -71,7 +87,12 @@ calib_object <- list(
         targets = "cc.dx.B",
         targets_val = targets["cc.dx.B"],
         params = c("hiv.test.rate_1"), # target: 0.00385
-        initial_proposals = tibble(hiv.test.rate_1 = c(0.0003, 0.001)),
+        initial_proposals = tibble(
+          hiv.test.rate_1 = sample(rep(
+            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
       ),
@@ -79,7 +100,12 @@ calib_object <- list(
         targets = "cc.dx.H",
         targets_val = targets["cc.dx.H"],
         params = c("hiv.test.rate_2"), # target: 0.0038
-        initial_proposals = tibble(hiv.test.rate_2 = c(0.0003, 0.001)),
+        initial_proposals = tibble(
+          hiv.test.rate_2 = sample(rep(
+            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
       ),
@@ -87,7 +113,12 @@ calib_object <- list(
         targets = "cc.dx.W",
         targets_val = targets["cc.dx.W"],
         params = c("hiv.test.rate_3"), # target: 0.0069
-        initial_proposals = tibble(hiv.test.rate_3 = c(0.0003, 0.001)),
+        initial_proposals = tibble(
+          hiv.test.rate_3 = sample(rep(
+            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
       )
@@ -97,7 +128,12 @@ calib_object <- list(
         targets = "cc.vsupp.B",
         targets_val = targets["cc.vsupp.B"],
         params = "tx.halt.rate_1",
-        initial_proposals = tibble(tx.halt.rate_1 = c(0.0006, 0.003)),
+        initial_proposals = tibble(
+          tx.halt.rate_1 = sample(rep(
+            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
       ),
@@ -105,7 +141,12 @@ calib_object <- list(
         targets = "cc.vsupp.H",
         targets_val = targets["cc.vsupp.H"],
         params = "tx.halt.rate_2",
-        initial_proposals = tibble(tx.halt.rate_2 = c(0.0006, 0.003)),
+        initial_proposals = tibble(
+          tx.halt.rate_2 = sample(rep(
+            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
       ),
@@ -113,7 +154,12 @@ calib_object <- list(
         targets = "cc.vsupp.W",
         targets_val = targets["cc.vsupp.W"],
         params = "tx.halt.rate_3",
-        initial_proposals = tibble(tx.halt.rate_3 = c(0.0006, 0.003)),
+        initial_proposals = tibble(
+          tx.halt.rate_3 = sample(rep(
+            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
       )
@@ -123,7 +169,12 @@ calib_object <- list(
         targets = "ir100.gono",
         targets_val = targets["ir100.gono"],
         params = c("gono.uret.prob"), # target:
-        initial_proposals = tibble(gono.uret.prob = c(0.1, 0.3)),
+        initial_proposals = tibble(
+          gono.uret.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
       ),
@@ -131,7 +182,12 @@ calib_object <- list(
         targets = "ir100.chla",
         targets_val = targets["ir100.chla"],
         params = c("chla.uret.prob"), # target:
-        initial_proposals = tibble(chla.uret.prob = c(0.1, 0.3)),
+        initial_proposals = tibble(
+          chla.uret.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
       ),
@@ -139,7 +195,12 @@ calib_object <- list(
         targets = "ir100.syph",
         targets_val = targets["ir100.syph"],
         params = c("syph.prob"), # target:
-        initial_proposals = tibble(syph.prob = c(0.1, 0.3)),
+        initial_proposals = tibble(
+          syph.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
       )
