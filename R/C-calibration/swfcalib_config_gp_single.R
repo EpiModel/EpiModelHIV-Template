@@ -93,7 +93,7 @@ calib_object <- list(
         params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = tibble(
           hiv.test.rate_1 = sample(rep(
-            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            seq(0.0005, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -106,7 +106,7 @@ calib_object <- list(
         params = c("hiv.test.rate_2"), # target: 0.0038
         initial_proposals = tibble(
           hiv.test.rate_2 = sample(rep(
-            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            seq(0.0005, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -119,7 +119,7 @@ calib_object <- list(
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = tibble(
           hiv.test.rate_3 = sample(rep(
-            seq(0.0003, 0.001, length.out = n_sims / n_reps),
+            seq(0.0005, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
