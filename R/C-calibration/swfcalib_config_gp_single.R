@@ -31,13 +31,17 @@ calib_object <- list(
   config = list(
     simulator = model_fn,
     root_directory = swfcalib_dir,
-    max_iteration = 10,
+    max_iteration = 100,
     n_sims = n_sims,
     default_proposal = select(
       params_df,
-      gono.uret.prob,
-      chla.uret.prob,
-      syph.prob
+      prep.start.rate_1, prep.start.rate_2, prep.start.rate_3,
+      hiv.test.rate_1, hiv.test.rate_2, hiv.test.rate_3,
+      tx.halt.rate_1, tx.halt.rate_2, tx.halt.rate_3,
+      hiv.trans.scale_1, hiv.trans.scale_2, hiv.trans.scale_3,
+      gono.uret.prob, chla.uret.prob, syph.prob,
+      aids.off.tx.mort.rate,
+      a.rate
     )
   ),
   waves = list(
