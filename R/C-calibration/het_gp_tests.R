@@ -5,7 +5,7 @@ library(ggplot2)
 theme_set(theme_light())
 source("./R/C-calibration/z-gp_utils.R", local = TRUE)
 results <- readRDS("./gp_res.rds")
-d <- filter(results, .iteration == 1)
+md <- filter(results, .iteration == 1)
 
 # d <- d1
 disease <- c("syph", "gono", "chla")[2]

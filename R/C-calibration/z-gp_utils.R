@@ -142,6 +142,13 @@ plot_gp <- function(mod, val, par_range, tar) {
     geom_vline(xintercept = par_star)
 }
 
+plot_par_tar <- function(d, par_name, tar_name, tar) {
+  ggplot(d, aes(x = .data[[par_name]], y = .data[[tar_name]])) +
+    geom_hline(yintercept = tar) +
+    geom_smooth() +
+    geom_point(alpha = 0.2)
+}
+
 get_new_gp_prop <- function(mod, n_batch, target) {
   new_p <- numeric(n_batch)
   for (i in seq_len(n_batch)) {

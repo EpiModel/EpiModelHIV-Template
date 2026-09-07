@@ -36,9 +36,9 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps              = calibration_end,
-  start               = restart_time,
-  initialize.FUN      = reinit_msm,
+  nsteps = calibration_end,
+  start = restart_time,
+  initialize.FUN = reinit_msm,
   verbose = FALSE
 )
 
@@ -53,23 +53,43 @@ n_scenarios <- 256
 
 # param -> c(min, max), taken from swfcalib_config.R's `priors` ranges
 param_ranges <- list(
-  prep.start.rate_1     = c(0.00333,  0.05191),
-  prep.start.rate_2     = c(0.00333,  0.05191),
-  prep.start.rate_3     = c(0.00333,  0.05191),
-  hiv.test.rate_1       = c(0.000444, 0.001332),
-  hiv.test.rate_2       = c(0.000444, 0.001332),
-  hiv.test.rate_3       = c(0.000444, 0.001332),
-  tx.halt.rate_1        = c(0.000888, 0.002664),
-  tx.halt.rate_2        = c(0.000888, 0.002664),
-  tx.halt.rate_3        = c(0.000888, 0.002664),
-  hiv.trans.scale_1     = c(1.5,      5),
-  hiv.trans.scale_2     = c(0.2,      0.9),
-  hiv.trans.scale_3     = c(0.2,      0.9),
-  gono.uret.prob        = c(0.17,     0.23),
-  chla.uret.prob        = c(0.17,     0.23),
-  syph.prob             = c(0.10,     0.13),
+  prep.start.rate_1 = c(0.00333, 0.05191),
+  prep.start.rate_2 = c(0.00333, 0.05191),
+  prep.start.rate_3 = c(0.00333, 0.05191),
+  hiv.test.rate_1 = c(0.000444, 0.001332),
+  hiv.test.rate_2 = c(0.000444, 0.001332),
+  hiv.test.rate_3 = c(0.000444, 0.001332),
+  tx.halt.rate_1 = c(0.000888, 0.002664),
+  tx.halt.rate_2 = c(0.000888, 0.002664),
+  tx.halt.rate_3 = c(0.000888, 0.002664),
+  hiv.trans.scale_1 = c(1.5, 5),
+  hiv.trans.scale_2 = c(0.2, 0.9),
+  hiv.trans.scale_3 = c(0.2, 0.9),
+  gono.uret.prob = c(0.17, 0.23),
+  chla.uret.prob = c(0.17, 0.23),
+  syph.prob = c(0.10, 0.13),
   aids.off.tx.mort.rate = c(0.000333, 0.000888),
-  a.rate                = c(0.0002,   0.0006)
+  a.rate = c(0.0002, 0.0006)
+)
+
+param_ranges <- list(
+  prep.start.rate_1 = c(0.002, 0.06),
+  prep.start.rate_2 = c(0.002, 0.06),
+  prep.start.rate_3 = c(0.002, 0.06),
+  hiv.test.rate_1 = c(0.0003, 0.001),
+  hiv.test.rate_2 = c(0.0003, 0.001),
+  hiv.test.rate_3 = c(0.0003, 0.001),
+  tx.halt.rate_1 = c(0.0006, 0.003),
+  tx.halt.rate_2 = c(0.0006, 0.003),
+  tx.halt.rate_3 = c(0.0006, 0.003),
+  hiv.trans.scale_1 = c(1.5, 5),
+  hiv.trans.scale_2 = c(0.2, 0.9),
+  hiv.trans.scale_3 = c(0.2, 0.9),
+  gono.uret.prob = c(0.1, 0.3),
+  chla.uret.prob = c(0.1, 0.3),
+  syph.prob = c(0.10, 0.2),
+  aids.off.tx.mort.rate = c(0.000333, 0.000888),
+  a.rate = c(0.0002, 0.0006)
 )
 
 # set.seed(12345)
@@ -86,16 +106,19 @@ scenarios_df <- as_tibble(lhs_unit) |>
     .at = 1,
     .before = 1
   )
-saveRDS(scenarios_df, "./data/run/lhs_scs.rds")
+saveRDS(scenarios_df, "./data/run/lhs_scs2.rds")
 
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    path_to_restart, param, init, control,
-    scenarios_list = NULL,
-    # scenarios_list = scenarios_list,
+    path_to_restart,
+    param,
+    init,
+    control,
+    # scenarios_list = NULL,
+    scenarios_list = scenarios_list,
     output_dir = calib_dir,
     n_rep = 4,
     n_cores = max_cores,

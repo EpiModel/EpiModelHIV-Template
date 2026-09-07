@@ -60,3 +60,11 @@ rmvnorm(10, 1:5, diag(1, 5, 5))
 
 
 # Use `hmer` for 3 GP, one per hiv.scale
+
+d <- readRDS("df__default.rds")
+
+d <- d |>
+  EpiModelHIV::mutate_calibration_targets() |>
+  filter(time > max(time) - 52) |>
+   f
+  glimpse()
