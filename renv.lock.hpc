@@ -260,7 +260,7 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
       "RemoteRef": "main",
-      "RemoteSha": "9581dd6cd05aca2fb3fd8be54994923002dad993",
+      "RemoteSha": "7103939de6343a0beeac9459963a3bf2435bda7f",
       "RemoteHost": "api.github.com"
     },
     "MASS": {
@@ -2655,10 +2655,10 @@
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "EpiModel",
+      "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
-      "RemoteRef": "flexible-futures",
-      "RemoteSha": "699a31289d978341637088be920e48182d5e7298"
+      "RemoteRef": "main",
+      "RemoteSha": "1d0f9a86199b799f1c0fa58245b89a03abd3f1a5"
     },
     "tergm": {
       "Package": "tergm",
