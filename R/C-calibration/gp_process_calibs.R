@@ -57,4 +57,4 @@ d_ls <- future.apply::future_lapply(
 d_calib <- bind_rows(d_ls) |>
   left_join(readRDS("./data/run/lhs_scs2.rds"), by = c("scenario_name" = ".scenario.id"))
 
-saveRDS(d_calib, "./data/run/gp_all_results2.Rds")
+saveRDS(d_calib, "./data/run/gp_lhs_scale.Rds")

@@ -13,8 +13,8 @@ results <- readRDS("./sw_res.rds")
 d <- readRDS("./res4.rds")
 
 d <- filter(results, .wave == 3)
-par_name <- "syph.prob"
-tar_name <- "ir100.syph"
+par_name <- "tx.halt.rate_2"
+tar_name <- "cc.vsupp.H"
 
 par_raw <- d[[par_name]]
 par_range <- range(par_raw)
@@ -35,3 +35,4 @@ par_star
 
 # Plotting
 plot_gp(mod, val, par_range, tar)
+ggsave(paste0(tar_name, "-gp_plot.png"))
