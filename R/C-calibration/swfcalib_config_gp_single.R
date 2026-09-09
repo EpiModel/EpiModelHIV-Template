@@ -93,12 +93,12 @@ calib_object <- list(
         params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = tibble(
           hiv.test.rate_1 = sample(rep(
-            seq(0.0005, 0.01, length.out = n_sims / n_reps),
+            seq(0.0001, 0.001, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
+        get_result = determ_gp_end_single(extended_range = c(0.00005, 0.005))
       ),
       job2 = list(
         targets = "cc.dx.H",
@@ -106,12 +106,12 @@ calib_object <- list(
         params = c("hiv.test.rate_2"), # target: 0.0038
         initial_proposals = tibble(
           hiv.test.rate_2 = sample(rep(
-            seq(0.0005, 0.01, length.out = n_sims / n_reps),
+            seq(0.0001, 0.001, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
+        get_result = determ_gp_end_single(extended_range = c(0.00005, 0.005))
       ),
       job3 = list(
         targets = "cc.dx.W",
@@ -119,12 +119,12 @@ calib_object <- list(
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = tibble(
           hiv.test.rate_3 = sample(rep(
-            seq(0.0005, 0.01, length.out = n_sims / n_reps),
+            seq(0.0001, 0.001, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.05))
+        get_result = determ_gp_end_single(extended_range = c(0.00005, 0.005))
       )
     ),
     wave3 = list(
@@ -134,12 +134,12 @@ calib_object <- list(
         params = "tx.halt.rate_1",
         initial_proposals = tibble(
           tx.halt.rate_1 = sample(rep(
-            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            seq(0.0015, 0.003, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
+        get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
       job2 = list(
         targets = "cc.vsupp.H",
@@ -147,12 +147,12 @@ calib_object <- list(
         params = "tx.halt.rate_2",
         initial_proposals = tibble(
           tx.halt.rate_2 = sample(rep(
-            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            seq(0.0015, 0.003, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
+        get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
       job3 = list(
         targets = "cc.vsupp.W",
@@ -160,12 +160,12 @@ calib_object <- list(
         params = "tx.halt.rate_3",
         initial_proposals = tibble(
           tx.halt.rate_3 = sample(rep(
-            seq(0.0006, 0.003, length.out = n_sims / n_reps),
+            seq(0.0015, 0.003, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.0001, 0.01))
+        get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       )
     ),
     wave4 = list(
@@ -250,4 +250,12 @@ calib_object <- list(
     #   )
     # )
   )
+)
+
+
+config = list(
+  simulator = model_fn,
+  root_directory = swfcalib_dir,
+  max_iteration = 100,
+  n_sims = n_sims
 )

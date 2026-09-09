@@ -30,3 +30,13 @@ write.csv(
   fs::path(swfcalib:::get_root_dir(calib_object), "params.csv"),
   row.names = FALSE
 )
+
+# Update model_parameters.csv with swfcalib values -----------------------------
+params_df <- read.csv(fs::path(input_dir, "model_parameters.csv"))
+updated_df <- read.csv("./calibrated.csv")
+new_params <- replace_join(params_df, updated_df, by = c("param", "type"))
+write.csv(
+  new_params,
+  fs::path(input_dir, "model_parameters.csv"),
+  row.names = FALSE
+)

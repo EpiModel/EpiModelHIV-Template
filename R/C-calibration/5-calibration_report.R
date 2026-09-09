@@ -6,7 +6,7 @@ rmarkdown::render(
   output_dir = output_dir,
   params = list(
     context = "local",
-    path_df = fs::path(calib_dir, "merged_tibbles/df__empty_scenario.rds")
-    # path_df = fs::path(calib_dir, "merged_tibbles/df__scenario_2.rds")
+    # path_df = fs::path(calib_dir, "merged_tibbles/df__empty_scenario.rds")
+    path_df = fs::path(calib_dir, "merged_tibbles/df__default.rds")
   )
 )

@@ -49,47 +49,29 @@ wf <- make_em_workflow("restart_calib_lhs", override = TRUE)
 
 # Define calibration scenarios: 256-point Latin Hypercube Sample covering the
 # full prior ranges from `C-calibration/swfcalib_config.R` wave priors.
-n_scenarios <- 256
+n_scenarios <- 64
 
 # param -> c(min, max), taken from swfcalib_config.R's `priors` ranges
 param_ranges <- list(
-  prep.start.rate_1 = c(0.00333, 0.05191),
-  prep.start.rate_2 = c(0.00333, 0.05191),
-  prep.start.rate_3 = c(0.00333, 0.05191),
-  hiv.test.rate_1 = c(0.000444, 0.001332),
-  hiv.test.rate_2 = c(0.000444, 0.001332),
-  hiv.test.rate_3 = c(0.000444, 0.001332),
-  tx.halt.rate_1 = c(0.000888, 0.002664),
-  tx.halt.rate_2 = c(0.000888, 0.002664),
-  tx.halt.rate_3 = c(0.000888, 0.002664),
+  # prep.start.rate_1 = c(0.00333, 0.05191),
+  # prep.start.rate_2 = c(0.00333, 0.05191),
+  # prep.start.rate_3 = c(0.00333, 0.05191),
+  # hiv.test.rate_1 = c(0.000444, 0.001332),
+  # hiv.test.rate_2 = c(0.000444, 0.001332),
+  # hiv.test.rate_3 = c(0.000444, 0.001332),
+  # tx.halt.rate_1 = c(0.000888, 0.002664),
+  # tx.halt.rate_2 = c(0.000888, 0.002664),
+  # tx.halt.rate_3 = c(0.000888, 0.002664),
+  #
+  # gono.uret.prob = c(0.17, 0.23),
+  # chla.uret.prob = c(0.17, 0.23),
+  # syph.prob = c(0.10, 0.13),
+  # aids.off.tx.mort.rate = c(0.000333, 0.000888),
+  # a.rate = c(0.0002, 0.0006)
+  #
   hiv.trans.scale_1 = c(1.5, 5),
   hiv.trans.scale_2 = c(0.2, 0.9),
-  hiv.trans.scale_3 = c(0.2, 0.9),
-  gono.uret.prob = c(0.17, 0.23),
-  chla.uret.prob = c(0.17, 0.23),
-  syph.prob = c(0.10, 0.13),
-  aids.off.tx.mort.rate = c(0.000333, 0.000888),
-  a.rate = c(0.0002, 0.0006)
-)
-
-param_ranges <- list(
-  prep.start.rate_1 = c(0.002, 0.06),
-  prep.start.rate_2 = c(0.002, 0.06),
-  prep.start.rate_3 = c(0.002, 0.06),
-  hiv.test.rate_1 = c(0.0003, 0.001),
-  hiv.test.rate_2 = c(0.0003, 0.001),
-  hiv.test.rate_3 = c(0.0003, 0.001),
-  tx.halt.rate_1 = c(0.0006, 0.003),
-  tx.halt.rate_2 = c(0.0006, 0.003),
-  tx.halt.rate_3 = c(0.0006, 0.003),
-  hiv.trans.scale_1 = c(1.5, 5),
-  hiv.trans.scale_2 = c(0.2, 0.9),
-  hiv.trans.scale_3 = c(0.2, 0.9),
-  gono.uret.prob = c(0.1, 0.3),
-  chla.uret.prob = c(0.1, 0.3),
-  syph.prob = c(0.10, 0.2),
-  aids.off.tx.mort.rate = c(0.000333, 0.000888),
-  a.rate = c(0.0002, 0.0006)
+  hiv.trans.scale_3 = c(0.2, 0.9)
 )
 
 # set.seed(12345)

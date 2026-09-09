@@ -117,7 +117,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_netsim_swfcalib_output(
     path_to_restart, param, init, control, calib_object,
     output_dir = calib_dir,
-    n_rep = 256,
+    n_rep = 64,
     n_cores = batch_size,
     max_array_size = 500,
     setup_lines = hpc_node_setup

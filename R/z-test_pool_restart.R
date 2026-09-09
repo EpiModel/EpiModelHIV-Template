@@ -8,8 +8,12 @@ library(dplyr)
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 source("R/C-calibration/utils-restart.R", local = TRUE)
-make_restart_pool <- function(sim_obj, time_attrs, sims_num = NULL,
-                              keep_steps = 1) {
+make_restart_pool <- function(
+  sim_obj,
+  time_attrs,
+  sims_num = NULL,
+  keep_steps = 1
+) {
   if (is.null(sims_num)) {
     sims_num <- seq_len(sim_obj$control$nsims)
   }
@@ -25,7 +29,7 @@ make_restart_pool <- function(sim_obj, time_attrs, sims_num = NULL,
 }
 
 # Process ----------------------------------------------------------------------
-sim <- readRDS("./data/run/calibration/sim__empty_scenario__1.rds")
+sim <- readRDS("./data/run/calibration_sav/sim__empty_scenario__1.rds")
 
 attrs_names <- names(EpiModelHIV::get_default_attrs())
 time_prefixes <- c(".last$", ".time$")
@@ -35,7 +39,12 @@ time_attrs <- Reduce(
   init = character(0)
 )
 
-restart_point <- make_restart_point(sim, time_attrs, sim_num = 1, keep_steps = 1)
+restart_point <- make_restart_point(
+  sim,
+  time_attrs,
+  sim_num = 1,
+  keep_steps = 1
+)
 
 restart_pool <- make_restart_pool(
   sim,
@@ -48,28 +57,44 @@ saveRDS(restart_point, "rp1.rds")
 saveRDS(restart_pool, "rpp.rds")
 
 lobstr::obj_size(restart_point)
+lobstr::obj_size(restart_pool)
 lapply(restart_point, lobstr::obj_size)
 lapply(restart_pool, lobstr::obj_size)
 
 # Better semantics -------------------------------------------------------------
-make_restart_point <- function(sim_obj, time_attrs,
-                               sims_num = NULL, keep_steps = 1) {
+make_restart_point <- function(
+  sim_obj,
+  time_attrs,
+  sims_num = NULL,
+  keep_steps = 1
+) {
   if (!inherits(sim_obj, c("netsim"))) {
     stop("`sim_obj` must be  an object of class `netsim`")
   }
   required_names <- c(
-    "control", "param", "nwparam", "epi", "run", "coef.form", "num.nw"
+    "control",
+    "param",
+    "nwparam",
+    "epi",
+    "run",
+    "coef.form",
+    "num.nw"
   )
   missing_names <- setdiff(required_names, names(sim_obj))
   if (length(missing_names) > 0) {
     stop(
       "`sim_obj` is missing the following elements required for",
-      " re-initialization: ", paste.and(missing_names)
+      " re-initialization: ",
+      paste.and(missing_names)
     )
   }
-  # TODO: fix for multi sims
+
+  nsims <- sim_obj$control$nsims
   if (is.null(sims_num)) {
-    sims_num <- seq_len(sim_obj$control$nsims)
+    sims_num <- seq_len(nsims)
+    message("Making a restart object with all (", nsims, ") simulations")
+  } else if (!all(sims_num %in% seq_len(sim_obj$control$nsims))) {
+    stop( "All `sims_num` must be >= 1 and <= `control$nsims` (", nsims, ")")
   }
 
   if (!sim_obj$control$tergmLite) {
@@ -123,7 +148,6 @@ make_restart_point <- function(sim_obj, time_attrs,
     run_ls$attr$unique_id <- run_ls$attr$unique_id - uid_offset
     run_ls$last_unique_id <- run_ls$last_unique_id - uid_offset
 
-
     # Cumulative Edgelist - fix time and UIDs
     run_ls$el_cuml_cur <- lapply(
       run_ls$el_cuml_cur,
@@ -163,7 +187,6 @@ make_restart_point <- function(sim_obj, time_attrs,
     }
   }
 
-
   # Output ---------------------------------------------------------------------
 
   x$attr.history <- list()
@@ -171,5 +194,5 @@ make_restart_point <- function(sim_obj, time_attrs,
   return(x)
 }
 
-restart_point <- make_restart_point(sim, time_attrs, keep_steps = 1)
+restart_point <- make_restart_point(sim, time_attrs, keep_steps = 1, sims_num = -1)
 saveRDS(restart_point, "rp2.rds")

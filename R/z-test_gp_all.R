@@ -9,12 +9,14 @@ source("R/C-calibration/z-context.R", local = TRUE)
 source("./R/C-calibration/z-gp_utils.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-# process_calibs ---------------------------------------------------------------
-if (!file.exists("data/run/gp_all_results2.Rds")) {
-  n_cores <- 4
-  source("./R/C-calibration/gp_process_calibs.R")
-}
-d <- readRDS("data/run/gp_all_results2.Rds")
+# # process_calibs ---------------------------------------------------------------
+# if (!file.exists("data/run/gp_all_results2.Rds")) {
+#   n_cores <- 4
+#   source("./R/C-calibration/gp_process_calibs.R")
+# }
+# d <- readRDS("data/run/gp_all_results2.Rds")
+results <- readRDS("./sw_res.rds")
+d <- filter(results, .wave == 2)
 
 # ------------------------------------------------------------------------------
 # PrEP

@@ -8,7 +8,7 @@ source("R/C-calibration/z-context.R", local = TRUE)
 source("./R/C-calibration/z-gp_utils.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-# process_calibs ---------------------------------------------------------------
+# process_calibs --------
 # if (!file.exists("data/run/gp_all_results2.Rds")) {
 #   n_cores <- 4
 #   source("./R/C-calibration/gp_process_calibs.R")
@@ -73,7 +73,6 @@ fit_params <- function() {
   par_star[par_names[1]] <<- munscale(root$root, par_ranges[[1]])
 }
 
-# ------------------------------------------------------------------------------
 # PrEP
 # ------------------------------------------------------------------------------
 for (i in seq_along(ethn)) {
@@ -82,7 +81,6 @@ for (i in seq_along(ethn)) {
   fit_params()
 }
 
-# ------------------------------------------------------------------------------
 # cc.dx
 # ------------------------------------------------------------------------------
 for (i in seq_along(ethn)) {
@@ -94,7 +92,6 @@ for (i in seq_along(ethn)) {
   fit_params()
 }
 
-# ------------------------------------------------------------------------------
 # cc.vsupp
 # ------------------------------------------------------------------------------
 for (i in seq_along(ethn)) {
@@ -108,7 +105,6 @@ for (i in seq_along(ethn)) {
 }
 
 
-# ------------------------------------------------------------------------------
 # syph
 # ------------------------------------------------------------------------------
 par_names <- c(
@@ -118,7 +114,6 @@ par_names <- c(
 tar_name <- "ir100.syph"
 fit_params()
 
-# ------------------------------------------------------------------------------
 # gono
 # ------------------------------------------------------------------------------
 par_names <- c("gono.uret.prob", "tx.halt.rate_1", "hiv.test.rate_1", "prep.start.rate_1")
