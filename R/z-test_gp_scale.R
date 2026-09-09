@@ -63,7 +63,6 @@ par_star
 # Plotting
 plot_gp(mod, val, par_range, tar)
 
-# ----
 # i.prev.dx.W ------------------------------------------------------------------
 par_name <- c("hiv.trans.scale_3")
 tar_name <- "i.prev.dx.W"
@@ -108,10 +107,6 @@ resid <- function(u) {
   xm <- matrix(pmin(pmax(u, 0), 1), nrow = 1)
   sapply(seq_along(mods), function(k) predict(mods[[k]], xm)$mean - tars[k])
 }
-
-sol <- nleqslv::nleqslv(rep(0.5, 3), resid) # multi-root solver
-par_star <- setNames(mapply(munscale, sol$x, par_ranges), par_names)
-par_star
 
 fit <- minpack.lm::nls.lm(
   par = rep(0.5, 3),

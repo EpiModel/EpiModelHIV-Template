@@ -13,8 +13,8 @@ results <- readRDS("./sw_res.rds")
 d <- readRDS("./res4.rds")
 
 d <- filter(results, .wave == 3)
-par_name <- "tx.halt.rate_2"
-tar_name <- "cc.vsupp.H"
+par_name <- "tx.halt.rate_1"
+tar_name <- "cc.vsupp.B"
 
 par_raw <- d[[par_name]]
 par_range <- range(par_raw)
