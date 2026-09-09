@@ -1,6 +1,9 @@
 # Utility
 replace_join <- function(orig, new, by) {
-  out <- dplyr::left_join(orig, new, by = by, suffix = c("__ditch_me", ""))
+  out <- dplyr::left_join(orig, new, by = by, suffix = c("__ditch_me", "")) |>
+    dplyr::mutate(
+      value = ifelse(!is.na(value), value, value__ditch_me)
+    )
   out[names(orig)]
 }
 
@@ -32,6 +35,12 @@ write.csv(
 )
 
 # Update model_parameters.csv with swfcalib values -----------------------------
+library(EpiModelHIV)
+library(dplyr)
+hpc_context <- TRUE
+source("R/shared_variables.R", local = TRUE)
+source("R/C-calibration/z-context.R", local = TRUE)
+source("R/netsim_settings.R", local = TRUE)
 params_df <- read.csv(fs::path(input_dir, "model_parameters.csv"))
 updated_df <- read.csv("./calibrated.csv")
 new_params <- replace_join(params_df, updated_df, by = c("param", "type"))
