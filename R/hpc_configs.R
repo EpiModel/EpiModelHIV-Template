@@ -36,7 +36,8 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
 
   if (update_renv) {
     renv::snapshot(
-      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
+      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData",
+        "minpack.lm", "hetGP", "MASS"),
       lockfile = "renv.lock.hpc",
       prompt = FALSE
     )

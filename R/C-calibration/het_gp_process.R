@@ -127,3 +127,41 @@ determ_gp_end_single <- function(extended_range) {
     return(NULL)
   }
 }
+
+determ_gp_end_single3 <- function() {
+  function(calib_object, job, results) {
+    library(hetGP)
+    library(MASS)
+    source("./R/C-calibration/z-gp_utils.R", local = TRUE)
+
+    par_names <- job$params
+    par_raws <- results[par_names]
+    par_ranges <- lapply(par_raws, range)
+    tar_names <- job$targets
+    tars <- job$targets_val
+
+    X <- mapply(mscale, par_raws, par_ranges)
+
+    mods <- lapply(tar_names, \(tar_name) {
+      val <- results[[tar_name]]
+      mleHetGP(X, val, covtype = "Matern5_2", eps = 1e-6)
+    })
+    names(mods) <- tar_names
+
+    resid <- function(u) {
+      xm <- matrix(pmin(pmax(u, 0), 1), nrow = 1)
+      sapply(seq_along(mods), function(k) predict(mods[[k]], xm)$mean - tars[k])
+    }
+
+    fit <- minpack.lm::nls.lm(
+      par = rep(0.5, 3),
+      fn = resid,
+      lower = rep(0, 3),
+      upper = rep(1, 3)
+    )
+    par_star <- setNames(mapply(munscale, fit$par, par_ranges), par_names)
+    result <- as.list(par_star)
+    names(result) <- job$params
+    return(dplyr::as_tibble(result))
+  }
+}
