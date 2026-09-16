@@ -6,7 +6,7 @@ theme_set(theme_light())
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 
-r <- readRDS("./w3r.rds")
+r <- readRDS("./rr.rds")
 props <- readRDS("./props.rds")
 print(props, n = 200)
 sort(props$gono.uret.prob)

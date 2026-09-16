@@ -25,7 +25,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-scale_r <- list(c(1, 5), c(0.2, 0.9), c(0.2, 0.9))
+scale_r <- list(c(1, 5), c(0.1, 0.9), c(0.1, 0.9))
 lhs_unit <- lhs::maximinLHS(n_sims / n_reps, length(scale_r))
 scale_params <- list()
 for (i in 1:3)
@@ -71,7 +71,7 @@ calib_object <- list(
         params = c("prep.start.rate_1"),
         initial_proposals = tibble(
           prep.start.rate_1 = sample(rep(
-            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            seq(0.0005, 0.05, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -84,7 +84,7 @@ calib_object <- list(
         params = c("prep.start.rate_2"),
         initial_proposals = tibble(
           prep.start.rate_2 = sample(rep(
-            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            seq(0.0005, 0.05, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -97,7 +97,7 @@ calib_object <- list(
         params = c("prep.start.rate_3"),
         initial_proposals = tibble(
           prep.start.rate_3 = sample(rep(
-            seq(0.002, 0.06, length.out = n_sims / n_reps),
+            seq(0.0005, 0.05, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -112,7 +112,7 @@ calib_object <- list(
         params = c("hiv.test.rate_1"), # target: 0.00385
         initial_proposals = tibble(
           hiv.test.rate_1 = sample(rep(
-            seq(0.0001, 0.001, length.out = n_sims / n_reps),
+            seq(0.00005, 0.005, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -125,7 +125,7 @@ calib_object <- list(
         params = c("hiv.test.rate_2"), # target: 0.0038
         initial_proposals = tibble(
           hiv.test.rate_2 = sample(rep(
-            seq(0.0001, 0.001, length.out = n_sims / n_reps),
+            seq(0.00005, 0.005, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -138,7 +138,7 @@ calib_object <- list(
         params = c("hiv.test.rate_3"), # target: 0.0069
         initial_proposals = tibble(
           hiv.test.rate_3 = sample(rep(
-            seq(0.0001, 0.001, length.out = n_sims / n_reps),
+            seq(0.00005, 0.005, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -153,7 +153,7 @@ calib_object <- list(
         params = "tx.halt.rate_1",
         initial_proposals = tibble(
           tx.halt.rate_1 = sample(rep(
-            seq(0.0015, 0.003, length.out = n_sims / n_reps),
+            seq(0.0001, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -166,7 +166,7 @@ calib_object <- list(
         params = "tx.halt.rate_2",
         initial_proposals = tibble(
           tx.halt.rate_2 = sample(rep(
-            seq(0.0015, 0.003, length.out = n_sims / n_reps),
+            seq(0.0001, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
@@ -179,7 +179,7 @@ calib_object <- list(
         params = "tx.halt.rate_3",
         initial_proposals = tibble(
           tx.halt.rate_3 = sample(rep(
-            seq(0.0005, 0.003, length.out = n_sims / n_reps),
+            seq(0.0001, 0.01, length.out = n_sims / n_reps),
             n_reps
           ))
         ),

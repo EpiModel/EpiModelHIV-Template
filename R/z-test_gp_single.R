@@ -9,12 +9,10 @@ source("R/C-calibration/z-context.R", local = TRUE)
 source("./R/C-calibration/z-gp_utils.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-results <- readRDS("./sw_res.rds")
-d <- readRDS("./res4.rds")
-
-d <- filter(results, .wave == 3)
-par_name <- "tx.halt.rate_1"
-tar_name <- "cc.vsupp.B"
+results <- readRDS("./rr.rds")
+d <- results
+par_name <- "hiv.test.rate_1"
+tar_name <- "cc.dx.B"
 
 par_raw <- d[[par_name]]
 par_range <- range(par_raw)
@@ -35,4 +33,3 @@ par_star
 
 # Plotting
 plot_gp(mod, val, par_range, tar)
-ggsave(paste0(tar_name, "-gp_plot.png"))
