@@ -40,7 +40,7 @@ wf <- make_em_workflow("bad_pool_calib", override = TRUE)
 # Define calibration scenarios
 # insert test values here
 scenarios_df <- tibble(
-  .scenario.id = "bad_calib",
+  .scenario.id = "bad_calib_pool",
   .at = 1,
   prep.start.rate_1 = 0.0059217,
   prep.start.rate_2 = 0.004542306,
