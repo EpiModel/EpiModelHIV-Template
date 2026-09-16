@@ -28,7 +28,7 @@ control <- control_msm(
   nsteps              = calibration_end,
   start               = restart_time,
   initialize.FUN      = reinit_msm,
-  randomize.restart = TRUE,
+  randomize.restart   = TRUE,
   verbose = FALSE
 )
 
