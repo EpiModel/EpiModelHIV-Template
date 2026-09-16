@@ -1,7 +1,9 @@
 # TODO: verify that I have results for ALL waves and iterations
+# NOTE: no, missing last
 # TODO: considering monotonous assumption, eval how deter gp fails and how to
 # auto fix => goal: run "bad_calib" once and get ballparck at the end even with
 # bad config
+# TODO: check how hiv trans behaved with no LHS, no reps - should I change
 
 library(dplyr)
 library(EpiModelHIV)

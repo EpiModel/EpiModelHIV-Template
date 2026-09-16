@@ -1,10 +1,14 @@
-## swfcalib Configuration 1 (pre-prep)
+## swfcalib Configuration 1
 ##
 ## Set up the configuration for the first calibration. This takes place before
 ## the restart point
 ##
 ## This script should not be run directly. But `sourced` from the swfcalib
 ## workflow
+
+# TODO: test as is (no restart, good ranges)
+# TODO: create a failsafe version?
+
 library(swfcalib)
 library(dplyr)
 library(tidyr)
@@ -13,13 +17,20 @@ n_sims <- 64
 n_reps <- 4
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
-model_fn <- make_model_fn(calib_steps = year_steps)
+model_fn <- make_direct_model_fn(calib_steps = year_steps)
 
 source("./R/C-calibration/het_gp_process.R", local = TRUE)
 
 source("R/shared_variables.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
+
+scale_r <- list(c(1, 5), c(0.2, 0.9), c(0.2, 0.9))
+lhs_unit <- lhs::maximinLHS(n_sims / n_reps, length(scale_r))
+scale_params <- list()
+for (i in 1:3)
+  scale_params[[i]] <- lhs_unit[, i] * diff(scale_r[[i]]) + scale_r[[i]][1]
+scale_params <- lapply(scale_params, rep, times = n_reps)
 
 params_df <- params_df |>
   select(value, param) |>
@@ -223,25 +234,16 @@ calib_object <- list(
         targets_val = targets[paste0("i.prev.dx.", c("B", "H", "W"))],
         params = paste0("hiv.trans.scale_", 1:3),
         initial_proposals = tibble(
-          hiv.trans.scale_1 = sample(rep(
-            seq(1, 5, length.out = n_sims / n_reps),
-            n_reps
-          )),
-          hiv.trans.scale_2 = sample(rep(
-            seq(0.2, 0.9, length.out = n_sims / n_reps),
-            n_reps
-          )),
-          hiv.trans.scale_3 = sample(rep(
-            seq(0.2, 0.9, length.out = n_sims / n_reps),
-            n_reps
-          ))
+          hiv.trans.scale_1 = scale_params[[1]],
+          hiv.trans.scale_2 = scale_params[[2]],
+          hiv.trans.scale_3 = scale_params[[3]]
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single3()
       )
     ),
     wave6 = list(
-      job0 = list(
+      job1 = list(
         targets = "disease.mr100",
         targets_val = targets["disease.mr100"],
         params = c("aids.off.tx.mort.rate"), # target: 0.00385
@@ -253,10 +255,8 @@ calib_object <- list(
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.001))
-      )
-    ),
-    wave7 = list(
-      job0 = list(
+      ),
+      job2 = list(
         targets = "num",
         targets_val = 100e3,
         params = c("a.rate"),
@@ -273,4 +273,4 @@ calib_object <- list(
   )
 )
 
-calib_object$waves <- calib_object$waves[-c(1, 2)]
+# calib_object$waves <- calib_object$waves[-c(1, 2)]

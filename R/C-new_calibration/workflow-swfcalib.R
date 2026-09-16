@@ -20,9 +20,7 @@ max_cores <- batch_size
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-# source("R/C-calibration/swfcalib_config.R", local = TRUE)
-# source("R/C-calibration/swfcalib_config_gp_single.R", local = TRUE)
-source("R/C-calibration/swfcalib_config_gp_bad.R", local = TRUE)
+source("./R/C-new_calibration/swfcalib_config_gp_bad.R", local = TRUE)
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 

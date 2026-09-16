@@ -25,7 +25,8 @@ make_model_fn <- function(calib_steps) {
     control <- control_msm(
       nsteps = calibration_end,
       start = restart_time,
-      initialize.FUN = reinit_msm,
+      initialize.FUN = initialize.net,
+      randomize.restart = TRUE,
       verbose = FALSE
     )
 
