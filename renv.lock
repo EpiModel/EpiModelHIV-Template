@@ -188,7 +188,7 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "restart_pool",
-      "RemoteSha": "59152803495e584947430088ef33be914a80788b",
+      "RemoteSha": "4cc3281aca694b76107ec9c68d6447d09f4590f9",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
