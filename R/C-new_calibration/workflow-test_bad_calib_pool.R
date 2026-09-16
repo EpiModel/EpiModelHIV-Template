@@ -27,7 +27,7 @@ source("R/netsim_settings.R", local = TRUE)
 control <- control_msm(
   nsteps              = calibration_end,
   start               = restart_time,
-  initialize.FUN      = reinit_msm,
+  initialize.FUN      = initialize.net,
   randomize.restart   = TRUE,
   verbose = FALSE
 )

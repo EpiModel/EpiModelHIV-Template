@@ -49,10 +49,11 @@ control <- control_msm(
   nsteps         = 3,
   nsims = 4,
   initialize.FUN = initialize.net,
-  randomize.restart = FALSE,
+  randomize.restart = TRUE,
   verbose = TRUE
 )
 
+restart_point <- readRDS("restart_pool.rds")
 rest_sim <- netsim(restart_point, param, init, control)
 
 for (i in 1:4) {
