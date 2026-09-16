@@ -26,7 +26,6 @@ params_df <- params_df |>
   mutate(value = as.numeric(value)) |>
   pivot_wider(names_from = param)
 
-
 calib_object <- list(
   config = list(
     simulator = model_fn,
@@ -34,18 +33,12 @@ calib_object <- list(
     max_iteration = 100,
     n_sims = n_sims,
     default_proposal = tibble(
-      prep.start.rate_1 = 0.0059217,
-      prep.start.rate_2 = 0.004542306,
-      prep.start.rate_3 = 0.006757837,
-      hiv.test.rate_1 = 0.0006724602,
-      hiv.test.rate_2 = 0.0009920079,
-      hiv.test.rate_3 = 0.0006740063,
-      # prep.start.rate_1 = 0.02,
-      # prep.start.rate_2 = 0.002,
-      # prep.start.rate_3 = 0.002,
-      # hiv.test.rate_1 = 0.0001,
-      # hiv.test.rate_2 = 0.003,
-      # hiv.test.rate_3 = 0.003,
+      prep.start.rate_1 = 0.02,
+      prep.start.rate_2 = 0.002,
+      prep.start.rate_3 = 0.002,
+      hiv.test.rate_1 = 0.0001,
+      hiv.test.rate_2 = 0.003,
+      hiv.test.rate_3 = 0.003,
       tx.halt.rate_1 = 0.004,
       tx.halt.rate_2 = 0.004,
       tx.halt.rate_3 = 0.0005,
@@ -280,4 +273,4 @@ calib_object <- list(
   )
 )
 
-# calib_object$waves <- calib_object$waves[-c(1, 2)]
+calib_object$waves <- calib_object$waves[-c(1, 2)]
