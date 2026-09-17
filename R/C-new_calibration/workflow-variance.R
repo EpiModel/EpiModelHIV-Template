@@ -25,7 +25,7 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps              = 300 * year_steps,
+  nsteps              = 600 * year_steps,
   start               = restart_time,
   initialize.FUN      = initialize.net,
   verbose = FALSE
@@ -48,7 +48,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
-    "time" = "04:00:00",
+    "time" = "20:00:00",
     "mem-per-cpu" = "5G"
   )
 )
@@ -65,6 +65,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
+    "mail-type" = "FAIL,TIME_LIMIT,END",
     "cpus-per-task" = max_cores,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"

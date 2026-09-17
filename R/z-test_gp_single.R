@@ -11,8 +11,8 @@ targets <- EpiModelHIV::get_calibration_targets()
 
 results <- readRDS("./rr.rds")
 d <- results
-par_name <- "hiv.test.rate_1"
-tar_name <- "cc.dx.B"
+par_name <- "hiv.test.rate_3"
+tar_name <- "cc.dx.W"
 
 par_raw <- d[[par_name]]
 par_range <- range(par_raw)

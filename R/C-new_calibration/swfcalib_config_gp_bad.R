@@ -26,11 +26,16 @@ source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
 scale_r <- list(c(1, 5), c(0.1, 0.9), c(0.1, 0.9))
-lhs_unit <- lhs::maximinLHS(n_sims / n_reps, length(scale_r))
-scale_params <- list()
-for (i in 1:3)
-  scale_params[[i]] <- lhs_unit[, i] * diff(scale_r[[i]]) + scale_r[[i]][1]
-scale_params <- lapply(scale_params, rep, times = n_reps)
+
+scale_params <- lapply(
+  scale_r,
+  \(r) rep(sample(seq(r[1], r[2], length.out = n_sims / n_reps)), n_reps)
+)
+# lhs_unit <- lhs::maximinLHS(n_sims / n_reps, length(scale_r))
+# scale_params <- list()
+# for (i in 1:3)
+#   scale_params[[i]] <- lhs_unit[, i] * diff(scale_r[[i]]) + scale_r[[i]][1]
+# scale_params <- lapply(scale_params, rep, times = n_reps)
 
 params_df <- params_df |>
   select(value, param) |>
@@ -64,6 +69,47 @@ calib_object <- list(
     )
   ),
   waves = list(
+    wave0 = list(
+      job1 = list(
+        targets = "ir100.gono",
+        targets_val = targets["ir100.gono"],
+        params = c("gono.uret.prob"), # target:
+        initial_proposals = tibble(
+          gono.uret.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
+        make_next_proposals = proposer_load_sideload,
+        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
+      ),
+      job2 = list(
+        targets = "ir100.chla",
+        targets_val = targets["ir100.chla"],
+        params = c("chla.uret.prob"), # target:
+        initial_proposals = tibble(
+          chla.uret.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
+        make_next_proposals = proposer_load_sideload,
+        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
+      ),
+      job3 = list(
+        targets = "ir100.syph",
+        targets_val = targets["ir100.syph"],
+        params = c("syph.prob"), # target:
+        initial_proposals = tibble(
+          syph.prob = sample(rep(
+            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            n_reps
+          ))
+        ),
+        make_next_proposals = proposer_load_sideload,
+        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
+      )
+    ),
     wave1 = list(
       job1 = list(
         targets = "cc.prep.B",
