@@ -192,7 +192,7 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodel",
       "RemoteRef": "restart_pool",
-      "RemoteSha": "4cc3281aca694b76107ec9c68d6447d09f4590f9",
+      "RemoteSha": "46596affbf268ba12c569de3cc10a9c9087726ac",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
@@ -2775,11 +2775,11 @@
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "1d0f9a86199b799f1c0fa58245b89a03abd3f1a5"
+      "RemoteSha": "5757119a9a5c6ab21e70847fee42df505f7c4fb1",
+      "RemoteHost": "api.github.com"
     },
     "tergm": {
       "Package": "tergm",
@@ -3111,7 +3111,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.60",
+      "Version": "0.61",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Supporting Functions for Packages Maintained by 'Yihui Xie'",
@@ -3151,7 +3151,7 @@
       "BugReports": "https://github.com/yihui/xfun/issues",
       "Encoding": "UTF-8",
       "VignetteBuilder": "litedown",
-      "Config/roxygen2/version": "8.0.0",
+      "Config/roxygen2/version": "8.1.0",
       "NeedsCompilation": "yes",
       "Author": "Yihui Xie [aut, cre, cph] (ORCID: <https://orcid.org/0000-0003-0645-5666>, URL: https://yihui.org), Wush Wu [ctb], Daijiang Li [ctb], Xianying Tan [ctb], Salim Brüggemann [ctb] (ORCID: <https://orcid.org/0000-0002-5329-5987>), Christophe Dervieux [ctb]",
       "Maintainer": "Yihui Xie <xie@yihui.name>",

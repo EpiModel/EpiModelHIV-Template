@@ -41,3 +41,7 @@ restart_pool <- EpiModel::make_restart_point(
 saveRDS(restart_pool, "restart_pool.rds")
 
 str(sims$coef.form, max.level = 1)
+
+restart_pool <- readRDS("restart_pool.rds")
+
+restart_pool$raw.records |> names()

@@ -13,7 +13,7 @@ library(swfcalib)
 library(dplyr)
 library(tidyr)
 
-n_sims <- 64
+n_sims <- 128
 n_reps <- 4
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
@@ -69,7 +69,7 @@ calib_object <- list(
     )
   ),
   waves = list(
-    wave0 = list(
+    wave1 = list(
       job1 = list(
         targets = "ir100.gono",
         targets_val = targets["ir100.gono"],
@@ -188,10 +188,8 @@ calib_object <- list(
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.00005, 0.005))
-      )
-    ),
-    wave3 = list(
-      job1 = list(
+      ),
+      job4 = list(
         targets = "cc.vsupp.B",
         targets_val = targets["cc.vsupp.B"],
         params = "tx.halt.rate_1",
@@ -204,7 +202,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
-      job2 = list(
+      job5 = list(
         targets = "cc.vsupp.H",
         targets_val = targets["cc.vsupp.H"],
         params = "tx.halt.rate_2",
@@ -217,7 +215,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
-      job3 = list(
+      job6 = list(
         targets = "cc.vsupp.W",
         targets_val = targets["cc.vsupp.W"],
         params = "tx.halt.rate_3",
@@ -231,48 +229,7 @@ calib_object <- list(
         get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       )
     ),
-    wave4 = list(
-      job1 = list(
-        targets = "ir100.gono",
-        targets_val = targets["ir100.gono"],
-        params = c("gono.uret.prob"), # target:
-        initial_proposals = tibble(
-          gono.uret.prob = sample(rep(
-            seq(0.1, 0.3, length.out = n_sims / n_reps),
-            n_reps
-          ))
-        ),
-        make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
-      ),
-      job2 = list(
-        targets = "ir100.chla",
-        targets_val = targets["ir100.chla"],
-        params = c("chla.uret.prob"), # target:
-        initial_proposals = tibble(
-          chla.uret.prob = sample(rep(
-            seq(0.1, 0.3, length.out = n_sims / n_reps),
-            n_reps
-          ))
-        ),
-        make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
-      ),
-      job3 = list(
-        targets = "ir100.syph",
-        targets_val = targets["ir100.syph"],
-        params = c("syph.prob"), # target:
-        initial_proposals = tibble(
-          syph.prob = sample(rep(
-            seq(0.1, 0.2, length.out = n_sims / n_reps),
-            n_reps
-          ))
-        ),
-        make_next_proposals = proposer_load_sideload,
-        get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
-      )
-    ),
-    wave5 = list(
+    wave3 = list(
       job1 = list(
         targets = paste0("i.prev.dx.", c("B", "H", "W")),
         targets_val = targets[paste0("i.prev.dx.", c("B", "H", "W"))],
@@ -284,10 +241,8 @@ calib_object <- list(
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single3()
-      )
-    ),
-    wave6 = list(
-      job1 = list(
+      ),
+      job2 = list(
         targets = "disease.mr100",
         targets_val = targets["disease.mr100"],
         params = c("aids.off.tx.mort.rate"), # target: 0.00385
@@ -300,7 +255,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.001))
       ),
-      job2 = list(
+      job3 = list(
         targets = "num",
         targets_val = 100e3,
         params = c("a.rate"),
