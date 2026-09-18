@@ -102,16 +102,14 @@ calib_object <- list(
         params = c("syph.prob"), # target:
         initial_proposals = tibble(
           syph.prob = sample(rep(
-            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            seq(0.1, 0.2, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.05, 0.5))
-      )
-    ),
-    wave1 = list(
-      job1 = list(
+      ),
+      job4 = list(
         targets = "cc.prep.B",
         targets_val = targets["cc.prep.B"],
         params = c("prep.start.rate_1"),
@@ -124,7 +122,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.005, 0.1))
       ),
-      job2 = list(
+      job5 = list(
         targets = "cc.prep.H",
         targets_val = targets["cc.prep.H"],
         params = c("prep.start.rate_2"),
@@ -137,7 +135,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.005, 0.1))
       ),
-      job3 = list(
+      job6 = list(
         targets = "cc.prep.W",
         targets_val = targets["cc.prep.W"],
         params = c("prep.start.rate_3"),
@@ -266,7 +264,7 @@ calib_object <- list(
         params = c("syph.prob"), # target:
         initial_proposals = tibble(
           syph.prob = sample(rep(
-            seq(0.1, 0.3, length.out = n_sims / n_reps),
+            seq(0.1, 0.2, length.out = n_sims / n_reps),
             n_reps
           ))
         ),
