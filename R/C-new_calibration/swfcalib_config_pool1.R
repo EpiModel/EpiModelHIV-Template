@@ -140,10 +140,8 @@ calib_object <- list(
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.001))
-      )
-    ),
-    wave3 = list(
-      job1 = list(
+      ),
+      job4 = list(
         targets = "cc.vsupp.B",
         targets_val = targets["cc.vsupp.B"],
         params = "tx.halt.rate_1",
@@ -156,7 +154,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
-      job2 = list(
+      job5 = list(
         targets = "cc.vsupp.H",
         targets_val = targets["cc.vsupp.H"],
         params = "tx.halt.rate_2",
@@ -169,7 +167,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0005, 0.01))
       ),
-      job3 = list(
+      job6 = list(
         targets = "cc.vsupp.W",
         targets_val = targets["cc.vsupp.W"],
         params = "tx.halt.rate_3",
@@ -183,7 +181,7 @@ calib_object <- list(
         get_result = determ_gp_end_single(extended_range = c(0.00025, 0.01))
       )
     ),
-    wave4 = list(
+    wave3 = list(
       job1 = list(
         targets = "ir100.gono",
         targets_val = targets["ir100.gono"],
@@ -224,7 +222,7 @@ calib_object <- list(
         get_result = determ_gp_end_single(extended_range = c(0.05, 0.3))
       )
     ),
-    wave5 = list(
+    wave4 = list(
       job1 = list(
         targets = paste0("i.prev.dx.", c("B", "H", "W")),
         targets_val = targets[paste0("i.prev.dx.", c("B", "H", "W"))],
@@ -236,9 +234,7 @@ calib_object <- list(
         ),
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single3()
-      )
-    ),
-    wave6 = list(
+      ),
       job2 = list(
         targets = "disease.mr100",
         targets_val = targets["disease.mr100"],
@@ -252,7 +248,7 @@ calib_object <- list(
         make_next_proposals = proposer_load_sideload,
         get_result = determ_gp_end_single(extended_range = c(0.0001, 0.001))
       ),
-      job2 = list(
+      job3 = list(
         targets = "num",
         targets_val = 100e3,
         params = c("a.rate"),

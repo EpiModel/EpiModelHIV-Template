@@ -8,11 +8,13 @@
 
 # Setup ------------------------------------------------------------------------
 scenario_name <- "empty_scenario"
-scenario_name <- "bad_calib"
+scenario_name <- "default"
 hpc_context <- TRUE
 
 library(EpiModelHIV)
 library(dplyr)
+library(ggplot2)
+theme_set(theme_light())
 source("R/shared_variables.R", local = TRUE)
 source("R/C-new_calibration/z-context.R", local = TRUE)
 source("./R/C-new_calibration/utils-restart_pool_tools.R", local = TRUE)
@@ -41,6 +43,19 @@ d_dist <- d_calibs |>
   ) |>
   mutate(cost = 0)
 
+# Relation between syph prev and syph ir100
+d_calibs |>
+  mutate(syph.prev = syph.inf / num) |>
+  select(batch_number, sim_number, syph.prev, ir100.syph) |>
+  summarize(
+    across(everything(), mean),
+    .by = c("batch_number", "sim_number")
+  ) |>
+  ggplot( aes(y = syph.prev, x = ir100.syph)) +
+  geom_point() +
+  geom_smooth()
+
+
 # calculate Squared Error
 for (nme in names(targets)) {
   d_dist$cost <- d_dist$cost + d_dist[[nme]]^2
@@ -52,7 +67,7 @@ for (sti in names(has_sti)) {
   if (has_sti[sti]) {
     sti_tar <- paste0("ir100.", sti)
     d_dist$cost <- ifelse(
-      d_dist[[sti_tar]] < -0.25 * targets[[sti_tar]],
+      d_dist[[sti_tar]] < -0.5 * targets[[sti_tar]],
       Inf,
       d_dist$cost
     )
@@ -74,7 +89,6 @@ best_sims <- d_dist |>
   filter(cost < Inf)
 
 batch_numbers <- unique(best_sims$batch_number)
-
 
 # Make the restart pool --------------------------------------------------------
 attrs_names <- names(EpiModelHIV::get_default_attrs())

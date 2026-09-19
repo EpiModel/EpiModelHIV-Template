@@ -7,7 +7,8 @@ rmarkdown::render(
   params = list(
     context = "local",
     # path_df = fs::path(calib_dir, "merged_tibbles/df__empty_scenario.rds")
-    path_df = fs::path(calib_dir, "merged_tibbles/df__bad_calib.rds")
+    # path_df = fs::path(calib_dir, "merged_tibbles/df__bad_calib.rds")
+    path_df = fs::path(calib_dir, "merged_tibbles/df__default.rds")
     # path_df = "./data/run/variance/df__variance_long.rds"
   )
 )

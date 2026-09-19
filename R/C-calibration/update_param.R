@@ -34,18 +34,18 @@ write.csv(
   row.names = FALSE
 )
 
-# Update model_parameters.csv with swfcalib values -----------------------------
-library(EpiModelHIV)
-library(dplyr)
-hpc_context <- TRUE
-source("R/shared_variables.R", local = TRUE)
-source("R/C-calibration/z-context.R", local = TRUE)
-source("R/netsim_settings.R", local = TRUE)
-params_df <- read.csv(fs::path(input_dir, "model_parameters.csv"))
-updated_df <- read.csv("./calibrated.csv")
-new_params <- replace_join(params_df, updated_df, by = c("param", "type"))
-write.csv(
-  new_params,
-  fs::path(input_dir, "model_parameters.csv"),
-  row.names = FALSE
-)
+# # Update model_parameters.csv with swfcalib values -----------------------------
+# library(EpiModelHIV)
+# library(dplyr)
+# hpc_context <- TRUE
+# source("R/shared_variables.R", local = TRUE)
+# source("R/C-calibration/z-context.R", local = TRUE)
+# source("R/netsim_settings.R", local = TRUE)
+# params_df <- read.csv(fs::path(input_dir, "model_parameters.csv"))
+# updated_df <- read.csv("./calibrated.csv")
+# new_params <- replace_join(params_df, updated_df, by = c("param", "type"))
+# write.csv(
+#   new_params,
+#   fs::path(input_dir, "model_parameters.csv"),
+#   row.names = FALSE
+# )

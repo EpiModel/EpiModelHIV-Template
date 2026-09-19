@@ -20,8 +20,9 @@ max_cores <- batch_size
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-# source("./R/C-new_calibration/swfcalib_config_gp_bad.R", local = TRUE)
-source("./R/C-new_calibration/swfcalib_config_gp_pool.R", local = TRUE)
+# source("./R/C-new_calibration/swfcalib_config_ballpark.R", local = TRUE)
+# source("./R/C-new_calibration/swfcalib_config_pool1.R", local = TRUE)
+source("./R/C-new_calibration/swfcalib_config_pool2.R", local = TRUE)
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 
@@ -82,23 +83,6 @@ wf <- add_workflow_step(
   )
 )
 
-# Update param csv
-wf <- add_workflow_step(
-  wf_summary = wf,
-  step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/C-calibration/update_param.R",
-    args = list(
-      calib_object = calib_object
-    ),
-    setup_lines = hpc_node_setup
-  ),
-  sbatch_opts = list(
-    "cpus-per-task" = 1,
-    "time" = "00:20:00",
-    "mem-per-cpu" = "8G"
-  )
-)
-
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
@@ -139,22 +123,8 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
-    "cpus-per-task" = batch_size,
-    "time" = "02:00:00",
-    "mem-per-cpu" = "5G"
-  )
-)
-
-wf <- add_workflow_step(
-  wf_summary = wf,
-  step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/C-calibration/process_calib_plots.R",
-    args = list(hpc_context = TRUE, scenario = "default"),
-    setup_lines = hpc_node_setup
-  ),
-  sbatch_opts = list(
     "mail-type" = "END",
-    "cpus-per-task" = max_cores,
+    "cpus-per-task" = batch_size,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"
   )
