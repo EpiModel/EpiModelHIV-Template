@@ -15,7 +15,7 @@ library(EpiModelHIV)
 library(dplyr)
 source("R/shared_variables.R", local = TRUE)
 source("R/C-new_calibration/z-context.R", local = TRUE)
-source("R/C-calibration/utils-restart.R", local = TRUE)
+source("./R/C-new_calibration/utils-restart_pool_tools.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
@@ -70,23 +70,33 @@ d_dist |>
   print(n = 100)
 
 # pick best sim
-best_sim <- d_dist |>
-  arrange(cost) |>
-  head(1)
+best_sims <- d_dist |>
+  filter(cost < Inf)
 
-glimpse(best_sim)
+batch_numbers <- unique(best_sims$batch_number)
 
-sim_path <- fs::path(
-  calib_dir,
-  paste0("sim__", scenario_name, "__", best_sim$batch_number, ".rds")
+
+# Make the restart pool --------------------------------------------------------
+attrs_names <- names(EpiModelHIV::get_default_attrs())
+time_prefixes <- c(".last$", ".time$")
+time_attrs <- Reduce(
+  function(a, prefix) c(a, grepv(prefix, attrs_names)),
+  time_prefixes,
+  init = character(0)
 )
 
-if (!fs::file_exists(sim_path))
-  stop("`sim` file: '", sim_path, "' not present.")
+restart_pools <- vector(mode = "list", length = length(batch_numbers))
 
-restart_point <- make_restart_point_hiv(
-  sim = readRDS(sim_path),
-  sim_num = best_sim$sim_number
-)
+for (batch in batch_numbers) {
+  sims_num <- filter(best_sims, batch_number == batch) |>
+    pull(sim_number) |>
+    unique()
+  restart_pools[[batch]] <- make_restart_point(
+    readRDS(paste0("./data/run/calibration/sim__bad_calib__", batch, ".rds")),
+    time_attrs,
+    sims_num = sims_num
+  )
+}
 
-saveRDS(restart_point, path_to_restart)
+restart_pools <- Reduce(merge_restart_points, restart_pools)
+saveRDS(restart_pools, "./data/run/estimates/restart_pool.rds")

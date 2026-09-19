@@ -20,7 +20,8 @@ max_cores <- batch_size
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-source("./R/C-new_calibration/swfcalib_config_gp_bad.R", local = TRUE)
+# source("./R/C-new_calibration/swfcalib_config_gp_bad.R", local = TRUE)
+source("./R/C-new_calibration/swfcalib_config_gp_pool.R", local = TRUE)
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 
@@ -37,8 +38,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = 8,
     "time" = "00:20:00",
-    "mem-per-cpu" = "4G",
-    "mail-type" = "FAIL"
+    "mem-per-cpu" = "4G"
   )
 )
 
@@ -60,8 +60,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = batch_size,
     "time" = "05:00:00",
-    "mem-per-cpu" = "5G",
-    "mail-type" = "FAIL"
+    "mem-per-cpu" = "5G"
   )
 )
 
@@ -96,8 +95,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = 1,
     "time" = "00:20:00",
-    "mem-per-cpu" = "8G",
-    "mail-type" = "END"
+    "mem-per-cpu" = "8G"
   )
 )
 

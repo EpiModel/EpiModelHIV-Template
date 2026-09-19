@@ -21,7 +21,8 @@ make_model_fn <- function(calib_steps) {
     # Inputs -------------------------------------------------------------------
     source("R/netsim_settings.R", local = TRUE)
 
-    orig <- readRDS(path_to_restart)
+    # orig <- readRDS(path_to_restart)
+    orig <- readRDS("./data/run/estimates/restart_pool.rds")
     control <- control_msm(
       nsteps = calibration_end,
       start = restart_time,
