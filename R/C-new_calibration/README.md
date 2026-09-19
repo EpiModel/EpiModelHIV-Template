@@ -16,6 +16,11 @@
         - make a report of the calib tests
     - still 3 waves?
 
+## Tests
+
+- Are replications actually usefull
+    - TODO: keep current results (19 sept) and compare with same thing without reps
+
 
 ## Tests to run
 
