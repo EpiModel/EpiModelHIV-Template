@@ -92,12 +92,14 @@ if (restart) { # Provided by swfcalib_config
     start = restart_time,
     randomize.restart = TRUE,
     initialize.FUN = initialize.net,
+    future.use.plan = future::tweak("multicore", workers = batch_size),
     verbose = FALSE
   )
 } else {
   path_to_orig <- path_to_est
   control <- control_msm(
     nsteps = calibration_end,
+    future.use.plan = future::tweak("multicore", workers = batch_size),
     verbose = FALSE
   )
 }
