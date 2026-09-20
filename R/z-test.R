@@ -10,7 +10,7 @@ targets <- EpiModelHIV::get_calibration_targets()
 targets$num <- 1e5
 results_raws <- readRDS("./rr.rds")
 
-results <- filter(results_raws, .wave >= 3)
+results <- filter(results_raws, .wave >= 1)
 race_num <- 2
 tar_name <- paste0("i.prev.dx.", c("B", "H", "W")[race_num])
 par_name <- paste0("hiv.trans.scale_", race_num)
@@ -35,3 +35,11 @@ ggplot(results, aes(x = .data[[par_name]], y = .data[[tar_name]])) +
   geom_smooth() +
   geom_point(aes(col = factor(.wave))) +
   geom_hline(yintercept = targets[[tar_name]])
+
+# Results of test: -------------------------------------------------------------
+d <- readRDS("./data/run/calibration/merged_tibbles/df__default.rds") |>
+  EpiModelHIV::mutate_calibration_targets()
+
+ggplot(d, aes(x = time, y = ir100.syph, col = as.factor(sim))) +
+  geom_smooth() +
+  geom_hline(yintercept = 2)

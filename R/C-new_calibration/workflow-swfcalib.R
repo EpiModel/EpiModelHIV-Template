@@ -21,8 +21,8 @@ max_cores <- batch_size
 
 ## Uncomment the calibration config to use
 # source("./R/C-new_calibration/swfcalib_config_ballpark.R", local = TRUE)
-# source("./R/C-new_calibration/swfcalib_config_pool1.R", local = TRUE)
-source("./R/C-new_calibration/swfcalib_config_pool2.R", local = TRUE)
+source("./R/C-new_calibration/swfcalib_config_pool1.R", local = TRUE)
+# source("./R/C-new_calibration/swfcalib_config_pool2.R", local = TRUE)
 
 wf <- make_em_workflow("swfcalib", override = TRUE)
 
@@ -85,18 +85,27 @@ wf <- add_workflow_step(
 
 source("R/netsim_settings.R", local = TRUE)
 
-# Control settings
-control <- control_msm(
-  nsteps              = calibration_end,
-  start               = restart_time,
-  initialize.FUN      = reinit_msm,
-  verbose = FALSE
-)
+if (restart) { # Provided by swfcalib_config
+  path_to_orig <- path_to_restart
+  control <- control_msm(
+    nsteps = calibration_end,
+    start = restart_time,
+    randomize.restart = TRUE,
+    initialize.FUN = initialize.net,
+    verbose = FALSE
+  )
+} else {
+  path_to_orig <- path_to_est
+  control <- control_msm(
+    nsteps = calibration_end,
+    verbose = FALSE
+  )
+}
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_swfcalib_output(
-    path_to_restart, param, init, control, calib_object,
+    path_to_orig, param, init, control, calib_object,
     output_dir = calib_dir,
     n_rep = 64,
     n_cores = batch_size,

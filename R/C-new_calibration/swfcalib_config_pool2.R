@@ -11,9 +11,10 @@ library(tidyr)
 
 n_sims <- 128
 n_reps <- 4
+restart <- TRUE
 
-source("R/C-calibration/swfcalib_model.R", local = TRUE)
-model_fn <- make_model_fn(calib_steps = year_steps)
+source("R/C-new_calibration/swfcalib_model.R", local = TRUE)
+model_fn <- make_model_fn(calib_steps = year_steps, restart)
 
 source("./R/C-calibration/het_gp_process.R", local = TRUE)
 
