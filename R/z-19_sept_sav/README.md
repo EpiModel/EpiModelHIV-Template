@@ -47,36 +47,3 @@ Notes:
 4. select restart where > 50% syph (ir100 > 1)
 5. pool2, 2x duration, only trans-scale and a-rate
 6. pick restart from here
-
-## NYC
-
-- need:
-    - init.hiv.prev
-    - targets
-
-```r
-get_calibration_targets <- function() {
-  c(
-    # 1st calibration set (all independant)
-    cc.dx.B         = 0.847,
-    cc.dx.H         = 0.818,
-    cc.dx.W         = 0.862,
-    # 2nd calibration set (all independant)
-    cc.vsupp.B      = 0.602,
-    cc.vsupp.H      = 0.620,
-    cc.vsupp.W      = 0.712,
-    # STIs
-    ir100.gono        = 12.81,
-    ir100.chla        = 14.59,
-    ir100.syph        = 2,
-    # 3rd calibration set
-    i.prev.dx.B     = 0.33,
-    i.prev.dx.H     = 0.127,
-    i.prev.dx.W     = 0.084,
-    cc.prep.B       = 0.199,
-    cc.prep.H       = 0.229,
-    cc.prep.W       = 0.321,
-    disease.mr100   = 0.273
-  )
-}
-```

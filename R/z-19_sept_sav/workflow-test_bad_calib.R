@@ -25,47 +25,43 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
-  nsteps = 2 * calibration_end,
-  start = restart_time,
-  randomize.restart = TRUE,
-  initialize.FUN = initialize.net,
-  verbose = FALSE
+  nsteps = calibration_end
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("bad_pool_calib", override = TRUE)
+wf <- make_em_workflow("bad_calib", override = TRUE)
 
 # Using scenarios --------------------------------------------------------------
 
 # Define calibration scenarios
 # insert test values here
 scenarios_df <- tibble(
-  .scenario.id = "bad_calib_pool",
+  .scenario.id = "bad_calib",
   .at = 1,
-  prep.start.rate_1 = 0.006187293,
-  prep.start.rate_2 = 0.004409822,
-  prep.start.rate_3 = 0.006681639,
-  hiv.test.rate_1 = 0.0005234353,
-  hiv.test.rate_2 = 0.001229486,
-  hiv.test.rate_3 = 0.0008837888,
-  tx.halt.rate_1 = 0.002225456,
-  tx.halt.rate_2 = 0.002160703,
-  tx.halt.rate_3 = 0.001402035,
-  hiv.trans.scale_1 = 3.335358,
-  hiv.trans.scale_2 = 0.6033294,
-  hiv.trans.scale_3 = 0.4552222,
-  gono.uret.prob = 0.2127404,
-  chla.uret.prob = 0.1382087,
-  syph.prob = 0.1351835,
-  aids.off.tx.mort.rate = 0.0005601838,
-  a.rate = 0.000421969
+  prep.start.rate_1 = 0.005828601,
+  prep.start.rate_2 = 0.004505324,
+  prep.start.rate_3 = 0.006700008,
+  hiv.test.rate_1 = 0.0006918843,
+  hiv.test.rate_2 = 0.0009446952,
+  hiv.test.rate_3 = 0.0005295467,
+  tx.halt.rate_1 = 0.002220137,
+  tx.halt.rate_2 = 0.00207386,
+  tx.halt.rate_3 = 0.001382076,
+  hiv.trans.scale_1 = 3.140432,
+  hiv.trans.scale_2 = 0.5378885,
+  hiv.trans.scale_3 = 0.4022414,
+  gono.uret.prob = 0.2379301,
+  chla.uret.prob = 0.1693996,
+  syph.prob = 0.1419804,
+  aids.off.tx.mort.rate = 0.0005657358,
+  a.rate = 0.0004228719
 )
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    path_to_restart,
+    path_to_est,
     param,
     init,
     control,
@@ -96,6 +92,21 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
+    "cpus-per-task" = max_cores,
+    "time" = "02:00:00",
+    "mem-per-cpu" = "5G"
+  )
+)
+
+wf <- add_workflow_step(
+  wf_summary = wf,
+  step_tmpl = step_tmpl_do_call_script(
+    r_script = "R/C-calibration/process_calibs.R",
+    args = list(hpc_context = TRUE, n_cores = max_cores),
+    setup_lines = hpc_node_setup
+  ),
+  sbatch_opts = list(
+    "mail-type" = "END",
     "cpus-per-task" = max_cores,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"
