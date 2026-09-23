@@ -43,3 +43,19 @@ d <- readRDS("./data/run/calibration/merged_tibbles/df__default.rds") |>
 ggplot(d, aes(x = time, y = ir100.syph, col = as.factor(sim))) +
   geom_smooth() +
   geom_hline(yintercept = 2)
+
+
+
+# AIDSvu NYC 2023:
+
+15100*0.94 / 22354 /2
+16800*0.93 / 30495 /2
+12870*0.9620 / 53072 /2
+
+### `ir100.hiv.dx`
+
+See sources
+
+- black: 268 / (22354*2 - 15100) * 100 = 3.6945
+- hisp: 385 / (30495*2 - 16800) * 100 =  2.8112
+- white: 150 / (53072*2 - 12870) * 100 = 0.3731

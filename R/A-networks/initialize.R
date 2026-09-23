@@ -24,7 +24,7 @@ if (system.file(package = "ARTnetData") == "") {
 } else {
   epistats <- build_epistats(
     geog.lvl = "city",
-    geog.cat = "Atlanta",
+    geog.cat = "New York City",
     init.hiv.prev = c(0.33, 0.137, 0.084), # by race: Black, Hispanic, White
     race = TRUE,
     time.unit = time_unit

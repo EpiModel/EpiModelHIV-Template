@@ -68,8 +68,8 @@
       "Author": "Samuel Jenness [cre, aut], Kevin Weiss [ctb], Pragati Prasad [ctb]",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "artnetdata",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "ARTnetData",
       "RemoteRef": "main",
       "RemoteSha": "3caad7145ff0031667709a9fcdb4abb27ce5a8c3"
     },
@@ -91,11 +91,12 @@
       "License": "GPL (>= 2)",
       "Author": "Eduardo L. T. Conceicao [aut, cre], Martin Maechler [ctb] (ORCID: <https://orcid.org/0000-0002-8685-9910>)",
       "Maintainer": "Eduardo L. T. Conceicao <mail@eduardoconceicao.org>",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
       "Repository/R-Forge/Project": "robustbase",
       "Repository/R-Forge/Revision": "1009",
       "Repository/R-Forge/DateTimeStamp": "2025-07-27 18:16:52",
-      "NeedsCompilation": "no"
+      "NeedsCompilation": "no",
+      "Encoding": "UTF-8"
     },
     "DiceDesign": {
       "Package": "DiceDesign",
@@ -3514,7 +3515,7 @@
       "Maintainer": "Adrien Le Guillou <contact@aleguillou.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
       "RemoteSha": "84e5f11f125681ddf23a835c86f298c665f2136c"
@@ -3688,10 +3689,10 @@
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "swfcalib",
       "RemoteRef": "main",
-      "RemoteSha": "1d0f9a86199b799f1c0fa58245b89a03abd3f1a5"
+      "RemoteSha": "5757119a9a5c6ab21e70847fee42df505f7c4fb1"
     },
     "tergm": {
       "Package": "tergm",
