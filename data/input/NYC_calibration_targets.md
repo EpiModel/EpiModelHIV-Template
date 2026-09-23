@@ -113,9 +113,16 @@ NOTE: p29 are those diag in 2024 only
 ### `disease.mr100`
 ### `num`
 
+- assumptions:
+    - MSM proportion is the same among race groups
+    - consider only 18+ males
+    - consider that the "https://doi.org/10.2196/publichealth.5365" percentages
+      are still correct
+
 source: Estimating the Population Sizes of Men Who Have Sex With Men in US States and Counties Using Data From the American Community Survey - https://doi.org/10.2196/publichealth.5365
 
 https://www.census.gov/quickfacts/fact/table/newyorkcitynewyork,bronxcountynewyork,kingscountynewyork,newyorkcountynewyork,queenscountynewyork,richmondcountynewyork/SEX255225#SEX255225
+(NYC census csv)
 
 NYC: estimated MSM 2016 (%) (census 2025)
 - New York County - 87556 (13.8%) (total: 1664862 - female: 53% - <18: 12.9%)
