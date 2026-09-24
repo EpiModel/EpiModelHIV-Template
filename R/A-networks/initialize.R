@@ -25,7 +25,7 @@ if (system.file(package = "ARTnetData") == "") {
   epistats <- build_epistats(
     geog.lvl = "city",
     geog.cat = "New York City",
-    init.hiv.prev = c(0.33, 0.137, 0.084), # by race: Black, Hispanic, White
+    init.hiv.prev = c(0.3, 0.25, 0.1), # by race: Black, Hispanic, White
     race = TRUE,
     time.unit = time_unit
   )
@@ -38,7 +38,7 @@ if (system.file(package = "ARTnetData") == "") {
   netstats <- build_netstats(
     epistats,
     netparams,
-    expect.mort = 0.000478213,
+    expect.mort = 0.000478213, # TODO: do I need to change that?
     network.size = networks_size
   )
 }

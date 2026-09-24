@@ -2,8 +2,7 @@
 
 ## Limits
 
-My estimations for the number of MSM is not great. As the biggest MSM county is
-NYC county, maybe it
+My estimations for the number of MSM is not great.
 
 ## Sources
 
