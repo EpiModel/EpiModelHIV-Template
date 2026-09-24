@@ -3,9 +3,9 @@ hiv.test.rate_1,0.001502146,numeric,7.1,,cc.dx.B,atlanta,Mean probability of HIV
 hiv.test.rate_2,0.001471541,numeric,7.1,,cc.dx.H,atlanta,Mean probability of HIV testing per time step for Hispanic MSM.
 hiv.test.rate_3,0.001466421,numeric,7.1,,cc.dx.W,atlanta,Mean probability of HIV testing per time step for White MSM.
 test.window.int,3,numeric,7.1,,,,Length of the HIV test window period in time steps.(i.e. the number of time steps between infection and test positivity).
-tx.init.rate_1,0.298361113628911,numeric,7.2,,cc.linked1m.B,atlanta,Probability per time step that a Black MSM who has tested positive will initiate treatment.
-tx.init.rate_2,0.368208639586171,numeric,7.2,,cc.linked1m.H,atlanta,Probability per time step that a Hispanic MSM who has tested positive will initiate treatment.
-tx.init.rate_3,0.347998730409527,numeric,7.2,,cc.linked1m.W,atlanta,Probability per time step that a White MSM who has tested positive will initiate treatment.
+tx.init.rate_1,0.3183546,numeric,7.2,,cc.linked1m.B,atlanta,Probability per time step that a Black MSM who has tested positive will initiate treatment.
+tx.init.rate_2,0.3869395,numeric,7.2,,cc.linked1m.H,atlanta,Probability per time step that a Hispanic MSM who has tested positive will initiate treatment.
+tx.init.rate_3,0.3744048,numeric,7.2,,cc.linked1m.W,atlanta,Probability per time step that a White MSM who has tested positive will initiate treatment.
 tx.halt.rate_1,0.002404553,numeric,7.2,,cc.vsupp.B,atlanta,Probability per time step that Black MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
 tx.halt.rate_2,0.002198361,numeric,7.2,,cc.vsupp.H,atlanta,Probability per time step that Hispanic MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.
 tx.halt.rate_3,0.001215838,numeric,7.2,,cc.vsupp.W,atlanta,Probability per time step that White MSM who have started treatment and assigned to the partial VL suppression category will stop treatment.

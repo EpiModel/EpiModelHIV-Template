@@ -36,6 +36,15 @@ sim <- netsim(est, param, init, control)
 # Simulation exploration (tidyverse)
 d_sim <- as_tibble(sim)
 
+targets <- EpiModelHIV::get_calibration_targets()
+
+EpiModelHIV::mutate_calibration_targets(d_sim) |>
+  filter(time >= max(time) - 52) |>
+  select(sim, time, any_of(names(targets))) |>
+  summarise(across(everything(), mean), .by = "sim") |>
+  glimpse()
+
+
 # See all tracked values
 glimpse(tail(d_sim))
 

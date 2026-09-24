@@ -7,6 +7,11 @@ Notes:
 
 ## Walkthrough
 
+0. compute `tx.init.rate` (no calibration needed)
+    - `Rscript R/C-new_calibration/0-compute_tx_init_rate.R`
+    - converts `cc.linked1m.{B,H,W}` (linked to care within 30 days of dx)
+      into weekly probabilities: `1 - (1 - p)^(1 / i)` with `i = 30 / 7` weeks
+    - copy the printed `tx.init.rate_{1,2,3}` into the model parameters
 1. bad swfcalib
     - 3 waves
     - wide priors
