@@ -17,8 +17,8 @@ n_sims <- 128
 n_reps <- 4
 restart <- FALSE
 
-source("R/C-calibration/swfcalib_model.R", local = TRUE)
-model_fn <- make_direct_model_fn(calib_steps = year_steps, restart)
+source("R/C-new_calibration/swfcalib_model.R", local = TRUE)
+model_fn <- make_model_fn(calib_steps = year_steps, restart)
 
 source("./R/C-calibration/het_gp_process.R", local = TRUE)
 
@@ -26,7 +26,7 @@ source("R/shared_variables.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
-scale_r <- list(c(1, 5), c(0.1, 0.9), c(0.1, 0.9))
+scale_r <- list(c(0.1, 3), c(0.1, 3), c(0.1, 3))
 
 scale_params <- lapply(
   scale_r,
@@ -49,24 +49,15 @@ calib_object <- list(
     root_directory = swfcalib_dir,
     max_iteration = 100,
     n_sims = n_sims,
-    default_proposal = tibble(
-      prep.start.rate_1 = 0.02,
-      prep.start.rate_2 = 0.002,
-      prep.start.rate_3 = 0.002,
-      hiv.test.rate_1 = 0.0001,
-      hiv.test.rate_2 = 0.003,
-      hiv.test.rate_3 = 0.003,
-      tx.halt.rate_1 = 0.004,
-      tx.halt.rate_2 = 0.004,
-      tx.halt.rate_3 = 0.0005,
-      hiv.trans.scale_1 = 1.5,
-      hiv.trans.scale_2 = 0.8,
-      hiv.trans.scale_3 = 0.9,
-      gono.uret.prob = 0.15,
-      chla.uret.prob = 0.25,
-      syph.prob = 0.10,
-      aids.off.tx.mort.rate = 0.0004,
-      a.rate = 0.0003
+    default_proposal = select(
+      params_df,
+      prep.start.rate_1, prep.start.rate_2, prep.start.rate_3,
+      hiv.test.rate_1, hiv.test.rate_2, hiv.test.rate_3,
+      tx.halt.rate_1, tx.halt.rate_2, tx.halt.rate_3,
+      hiv.trans.scale_1, hiv.trans.scale_2, hiv.trans.scale_3,
+      gono.uret.prob, chla.uret.prob, syph.prob,
+      aids.off.tx.mort.rate,
+      a.rate
     )
   ),
   waves = list(

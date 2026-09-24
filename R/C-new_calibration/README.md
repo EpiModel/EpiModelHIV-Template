@@ -12,6 +12,8 @@ Notes:
     - converts `cc.linked1m.{B,H,W}` (linked to care within 30 days of dx)
       into weekly probabilities: `1 - (1 - p)^(1 / i)` with `i = 30 / 7` weeks
     - copy the printed `tx.init.rate_{1,2,3}` into the model parameters
+1. test the default param in order to set the search range
+    - test_default workflow
 1. bad swfcalib
     - 3 waves
     - wide priors
