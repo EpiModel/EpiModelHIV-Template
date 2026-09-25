@@ -36,3 +36,12 @@ d_sc |>
 
 ggplot(d_sc, aes(x = time, y = disease.mr100)) +
   geom_smooth()
+
+d_calib |>
+  filter(time >= max(time) - 52) |>
+  mutate(
+    tx_prev.B = hiv.tx.B / hiv.dx.B,
+    tx_prev.H = hiv.tx.H / hiv.dx.H,
+    tx_prev.W = hiv.tx.W / hiv.dx.W
+  ) |>
+  summarise(across(starts_with("tx_prev"), mean))

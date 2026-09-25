@@ -58,6 +58,12 @@ calib_plot_infos <- list(
     text_offset = 0.01,
     fmt_target = scales::percent_format(0.1)
   ),
+  ir100.hiv.dx = list(
+    names = paste0("ir100.hiv.dx.", races),
+    ylab = "Incidence per 100 MSM",
+    text_offset = 0.01,
+    fmt_target = scales::number_format(0.001)
+  ),
   ir100.sti = list(
     names = c("ir100.gono", "ir100.chla", "ir100.syph"),
     ylab = "Infection Rate per 100 PYAR",
