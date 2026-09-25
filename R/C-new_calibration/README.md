@@ -7,22 +7,23 @@ Notes:
 
 ## Walkthrough
 
-0. compute `tx.init.rate` (no calibration needed)
+- compute `tx.init.rate` (no calibration needed)
     - `Rscript R/C-new_calibration/0-compute_tx_init_rate.R`
     - converts `cc.linked1m.{B,H,W}` (linked to care within 30 days of dx)
       into weekly probabilities: `1 - (1 - p)^(1 / i)` with `i = 30 / 7` weeks
     - copy the printed `tx.init.rate_{1,2,3}` into the model parameters
-1. test the default param in order to set the search range
+- test the default param in order to set the search range
     - test_default workflow
-1. bad swfcalib
-    - 3 waves
-    - wide priors
-    - 128 runs (32x4)
-2. validation set + calib report to check the result
-3. make restart pool
+- bad swfcalib
+    - 3 waves, wide priors, 128 runs (32x4)
+    - do in multiple shots
+        - once one wave fail, get results and assess
+            - download "data/run/swfcalib/waves/X/results.rds"
+- validation set + calib report to check the result
+- make restart pool
     - just make sure STIs are live in all
     - see "./R/C-new_calibration/3-choose_restart.R"
-4. pool swfcalib
+- pool swfcalib
     - using restart
     - look at results swfcalib to choose new priors
         - make a report of the calib tests
