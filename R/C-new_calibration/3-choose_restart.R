@@ -106,7 +106,8 @@ for (batch in batch_numbers) {
     pull(sim_number) |>
     unique()
   restart_pools[[batch]] <- make_restart_point(
-    readRDS(paste0("./data/run/calibration/sim__bad_calib__", batch, ".rds")),
+    # readRDS(paste0("./data/run/calibration/sim__bad_calib__", batch, ".rds")),
+    readRDS(paste0("./data/run/variance/restart_elts/sim__empty_scenario__", batch, ".rds")),
     time_attrs,
     sims_num = sims_num
   )

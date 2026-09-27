@@ -6,7 +6,12 @@ theme_set(theme_light())
 source("./R/C-new_calibration/z-context.R")
 source("./R/shared_variables.R")
 
-d <- readRDS("./data/run/variance/df__variance_long.rds")
+d <- readRDS("./data/run/variance/df__variance_long.rds") |>
+  mutate( # artificially create incid.dx so `mutate_calibration_targets` works
+    hiv.dx.incid.B = hiv.incid.B,
+    hiv.dx.incid.H = hiv.incid.H,
+    hiv.dx.incid.W = hiv.incid.W
+  )
 glimpse(d)
 
 d_var <- d |>

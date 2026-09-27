@@ -28,3 +28,5 @@ ggplot(d_var, aes(x = time / 52, y = .data[[paste0(tar_name, "_mean")]])) +
 ggplot(d_var, aes(x = time / 52, y = .data[[paste0(tar_name, "_sd")]])) +
   geom_line(alpha = 0.2) +
   geom_smooth()
+
+filter(d, time == min(time)) |> glimpse()
