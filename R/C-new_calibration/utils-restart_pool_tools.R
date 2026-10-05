@@ -8,10 +8,6 @@ merge_restart_points <- function(x, y) {
     "coef.form",
     "num.nw"
   )
-  # TODO: ensure both have all elts necessary - or of right class
-  # TODO: verify run
-  #   - same names
-  #   - same attrs
 
   out <- x
   out$control$nsims <- x$control$nsims + y$control$nsims

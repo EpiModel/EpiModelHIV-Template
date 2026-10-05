@@ -1,0 +1,15 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+PCs kept: 18 explaining 0.954 
+EQ_START rule: 240 (slowest: prep.indic.H T_var_0.1 190 )
+Warning message:
+In log(x, base) : NaNs produced

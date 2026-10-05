@@ -1,0 +1,40 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+     strategy mean_bias_min mean_bias_median mean_bias_max rmse_pool_mean_min
+1      random  -0.011622241    -0.0029011767   0.007078995          0.1729737
+2     ongoing  -0.015267087     0.0158119672   0.036479986          0.1713144
+3     typical  -0.011953998     0.0111030330   0.040618490          0.1368706
+4 target_like  -0.021059070     0.0026745056   0.023778033          0.1098046
+5  stratified  -0.008679777     0.0008401019   0.004681737          0.1051215
+  rmse_pool_mean_median rmse_pool_mean_max mean_var_ratio_min
+1             0.1763123          0.1804614          0.9868308
+2             0.1746503          0.1813133          0.9481166
+3             0.1653792          0.1794531          0.6170070
+4             0.1664881          0.1794012          0.3975266
+5             0.1676518          0.1789266          0.9916869
+  mean_var_ratio_median mean_var_ratio_max mean_within_ratio_min
+1             0.9996754           1.007331             0.9976268
+2             0.9807519           1.009713             0.9886628
+3             0.8542969           1.001608             0.8841553
+4             0.9178547           1.014921             0.8980438
+5             1.0031158           1.013795             0.9962406
+  mean_within_ratio_median mean_within_ratio_max
+1                0.9996211              1.005141
+2                0.9988390              1.007275
+3                0.9607845              0.998654
+4                0.9818871              1.003839
+5                1.0002263              1.007025
+Warning messages:
+1: Removed 12 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+2: Removed 12 rows containing missing values or values outside the scale range
+(`geom_point()`). 

@@ -1,0 +1,4 @@
+"series","n","rule_brief_median","rule_brief_iqr","rule_brief_na","rule_nullmax_median","rule_nullmax_iqr","t_var_true","t_var_median","t_var_cover","t_mean_true","t_mean_median","t_mean_cover"
+"S0",30,132.5,"1-269.75",0,65.5,"1-201.75",0,0,1,0,0,1
+"S1",30,149,"68-269",1,99,"28.25-269",10.927,11.25,0.9,32.282,34.5,0.9
+"S2",30,105,"1-270.75",0,36.5,"1-230.25",3.1232,5.5,0.83333,0,0,1

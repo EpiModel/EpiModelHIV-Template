@@ -1,0 +1,7 @@
+2026-09-26 12:47:58 running c3_01_prepare.R 
+2026-09-26 12:48:47 running c3_02_validate.R 
+2026-09-26 12:52:22 running c3_03_same_law.R 
+2026-09-26 12:53:44 running c3_04_cold_start.R 
+2026-09-26 13:03:22 running c3_05_workflow.R 
+2026-09-26 13:08:52 running c3_06_replication.R 
+2026-09-26 13:13:59 done

@@ -1,6 +1,3 @@
-# TODO: re-run a bad calib assess with restart pool
-# TODO: update merge netsim to use same as netsim saves
-
 hpc_context <- TRUE
 pkgload::load_all("../EpiModel/")
 library(EpiModelHIV)

@@ -1,0 +1,4 @@
+"file","modified","nsims","best_sim","abs_distance","exact_match"
+"restart-hpc.rds","2026-05-20 10:41:41.841924",1,1,0,TRUE
+"restart-local.rds","2026-05-11 16:20:26.937247",1,1,303260,FALSE
+"restart_pool.rds","2026-09-21 10:19:48.024696",62,45,16075,FALSE

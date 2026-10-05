@@ -1,0 +1,53 @@
+R version 4.5.3 (2026-03-11)
+Platform: x86_64-conda-linux-gnu
+Running under: Fedora Linux 44 (Workstation Edition)
+
+Matrix products: default
+BLAS/LAPACK: /home/adrienleguillou/Documents/Emory/EM_v2.6.1/EpiModelHIV-Template/.pixi/envs/default/lib/libopenblasp-r0.3.34.so;  LAPACK version 3.12.0
+
+Random number generation:
+ RNG:     L'Ecuyer-CMRG 
+ Normal:  Inversion 
+ Sample:  Rejection 
+ 
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=fr_FR.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=fr_FR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=fr_FR.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Europe/Paris
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+[1] ggplot2_4.0.3 dplyr_1.2.1  
+
+loaded via a namespace (and not attached):
+ [1] tidyr_1.3.2              utf8_1.2.6               future_1.76.0           
+ [4] generics_0.1.4           renv_1.2.4               robustbase_0.99-7       
+ [7] stringi_1.8.9            lattice_0.23-1           listenv_1.0.0           
+[10] digest_0.6.39            magrittr_2.0.5           statnet.common_4.13.0   
+[13] lpSolveAPI_5.5.2.0-17.15 grid_4.5.3               RColorBrewer_1.1-3      
+[16] networkLite_1.1.0        fastmap_1.2.0            Matrix_1.7-6            
+[19] tergm_4.2.2              ape_5.8-1                network_1.20.0          
+[22] deSolve_1.42             rle_0.10.0               purrr_1.2.2             
+[25] scales_1.4.0             textshaping_1.0.5        codetools_0.2-20        
+[28] lazyeval_0.2.3           Rdpack_2.6.6             cli_3.6.6               
+[31] rlang_1.3.0              rbibutils_2.4.1          parallelly_1.48.0       
+[34] withr_3.0.3              cachem_1.1.0             yaml_2.3.12             
+[37] tools_4.5.3              parallel_4.5.3           memoise_2.0.1           
+[40] coda_0.19-4.1            globals_0.19.1           vctrs_0.7.3             
+[43] R6_2.6.1                 lifecycle_1.0.5          stringr_1.6.0           
+[46] ergm_4.12.0              fs_2.1.0                 MASS_7.3-66             
+[49] trust_0.1-9              ragg_1.5.2               pkgconfig_2.0.3         
+[52] pillar_1.11.1            gtable_0.3.6             ergm.multi_0.3.0        
+[55] glue_1.8.1               Rcpp_1.1.2               systemfonts_1.3.2       
+[58] networkDynamic_0.12.0    DEoptimR_1.2-1           tibble_3.3.1            
+[61] tidyselect_1.2.1         EpiModelHIV_3.3.2        farver_2.1.2            
+[64] nlme_3.1-170             labeling_0.4.3           EpiModel_2.6.2          
+[67] compiler_4.5.3           S7_0.2.2                

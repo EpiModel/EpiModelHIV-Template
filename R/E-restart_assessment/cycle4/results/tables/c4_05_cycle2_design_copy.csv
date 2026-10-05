@@ -1,0 +1,9 @@
+"outcome","var","functional","h","icc_lb","icc_direct","x0_sd_ratio","x0_offset_sd","x0_offset_pct","pi_cv_pct","single_sd_ratio_lb","single_sd_ratio_direct","recycle_var_deficit_lb","recycle_var_deficit_direct","recycle_mcse_infl_lb","recycle_mcse_infl_direct","random8_mcse_infl_direct","k_mcse10_N32","k_mcse10_N256"
+"cml incidence, years 6-15","cml_incid","cml10",5,0.14744,0.2492,0.86649,1.0852,2.0726,1.9099,0.92334,0.86649,0.014268,0.024116,1.201,1.322,1.402,18,139
+"cml incidence, years 6-15","cml_incid.B","cml10",5,0.13543,0.30498,0.83368,1.1103,2.0888,1.8812,0.92982,0.83368,0.013106,0.029514,1.1859,1.3838,1.4771,19,152
+"cml incidence, years 6-15","cml_incid.H","cml10",5,0.088334,0.048215,0.97559,-0.018844,-0.11324,6.0092,0.95481,0.97559,0.0085485,0.004666,1.1247,1.0699,1.0894,6,48
+"cml incidence, years 6-15","cml_incid.W","cml10",5,0.15853,0.092923,0.95241,0.70696,2.37,3.3524,0.91732,0.95241,0.015342,0.0089925,1.2147,1.1308,1.1662,10,79
+"incidence rate, year 15","incid_rate","value",15,0.037031,0.040309,0.97964,0.4755,2.0398,NA,0.98131,0.97964,0.0035836,0.0039009,1.0541,1.0587,1.0753,6,42
+"incidence rate, year 15","incid_rate.B","value",15,0.030223,0.073711,0.96244,0.35813,1.6662,NA,0.98477,0.96244,0.0029248,0.0071333,1.0444,1.105,1.1339,9,67
+"incidence rate, year 15","incid_rate.H","value",15,0.0051908,0.0072341,0.99638,0.13164,2.3548,NA,0.9974,0.99638,0.00050234,0.00070007,1.0078,1.0108,1.0139,2,9
+"incidence rate, year 15","incid_rate.W","value",15,0.020729,0,1.0035,0.32548,2.6204,NA,0.98958,1,0.002006,0,1.0306,1,1,0,0

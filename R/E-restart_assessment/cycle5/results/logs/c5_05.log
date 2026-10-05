@@ -1,0 +1,117 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+          var          stat       est        lo        hi
+1        prev         d_inf -4.26e-02 -4.34e-02 -4.18e-02
+2        prev drift_per_50y -1.39e-03 -2.30e-03 -4.94e-04
+3        prev           T01  1.09e+02  9.07e+01  1.24e+02
+4        prev           T02  9.50e+01  8.17e+01  1.07e+02
+5        prev       share10  2.11e-01  2.04e-01  2.20e-01
+6        prev       share20  4.33e-01  4.22e-01  4.48e-01
+7        prev       share50  8.50e-01  8.31e-01  8.71e-01
+8        prev         model  2.00e+00  2.00e+00  3.00e+00
+9      prev.B         d_inf -5.61e-02 -5.71e-02 -5.50e-02
+10     prev.B drift_per_50y -1.88e-03 -3.20e-03 -5.19e-04
+11     prev.B           T01  1.04e+02  8.62e+01  1.20e+02
+12     prev.B           T02  9.12e+01  7.82e+01  1.04e+02
+13     prev.B       share10  2.11e-01  2.02e-01  2.20e-01
+14     prev.B       share20  4.30e-01  4.12e-01  4.47e-01
+15     prev.B       share50  8.49e-01  8.28e-01  8.72e-01
+16     prev.B         model  3.00e+00  2.00e+00  3.00e+00
+17     prev.H         d_inf -3.88e-02 -3.99e-02 -3.78e-02
+18     prev.H drift_per_50y  1.24e-03 -1.16e-03  2.82e-03
+19     prev.H           T01  9.28e+01  7.55e+01  1.12e+02
+20     prev.H           T02  8.05e+01  6.95e+01  9.45e+01
+21     prev.H       share10  2.10e-01  1.89e-01  2.34e-01
+22     prev.H       share20  4.37e-01  4.14e-01  4.62e-01
+23     prev.H       share50  8.43e-01  8.07e-01  8.77e-01
+24     prev.H         model  3.00e+00  2.00e+00  3.00e+00
+25     prev.W         d_inf -2.84e-02 -2.88e-02 -2.79e-02
+26     prev.W drift_per_50y -8.16e-04 -1.57e-03 -7.95e-06
+27     prev.W           T01  1.10e+02  9.57e+01  1.23e+02
+28     prev.W           T02  9.55e+01  8.47e+01  1.06e+02
+29     prev.W       share10  2.07e-01  1.96e-01  2.20e-01
+30     prev.W       share20  4.33e-01  4.19e-01  4.46e-01
+31     prev.W       share50  8.51e-01  8.33e-01  8.76e-01
+32     prev.W         model  2.00e+00  2.00e+00  3.00e+00
+33 incid_rate         d_inf -2.69e-01 -2.73e-01 -2.64e-01
+34 incid_rate drift_per_50y -4.16e-03 -1.22e-02  3.62e-03
+35 incid_rate           T01  7.25e+01  6.45e+01  9.03e+01
+36 incid_rate           T02  5.72e+01  5.07e+01  6.85e+01
+37 incid_rate       share10  6.56e-01  6.12e-01  6.96e-01
+38 incid_rate       share20  7.56e-01  7.12e-01  7.98e-01
+39 incid_rate       share50  9.30e-01  8.96e-01  9.74e-01
+40 incid_rate         model  1.00e+00  1.00e+00  2.00e+00
+41        num         d_inf  1.20e+02  6.84e+01  1.66e+02
+42        num drift_per_50y  3.69e+00 -8.97e+01  7.60e+01
+43        num           T01  7.42e+01  2.10e+01  1.19e+03
+44        num           T02  4.60e+01  0.00e+00  6.04e+02
+45        num       share10  9.10e-02 -1.89e-01  5.80e-01
+46        num       share20  1.68e-01 -2.32e-01  8.76e-01
+47        num       share50  5.19e-01 -3.35e-02  1.14e+00
+48        num         model  3.00e+00  1.00e+00  3.00e+00
+49    dx_frac         d_inf -2.99e-03 -3.23e-03 -2.78e-03
+50    dx_frac drift_per_50y -1.02e-03 -1.82e-03 -1.86e-04
+51    dx_frac           T01  9.62e+01  7.95e+01  1.08e+02
+52    dx_frac           T02  8.20e+01  7.07e+01  9.10e+01
+53    dx_frac       share10 -2.43e+00 -2.69e+00 -2.19e+00
+54    dx_frac       share20 -1.73e+00 -1.94e+00 -1.51e+00
+55    dx_frac       share50  2.34e-01  4.58e-02  4.13e-01
+56    dx_frac         model  2.00e+00  2.00e+00  3.00e+00
+57  gono_prev         d_inf -1.77e-02 -1.82e-02 -1.73e-02
+58  gono_prev drift_per_50y -2.29e-04 -7.79e-04  2.69e-04
+59  gono_prev           T01  8.10e+01  6.00e+01  1.06e+02
+60  gono_prev           T02  6.45e+01  4.87e+01  8.30e+01
+61  gono_prev       share10  6.62e-01  6.34e-01  6.93e-01
+62  gono_prev       share20  8.20e-01  7.90e-01  8.54e-01
+63  gono_prev       share50  9.46e-01  9.10e-01  9.89e-01
+64  gono_prev         model  2.00e+00  2.00e+00  2.00e+00
+65  chla_prev         d_inf -2.31e-02 -2.35e-02 -2.27e-02
+66  chla_prev drift_per_50y -2.39e-04 -9.86e-04  6.32e-04
+67  chla_prev           T01  6.50e+01  5.20e+01  9.16e+01
+68  chla_prev           T02  5.20e+01  4.25e+01  7.18e+01
+69  chla_prev       share10  7.15e-01  6.95e-01  7.41e-01
+70  chla_prev       share20  8.66e-01  8.41e-01  8.93e-01
+71  chla_prev       share50  9.70e-01  9.31e-01  1.00e+00
+72  chla_prev         model  2.00e+00  2.00e+00  2.00e+00
+73  syph_prev         d_inf -1.54e-02 -1.63e-02 -1.44e-02
+74  syph_prev drift_per_50y -6.60e-04 -2.06e-03  8.92e-04
+75  syph_prev           T01  8.02e+01  5.27e+01  1.15e+02
+76  syph_prev           T02  6.02e+01  3.98e+01  8.43e+01
+77  syph_prev       share10  6.54e-01  6.01e-01  7.21e-01
+78  syph_prev       share20  8.04e-01  7.27e-01  8.84e-01
+79  syph_prev       share50  9.44e-01  8.74e-01  1.02e+00
+80  syph_prev         model  2.00e+00  2.00e+00  2.00e+00
+          var  period mean_sd_delta_sd mean_icc_delta share_p05
+1        prev     1-5          0.02938       0.015437     0.000
+2        prev    6-10          0.08358       0.034355     0.000
+3        prev   11-20          0.15925       0.048026     0.000
+4        prev   21-50          0.06748       0.009803     0.000
+5        prev  51-100          0.00314       0.000118     0.000
+6        prev 101-150          0.08234       0.008254     0.000
+7  incid_rate     1-5          0.03184       0.003034     0.000
+8  incid_rate    6-10          0.23864       0.047149     0.200
+9  incid_rate   11-20          0.10923       0.019149     0.000
+10 incid_rate   21-50          0.12919       0.021211     0.000
+11 incid_rate  51-100          0.11076       0.017422     0.040
+12 incid_rate 101-150          0.11588       0.020178     0.080
+13        num     1-5          0.10286       0.088329     0.400
+14        num    6-10          0.21007       0.097073     0.600
+15        num   11-20          0.20406       0.055339     0.000
+16        num   21-50          0.41293       0.124250     0.667
+17        num  51-100          0.03640       0.004101     0.000
+18        num 101-150          0.00000       0.000000     0.000
+19  gono_prev     1-5          0.00000       0.000000     0.000
+20  gono_prev    6-10          0.06717       0.010219     0.000
+21  gono_prev   11-20          0.00000       0.000000     0.000
+22  gono_prev   21-50          0.02556       0.002831     0.000
+23  gono_prev  51-100          0.03930       0.004351     0.000
+24  gono_prev 101-150          0.09098       0.013014     0.000

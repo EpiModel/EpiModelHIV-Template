@@ -1,0 +1,81 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+                                                       check       truth
+1                                                S1 icc_w(1)  0.94090000
+2                                                S1 icc_a(1)  0.94090000
+3                                                S1 icc_w(5)  0.73742413
+4                                                S1 icc_a(5)  0.73742413
+5                                               S1 icc_w(10)  0.54379434
+6                                               S1 icc_a(10)  0.54379434
+7                                               S1 icc_w(20)  0.29571229
+8                                               S1 icc_a(20)  0.29571229
+9                                               S1 icc_w(50)  0.04755251
+10                                              S1 icc_a(50)  0.04755251
+11                       S1 icc_w of the 20-year mean, B = 0  0.65942491
+12                      S1 icc_w of the 20-year mean, B = 20  0.19500005
+13                                               S2 icc_w(1)  0.59236000
+14                                               S2 icc_a(1)  0.59236000
+15                                               S2 icc_w(5)  0.29859762
+16                                               S2 icc_a(5)  0.29859762
+17                                              S2 icc_w(10)  0.21753967
+18                                              S2 icc_a(10)  0.21753967
+19                                              S2 icc_w(20)  0.11828492
+20                                              S2 icc_a(20)  0.11828492
+21                                              S2 icc_w(50)  0.01902100
+22                                              S2 icc_a(50)  0.01902100
+23                       S2 icc_w of the 20-year mean, B = 0  0.50365361
+24                      S2 icc_w of the 20-year mean, B = 20  0.14666179
+25            S2 one point: time to full variance, eps = 0.1 23.00000000
+26            S2 one point: time to full variance, eps = 0.2 11.50000000
+27                   S1 icc_w(10): mean over 50 replications  0.54379434
+28                   S1 icc_a(10): mean over 50 replications  0.54379434
+29                      S1 icc_w(10): coverage of the 95% CI  0.95000000
+30                      S1 icc_a(10): coverage of the 95% CI  0.95000000
+31 Pool variance ratio at h = 10 (mean over 50 replications)  0.98237333
+32  Continuity test, H0: rejection rate (200 reps, 5% level)  0.05000000
+33      Continuity test, H1 jump of 0.1 SD: power (100 reps)          NA
+            est          lo           hi           z          criterion  pass
+1   0.937566018  0.92452553   0.94887708 -0.53668892              in CI  TRUE
+2   0.886652085  0.82172771   0.91520751 -2.27484252              in CI  TRUE
+3   0.656204262  0.59602511   0.71510919 -2.67358892              in CI  TRUE
+4   0.511149861  0.37768602   0.60238460 -3.94748870              in CI FALSE
+5   0.479410848  0.37313480   0.58335788 -1.20054995              in CI  TRUE
+6   0.307230896  0.16045619   0.40406454 -3.80663764              in CI FALSE
+7   0.265883343  0.08555917   0.39993792 -0.37193819              in CI  TRUE
+8   0.173208826  0.08631741   0.24359415 -3.05330314              in CI FALSE
+9  -0.017797991 -0.23022916   0.15682579 -0.66185424              in CI  TRUE
+10  0.001443526 -0.05514906   0.05302294 -1.67092428              in CI  TRUE
+11  0.592138217  0.49624611   0.67387167 -1.48494302              in CI  TRUE
+12  0.077535754 -0.11562242   0.22696406 -1.34406948              in CI  TRUE
+13  0.649269142  0.58253425   0.70532215  1.81682265              in CI  TRUE
+14  0.662166410  0.45352506   0.74061637  0.95315015              in CI  TRUE
+15  0.309555113  0.16429481   0.44142383  0.15499411              in CI  TRUE
+16  0.341718879  0.19180044   0.45564798  0.64065531              in CI  TRUE
+17  0.198025434  0.09023704   0.29318770 -0.37691830              in CI  TRUE
+18  0.253767698  0.11702909   0.32517453  0.68228183              in CI  TRUE
+19  0.246875260  0.14770330   0.35169158  2.47109359              in CI  TRUE
+20  0.143715552  0.04940134   0.21856602  0.58929613              in CI  TRUE
+21  0.016561119 -0.21922627   0.23051542 -0.02144063              in CI  TRUE
+22  0.029561414 -0.05247300   0.12791404  0.22905422              in CI  TRUE
+23  0.484961283  0.39546427   0.56241916 -0.43888447              in CI  TRUE
+24  0.067236997 -0.11524482   0.22234876 -0.92224860              in CI  TRUE
+25 20.750000000 13.48750000 794.26250000 -0.01129647              in CI  TRUE
+26 11.750000000  7.50000000  18.76250000  0.08701443              in CI  TRUE
+27  0.531606497  0.51818987   0.54502312 -1.78049125              in CI  TRUE
+28  0.513239028  0.49395732   0.53252073 -3.10597079              in CI FALSE
+29  0.880000000          NA           NA          NA    range 0.85 to 1  TRUE
+30  0.900000000          NA           NA          NA    range 0.85 to 1  TRUE
+31  0.961154490  0.92145325   1.00085573 -1.04754732              in CI  TRUE
+32  0.045000000          NA           NA          NA range 0.02 to 0.09  TRUE
+33  1.000000000          NA           NA          NA             report    NA
+
+All checks passed: FALSE 

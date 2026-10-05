@@ -1,0 +1,17 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+# A tibble: 1 × 12
+  var    block period  mean_drift  mean_lo mean_hi var_drift  var_lo var_hi
+  <chr>  <chr> <chr>        <dbl>    <dbl>   <dbl>     <dbl>   <dbl>  <dbl>
+1 prev.W key   300-600     0.0553 0.000328   0.111    0.0320 -0.0287 0.0976
+# ℹ 3 more variables: mean_flag <lgl>, var_flag <lgl>, flag <lgl>
+Flagged: 1 of 106 

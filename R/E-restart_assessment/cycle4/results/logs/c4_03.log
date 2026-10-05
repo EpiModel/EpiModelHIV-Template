@@ -1,0 +1,53 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+               var  kind       first   ref_median   ref_mad         z
+1    chla.rect.inf stock   4.5898438   0.26953125 1.5752625  2.742598
+2     prep.indic.B stock  -5.9648438  -0.08203125 2.1775687 -2.701551
+3       prep.indic stock  -7.5546875  -0.00390625 3.0578625 -2.469300
+4         chla.inf stock   5.1367188   0.47265625 2.0096180  2.320870
+5         syph.inf stock   1.8906250   0.04296875 0.9729562  1.899013
+6        hiv.inf.H stock  -0.3203125   0.00390625 0.1795336 -1.805895
+7    gono.uret.inf stock   3.7070312   0.04687500 2.1196547  1.726770
+8  gono.uret.incid  flow 194.6523438 191.42968750 1.8822070  1.712169
+9   hiv.dx.incid.W  flow   4.2343750   3.90234375 0.2026992  1.638049
+10        hiv.dx.W stock   0.6406250   0.01171875 0.3996070  1.573812
+11      gono.incid  flow 288.0429688 284.22265625 2.5540102  1.495809
+12        hiv.dx.H stock  -0.2539062  -0.02734375 0.1679508 -1.348982
+   level_shift_sd
+1      0.11494646
+2      0.03653567
+3     -0.02386495
+4      0.12601744
+5      0.01892550
+6     -0.04712903
+7      0.09360770
+8      0.04022261
+9      0.19576548
+10     0.00120436
+11     0.04559011
+12    -0.07771052
+One-year change: mean CI excludes 0 for 10 of 66 ; variance CI excludes 1 for 3 
+                             statistic n_vars max_abs_z var_at_max  p_global
+1 max |mean one-year change| / null SD     66   2.21287        num 0.6326837
+  n_abs_z_gt_2
+1            3
+           statistic max_abs_z     p_global         comparison
+1    mean difference  2.281226 0.3983008496 pool vs cold start
+2 log variance ratio  2.356843 0.4292853573 pool vs cold start
+3    mean difference 33.553016 0.0004997501    pool vs x0 runs
+4 log variance ratio  7.024043 0.0004997501    pool vs x0 runs
+          comparison n_components      energy null_median    null_q95
+1 pool vs cold start           18 0.003578844 0.003884953 0.005355701
+2    pool vs x0 runs           18 0.423395988 0.004436861 0.007575925
+             p
+1 0.6711644178
+2 0.0004997501

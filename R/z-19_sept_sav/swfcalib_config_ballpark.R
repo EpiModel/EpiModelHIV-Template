@@ -6,9 +6,6 @@
 ## This script should not be run directly. But `sourced` from the swfcalib
 ## workflow
 
-# TODO: test as is (no restart, good ranges)
-# TODO: create a failsafe version?
-
 library(swfcalib)
 library(dplyr)
 library(tidyr)

@@ -1,0 +1,70 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+             var   tau_int truncated_at_max_lag        lo        hi block
+1           prev 66.498859                 TRUE 59.370815 75.215569   key
+2         prev.W 61.959082                 TRUE 53.242902 69.766428   key
+3      hiv.inf.B 60.810709                 TRUE 55.092506 68.555097 state
+4       hiv.dx.B 60.275315                 TRUE 54.538790 67.627167 state
+5      hiv.inf.W 60.134215                 TRUE 52.674340 68.355739 state
+6       hiv.dx.W 58.663002                 TRUE 51.004551 65.980525 state
+7         prev.B 57.973992                 TRUE 52.584492 65.259258   key
+8          num.B 52.156990                 TRUE 46.643517 56.968565 state
+9       hiv.tx.W 51.508201                 TRUE 45.246472 58.413779 state
+10         num.W 51.427437                 TRUE 47.051633 58.941887 state
+11    hiv.supp.W 51.319480                 TRUE 44.855011 57.943037 state
+12      hiv.tx.B 51.168214                 TRUE 46.364209 56.767365 state
+13    hiv.supp.B 50.946412                 TRUE 46.181340 56.967623 state
+14           num 49.571051                FALSE 47.315904 54.426563   key
+15         num.H 48.457709                FALSE 46.786400 50.499580 state
+16  prep.indic.W 45.203547                 TRUE 37.731077 50.974922 state
+17        prev.H 40.347011                FALSE 36.139215 44.811826   key
+18     hiv.inf.H 39.880803                FALSE 35.711819 44.417252 state
+19      hiv.dx.H 39.032505                 TRUE 34.551852 44.525027 state
+20  prep.indic.B 38.160378                 TRUE 34.175871 43.093169 state
+21  prep.indic.H 36.499979                FALSE 35.066913 38.560276 state
+22      hiv.tx.H 27.667907                FALSE 24.638818 30.766770 state
+23    hiv.supp.H 27.432052                FALSE 24.502017 31.013042 state
+24        prep.W 26.375448                 TRUE 21.700091 29.741448 state
+25        prep.B 24.023972                FALSE 21.261506 27.648030 state
+26     chla_prev 22.898265                FALSE 20.751754 25.326106   key
+27 chla.rect.inf 22.714254                FALSE 20.771627 25.187846 state
+28 chla.uret.inf 22.594155                FALSE 20.452919 25.107223 state
+29       chla_ir 22.284790                FALSE 20.283299 24.540585   key
+30     gono_prev 22.284115                FALSE 20.228803 24.609031   key
+31 gono.rect.inf 22.141157                FALSE 20.077035 24.510359 state
+32 gono.uret.inf 22.080538                FALSE 19.981563 24.369717 state
+33       gono_ir 22.022339                FALSE 19.843884 24.239678   key
+34     syph_prev 18.437726                FALSE 17.385969 20.008979   key
+35      syph.inf 18.423283                FALSE 17.434027 19.911799 state
+36       syph_ir 16.099128                FALSE 15.213908 17.412794   key
+37        prep.H 14.300966                FALSE 13.530167 15.110106 state
+38     dx_frac.B 10.755025                FALSE 10.370448 11.224671   key
+39       dx_frac 10.380561                FALSE 10.017790 10.776806   key
+40    incid_rate  9.553367                FALSE  8.340572 10.661115   key
+41     dx_frac.H  8.883074                FALSE  8.608124  9.164321   key
+42  incid_rate.B  7.906802                FALSE  6.669562  8.606549   key
+43     dx_frac.W  7.865674                FALSE  7.587633  8.153687   key
+44     supp_frac  7.091804                FALSE  6.627236  7.582905   key
+45   supp_frac.W  6.962050                FALSE  6.781074  7.176669   key
+46   supp_frac.H  6.895928                FALSE  6.635908  7.286446   key
+47   supp_frac.B  6.877533                FALSE  6.528562  7.429323   key
+48  incid_rate.W  6.135670                FALSE  5.445166  6.760399   key
+49      prep_cov  3.111668                FALSE  2.812972  3.369033   key
+50    prep_cov.B  3.026400                FALSE  2.731034  3.269257   key
+51    prep_cov.H  2.643805                FALSE  2.526700  2.753081   key
+52    prep_cov.W  2.363886                FALSE  2.189798  2.490969   key
+53  incid_rate.H  1.688717                FALSE  1.476119  1.773569   key
+Max |identity error|: 5.602487e-09 
+Warning message:
+`geom_errorbarh()` was deprecated in ggplot2 4.0.0.
+ℹ Please use the `orientation` argument of `geom_errorbar()` instead. 
+`height` was translated to `width`.

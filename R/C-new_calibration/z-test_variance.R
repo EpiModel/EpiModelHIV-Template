@@ -1,5 +1,3 @@
-# TODO: assess variance
-
 library(dplyr)
 library(ggplot2)
 theme_set(theme_light())

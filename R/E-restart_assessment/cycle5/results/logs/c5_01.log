@@ -1,0 +1,55 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Registered S3 method overwritten by 'tergm':
+  method                   from
+  simulate_formula.network ergm
+           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells  2652398 141.7    4727551 252.5   4727551  252.5
+Vcells 24515107 187.1  125403317 956.8 201506258 1537.4
+# A tibble: 6 × 7
+  set   scenario                 runs points min_per_point max_per_point years
+  <chr> <chr>                   <int>  <int>         <int>         <int> <dbl>
+1 short baseline                  128     32             4             4    15
+2 short s1_test                   128     32             4             4    15
+3 short s2_prep                   128     32             4             4    15
+4 short s3_sti                    128     32             4             4    15
+5 long  s4_acts                   128     32             4             4   150
+6 long  baseline (cycle 4 runs)   256     32             1            15   150
+   scenario    variable    z_before change_after_pct
+1  baseline dx_per_year  0.00000000       0.00000000
+2  baseline undiagnosed  0.00000000       0.00000000
+3  baseline    prep_cov  0.00000000       0.00000000
+4  baseline     gono_ir  0.00000000       0.00000000
+5  baseline     chla_ir  0.00000000       0.00000000
+6  baseline     syph_ir  0.00000000       0.00000000
+7  baseline        prev  0.00000000       0.00000000
+8   s1_test dx_per_year  0.56681482       4.98267658
+9   s1_test undiagnosed  0.92118047      -8.66180277
+10  s1_test    prep_cov  1.31828095       0.30112516
+11  s1_test     gono_ir -0.37314967       1.09160956
+12  s1_test     chla_ir  0.06152252       1.55154386
+13  s1_test     syph_ir  0.42529925       3.68735134
+14  s1_test        prev  0.27114378      -0.14583345
+15  s2_prep dx_per_year  0.01397630      -1.06128888
+16  s2_prep undiagnosed  0.36172160     -39.09217353
+17  s2_prep    prep_cov -0.14882589      57.64289310
+18  s2_prep     gono_ir -0.34811289     -20.44744124
+19  s2_prep     chla_ir -0.65883953     -20.26915998
+20  s2_prep     syph_ir -0.92990633      -6.99608004
+21  s2_prep        prev  0.05754462      -4.16161595
+22   s3_sti dx_per_year -0.38863256      -4.00353409
+23   s3_sti undiagnosed -0.02558326      -3.12927548
+24   s3_sti    prep_cov  1.03714832       0.09057797
+25   s3_sti     gono_ir  0.46894795     -57.66890959
+26   s3_sti     chla_ir  0.12549805     -58.08723050
+27   s3_sti     syph_ir  0.33832408       0.40578938
+28   s3_sti        prev  0.01809435      -0.98328577

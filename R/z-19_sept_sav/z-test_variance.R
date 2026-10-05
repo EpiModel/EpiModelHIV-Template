@@ -1,4 +1,3 @@
-# TODO: assess variance
 
 library(dplyr)
 library(ggplot2)

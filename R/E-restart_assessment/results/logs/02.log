@@ -1,0 +1,151 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+                                                          check        truth
+1                                  S1 ICC_x0(5) = 1 - v(h)/v_pi  0.348678440
+2                                 S1 ICC_x0(10) = 1 - v(h)/v_pi  0.121576655
+3                                 S1 ICC_x0(20) = 1 - v(h)/v_pi  0.014780883
+4                              S1 variance relaxation tau (fit)  4.745610791
+5                                 S2 ICC_x0(10) = 1 - v(h)/v_pi  0.066761655
+6                                 S2 ICC_x0(30) = 1 - v(h)/v_pi  0.029755314
+7                                            S1 mean at year 10  1.046035320
+8                                                     S1 rho(1)  0.900000000
+9                                                     S1 rho(5)  0.590490000
+10                                                   S1 rho(10)  0.348678440
+11                                                   S1 rho(20)  0.121576655
+12                                           S1 tau_int (Geyer) 19.000000000
+13                                                    S2 rho(1)  0.548000000
+14                                                   S2 rho(10)  0.082586187
+15                                                   S2 rho(50)  0.036416968
+16                                           S2 tau_int (Geyer) 12.600000000
+17          Fast pooled ACF == direct pooled ACF (max abs diff)  0.000000000
+18                                                  S4 rho_u(5) -0.295245000
+19                   Window identity |within + between - total|  0.000000000
+20                                        S1 Var(M_20) / Var_pi  0.554709495
+21                              S1 L Var(M_L)/Var_pi at L = 100 17.200047811
+22                                   S1 drift test (stationary)  0.000000000
+23        S3 drift test (random walk, SD 0.02: below tolerance)           NA
+24       S3b drift test (random walk, SD 0.03: above tolerance)  1.000000000
+25                    S1 T by the brief's rule (q95, runs <= 3)           NA
+26                                S1 T by the null-maximum rule           NA
+27 S0 (stationary start) T by the brief's rule (q95, runs <= 3)           NA
+28             S0 (stationary start) T by the null-maximum rule           NA
+29                                      S1 T_var(0.05) from fit 14.216579403
+30                                   S1 T_mean(0.1 SD) from fit 32.281517990
+31                                       S1 T_var(0.1) from fit 10.927172663
+32                                   S1 T_mean(0.2 SD) from fit 25.702704511
+33                                      S2 T_var(0.05) from fit 17.154787133
+34                                 S1 R2 bound own value, h = 5  0.348678440
+35                                S1 R2 bound own value, h = 10  0.121576655
+36                               S2 R2 bound full state, h = 10  0.066761655
+37                               S2 R2 bound full state, h = 30  0.029755314
+38                  S2 R2 bound own value, h = 10 (= rho(10)^2)  0.006820478
+39 S2 R2 bound own value + lags, h = 10 (between rho^2 and ICC)           NA
+40                              S4 R2 bound state (u, v), h = 5  0.348678440
+41                     S4 R2 bound u only, h = 5 (= rho_u(5)^2)  0.087169610
+42         Coverage of 95% CI, S1 ICC_x0(10) (100 replications)  0.950000000
+43           Mean of S1 ICC_x0(10) estimates (100 replications)  0.121576655
+44            Coverage of 95% CI, S1 rho(10) (100 replications)  0.950000000
+45              Mean of S1 rho(10) estimates (100 replications)  0.348678440
+             est           lo           hi           z            criterion
+1   3.301706e-01  0.227733589  0.437828375 -0.34532415                in CI
+2   1.039949e-01 -0.028910326  0.234244989 -0.26189971                in CI
+3  -1.614229e-01 -0.386691784  0.023561628 -1.68363956                in CI
+4   4.154492e+00  3.164118265  6.135011537 -0.77996279                in CI
+5   9.899611e-02 -0.059465026  0.258961301  0.39682350                in CI
+6  -1.028468e-01 -0.270269790  0.059058688 -1.57836375                in CI
+7   1.056517e+00  0.942286593  1.170748309  0.17985487                in CI
+8   8.975436e-01  0.894977058  0.900743231 -1.66989427                in CI
+9   5.823278e-01  0.573180214  0.592515650 -1.65478275                in CI
+10  3.408095e-01  0.328214283  0.355656004 -1.12405957                in CI
+11  1.125200e-01  0.096932773  0.129277613 -1.09761347                in CI
+12  1.862744e+01 17.524092717 20.039525092 -0.58058850                in CI
+13  5.429973e-01  0.537491669  0.548766254 -1.73936093                in CI
+14  8.614587e-02  0.076742011  0.096119109  0.72012544                in CI
+15  2.624362e-02  0.015240291  0.037293393 -1.80834032                in CI
+16  1.054050e+01  9.010283653 11.449521514 -3.30973629                in CI
+17  6.661338e-16           NA           NA          NA            abs<1e-10
+18 -2.934114e-01 -0.299878916 -0.286613005  0.54181484                in CI
+19  0.000000e+00           NA           NA          NA            abs<1e-10
+20  5.492283e-01  0.539127961  0.560933063 -0.98538126                in CI
+21  1.636124e+01 15.026030615 17.773948570 -1.19658995                in CI
+22  0.000000e+00           NA           NA          NA          not flagged
+23  0.000000e+00           NA           NA          NA               report
+24  1.000000e+00           NA           NA          NA              flagged
+25  2.100000e+01           NA           NA          NA               report
+26  2.200000e+01           NA           NA          NA               report
+27  2.970000e+02           NA           NA          NA               report
+28  2.220000e+02           NA           NA          NA               report
+29  1.275000e+01  9.743750000 22.875000000 -0.43780990                in CI
+30  2.900000e+01 23.500000000 47.562500000 -0.53458911                in CI
+31  1.000000e+01  7.500000000 15.012500000 -0.48379592                in CI
+32  2.400000e+01 20.500000000 29.006250000 -0.78467029                in CI
+33  1.400000e+01  9.993750000 28.312500000 -0.67508785                in CI
+34  3.394164e-01  0.326270717  0.351910449 -1.41604728                in CI
+35  1.174286e-01  0.105461687  0.129373845 -0.68000485                in CI
+36  6.889609e-02  0.060757773  0.077810110  0.49066423                in CI
+37  2.924866e-02  0.023335932  0.034596597 -0.17637497                in CI
+38  6.929704e-03  0.003893162  0.009334606  0.07868618                in CI
+39  1.405091e-02  0.010059653  0.017782799          NA range 0.00682-0.0668
+40  3.509077e-01  0.341050087  0.361633314  0.42455508                in CI
+41  9.084718e-02  0.086345438  0.096662047  1.39736414                in CI
+42  9.800000e-01           NA           NA          NA         range 0.89-1
+43  1.203489e-01  0.106393637  0.134304238 -0.17243089                in CI
+44  9.500000e-01           NA           NA          NA         range 0.89-1
+45  3.493179e-01  0.347965667  0.350670226  0.92690378                in CI
+    pass
+1   TRUE
+2   TRUE
+3   TRUE
+4   TRUE
+5   TRUE
+6   TRUE
+7   TRUE
+8   TRUE
+9   TRUE
+10  TRUE
+11  TRUE
+12  TRUE
+13  TRUE
+14  TRUE
+15  TRUE
+16 FALSE
+17  TRUE
+18  TRUE
+19  TRUE
+20  TRUE
+21  TRUE
+22  TRUE
+23    NA
+24  TRUE
+25    NA
+26    NA
+27    NA
+28    NA
+29  TRUE
+30  TRUE
+31  TRUE
+32  TRUE
+33  TRUE
+34  TRUE
+35  TRUE
+36  TRUE
+37  TRUE
+38  TRUE
+39  TRUE
+40  TRUE
+41  TRUE
+42  TRUE
+43  TRUE
+44  TRUE
+45  TRUE
+
+All checks passed: FALSE 

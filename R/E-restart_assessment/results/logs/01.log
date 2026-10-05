@@ -1,0 +1,30 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Class: tbl_df tbl data.frame 
+Dim: 7987200 61 
+Size: 1.8 Gb 
+First step identical across chains: TRUE 
+# A tibble: 2 × 5
+    sim syph.inf gono.inf chla.inf hiv.inf
+  <dbl>    <dbl>    <dbl>    <dbl>   <dbl>
+1    75    374.        NA       NA      NA
+2    88     88.9       NA       NA      NA
+           used (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  1381353 73.8    2681702  143.3   2343219  125.2
+Vcells 11494012 87.7  449765852 3431.5 562207314 4289.4
+Annual object size: 96.6 Mb 
+Warning message:
+Removed 7 rows containing missing values or values outside the scale range
+(`geom_hline()`). 
+Warning message:
+Removed 7 rows containing missing values or values outside the scale range
+(`geom_hline()`). 

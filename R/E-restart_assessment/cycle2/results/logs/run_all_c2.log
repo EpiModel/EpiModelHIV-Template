@@ -1,0 +1,7 @@
+2026-09-25 18:56:42 running c2_01_provenance.R 
+2026-09-25 18:57:02 running c2_02_project_outcomes.R 
+2026-09-25 18:59:45 running c2_03_robustness.R 
+2026-09-25 19:10:32 running c2_04_design.R 
+2026-09-25 19:10:36 running c2_05_selection.R 
+2026-09-25 19:12:03 done
+Rscript R/E-restart_assessment/cycle2/run_all_c2.R  6614,95s user 63,42s system 723% cpu 15:22,59 total

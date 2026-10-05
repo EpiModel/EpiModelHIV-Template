@@ -1,0 +1,91 @@
+"var","method","eps","est","lo","hi"
+"prev","exp_fit (cycle 1)",0.1,73.25,59.488,130.74
+"prev","exp_fit (cycle 1)",0.2,52.5,42.744,70.519
+"prev","stretched_exp",0.1,68.25,52.25,141.76
+"prev","stretched_exp",0.2,52,42.438,80.762
+"prev","isotonic",0.1,82,50.9,122.02
+"prev","isotonic",0.2,58,37.95,85
+"prev.B","exp_fit (cycle 1)",0.1,66.25,55.488,84.519
+"prev.B","exp_fit (cycle 1)",0.2,47.5,40.238,59.506
+"prev.B","stretched_exp",0.1,61.25,48.731,79.756
+"prev.B","stretched_exp",0.2,47.5,39.994,60
+"prev.B","isotonic",0.1,71,46,108.05
+"prev.B","isotonic",0.2,46,36,80
+"prev.H","exp_fit (cycle 1)",0.1,37.25,30,78.35
+"prev.H","exp_fit (cycle 1)",0.2,26.5,21.75,34.269
+"prev.H","stretched_exp",0.1,32.25,25.25,106.51
+"prev.H","stretched_exp",0.2,25.5,21,48.281
+"prev.H","isotonic",0.1,28,26.95,225.02
+"prev.H","isotonic",0.2,27,22,31.075
+"prev.W","exp_fit (cycle 1)",0.1,87.75,61.494,430.49
+"prev.W","exp_fit (cycle 1)",0.2,54.25,41.244,80.5
+"prev.W","stretched_exp",0.1,96.75,60.225,209.34
+"prev.W","stretched_exp",0.2,59.25,42.238,96.256
+"prev.W","isotonic",0.1,112,60,286.05
+"prev.W","isotonic",0.2,61,32,110.02
+"num","exp_fit (cycle 1)",0.1,74.75,48.994,326.98
+"num","exp_fit (cycle 1)",0.2,45.25,35.25,68.713
+"num","stretched_exp",0.1,79.75,38.744,199.37
+"num","stretched_exp",0.2,50.75,32.744,89.556
+"num","isotonic",0.1,47,39,280
+"num","isotonic",0.2,43,35,78.025
+"incid_rate","exp_fit (cycle 1)",0.1,1.75,0,12.75
+"incid_rate","exp_fit (cycle 1)",0.2,0,0,0.5125
+"incid_rate","stretched_exp",0.1,0,0,16.025
+"incid_rate","stretched_exp",0.2,0,0,0.5125
+"incid_rate","isotonic",0.1,3,1,21
+"incid_rate","isotonic",0.2,1,1,3
+"dx_frac","exp_fit (cycle 1)",0.1,25.75,14,46.519
+"dx_frac","exp_fit (cycle 1)",0.2,7.25,4.25,16.013
+"dx_frac","stretched_exp",0.1,19,12,39.256
+"dx_frac","stretched_exp",0.2,9.25,6.5,15.538
+"dx_frac","isotonic",0.1,27,14,67.025
+"dx_frac","isotonic",0.2,5,4,27.025
+"supp_frac","exp_fit (cycle 1)",0.1,4.75,3.75,12.019
+"supp_frac","exp_fit (cycle 1)",0.2,3.5,3,4.5063
+"supp_frac","stretched_exp",0.1,4.75,3.4938,18.269
+"supp_frac","stretched_exp",0.2,3.5,2.9938,7.2563
+"supp_frac","isotonic",0.1,5,4,27.05
+"supp_frac","isotonic",0.2,4,3,5
+"prep_cov","exp_fit (cycle 1)",0.1,2.25,2,2.5
+"prep_cov","exp_fit (cycle 1)",0.2,1.75,1.5,2
+"prep_cov","stretched_exp",0.1,1.5,1.25,2.25
+"prep_cov","stretched_exp",0.2,1.25,1.25,2
+"prep_cov","isotonic",0.1,2,2,3
+"prep_cov","isotonic",0.2,2,2,2
+"gono_prev","exp_fit (cycle 1)",0.1,36.25,25.25,82.794
+"gono_prev","exp_fit (cycle 1)",0.2,22,14.238,29.006
+"gono_prev","stretched_exp",0.1,42,26,108.51
+"gono_prev","stretched_exp",0.2,19.75,14.75,34.756
+"gono_prev","isotonic",0.1,35,31,138.13
+"gono_prev","isotonic",0.2,32,18,37
+"chla_prev","exp_fit (cycle 1)",0.1,42.5,29.731,151.66
+"chla_prev","exp_fit (cycle 1)",0.2,22.5,15.988,36.531
+"chla_prev","stretched_exp",0.1,63.25,33,128.51
+"chla_prev","stretched_exp",0.2,27.75,18.738,43.75
+"chla_prev","isotonic",0.1,41,30,187.08
+"chla_prev","isotonic",0.2,30,18.975,42
+"syph_prev","exp_fit (cycle 1)",0.1,59.25,28.475,98.581
+"syph_prev","exp_fit (cycle 1)",0.2,15.5,8.2438,32.269
+"syph_prev","stretched_exp",0.1,46.25,25.481,78.25
+"syph_prev","stretched_exp",0.2,20.25,13.744,28.756
+"syph_prev","isotonic",0.1,39,30.975,144.13
+"syph_prev","isotonic",0.2,30,6,39
+"i.prev.dx.B","exp_fit (cycle 1)",0.1,68.75,56.75,86.05
+"i.prev.dx.B","exp_fit (cycle 1)",0.2,49.75,41.25,61.275
+"i.prev.dx.B","stretched_exp",0.1,62.5,48.462,86
+"i.prev.dx.B","stretched_exp",0.2,49.5,39.5,61.275
+"i.prev.dx.B","isotonic",0.1,72,46.975,116
+"i.prev.dx.B","isotonic",0.2,47,37,78.025
+"i.prev.dx.H","exp_fit (cycle 1)",0.1,43,32.744,73.563
+"i.prev.dx.H","exp_fit (cycle 1)",0.2,30.75,23.744,39.281
+"i.prev.dx.H","stretched_exp",0.1,39,25.994,97
+"i.prev.dx.H","stretched_exp",0.2,29.75,22.25,47.788
+"i.prev.dx.H","isotonic",0.1,33,25,94
+"i.prev.dx.H","isotonic",0.2,27,23,52.1
+"i.prev.dx.W","exp_fit (cycle 1)",0.1,89,58.238,414.82
+"i.prev.dx.W","exp_fit (cycle 1)",0.2,56,41.744,83.256
+"i.prev.dx.W","stretched_exp",0.1,93.5,54.944,210.34
+"i.prev.dx.W","stretched_exp",0.2,60.25,41.475,98.288
+"i.prev.dx.W","isotonic",0.1,110,59.975,297.03
+"i.prev.dx.W","isotonic",0.2,61,33.95,117.02

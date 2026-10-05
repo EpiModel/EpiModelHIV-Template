@@ -1,10 +1,3 @@
-# TODO: verify that I have results for ALL waves and iterations
-# NOTE: no, missing last
-# TODO: considering monotonous assumption, eval how deter gp fails and how to
-# auto fix => goal: run "bad_calib" once and get ballparck at the end even with
-# bad config
-# TODO: check how hiv trans behaved with no LHS, no reps - should I change
-
 library(dplyr)
 library(EpiModelHIV)
 hpc_context <- TRUE
@@ -42,7 +35,6 @@ determ_gp_end_single <- function(extended_range) {
     params <- params[complete_rows]
 
     # Check if target is within reach, otherwise extend range
-    # TODO: fail if range have been extended already
     new_proposal <- extend_param_range1(params, values, target, extended_range)
     if (!is.null(new_proposal)) {
       proposals <- list(new_proposal)

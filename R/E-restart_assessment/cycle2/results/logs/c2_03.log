@@ -1,0 +1,27 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+  series  n rule_brief_median rule_brief_iqr rule_brief_na rule_nullmax_median
+1     S0 30             132.5       1-269.75             0                65.5
+2     S1 30             149.0         68-269             1                99.0
+3     S2 30             105.0       1-270.75             0                36.5
+  rule_nullmax_iqr t_var_true t_var_median t_var_cover t_mean_true
+1         1-201.75   0.000000         0.00   1.0000000     0.00000
+2        28.25-269  10.927173        11.25   0.9000000    32.28152
+3         1-230.25   3.123151         5.50   0.8333333     0.00000
+  t_mean_median t_mean_cover
+1           0.0          1.0
+2          34.5          0.9
+3           0.0          1.0
+Warning message:
+`geom_errorbarh()` was deprecated in ggplot2 4.0.0.
+ℹ Please use the `orientation` argument of `geom_errorbar()` instead. 
+`height` was translated to `width`.

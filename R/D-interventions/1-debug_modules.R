@@ -26,10 +26,17 @@ source("R/netsim_settings.R", local = TRUE)
 control <- control_msm(
   start          = restart_time,
   nsteps         = restart_time + year_steps * 4,
-  initialize.FUN = reinit_msm,
+  initialize.FUN = initialize.net,
   # Always ncores = 1 with `load_local_EpiModelHIV()`
   # parallel workers load the installed package, not the dev version.
   ncores         = 1
+)
+control <- control_msm(
+  nsteps              = 600 * year_steps,
+  start               = restart_time,
+  initialize.FUN      = initialize.net,
+  randomize.restart   = TRUE,
+  verbose = FALSE
 )
 
 # Inspect the restart point

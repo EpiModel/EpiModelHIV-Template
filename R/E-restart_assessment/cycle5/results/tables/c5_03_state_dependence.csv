@@ -1,0 +1,4 @@
+"scenario","outcome","predictor","slope_pp_per_sd","se","p","r2"
+"s1_test","cml_incid","undx_frac",0.14517,0.25364,0.57136,0.010801
+"s2_prep","cml_incid","prev",0.099288,0.21835,0.65258,0.0068451
+"s3_sti","cml_gono","gono_prev",-2.1934,0.91001,0.022274,0.16224

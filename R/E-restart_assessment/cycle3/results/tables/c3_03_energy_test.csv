@@ -1,0 +1,3 @@
+"comparison","n_components","n_cross_sections","energy","null_median","null_q95","p"
+"cold start vs x0 runs",18,13,0.4278,0.0044706,0.0076977,0.00049975
+"placebo: two halves of cold start",NA,13,0.0082782,0.0078468,0.010922,0.3953

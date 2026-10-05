@@ -1,0 +1,79 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+     design   e  s2d  noise true_s2_delta     z_delta cover_delta        z_s2
+1  balanced 0.0 0.00 normal        0.0000  1.89932467       0.945  0.27034567
+2  s4_vs_c4 0.0 0.00 normal        0.0000 -1.33186303       0.953 -2.28285610
+3  balanced 0.1 0.00 normal        0.0025 -0.41678975       0.947  1.55513507
+4  s4_vs_c4 0.1 0.00 normal        0.0025 -0.23401748       0.958 -0.48514570
+5  balanced 0.0 0.02 normal        0.0200 -0.86412276       0.959 -0.99005734
+6  s4_vs_c4 0.0 0.02 normal        0.0200 -0.83362665       0.963  1.63345441
+7  balanced 0.1 0.02 normal        0.0225  0.67839938       0.944  0.10724181
+8  s4_vs_c4 0.1 0.02 normal        0.0225 -0.41099687       0.936 -0.78202046
+9  balanced 0.0 0.10 normal        0.1000 -1.99582150       0.948  0.34052006
+10 s4_vs_c4 0.0 0.10 normal        0.1000  0.21458740       0.954 -0.97057237
+11 balanced 0.1 0.10 normal        0.1025  0.89377453       0.944 -0.09798962
+12 s4_vs_c4 0.1 0.10 normal        0.1025 -0.35976286       0.947 -1.63528385
+13 balanced 0.0 0.30 normal        0.3000  0.55742490       0.960  2.38080218
+14 s4_vs_c4 0.0 0.30 normal        0.3000  0.63304990       0.940 -0.16724729
+15 balanced 0.1 0.30 normal        0.3025 -1.11421758       0.954 -0.08709015
+16 s4_vs_c4 0.1 0.30 normal        0.3025  1.56861235       0.941 -1.22272867
+17 balanced 0.0 0.00 skewed        0.0000  0.45165998       0.953 -1.17915797
+18 s4_vs_c4 0.0 0.00 skewed        0.0000  0.72476036       0.952  0.14627153
+19 balanced 0.1 0.00 skewed        0.0025 -1.63234800       0.949  0.37235307
+20 s4_vs_c4 0.1 0.00 skewed        0.0025  0.23519892       0.942  1.28024033
+21 balanced 0.0 0.02 skewed        0.0200 -0.08599628       0.953  0.48791011
+22 s4_vs_c4 0.0 0.02 skewed        0.0200 -1.13989056       0.955 -1.32604821
+23 balanced 0.1 0.02 skewed        0.0225 -0.48813950       0.952  0.66897154
+24 s4_vs_c4 0.1 0.02 skewed        0.0225 -1.45372780       0.946  0.02373821
+25 balanced 0.0 0.10 skewed        0.1000  0.52051420       0.943 -0.93311185
+26 s4_vs_c4 0.0 0.10 skewed        0.1000  1.89213663       0.954  0.13625615
+27 balanced 0.1 0.10 skewed        0.1025  0.80825928       0.950  0.38370229
+28 s4_vs_c4 0.1 0.10 skewed        0.1025 -0.35419681       0.958 -1.05222657
+29 balanced 0.0 0.30 skewed        0.3000  1.14673418       0.952 -2.13936635
+30 s4_vs_c4 0.0 0.30 skewed        0.3000  0.85197403       0.948 -0.39370958
+31 balanced 0.1 0.30 skewed        0.3025  0.77119272       0.948 -0.54314800
+32 s4_vs_c4 0.1 0.30 skewed        0.3025  1.25488941       0.964  1.23853618
+   cover_s2 reject_rate pass_delta pass_s2 pass_size
+1     0.959       0.049       TRUE    TRUE      TRUE
+2     0.942       0.052       TRUE    TRUE      TRUE
+3     0.942       0.057       TRUE    TRUE        NA
+4     0.942       0.055       TRUE    TRUE        NA
+5     0.959       0.068       TRUE    TRUE        NA
+6     0.926       0.118       TRUE   FALSE        NA
+7     0.953       0.091       TRUE    TRUE        NA
+8     0.943       0.096       TRUE    TRUE        NA
+9     0.956       0.231       TRUE    TRUE        NA
+10    0.945       0.295       TRUE    TRUE        NA
+11    0.956       0.230       TRUE    TRUE        NA
+12    0.957       0.293       TRUE    TRUE        NA
+13    0.956       0.745       TRUE    TRUE        NA
+14    0.952       0.821       TRUE    TRUE        NA
+15    0.967       0.713       TRUE    TRUE        NA
+16    0.951       0.806       TRUE    TRUE        NA
+17    0.942       0.047       TRUE    TRUE      TRUE
+18    0.927       0.057       TRUE   FALSE      TRUE
+19    0.949       0.045       TRUE    TRUE        NA
+20    0.922       0.078       TRUE   FALSE        NA
+21    0.954       0.074       TRUE    TRUE        NA
+22    0.933       0.095       TRUE    TRUE        NA
+23    0.939       0.093       TRUE    TRUE        NA
+24    0.940       0.105       TRUE    TRUE        NA
+25    0.954       0.245       TRUE    TRUE        NA
+26    0.941       0.291       TRUE    TRUE        NA
+27    0.962       0.254       TRUE    TRUE        NA
+28    0.938       0.291       TRUE    TRUE        NA
+29    0.958       0.692       TRUE    TRUE        NA
+30    0.944       0.805       TRUE    TRUE        NA
+31    0.966       0.711       TRUE    TRUE        NA
+32    0.945       0.831       TRUE    TRUE        NA
+
+Passed: delta 32 / 32 | s2_delta 29 / 32 | size 4 / 4 

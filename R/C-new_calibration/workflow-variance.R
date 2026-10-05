@@ -38,8 +38,8 @@ wf <- make_em_workflow("variance_assess_pool", override = TRUE)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    # path_to_restart, param, init, control,
-    path_to_est, param, init, control,
+    path_to_restart, param, init, control,
+    # path_to_est, param, init, control,
     scenarios_list = NULL,
     output_dir = calib_dir,
     n_rep = 256,

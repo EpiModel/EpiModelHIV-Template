@@ -1,0 +1,10 @@
+"source","file","network","netest_coef_local","n_points","offset_min","offset_max","tie_propensity_ratio","num_elig_saved"
+"pool of the cycle 4 runs (restart_pool.rds, 2026-09-27)","restart_pool.rds","fit_main",-19.1725,32,-4.3294e-13,2.27697e-13,1,TRUE
+"pool of the cycle 4 runs (restart_pool.rds, 2026-09-27)","restart_pool.rds","fit_casl",-18.5614,32,-4.3294e-13,2.27697e-13,1,TRUE
+"pool of the cycle 4 runs (restart_pool.rds, 2026-09-27)","restart_pool.rds","fit_ooff",-14.1951,32,-6.96817e-16,1.04886e-15,1,TRUE
+"x0 of the variance runs (2026-05-20)","restart-hpc.rds","fit_main",-19.1725,1,-0.0111367,-0.0111367,0.988925,FALSE
+"x0 of the variance runs (2026-05-20)","restart-hpc.rds","fit_casl",-18.5614,1,-0.0111367,-0.0111367,0.988925,FALSE
+"x0 of the variance runs (2026-05-20)","restart-hpc.rds","fit_ooff",-14.1951,1,-0.0111367,-0.0111367,0.988925,FALSE
+"September pool (HPC cold starts, 2026-09-21)","restart_pool.rds","fit_main",-19.1725,62,-0.0147,-0.0147,0.985408,TRUE
+"September pool (HPC cold starts, 2026-09-21)","restart_pool.rds","fit_casl",-18.5614,62,-0.0869984,-0.0869984,0.916679,TRUE
+"September pool (HPC cold starts, 2026-09-21)","restart_pool.rds","fit_ooff",-14.1951,62,0.100442,0.100442,1.10566,TRUE

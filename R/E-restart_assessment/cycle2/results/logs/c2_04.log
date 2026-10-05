@@ -1,0 +1,56 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+                    outcome          var functional  h    icc_lb icc_direct
+1 cml incidence, years 6-15    cml_incid      cml10  5 0.1474400  0.2492000
+2 cml incidence, years 6-15  cml_incid.B      cml10  5 0.1354300  0.3049800
+3 cml incidence, years 6-15  cml_incid.H      cml10  5 0.0883340  0.0482150
+4 cml incidence, years 6-15  cml_incid.W      cml10  5 0.1585300  0.0929230
+5   incidence rate, year 15   incid_rate      value 15 0.0370310  0.0403090
+6   incidence rate, year 15 incid_rate.B      value 15 0.0302230  0.0737110
+7   incidence rate, year 15 incid_rate.H      value 15 0.0051908  0.0072341
+8   incidence rate, year 15 incid_rate.W      value 15 0.0207290  0.0000000
+  x0_sd_ratio x0_offset_sd x0_offset_pct pi_cv_pct single_sd_ratio_lb
+1   0.8664872    1.0852000      2.072600    1.9099          0.9233418
+2   0.8336786    1.1103000      2.088800    1.8812          0.9298226
+3   0.9755921   -0.0188440     -0.113240    6.0092          0.9548120
+4   0.9524075    0.7069600      2.370000    3.3524          0.9173167
+5   0.9796384    0.4755035      2.039789        NA          0.9813098
+6   0.9624393    0.3581305      1.666195        NA          0.9847726
+7   0.9963764    0.1316397      2.354772        NA          0.9974012
+8   1.0035254    0.3254843      2.620400        NA          0.9895812
+  single_sd_ratio_direct recycle_var_deficit_lb recycle_var_deficit_direct
+1              0.8664872           0.0142683871               0.0241161290
+2              0.8336786           0.0131061290               0.0295141935
+3              0.9755947           0.0085484516               0.0046659677
+4              0.9524059           0.0153416129               0.0089925484
+5              0.9796382           0.0035836452               0.0039008710
+6              0.9624391           0.0029248065               0.0071333226
+7              0.9963764           0.0005023355               0.0007000742
+8              1.0000000           0.0020060323               0.0000000000
+  recycle_mcse_infl_lb recycle_mcse_infl_direct random8_mcse_infl_direct
+1             1.200966                 1.321968                 1.402016
+2             1.185871                 1.383814                 1.477091
+3             1.124723                 1.069881                 1.089419
+4             1.214739                 1.130827                 1.166223
+5             1.054084                 1.058738                 1.075266
+6             1.044351                 1.105049                 1.133856
+7             1.007756                 1.010793                 1.013919
+8             1.030625                 1.000000                 1.000000
+  k_mcse10_N32 k_mcse10_N256
+1           18           139
+2           19           152
+3            6            48
+4           10            79
+5            6            42
+6            9            67
+7            2             9
+8            0             0

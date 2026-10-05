@@ -1,0 +1,7 @@
+"set","scenario","runs","points","min_per_point","max_per_point","years"
+"short","baseline",128,32,4,4,15
+"short","s1_test",128,32,4,4,15
+"short","s2_prep",128,32,4,4,15
+"short","s3_sti",128,32,4,4,15
+"long","s4_acts",128,32,4,4,150
+"long","baseline (cycle 4 runs)",256,32,1,15,150

@@ -1,0 +1,5 @@
+"statistic","max_abs_z","p_global","comparison"
+"mean difference",2.2812,0.3983,"pool vs cold start"
+"log variance ratio",2.3568,0.42929,"pool vs cold start"
+"mean difference",33.553,0.00049975,"pool vs x0 runs"
+"log variance ratio",7.024,0.00049975,"pool vs x0 runs"

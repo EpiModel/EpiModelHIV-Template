@@ -1,0 +1,6 @@
+"item","value"
+"EpiModelHIV-p commit, x0 runs (renv.lock.hpc before update)","4ab6641fbeb679d94551c32e75ae66b4b24666a1"
+"EpiModelHIV-p commit, cold-start runs","6e6bff150f33b017f6105f298b2079d2acd8e422"
+"installed locally","6e6bff150f33b017f6105f298b2079d2acd8e422"
+"R/ files that differ (added, deleted lines, file): 2	1	R/mod.prevalence.R",""
+"R/ files that differ (added, deleted lines, file): 14	0	R/utils-calibration.R",""

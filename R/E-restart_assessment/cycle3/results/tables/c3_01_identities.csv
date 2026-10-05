@@ -1,0 +1,16 @@
+"check","result"
+"nNew identical to arrivals",TRUE
+"total = B + H + W: num",TRUE
+"total = B + H + W: arrivals",TRUE
+"total = B + H + W: hiv.inf",TRUE
+"total = B + H + W: hiv.incid",TRUE
+"total = B + H + W: hiv.dx",TRUE
+"total = B + H + W: hiv.dx.incid",TRUE
+"total = B + H + W: hiv.tx",TRUE
+"total = B + H + W: hiv.supp",TRUE
+"total = B + H + W: prep",TRUE
+"total = B + H + W: prep.incid",TRUE
+"total = B + H + W: prep.indic",TRUE
+"distinct chains (checksum): hiv.inf",TRUE
+"distinct chains (checksum): gono.inf",TRUE
+"distinct chains (checksum): num",TRUE

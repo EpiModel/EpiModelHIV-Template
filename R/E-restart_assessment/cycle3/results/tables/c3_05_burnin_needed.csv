@@ -1,0 +1,181 @@
+"start","fun","tolerance","B","lo","hi"
+"cold start","cml_incid","0.1 SD",70.5,66.15,72.256
+"cold start","cml_incid","0.2 SD",46.5,45.244,63.006
+"cold start","cml_incid","0.2 MCSE, N = 32",78.5,75.25,81.5
+"cold start","cml_incid","0.2 MCSE, N = 256",101.25,83.488,104.75
+"cold start","cml_incid","1% of level",41.75,40.5,43.256
+"cold start","cml_incid.B","0.1 SD",72,55.494,78.506
+"cold start","cml_incid.B","0.2 SD",52.75,50.75,55.75
+"cold start","cml_incid.B","0.2 MCSE, N = 32",88.75,65.744,90.5
+"cold start","cml_incid.B","0.2 MCSE, N = 256",96.75,73.494,100.01
+"cold start","cml_incid.B","1% of level",47.25,44.75,48.75
+"cold start","cml_incid.H","0.1 SD",37,33.244,39.006
+"cold start","cml_incid.H","0.2 SD",30.75,19.25,34.75
+"cold start","cml_incid.H","0.2 MCSE, N = 32",41.5,39,53.256
+"cold start","cml_incid.H","0.2 MCSE, N = 256",57,42.25,62.25
+"cold start","cml_incid.H","1% of level",32.75,20,36
+"cold start","cml_incid.W","0.1 SD",81.25,67.731,99.269
+"cold start","cml_incid.W","0.2 SD",62,52.738,73.044
+"cold start","cml_incid.W","0.2 MCSE, N = 32",109.75,89.988,137.79
+"cold start","cml_incid.W","0.2 MCSE, N = 256",138.5,110.75,176.84
+"cold start","cml_incid.W","1% of level",49.75,43,57.031
+"cold start","incid_rate_y15","0.1 SD",63,49.238,84.275
+"cold start","incid_rate_y15","0.2 SD",42.5,37.494,50
+"cold start","incid_rate_y15","0.2 MCSE, N = 32",102,75.5,162.16
+"cold start","incid_rate_y15","0.2 MCSE, N = 256",142.25,102.45,254.44
+"cold start","incid_rate_y15","1% of level",38.75,35,44.012
+"cold start","prev_y15","0.1 SD",112,87.719,167.61
+"cold start","prev_y15","0.2 SD",90.5,78.744,109.51
+"cold start","prev_y15","0.2 MCSE, N = 32",159,100.7,765.88
+"cold start","prev_y15","0.2 MCSE, N = 256",215.25,111.98,1742
+"cold start","prev_y15","1% of level",63.5,60.738,66.75
+"cold start","i.prev.dx.B_y15","0.1 SD",111,87.231,191.41
+"cold start","i.prev.dx.B_y15","0.2 SD",89,77.744,109.29
+"cold start","i.prev.dx.B_y15","0.2 MCSE, N = 32",158.25,99.95,507.31
+"cold start","i.prev.dx.B_y15","0.2 MCSE, N = 256",212.5,116.38,1414.2
+"cold start","i.prev.dx.B_y15","1% of level",60.75,58.25,63.5
+"cold start","i.prev.dx.H_y15","0.1 SD",91.75,77.475,146.6
+"cold start","i.prev.dx.H_y15","0.2 SD",77.25,69.738,90.263
+"cold start","i.prev.dx.H_y15","0.2 MCSE, N = 32",124.5,86.494,771.89
+"cold start","i.prev.dx.H_y15","0.2 MCSE, N = 256",198.5,99.456,1811.6
+"cold start","i.prev.dx.H_y15","1% of level",74,67.738,84.762
+"cold start","i.prev.dx.W_y15","0.1 SD",97.75,84.981,143.77
+"cold start","i.prev.dx.W_y15","0.2 SD",86.25,77.75,99
+"cold start","i.prev.dx.W_y15","0.2 MCSE, N = 32",115.25,94.981,806.23
+"cold start","i.prev.dx.W_y15","0.2 MCSE, N = 256",132.5,103.24,1785.3
+"cold start","i.prev.dx.W_y15","1% of level",75.25,70.5,80.762
+"cold start","M20_prev","0.1 SD",119.75,93.738,208.09
+"cold start","M20_prev","0.2 SD",97.75,85.5,121.55
+"cold start","M20_prev","0.2 MCSE, N = 32",167.25,106.49,917.21
+"cold start","M20_prev","0.2 MCSE, N = 256",221.75,122.96,1904.8
+"cold start","M20_prev","1% of level",68.75,66,72.006
+"cold start","M20_incid_rate","0.1 SD",93,75.975,148.21
+"cold start","M20_incid_rate","0.2 SD",74,61.962,92.038
+"cold start","M20_incid_rate","0.2 MCSE, N = 32",121.25,95.219,494.36
+"cold start","M20_incid_rate","0.2 MCSE, N = 256",149.5,114.22,788.25
+"cold start","M20_incid_rate","1% of level",47,41.744,52
+"cold start","M20_dx_frac","0.1 SD",89.75,82.5,105
+"cold start","M20_dx_frac","0.2 SD",82,77.744,89.756
+"cold start","M20_dx_frac","0.2 MCSE, N = 32",99.5,90.994,188.04
+"cold start","M20_dx_frac","0.2 MCSE, N = 256",106.25,100.49,606.01
+"cold start","M20_dx_frac","1% of level",39,38,39
+"cold start","M20_supp_frac","0.1 SD",77.5,65.744,103.33
+"cold start","M20_supp_frac","0.2 SD",66.25,59.738,74.269
+"cold start","M20_supp_frac","0.2 MCSE, N = 32",94.75,77.488,157.87
+"cold start","M20_supp_frac","0.2 MCSE, N = 256",112.25,90.994,199.01
+"cold start","M20_supp_frac","1% of level",29,28,29.269
+"cold start","M20_prep_cov","0.1 SD",93.5,57.25,164.63
+"cold start","M20_prep_cov","0.2 SD",53.5,39.744,74.775
+"cold start","M20_prep_cov","0.2 MCSE, N = 32",159.25,84.456,398.52
+"cold start","M20_prep_cov","0.2 MCSE, N = 256",225,112.41,650.49
+"cold start","M20_prep_cov","1% of level",3,3,3
+"cold start","M20_gono_prev","0.1 SD",33.25,28.75,44.669
+"cold start","M20_gono_prev","0.2 SD",30.25,27,37.706
+"cold start","M20_gono_prev","0.2 MCSE, N = 32",36.75,33.244,55.163
+"cold start","M20_gono_prev","0.2 MCSE, N = 256",39.25,37.981,65.756
+"cold start","M20_gono_prev","1% of level",32.25,28.244,41.931
+"cold start","M20_chla_prev","0.1 SD",68.25,30.244,119.7
+"cold start","M20_chla_prev","0.2 SD",42,28.5,57.538
+"cold start","M20_chla_prev","0.2 MCSE, N = 32",128.25,33.744,242.4
+"cold start","M20_chla_prev","0.2 MCSE, N = 256",188.75,38.744,369.83
+"cold start","M20_chla_prev","1% of level",41,28.494,56.006
+"cold start","M20_syph_prev","0.1 SD",70.75,47.994,77.519
+"cold start","M20_syph_prev","0.2 SD",47,43.5,56.756
+"cold start","M20_syph_prev","0.2 MCSE, N = 32",81,73.744,102.28
+"cold start","M20_syph_prev","0.2 MCSE, N = 256",110.25,92.744,126.26
+"cold start","M20_syph_prev","1% of level",75.5,60.738,88.256
+"cold start","M20_num","0.1 SD",88.5,54.744,166.75
+"cold start","M20_num","0.2 SD",62.25,51.744,89.019
+"cold start","M20_num","0.2 MCSE, N = 32",145.5,58.744,643.48
+"cold start","M20_num","0.2 MCSE, N = 256",203,62.244,1337.7
+"cold start","M20_num","1% of level",33,33,34
+"x0 restart","cml_incid","0.1 SD",37,30.988,89
+"x0 restart","cml_incid","0.2 SD",29.5,24.744,37.756
+"x0 restart","cml_incid","0.2 MCSE, N = 32",44.75,41.244,624.74
+"x0 restart","cml_incid","0.2 MCSE, N = 256",96,52.444,1664.5
+"x0 restart","cml_incid","1% of level",14.5,10,18.5
+"x0 restart","cml_incid.B","0.1 SD",30.5,26.75,76.806
+"x0 restart","cml_incid.B","0.2 SD",25.25,21.738,30.506
+"x0 restart","cml_incid.B","0.2 MCSE, N = 32",63.25,34.744,549.81
+"x0 restart","cml_incid.B","0.2 MCSE, N = 256",82,48.488,1589.6
+"x0 restart","cml_incid.B","1% of level",13.75,10.25,16.75
+"x0 restart","cml_incid.H","0.1 SD",17,0,73.006
+"x0 restart","cml_incid.H","0.2 SD",12.25,0,17.019
+"x0 restart","cml_incid.H","0.2 MCSE, N = 32",20.75,18.75,769.17
+"x0 restart","cml_incid.H","0.2 MCSE, N = 256",38,27.494,1808.9
+"x0 restart","cml_incid.H","1% of level",14,0,19.788
+"x0 restart","cml_incid.W","0.1 SD",49.25,39.238,143.01
+"x0 restart","cml_incid.W","0.2 SD",38,29.225,49.75
+"x0 restart","cml_incid.W","0.2 MCSE, N = 32",60.5,52.481,489.14
+"x0 restart","cml_incid.W","0.2 MCSE, N = 256",115,70.225,1528.9
+"x0 restart","cml_incid.W","1% of level",29.5,20,37.506
+"x0 restart","incid_rate_y15","0.1 SD",35.75,30.988,46.75
+"x0 restart","incid_rate_y15","0.2 SD",25.75,21.738,30.013
+"x0 restart","incid_rate_y15","0.2 MCSE, N = 32",47.75,39.244,184.63
+"x0 restart","incid_rate_y15","0.2 MCSE, N = 256",56.5,47.994,1100
+"x0 restart","incid_rate_y15","1% of level",23.25,18.5,27
+"x0 restart","prev_y15","0.1 SD",67.75,58.469,148.48
+"x0 restart","prev_y15","0.2 SD",58.25,51.225,72.25
+"x0 restart","prev_y15","0.2 MCSE, N = 32",78,69.75,218.81
+"x0 restart","prev_y15","0.2 MCSE, N = 256",121.75,82.744,259.23
+"x0 restart","prev_y15","1% of level",34.5,29.994,39.5
+"x0 restart","i.prev.dx.B_y15","0.1 SD",67.75,57.244,112.23
+"x0 restart","i.prev.dx.B_y15","0.2 SD",58.25,50.994,76.006
+"x0 restart","i.prev.dx.B_y15","0.2 MCSE, N = 32",78.25,69.469,142.59
+"x0 restart","i.prev.dx.B_y15","0.2 MCSE, N = 256",85,83.988,191.84
+"x0 restart","i.prev.dx.B_y15","1% of level",32.75,28.744,38
+"x0 restart","i.prev.dx.H_y15","0.1 SD",56.25,39.244,150.29
+"x0 restart","i.prev.dx.H_y15","0.2 SD",35.75,25.5,53.544
+"x0 restart","i.prev.dx.H_y15","0.2 MCSE, N = 32",87.25,74.981,1134.5
+"x0 restart","i.prev.dx.H_y15","0.2 MCSE, N = 256",118.25,101.49,Inf
+"x0 restart","i.prev.dx.H_y15","1% of level",32.25,22.481,47.756
+"x0 restart","i.prev.dx.W_y15","0.1 SD",70,59.231,195.94
+"x0 restart","i.prev.dx.W_y15","0.2 SD",59.25,50.75,85.825
+"x0 restart","i.prev.dx.W_y15","0.2 MCSE, N = 32",80.5,73.25,930.73
+"x0 restart","i.prev.dx.W_y15","0.2 MCSE, N = 256",148.5,91.75,Inf
+"x0 restart","i.prev.dx.W_y15","1% of level",47,41.244,55.256
+"x0 restart","M20_prev","0.1 SD",74.25,63.231,132.87
+"x0 restart","M20_prev","0.2 SD",64.75,56,78.775
+"x0 restart","M20_prev","0.2 MCSE, N = 32",84,77.25,155.42
+"x0 restart","M20_prev","0.2 MCSE, N = 256",139.25,93.75,226.36
+"x0 restart","M20_prev","1% of level",39,33.731,44
+"x0 restart","M20_incid_rate","0.1 SD",53.25,42.725,150.56
+"x0 restart","M20_incid_rate","0.2 SD",44,35.988,58.288
+"x0 restart","M20_incid_rate","0.2 MCSE, N = 32",63.25,55,904.45
+"x0 restart","M20_incid_rate","0.2 MCSE, N = 256",110.75,74.231,1866.4
+"x0 restart","M20_incid_rate","1% of level",27.25,23,31.25
+"x0 restart","M20_dx_frac","0.1 SD",78,66.231,91.031
+"x0 restart","M20_dx_frac","0.2 SD",66.25,56.481,75.25
+"x0 restart","M20_dx_frac","0.2 MCSE, N = 32",89,79.488,148.01
+"x0 restart","M20_dx_frac","0.2 MCSE, N = 256",148.25,94.219,173.56
+"x0 restart","M20_dx_frac","1% of level",0,0,0
+"x0 restart","M20_supp_frac","0.1 SD",42.25,0,487.73
+"x0 restart","M20_supp_frac","0.2 SD",24,0,44.275
+"x0 restart","M20_supp_frac","0.2 MCSE, N = 32",62.5,42.225,1397.1
+"x0 restart","M20_supp_frac","0.2 MCSE, N = 256",80.25,57.456,Inf
+"x0 restart","M20_supp_frac","1% of level",0,0,0
+"x0 restart","M20_prep_cov","0.1 SD",29.75,18.5,160.59
+"x0 restart","M20_prep_cov","0.2 SD",18.25,13.75,24.756
+"x0 restart","M20_prep_cov","0.2 MCSE, N = 32",351.75,24.494,1146
+"x0 restart","M20_prep_cov","0.2 MCSE, N = 256",1391.5,34.712,Inf
+"x0 restart","M20_prep_cov","1% of level",0,0,0
+"x0 restart","M20_gono_prev","0.1 SD",48.75,33.469,80.812
+"x0 restart","M20_gono_prev","0.2 SD",35.75,26.744,49.788
+"x0 restart","M20_gono_prev","0.2 MCSE, N = 32",68.25,53.244,720.51
+"x0 restart","M20_gono_prev","0.2 MCSE, N = 256",87.75,70.238,1760.3
+"x0 restart","M20_gono_prev","1% of level",48,32.731,79.325
+"x0 restart","M20_chla_prev","0.1 SD",46,39.725,164.51
+"x0 restart","M20_chla_prev","0.2 SD",37.75,32.25,52.05
+"x0 restart","M20_chla_prev","0.2 MCSE, N = 32",55,50.25,289.79
+"x0 restart","M20_chla_prev","0.2 MCSE, N = 256",60.75,66.975,339.29
+"x0 restart","M20_chla_prev","1% of level",39.25,33.744,103.1
+"x0 restart","M20_syph_prev","0.1 SD",56.25,43.975,152.8
+"x0 restart","M20_syph_prev","0.2 SD",45,36,57.75
+"x0 restart","M20_syph_prev","0.2 MCSE, N = 32",67.75,56.75,272.65
+"x0 restart","M20_syph_prev","0.2 MCSE, N = 256",135.75,71.981,597.45
+"x0 restart","M20_syph_prev","1% of level",64,48.975,192.76
+"x0 restart","M20_num","0.1 SD",37.5,31,384.96
+"x0 restart","M20_num","0.2 SD",31,26.494,46.756
+"x0 restart","M20_num","0.2 MCSE, N = 32",45,40.494,1423.2
+"x0 restart","M20_num","0.2 MCSE, N = 256",50,50.488,Inf
+"x0 restart","M20_num","1% of level",0,0,0

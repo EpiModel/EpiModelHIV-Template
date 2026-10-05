@@ -1,0 +1,61 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Registered S3 method overwritten by 'tergm':
+  method                   from
+  simulate_formula.network ergm
+Warning message:
+replacing previous import ‘ergm::snctrl’ by ‘tergm::snctrl’ when loading ‘EpiModel’ 
+Parameters identical to the cold-start runs: 82 of 82 
+                                                   source             file
+1 pool of the cycle 4 runs (restart_pool.rds, 2026-09-27) restart_pool.rds
+2 pool of the cycle 4 runs (restart_pool.rds, 2026-09-27) restart_pool.rds
+3 pool of the cycle 4 runs (restart_pool.rds, 2026-09-27) restart_pool.rds
+4                    x0 of the variance runs (2026-05-20)  restart-hpc.rds
+5                    x0 of the variance runs (2026-05-20)  restart-hpc.rds
+6                    x0 of the variance runs (2026-05-20)  restart-hpc.rds
+7            September pool (HPC cold starts, 2026-09-21) restart_pool.rds
+8            September pool (HPC cold starts, 2026-09-21) restart_pool.rds
+9            September pool (HPC cold starts, 2026-09-21) restart_pool.rds
+   network netest_coef_local n_points    offset_min    offset_max
+1 fit_main         -19.17250       32 -4.329399e-13  2.276967e-13
+2 fit_casl         -18.56140       32 -4.329399e-13  2.276967e-13
+3 fit_ooff         -14.19506       32 -6.968167e-16  1.048857e-15
+4 fit_main         -19.17250        1 -1.113670e-02 -1.113670e-02
+5 fit_casl         -18.56140        1 -1.113670e-02 -1.113670e-02
+6 fit_ooff         -14.19510        1 -1.113670e-02 -1.113670e-02
+7 fit_main         -19.17250       62 -1.470000e-02 -1.470000e-02
+8 fit_casl         -18.56140       62 -8.699840e-02 -8.699840e-02
+9 fit_ooff         -14.19510       62  1.004420e-01  1.004420e-01
+  tie_propensity_ratio num_elig_saved
+1             1.000000           TRUE
+2             1.000000           TRUE
+3             1.000000           TRUE
+4             0.988925          FALSE
+5             0.988925          FALSE
+6             0.988925          FALSE
+7             0.985408           TRUE
+8             0.916679           TRUE
+9             1.105660           TRUE
+Class: tbl_df tbl data.frame 
+Dim: 7987200 65 
+Size: 2 Gb 
+Runs per point: 8 8 7 7 6 6 8 15 15 7 10 14 8 11 5 1 5 5 9 13 8 8 6 6 11 4 9 4 10 9 5 8 
+# A tibble: 0 × 5
+# ℹ 5 variables: sim <dbl>, syph.inf <dbl>, gono.inf <dbl>, chla.inf <dbl>,
+#   hiv.inf <dbl>
+           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  2729522 145.8    4894347  261.4   4894347  261.4
+Vcells 15289671 116.7  426857615 3256.7 533572018 4070.9
+           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  2729703 145.8    4894347  261.4   4894347  261.4
+Vcells 15400942 117.5  341486092 2605.4 533572018 4070.9
+Annual object size: 129.8 Mb 

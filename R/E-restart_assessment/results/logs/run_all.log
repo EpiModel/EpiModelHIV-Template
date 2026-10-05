@@ -1,0 +1,9 @@
+2026-09-25 17:46:47 running 01_prepare_annual.R 
+2026-09-25 17:47:22 running 02_validate_methods.R 
+2026-09-25 17:53:14 running 03_stationarity.R 
+2026-09-25 17:55:00 running 04_relaxation_from_x0.R 
+2026-09-25 18:02:24 running 05_equilibrium_structure.R 
+2026-09-25 18:04:16 running 06_restart_memory.R 
+2026-09-25 18:10:03 running 07_pool_design.R 
+2026-09-25 18:12:21 done
+Rscript R/E-restart_assessment/run_all.R  7619,29s user 86,94s system 501% cpu 25:35,84 total

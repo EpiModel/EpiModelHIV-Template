@@ -1,0 +1,3 @@
+"comparison","n_components","energy","null_median","null_q95","p"
+"pool vs cold start",18,0.0035788,0.003885,0.0053557,0.67116
+"pool vs x0 runs",18,0.4234,0.0044369,0.0075759,0.00049975

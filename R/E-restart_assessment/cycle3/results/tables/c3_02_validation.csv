@@ -1,0 +1,38 @@
+"check","truth","est","lo","hi","z","criterion","pass"
+"C1 T_var(0.1)",11,9.25,7.9938,46.288,-0.17914,"in CI",TRUE
+"C1 T_var(0.2)",7.75,7.5,6.4938,10.5,-0.24462,"in CI",TRUE
+"C1 T_mean(0.1)",37.25,38.75,33,50.506,0.33588,"in CI",TRUE
+"C1 T_mean(0.2)",30.75,31.75,28.744,36.512,0.50459,"in CI",TRUE
+"C1 fitted o(70)",0.0031329,0.0042444,-0.06051,0.063446,0.03515,"in CI",TRUE
+"C1 tail window start",NA,5,5,6,NA,"report",NA
+"C1 empirical o(70)",0.0031329,0.067635,-0.063773,0.18664,1.0097,"in CI",TRUE
+"C2 T_var(0.1)",33.25,28.75,19.25,93.694,-0.23696,"in CI",TRUE
+"C2 T_var(0.2)",26.5,21,15.237,33.519,-1.1794,"in CI",TRUE
+"C2 T_mean(0.1)",66.5,65,53.481,115.85,-0.094278,"in CI",TRUE
+"C2 T_mean(0.2)",53,52,44.5,64.25,-0.19848,"in CI",TRUE
+"C2 fitted o(70)",-0.082751,-0.076017,-0.16341,0.020836,0.14326,"in CI",TRUE
+"C2 tail window start",NA,5,5,5,NA,"report",NA
+"C2 empirical o(70)",-0.082751,-0.09426,-0.20827,0.012328,-0.20452,"in CI",TRUE
+"C3 T_var(0.1)",18.5,23.25,14.994,98.563,0.22281,"in CI",TRUE
+"C3 T_var(0.2)",12.75,15.25,9.7375,21.256,0.85079,"in CI",TRUE
+"C3 T_mean(0.1)",113.25,115.5,104.5,161.52,0.15467,"in CI",TRUE
+"C3 T_mean(0.2)",101,102.75,96.494,114.29,0.38539,"in CI",TRUE
+"C3 T_mean(0.012 = 0.2 MCSE, N = 256)",149.5,153.25,138.71,1835.4,0.008664,"in CI",TRUE
+"C3 fitted o(70)",1.1571,1.2048,1.0946,1.3255,0.80947,"in CI",TRUE
+"C3 tail window start",NA,54,53,54,NA,"report",NA
+"C3 empirical o(70)",1.1571,1.1777,1.0513,1.3192,0.30003,"in CI",TRUE
+"C3 T_mean(0.1), fit from FIT_START (no tail window)",113.25,114.75,NA,NA,NA,"report",NA
+"C3 fitted o(70), fit from FIT_START (no tail window)",1.1571,1.1992,NA,NA,NA,"report",NA
+"C0 (stationary) T_mean(0.1)",0,0,NA,NA,NA,"range 0 to 10",TRUE
+"C0 (stationary) T_var(0.1)",0,8,NA,NA,NA,"range 0 to 10",TRUE
+"C3 20-year window-mean offset, B = 50",2.5274,2.5988,2.4838,2.7497,1.0533,"in CI",TRUE
+"C3 20-year window-mean offset, B = 100",0.14945,0.23586,0.11756,0.35947,1.4003,"in CI",TRUE
+"C3 T_mean(0.1): mean over 30 replications",113.25,114.41,111.07,117.74,0.68088,"in CI",TRUE
+"C3 T_mean(0.1): coverage of the 95% CI (30 replications)",0.95,1,NA,NA,NA,"report",NA
+"C3 empirical o(70): coverage of the 95% CI (30 replications)",0.95,0.9,NA,NA,NA,"range 0.83 to 1",TRUE
+"Same-law test, H0: rejection rate, means (200 reps, 5% level)",0.05,0.05,NA,NA,NA,"range 0.02 to 0.085",TRUE
+"Same-law test, H0: rejection rate, variances (200 reps)",0.05,0.07,NA,NA,NA,"range 0.02 to 0.085",TRUE
+"Same-law test, H1 mean shift 0.1 SD (a = 0.9): power, means",NA,1,NA,NA,NA,"range 0.8 to 1",TRUE
+"Same-law test, H1 variance x1.1 (a = 0.9): power, variances",NA,0.99,NA,NA,NA,"report",NA
+"Energy chain test, H0: rejection rate (100 reps)",0.05,0.06,NA,NA,NA,"range 0.01 to 0.11",TRUE
+"Energy chain test, H1 shift 0.2 SD in one variable: power",NA,1,NA,NA,NA,"report",NA

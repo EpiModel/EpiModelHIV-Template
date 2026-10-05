@@ -1,0 +1,46 @@
+"check","truth","est","lo","hi","z","criterion","pass"
+"S1 ICC_x0(5) = 1 - v(h)/v_pi",0.34868,0.33017,0.22773,0.43783,-0.34532,"in CI",TRUE
+"S1 ICC_x0(10) = 1 - v(h)/v_pi",0.12158,0.10399,-0.02891,0.23424,-0.2619,"in CI",TRUE
+"S1 ICC_x0(20) = 1 - v(h)/v_pi",0.014781,-0.16142,-0.38669,0.023562,-1.6836,"in CI",TRUE
+"S1 variance relaxation tau (fit)",4.7456,4.1545,3.1641,6.135,-0.77996,"in CI",TRUE
+"S2 ICC_x0(10) = 1 - v(h)/v_pi",0.066762,0.098996,-0.059465,0.25896,0.39682,"in CI",TRUE
+"S2 ICC_x0(30) = 1 - v(h)/v_pi",0.029755,-0.10285,-0.27027,0.059059,-1.5784,"in CI",TRUE
+"S1 mean at year 10",1.046,1.0565,0.94229,1.1707,0.17985,"in CI",TRUE
+"S1 rho(1)",0.9,0.89754,0.89498,0.90074,-1.6699,"in CI",TRUE
+"S1 rho(5)",0.59049,0.58233,0.57318,0.59252,-1.6548,"in CI",TRUE
+"S1 rho(10)",0.34868,0.34081,0.32821,0.35566,-1.1241,"in CI",TRUE
+"S1 rho(20)",0.12158,0.11252,0.096933,0.12928,-1.0976,"in CI",TRUE
+"S1 tau_int (Geyer)",19,18.627,17.524,20.04,-0.58059,"in CI",TRUE
+"S2 rho(1)",0.548,0.543,0.53749,0.54877,-1.7394,"in CI",TRUE
+"S2 rho(10)",0.082586,0.086146,0.076742,0.096119,0.72013,"in CI",TRUE
+"S2 rho(50)",0.036417,0.026244,0.01524,0.037293,-1.8083,"in CI",TRUE
+"S2 tau_int (Geyer)",12.6,10.541,9.0103,11.45,-3.3097,"in CI",FALSE
+"Fast pooled ACF == direct pooled ACF (max abs diff)",0,6.6613e-16,NA,NA,NA,"abs<1e-10",TRUE
+"S4 rho_u(5)",-0.29524,-0.29341,-0.29988,-0.28661,0.54181,"in CI",TRUE
+"Window identity |within + between - total|",0,0,NA,NA,NA,"abs<1e-10",TRUE
+"S1 Var(M_20) / Var_pi",0.55471,0.54923,0.53913,0.56093,-0.98538,"in CI",TRUE
+"S1 L Var(M_L)/Var_pi at L = 100",17.2,16.361,15.026,17.774,-1.1966,"in CI",TRUE
+"S1 drift test (stationary)",0,0,NA,NA,NA,"not flagged",TRUE
+"S3 drift test (random walk, SD 0.02: below tolerance)",NA,0,NA,NA,NA,"report",NA
+"S3b drift test (random walk, SD 0.03: above tolerance)",1,1,NA,NA,NA,"flagged",TRUE
+"S1 T by the brief's rule (q95, runs <= 3)",NA,21,NA,NA,NA,"report",NA
+"S1 T by the null-maximum rule",NA,22,NA,NA,NA,"report",NA
+"S0 (stationary start) T by the brief's rule (q95, runs <= 3)",NA,297,NA,NA,NA,"report",NA
+"S0 (stationary start) T by the null-maximum rule",NA,222,NA,NA,NA,"report",NA
+"S1 T_var(0.05) from fit",14.217,12.75,9.7438,22.875,-0.43781,"in CI",TRUE
+"S1 T_mean(0.1 SD) from fit",32.282,29,23.5,47.563,-0.53459,"in CI",TRUE
+"S1 T_var(0.1) from fit",10.927,10,7.5,15.013,-0.4838,"in CI",TRUE
+"S1 T_mean(0.2 SD) from fit",25.703,24,20.5,29.006,-0.78467,"in CI",TRUE
+"S2 T_var(0.05) from fit",17.155,14,9.9938,28.313,-0.67509,"in CI",TRUE
+"S1 R2 bound own value, h = 5",0.34868,0.33942,0.32627,0.35191,-1.416,"in CI",TRUE
+"S1 R2 bound own value, h = 10",0.12158,0.11743,0.10546,0.12937,-0.68,"in CI",TRUE
+"S2 R2 bound full state, h = 10",0.066762,0.068896,0.060758,0.07781,0.49066,"in CI",TRUE
+"S2 R2 bound full state, h = 30",0.029755,0.029249,0.023336,0.034597,-0.17637,"in CI",TRUE
+"S2 R2 bound own value, h = 10 (= rho(10)^2)",0.0068205,0.0069297,0.0038932,0.0093346,0.078686,"in CI",TRUE
+"S2 R2 bound own value + lags, h = 10 (between rho^2 and ICC)",NA,0.014051,0.01006,0.017783,NA,"range 0.00682-0.0668",TRUE
+"S4 R2 bound state (u, v), h = 5",0.34868,0.35091,0.34105,0.36163,0.42456,"in CI",TRUE
+"S4 R2 bound u only, h = 5 (= rho_u(5)^2)",0.08717,0.090847,0.086345,0.096662,1.3974,"in CI",TRUE
+"Coverage of 95% CI, S1 ICC_x0(10) (100 replications)",0.95,0.98,NA,NA,NA,"range 0.89-1",TRUE
+"Mean of S1 ICC_x0(10) estimates (100 replications)",0.12158,0.12035,0.10639,0.1343,-0.17243,"in CI",TRUE
+"Coverage of 95% CI, S1 rho(10) (100 replications)",0.95,0.95,NA,NA,NA,"range 0.89-1",TRUE
+"Mean of S1 rho(10) estimates (100 replications)",0.34868,0.34932,0.34797,0.35067,0.9269,"in CI",TRUE
