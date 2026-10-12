@@ -109,8 +109,8 @@ departure_msm <- function(dat, at) {
   dat <- depart_nodes(dat, dep_all_ids)
 
   ## Summary Output
-  dat <- set_epi(dat, "departures", at, length(dep_all_ids))
-  dat <- set_epi(dat, "departures.AIDS", at, length(dep_aids_ids))
+  dat <- set_epi(dat, "departures", length(dep_all_ids), at = at)
+  dat <- set_epi(dat, "departures.AIDS", length(dep_aids_ids), at = at)
 
   ## handle sexual cessation age
 
