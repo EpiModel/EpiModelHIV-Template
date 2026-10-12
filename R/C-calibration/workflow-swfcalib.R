@@ -155,8 +155,8 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/C-calibration/process_calib_plots.R",
-    args = list(hpc_context = TRUE, scenario = "default"),
+    r_script = "R/C-calibration/process_calibs.R",
+    args = list(hpc_context = TRUE, n_cores = max_cores),
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
