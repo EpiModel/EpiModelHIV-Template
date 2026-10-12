@@ -26,7 +26,7 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
       "  Open '.Renviron' with: \n",
       "    `usethis::edit_r_environ(\"project\")`.\n\n",
       "  Write in it: \n",
-      "    HPC_MAIL_USER=\"user@emoy.edu\"\n\n",
+      "    HPC_MAIL_USER=\"user@emory.edu\"\n\n",
       "  then save the file and restart R."
     )
   }
