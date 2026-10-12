@@ -71,8 +71,7 @@ Open the following two files and edit every variable marked with `# <- USER`.
 Open **`R/00-setup.R`** and run it step by step (read the comments — there is
 a required R restart in the middle).
 
-This installs all R packages and copies the default parameter file into
-`data/input/`.
+This installs all R packages.
 
 ### 5. Start Chapter A
 
@@ -106,6 +105,8 @@ the project evolves.
 **Shared variables** — `R/shared_variables.R` is sourced by every top-level
 script and is the single source of truth for paths, time steps, and milestones.
 Never redefine its variables in other scripts.
+
+**Model parameters**: the default values come from `model_parameters.csv` in the EpiModelHIV package (`inst/model_parameters.csv` in EpiModelHIV-p). `data/input/model_parameters.csv` holds only this project's overrides and starts with just its header. To change a value, copy the parameter's row from the package file into the project file and edit `value`. Empty cells keep the package value, so a row with only `param` and `value` filled in also works. `read_model_params()` in `R/netsim_settings.R` combines the two files. It stops with an error if the project file names a parameter the package does not have, so an override left behind after a parameter is renamed or removed fails loudly. New parameters go in the package file on your EpiModelHIV-p branch. Scripts that call `library(EpiModelHIV)` read the installed package's file; `load_local_EpiModelHIV()` reads the one in your local clone.
 
 **Data directories:**
 

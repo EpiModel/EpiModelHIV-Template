@@ -99,7 +99,7 @@ iteration) with polynomial convergence checks. Noisier epidemiological targets
 (STIs, HIV prevalence) use a **SE-range proposer** (retaining top 30%) with
 absolute threshold convergence.
 
-After convergence, `update_param.R` writes calibrated values to `params.csv`.
+After convergence, `update_param.R` writes `params.csv` to the swfcalib directory. It holds the project parameter overrides (the rows already in `data/input/model_parameters.csv` plus the calibrated values). Copy it over `data/input/model_parameters.csv`.
 
 See [the swfcalib vignette](https://epimodel.github.io/swfcalib/articles/swfcalib.html)
 for details on the package.
@@ -119,9 +119,7 @@ This chapter produces two artifacts consumed by the rest of the project:
   Used by Chapter D (`D-interventions`) as the starting state for intervention
   runs, and by `B-model_dev/2-debug_modules.R` for post-calibration module
   development. Both local and HPC versions are needed.
-- **`data/input/model_parameters.csv`** (updated) — When using swfcalib,
-  `update_param.R` writes the calibrated parameter values back to this file so
-  they become the new defaults for all subsequent runs.
+- **`data/input/model_parameters.csv`** (updated): the project overrides of the EpiModelHIV parameter defaults. When using swfcalib, copy the `params.csv` written by `update_param.R` over this file so the calibrated values become the defaults for all subsequent runs.
 
 ## Post-Calibration
 
@@ -140,7 +138,7 @@ This chapter produces two artifacts consumed by the rest of the project:
 | `process_calibs.R` | Generate `calib_assess.csv` summary |
 | `swfcalib_config.R` | Wave definitions and priors for swfcalib |
 | `swfcalib_model.R` | Model function passed to swfcalib |
-| `update_param.R` | Write calibrated params back to CSV |
+| `update_param.R` | Write the project overrides, with calibrated values, to `params.csv` |
 | `utils-calib_plots.R` | Plotting helpers for calibration targets |
 | `utils-restart.R` | Helper to create restart point from a sim |
 | `workflow-ballpark_calib.R` | HPC workflow: ballpark calibration (Phase 1) |
