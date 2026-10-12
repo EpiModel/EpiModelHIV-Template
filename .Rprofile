@@ -7,14 +7,18 @@ if (dir.exists("renv/")) {
     source("renv/activate.R")
   } else {
     cat(
-      "* renv may have been incompletely set up.\n",
-      "  Run renv::init(bare = TRUE) to continue\n"
+      "* renv may have been incompletely set up (no 'renv/activate.R').\n",
+      "  Fix what stopped renv::init(), restart R, and rerun Step 1 of\n",
+      "  'R/00-setup.R'.",
+      "Do not run renv::restore() before that: it would install into\n",
+      "  your personal library.\n"
     )
   }
   if (interactive()) renv::status()
 } else {
   cat(
-    "* Run renv::init(bare = TRUE) to install the R packages for this project\n"
+    "* Run 'R/00-setup.R' step by step to install the R packages for this",
+    "project\n"
   )
 }
 

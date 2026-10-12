@@ -27,7 +27,7 @@ You must have completed **Chapter A** (network estimation) so that
 | **`2-debug_modules.R`** | Run a simulation with your local development version of `EpiModelHIV-p`. This is where you spend most of your time while modifying modules. |
 | **`3-scenarios_run.R`** | Run parameter scenarios locally to test the scenario API. |
 | **`4-scenarios_assess.R`** | Inspect scenario output (locally or downloaded from HPC). |
-| **`workflow-scenarios.R`** | Generate the HPC workflow to run scenarios at full scale. |
+| **`workflow-module_dev.R`** | Generate the HPC workflow to run scenarios at full scale. |
 
 ## Workflow
 
@@ -42,16 +42,12 @@ section by section and make sure you understand the output before moving on.
 Once you start editing modules in `EpiModelHIV-p`, switch to
 **`2-debug_modules.R`**. The typical loop is:
 
-1. Edit a module file in your `EpiModelHIV-p` clone (e.g., `R/mod.hiv.test.R`).
-   The path to your clone is defined as `EMHIVp_dir` in `R/shared_variables.R`.
-2. In this script, run `pkgload::load_all(EMHIVp_dir)` to reload your changes
+1. Edit a module file in your `EpiModelHIV-p` clone (e.g., `R/mod.hivtest.R`). The path to your clone is set by `EPIMODELHIV_DIR` in the project `.Renviron`.
+2. In this script, run `load_local_EpiModelHIV()` (defined in `.Rprofile`) to reload your changes
 3. Run `netsim()` and inspect the output
 4. Repeat from step 1
 
-**Important:** always use `ncores = 1` when working with `load_all()`. Parallel
-workers load the *installed* package version, not your development code — so
-with `ncores > 1`, only the main process would run your changes while workers
-run the old code.
+**Important:** always use `ncores = 1` when working with `load_local_EpiModelHIV()`. Parallel workers load the *installed* package version, not your development code, so with `ncores > 1` only the main process would run your changes while workers run the old code.
 
 To step through a module line by line, use `debugonce(module_name)` before
 calling `netsim()`. If you are new to debugging in R, see
@@ -68,7 +64,7 @@ Then use **`4-scenarios_assess.R`** to inspect the results.
 
 ### Scaling to HPC
 
-Once satisfied locally, run **`workflow-scenarios.R`** to generate HPC jobs.
+Once satisfied locally, run **`workflow-module_dev.R`** to generate HPC jobs.
 This runs more simulations with more replications for stable estimates.
 
 See the [wiki](https://github.com/EpiModel/EpiModeling/wiki#slurmworkflow)
@@ -79,14 +75,13 @@ for how to submit and monitor workflows.
 These scripts are templates — you can duplicate them and experiment with your
 copies while keeping the originals as reference.
 
-In particular, adapt the scenario definitions in `3-scenarios_run.R` and
-`workflow-scenarios.R` to use the parameters relevant to your project.
+In particular, adapt the scenario definitions in `3-scenarios_run.R` and `workflow-module_dev.R` to use the parameters relevant to your project.
 
 ## Common mistakes
 
 | Mistake | Fix |
 |---|---|
-| Using `ncores > 1` with `load_all()` | Always `ncores = 1` during development |
+| Using `ncores > 1` with `load_local_EpiModelHIV()` | Always `ncores = 1` during development |
 | Old simulations mixed with new results | Delete `data/run/scenarios/` contents before a new run |
-| Forgetting to reload after editing a module | Re-run `pkgload::load_all(EMHIVp_dir)` |
+| Forgetting to reload after editing a module | Re-run `load_local_EpiModelHIV()` |
 | Running scripts without restarting R | Always `Ctrl+Shift+F10` before a numbered script |

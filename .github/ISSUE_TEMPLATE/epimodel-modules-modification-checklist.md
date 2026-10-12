@@ -11,10 +11,13 @@ assignees: ''
 
 ## New Attributes
 
+<!-- Use typed defaults, as in `get_default_attrs()`: `0L` for integer flags and counts, `0` for doubles, `-1e8L` for a time step that is not yet set. -->
+
 |attribute name| default value|
 |----|---|
-|new.attr.1|0|
-|new.attr.2|NA|
+|new.attr.1|0L|
+|new.attr.2|0|
+|new.attr.last|-1e8L|
 
 ## New Parameter
 
