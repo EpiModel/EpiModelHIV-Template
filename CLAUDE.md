@@ -66,6 +66,7 @@ Fit model parameters to epidemiological targets. Two approaches:
 - **Manual**: Run scenarios, download `calib_assess.csv`, adjust parameters, repeat
 - **Automated**: `swfcalib` package for systematic calibration
 - `3-choose_restart.R`: Picks a simulation and saves it as the restart point (checkpoint) for later calibration and intervention runs
+- `workflow-restart_point.R`: HPC workflow that runs 500 replications with the current parameters and saves the best as the restart point; rerun it after calibration and whenever attributes or parameters change
 
 ### D-interventions — Intervention Scenarios
 Run calibrated model with intervention scenarios and process results.

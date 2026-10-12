@@ -43,9 +43,7 @@ moved past its initial synthetic state.
 
 **Script:** `3-choose_restart.R` (reuses existing simulations; run it in a batch job on the HPC, from the project root)
 
-No new simulations are needed — the restart point is picked from the results
-of the best Phase 1 calibration scenario. `3-choose_restart.R` lets you choose
-which scenario's merged tibble to work from, then:
+No new simulations are needed: the restart point is picked from the results of the best Phase 1 calibration scenario. Set `scenario_name` at the top of `3-choose_restart.R` to that scenario, then run it. It:
 
 1. Evaluates each simulation against targets (sum of squared errors),
    disqualifying any sim where an STI incidence drops below 25% of its target.
@@ -106,11 +104,13 @@ After convergence, `update_param.R` writes `params.csv` to the swfcalib director
 See [the swfcalib vignette](https://epimodel.github.io/swfcalib/articles/swfcalib.html)
 for details on the package.
 
-### Final restart point
+### Final restart point (`workflow-restart_point.R`)
 
-After swfcalib converges, the last steps of `workflow-swfcalib.R` run 256 replications with the calibrated parameters, starting from the current restart point, and merge them into `data/run/calibration/merged_tibbles/` (the merged file is `df__default.rds`). Pick the definitive restart point from these runs with `3-choose_restart.R`: set `scenario_name <- "default"` at the top of the script and run it from the project root in a batch job on the HPC, where the simulation files are. This is the restart point used by Chapter D for intervention runs; copy it to your computer as well.
+After swfcalib converges and its values are in `data/input/model_parameters.csv`, run `workflow-restart_point.R`. It runs a pool of 500 replications of the calibrated model from scratch to `calibration_end`, merges them, picks the simulation closest to the targets with `3-choose_restart.R`, saves it to `path_to_restart`, and writes `calib_assess.csv` for the pool. This is the restart point Chapter D uses for intervention runs; copy it to your computer as well. Expect a few hours on the HPC.
 
-The Template does not yet include a dedicated restart-point workflow, so this last step is run by hand. The final step of `workflow-swfcalib.R` is meant to make the calibration plots, but the script it calls, `R/C-calibration/process_calib_plots.R`, is not in the Template yet, so that step fails after the merged results are saved; use `4-swfcalib_assess.R` and `5-calibration_report.R` instead.
+Before each run, clear the previous pool from `data/run/calibration/` on the HPC (`sim__empty_scenario__*.rds` and `merged_tibbles/df__empty_scenario.rds`), or the old files are merged with the new ones, and keep a copy of the restart point it will overwrite.
+
+Run it again whenever attributes or parameters change. A restart point carries the attributes of the model that produced it, so nodes restarted from an old one lack any attribute added since, and their values reflect the old parameters.
 
 ## Outputs
 
@@ -144,5 +144,6 @@ This chapter produces two artifacts consumed by the rest of the project:
 | `utils-restart.R` | Helper to create restart point from a sim |
 | `workflow-ballpark_calib.R` | HPC workflow: ballpark calibration (Phase 1) |
 | `workflow-restart_calib.R` | HPC workflow: manual fine-tuning from restart (Phase 3) |
+| `workflow-restart_point.R` | HPC workflow: run a pool of replications and save the best as the restart point |
 | `workflow-swfcalib.R` | HPC workflow: automated swfcalib calibration |
 | `z-context.R` | Local/HPC context switch |
