@@ -36,8 +36,8 @@ print(control)
 #   .scenario.id — unique name (used in output filenames)
 #   .at          — time step when parameter changes are applied
 # All other columns are parameter names with their new values.
-# Valid parameter names are those in data/input/model_parameters.csv or any
-# argument accepted by param.net().
+# Valid parameter names are those in `params_df$param` (the EpiModelHIV
+# `model_parameters.csv`) or any argument accepted by param.net().
 scenarios_df <- tibble(
   .scenario.id    = c("scenario_1", "scenario_2"),
   .at             = 1,

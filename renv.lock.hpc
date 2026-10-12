@@ -100,8 +100,8 @@
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.6.2",
-      "Source": "GitHub",
-      "Date": "2026-05-18",
+      "Source": "Repository",
+      "Date": "2026-09-15",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
       "Description": "Tools for simulating mathematical models of infectious disease dynamics. Epidemic model classes include deterministic compartmental models, stochastic individual-contact models, and stochastic network models. Network models use the robust statistical methods of exponential-family random graph models (ERGMs) from the Statnet suite of software packages in R. Standard templates for epidemic modeling include SI, SIR, and SIS disease types. EpiModel features an API for extending these templates to address novel scientific research aims. Full methods for EpiModel are detailed in Jenness et al. (2018, <doi:10.18637/jss.v084.i08>).",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -147,7 +147,7 @@
         "plotly (>= 4.10.0)",
         "rmarkdown",
         "shiny",
-        "testthat",
+        "testthat (>= 3.1.8)",
         "progressr",
         "tidyr"
       ],
@@ -157,19 +157,14 @@
         "ergm"
       ],
       "Encoding": "UTF-8",
-      "Roxygen": "list(markdown = TRUE)",
-      "Config/roxygen2/version": "8.0.0",
+      "Config/roxygen2/version": "8.1.0",
+      "NeedsCompilation": "yes",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
-      "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
-      "RemoteRef": "main",
-      "RemoteSha": "8f3a5d6ea92ed56f645e942b5477e8aa57a7396d",
-      "RemoteHost": "api.github.com"
+      "Repository": "CRAN"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
-      "Version": "3.3.0",
+      "Version": "3.3.2",
       "Source": "GitHub",
       "Date": "2026-03-26",
       "Type": "Package",
@@ -180,7 +175,7 @@
       "License": "GPL-3",
       "Depends": [
         "R (>= 4.1.0)",
-        "EpiModel (>= 2.6.0)"
+        "EpiModel (>= 2.6.2)"
       ],
       "Imports": [
         "ARTnet (>= 2.9.0)",
@@ -203,18 +198,18 @@
         "Rglpk"
       ],
       "VignetteBuilder": "knitr",
-      "RoxygenNote": "7.3.3",
+      "RoxygenNote": "8.0.0",
       "Encoding": "UTF-8",
       "Config/testthat/edition": "3",
       "Roxygen": "list(markdown = TRUE)",
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
-      "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
+      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "v3.3.x",
-      "RemoteSha": "8e6c2995f4558d65c58af76e8d7b6feac65d59c1",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "1ad1162566260d7c7473fcb9690e5aae32667833"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",

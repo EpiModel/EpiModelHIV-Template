@@ -45,7 +45,7 @@ for (or_test in ors) {
         param$hiv.test.rate[[2]], or_test
       ),
       hiv.test.rate_3 = apply_or(
-        param$hiv.test.rate[[2]], or_test
+        param$hiv.test.rate[[3]], or_test
       ),
       tx.init.rate_1  = apply_or(
         param$tx.init.rate[[1]], or_tx

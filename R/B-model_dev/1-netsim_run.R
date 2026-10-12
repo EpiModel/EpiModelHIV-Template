@@ -15,7 +15,9 @@ source("R/B-model_dev/z-context.R")
 source("R/netsim_settings.R", local = TRUE)
 
 # See full listing of parameters
-# See data/input/model_parameters.xlsx for definitions
+# Definitions are in the `model_parameters.csv` of EpiModelHIV:
+#   system.file("model_parameters.csv", package = "EpiModelHIV")
+# Project overrides are in data/input/model_parameters.csv
 print(param)
 
 # See the initialization object
