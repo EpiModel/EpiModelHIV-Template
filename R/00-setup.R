@@ -20,14 +20,12 @@ renv::install(paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch))
 # Lock the installed package versions
 renv::snapshot()
 
-## Step 3: Copy the default parameter file -------------------------------------
-fs::file_copy(
-  system.file("model_parameters.csv", package = "EpiModelHIV"),
-  fs::path(input_dir, "model_parameters.csv"),
-  overwrite = TRUE
-)
+## Parameters: nothing to copy. The model reads its defaults from the
+## `model_parameters.csv` shipped with EpiModelHIV, then applies the project
+## overrides in "data/input/model_parameters.csv" (see `read_model_params()` in
+## "R/netsim_settings.R").
 
-## Step 4: Verify ARTnetData access --------------------------------------------
+## Step 3: Verify ARTnetData access --------------------------------------------
 ## This line will error if you don't have access to ARTnetData.
 ## If it does, ask a lab member for access.
 library(ARTnetData)
