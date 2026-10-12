@@ -3,8 +3,6 @@
 ## This script should not be run directly. But `sourced` from the
 ## scripts that interact with the HPC (the `workflow-*.R` ones)
 
-current_git_branch <- "dev_v3.3"          # <- USER: your git branch
-
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
@@ -33,6 +31,27 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
     )
   }
   message("HPC notifications will be mailed to:\n    \"", hpc_mail_user, "\"")
+
+  # The HPC clone of this project must be on the same git branch as this local
+  # copy: the renv restore step below stops if it is not. Read the branch with
+  # the same git command that step uses.
+  current_git_branch <- suppressWarnings(system2(
+    "git", c("rev-parse", "--abbrev-ref", "HEAD"),
+    stdout = TRUE, stderr = FALSE
+  ))
+  if (length(current_git_branch) != 1 ||
+        current_git_branch %in% c("", "HEAD")) {
+    stop(
+      "\n",
+      "  Could not read the git branch of this project.\n",
+      "  Create workflows from the root of a git clone of the project that\n",
+      "  is on a branch (not a detached HEAD). The HPC clone must be on the\n",
+      "  same branch."
+    )
+  }
+  message(
+    "The HPC clone must be on the git branch:\n    \"", current_git_branch, "\""
+  )
 
   if (update_renv) {
     renv::snapshot(
