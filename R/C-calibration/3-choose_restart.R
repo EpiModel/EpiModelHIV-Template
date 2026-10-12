@@ -3,8 +3,10 @@
 ##  Assess the candidates simulations for restart point, pick the best one and
 ##  save it in `path_to_restart`.
 ##
-## This script should not be run directly. But `sourced` from the restart_point
-## workflow
+## It runs as a step of `workflow-restart_point.R`. To pick a restart point from
+## another set of simulations (for example the best Phase 1 scenario), set
+## `scenario_name` below and run it from the project root in a batch job on the
+## HPC, where the simulation files are.
 
 # Setup ------------------------------------------------------------------------
 scenario_name <- "empty_scenario"
