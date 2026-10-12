@@ -25,6 +25,16 @@ updt_param <- EpiModel::param.net_to_table(param_sc)
 
 # param_df loaded by netsim_settings
 new_params <- replace_join(params_df, updt_param, by = c("param", "type"))
+
+# Keep only the project overrides: the rows already in the project file plus
+# the calibrated parameters. Copy the result over
+# "data/input/model_parameters.csv".
+override_names <- c(
+  read.csv(fs::path(input_dir, "model_parameters.csv"))$param,
+  names(default_proposal)
+)
+new_params <- new_params[new_params$param %in% override_names, ]
+
 write.csv(
   new_params,
   fs::path(swfcalib:::get_root_dir(calib_object), "params.csv"),

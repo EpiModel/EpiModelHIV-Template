@@ -35,10 +35,11 @@ your package branch as `EpiModelHIV-p@<applied_project>`.
 
 ### 2. Set project environment variables
 
-Two variables must be defined in the project-level `.Renviron` file:
+Three variables must be defined in the project-level `.Renviron` file:
 
-- **`EPIMODELHIV_DIR`** — the path to your local clone of `EpiModelHIV-p@<applied_project>`. Used by `.Rprofile` to locate the sibling package.
-- **`HPC_MAIL_USER`** — the email address SLURM should notify for HPC job status. Used by `R/hpc_configs.R`.
+- **`EPIMODELHIV_DIR`**: the path to your local clone of `EpiModelHIV-p@<applied_project>`. Used by `.Rprofile` to locate the sibling package.
+- **`HPC_MAIL_USER`**: the email address SLURM should notify for HPC job status. Used by `R/hpc_configs.R`.
+- **`GITHUB_PAT`**: your GitHub personal access token, needed to install the private packages (EpiModelHIV-p, ARTnetData). R reads only one `.Renviron`, so once the project has its own, the token in your user-wide `~/.Renviron` is ignored and private installs fail with "error code 56".
 
 Open the project `.Renviron` with:
 
@@ -47,32 +48,28 @@ usethis::edit_r_environ("project")
 ```
 
 (This opens the `.Renviron` scoped to this project, not your user-wide one.)
-Add these two lines, adjust them to your setup, save, then **restart R**:
+Add these three lines, adjust them to your setup, save, then **restart R**:
 
 ```
 EPIMODELHIV_DIR="/path/to/EpiModelHIV-p"
 HPC_MAIL_USER="you@emory.edu"
+GITHUB_PAT="<your GitHub token>"
 ```
+
+The project `.Renviron` is git-ignored, so the token stays out of git.
 
 ### 3. Personalize
 
-A few configuration files need to be edited before you can run any scripts.
-These files are documented with inline comments — look for `# <- USER` markers
-to find the values you need to change.
+Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name). **The project will not work until this is done.**
 
-Open the following two files and edit every variable marked with `# <- USER`.
-**The project will not work until this is done.**
-
-- **`R/shared_variables.R`**
-- **`R/hpc_configs.R`**
+`R/hpc_configs.R` needs no edits. When you create an HPC workflow, it reads the current git branch of this project, and the HPC clone of the project must be on that same branch.
 
 ### 4. Initialize the R environment
 
 Open **`R/00-setup.R`** and run it step by step (read the comments — there is
 a required R restart in the middle).
 
-This installs all R packages and copies the default parameter file into
-`data/input/`.
+This installs all R packages.
 
 ### 5. Start Chapter A
 
@@ -106,6 +103,8 @@ the project evolves.
 **Shared variables** — `R/shared_variables.R` is sourced by every top-level
 script and is the single source of truth for paths, time steps, and milestones.
 Never redefine its variables in other scripts.
+
+**Model parameters**: the default values come from `model_parameters.csv` in the EpiModelHIV package (`inst/model_parameters.csv` in EpiModelHIV-p). `data/input/model_parameters.csv` holds only this project's overrides and starts with just its header. To change a value, copy the parameter's row from the package file into the project file and edit `value`. Empty cells keep the package value, so a row with only `param` and `value` filled in also works. `read_model_params()` in `R/netsim_settings.R` combines the two files. It stops with an error if the project file names a parameter the package does not have, so an override left behind after a parameter is renamed or removed fails loudly. New parameters go in the package file on your EpiModelHIV-p branch. Scripts that call `library(EpiModelHIV)` read the installed package's file; `load_local_EpiModelHIV()` reads the one in your local clone.
 
 **Data directories:**
 
