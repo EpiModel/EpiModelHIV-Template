@@ -11,9 +11,9 @@
   "Packages": {
     "ARTnet": {
       "Package": "ARTnet",
-      "Version": "2.9.0",
+      "Version": "2.9.3",
       "Source": "GitHub",
-      "Date": "2024-09-06",
+      "Date": "2026-10-18",
       "Title": "Epidemic and Network Model Parameterization with the ARTnet Dataset",
       "Description": "Epidemic and Network Model Parameterization with the ARTnet Dataset.",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -36,10 +36,10 @@
         "testthat (>= 3.0.0)"
       ],
       "VignetteBuilder": "knitr",
-      "RoxygenNote": "7.3.3",
       "Encoding": "UTF-8",
       "Roxygen": "list(markdown = TRUE)",
       "Config/testthat/edition": "3",
+      "Config/roxygen2/version": "8.0.0",
       "Author": "Samuel Jenness [cre, aut]",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/ARTnetData@main",
@@ -47,7 +47,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "5a4cf31c2a0fe2d4bf3395937c7d63508c053d15"
+      "RemoteSha": "4114a59a797c74801f770d00eef2002f11256901"
     },
     "ARTnetData": {
       "Package": "ARTnetData",
