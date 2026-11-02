@@ -19,11 +19,14 @@
 #' Stops if the project file names a parameter the package does not have, so a
 #' stale or misspelled override fails loudly instead of being ignored.
 read_model_params <- function(
-    project_csv = fs::path(input_dir, "model_parameters.csv")) {
+  project_csv = fs::path(input_dir, "model_parameters.csv")
+) {
   package_csv <- system.file("model_parameters.csv", package = "EpiModelHIV")
   if (!nzchar(package_csv)) {
-    stop("EpiModelHIV does not provide `model_parameters.csv`. ",
-         "Load EpiModelHIV before sourcing this file.")
+    stop(
+      "EpiModelHIV does not provide `model_parameters.csv`. ",
+      "Load EpiModelHIV before sourcing this file."
+    )
   }
   params <- read.csv(package_csv, colClasses = "character")
   overrides <- read.csv(project_csv, colClasses = "character")
@@ -33,17 +36,27 @@ read_model_params <- function(
   }
   dups <- unique(overrides$param[duplicated(overrides$param)])
   if (length(dups) > 0) {
-    stop("`", project_csv, "` sets these parameters more than once: `",
-         paste0(dups, collapse = "`, `"), "`")
+    stop(
+      "`",
+      project_csv,
+      "` sets these parameters more than once: `",
+      paste0(dups, collapse = "`, `"),
+      "`"
+    )
   }
   unknown <- setdiff(overrides$param, params$param)
   if (length(unknown) > 0) {
     stop(
-      "\n  `", project_csv, "` overrides parameters that EpiModelHIV ",
-      utils::packageVersion("EpiModelHIV"), " does not have:\n    `",
-      paste0(unknown, collapse = "`, `"), "`\n",
+      "\n  `",
+      project_csv,
+      "` overrides parameters that EpiModelHIV ",
+      utils::packageVersion("EpiModelHIV"),
+      " does not have:\n    `",
+      paste0(unknown, collapse = "`, `"),
+      "`\n",
       "  They were probably renamed or removed in the package. Fix or delete\n",
-      "  these rows. The package defaults are in:\n    ", package_csv
+      "  these rows. The package defaults are in:\n    ",
+      package_csv
     )
   }
 
@@ -60,6 +73,7 @@ epistats <- readRDS(fs::path(est_dir, paste0("epistats-", context, ".rds")))
 netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
 path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))
 path_to_restart <- fs::path(est_dir, paste0("restart-", context, ".rds"))
+path_to_restart_pool <- fs::path(est_dir, "restart_pool/")
 
 # Package defaults with the project overrides applied
 params_df <- read_model_params() |>
@@ -67,11 +81,11 @@ params_df <- read_model_params() |>
 
 # `netsim` Parameters
 param <- param.net(
-  data.frame.params   = params_df,
-  netstats            = netstats,
-  epistats            = epistats,
-  prep.start          = prep_start,
-  riskh.start         = prep_start - year_steps
+  data.frame.params = params_df,
+  netstats = netstats,
+  epistats = epistats,
+  prep.start = prep_start,
+  riskh.start = prep_start - year_steps
 )
 
 # Initial conditions (default prevalence initialized in epistats).
@@ -82,7 +96,7 @@ init <- init_msm(
   prev.gono.uret = 0.1,
   prev.chla.rect = 0.1,
   prev.chla.uret = 0.1,
-  prev.syph      = 0.1
+  prev.syph = 0.1
 )
 
 # Flags to now weather each disease is enabled

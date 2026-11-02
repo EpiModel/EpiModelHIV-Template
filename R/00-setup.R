@@ -14,8 +14,17 @@ renv::init()
 ## Step 2: Install packages ----------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
 
+# Install ergmkit first: EpiModelHIV imports it. It builds its Rust engine at
+# install time, so cargo and rustc (>= 1.85) must be on the PATH.
+renv::install("AdrienLeGuillou/ergmkit-R")
+
 # Install the correct version of EpiModelHIV-p for your project
-renv::install(paste0("EpiModel/EpiModelHIV-p@", EMHIVp_branch))
+renv::install(paste0("/EpiModelHIV-p@", EMHIVp_branch))
+
+renv::install(c(
+  "EpiModel/EpiModel",
+  "EpiModel/EpiModelHPC@restart_pool"
+))
 
 # Lock the installed package versions
 renv::snapshot()

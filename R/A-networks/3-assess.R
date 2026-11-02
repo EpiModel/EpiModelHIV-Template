@@ -35,3 +35,6 @@ plot(dx$static)
 dx <- readRDS(fs::path(diag_dir, paste0("netdx-ooff-", context, ".rds")))
 print(dx$static, digits = 2)
 plot(dx$static)
+
+print(dx$exact, digits = 2)
+plot(dx$exact)
