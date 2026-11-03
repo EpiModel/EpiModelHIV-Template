@@ -11,7 +11,7 @@ library(EpiModelHIV)
 
 hpc_context <- TRUE
 source("R/shared_variables.R", local = TRUE)
-source("R/C-calibration/z-context.R", local = TRUE)
+source("R/Z-calibration/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
 
 batch_size <- 8
@@ -20,14 +20,9 @@ max_cores <- batch_size
 # Process ----------------------------------------------------------------------
 
 ## Uncomment the calibration config to use
-source("R/C-calibration/swfcalib_config.R", local = TRUE)
+source("./R/Z-calibration/swfcalib_config_pool2.R", local = TRUE)
 
-wf <- make_em_workflow("swfcalib", override = TRUE)
-
-# Register this campaign in the deploy-doctor watch list. Pairs with the teardown
-# step at the end; together they stop the shared deploy doctor (launched from the
-# deploy script) once this is the last campaign still running. Requires EpiModelHPC.
-wf <- add_doctor_register_step(wf, "swfcalib")
+wf <- make_em_workflow("merck_calib2", override = TRUE)
 
 # Calibration step 1
 wf <- add_workflow_step(
@@ -42,8 +37,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = 8,
     "time" = "00:20:00",
-    "mem-per-cpu" = "4G",
-    "mail-type" = "FAIL"
+    "mem-per-cpu" = "4G"
   )
 )
 
@@ -65,8 +59,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = batch_size,
     "time" = "05:00:00",
-    "mem-per-cpu" = "5G",
-    "mail-type" = "FAIL"
+    "mem-per-cpu" = "5G"
   )
 )
 
@@ -88,38 +81,29 @@ wf <- add_workflow_step(
   )
 )
 
-# Update param csv
-wf <- add_workflow_step(
-  wf_summary = wf,
-  step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/C-calibration/update_param.R",
-    args = list(
-      calib_object = calib_object
-    ),
-    setup_lines = hpc_node_setup
-  ),
-  sbatch_opts = list(
-    "cpus-per-task" = 1,
-    "time" = "00:20:00",
-    "mem-per-cpu" = "8G",
-    "mail-type" = "END"
-  )
-)
-
 source("R/netsim_settings.R", local = TRUE)
 
-# Control settings
-control <- control_msm(
-  nsteps              = calibration_end,
-  start               = restart_time,
-  initialize.FUN      = reinit_msm,
-  verbose = FALSE
-)
+if (restart) { # Provided by swfcalib_config
+  path_to_orig <- path_to_restart_pool
+  control <- control_msm(
+    nsteps = 120 * year_steps,
+    start = restart_time,
+    initialize.FUN = initialize.net,
+    inst.resim = "exact",
+    verbose = FALSE
+  )
+} else {
+  path_to_orig <- path_to_est
+  control <- control_msm(
+    nsteps = 120 * year_steps,
+    verbose = FALSE
+  )
+}
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_swfcalib_output(
-    path_to_restart, param, init, control, calib_object,
+    path_to_orig, param, init, control, calib_object,
     output_dir = calib_dir,
     n_rep = 256,
     n_cores = batch_size,
@@ -146,27 +130,9 @@ wf <- add_workflow_step(
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
+    "mail-type" = "END",
     "cpus-per-task" = batch_size,
     "time" = "02:00:00",
     "mem-per-cpu" = "5G"
   )
 )
-
-wf <- add_workflow_step(
-  wf_summary = wf,
-  step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/C-calibration/process_calibs.R",
-    args = list(hpc_context = TRUE, n_cores = max_cores),
-    setup_lines = hpc_node_setup
-  ),
-  sbatch_opts = list(
-    "mail-type" = "END",
-    "cpus-per-task" = max_cores,
-    "time" = "02:00:00",
-    "mem-per-cpu" = "5G"
-  )
-)
-
-# Final step: deregister from the deploy-doctor watch list and stop the shared
-# doctor once this is the last campaign still running (EpiModelHPC).
-wf <- add_doctor_teardown_step(wf, "swfcalib")

@@ -22,3 +22,19 @@ source("R/A-networks/diag_casl.R", local = TRUE)
 source("R/A-networks/diag_ooff.R", local = TRUE)
 
 message("\n\n", "Network diagnostics are saved in: \"", diag_dir, "\"")
+
+# Ergmkit calibration ----------------------------------------------------------
+# The proposals per node the main and casual steps need with the separable
+# step. The one-off network is drawn exactly and makes no proposals.
+ergmkit_calibration <- list(
+  main = calibrate_netest(est$fit_main, separable = TRUE),
+  casl = calibrate_netest(est$fit_casl, separable = TRUE)
+)
+ergmkit_calibration_path <- fs::path(
+  est_dir,
+  paste0("ergmkit-calibration-", context, ".rds")
+)
+saveRDS(ergmkit_calibration, ergmkit_calibration_path)
+message(
+  "\nErgmkit calibration saved to \"", ergmkit_calibration_path, "\"\n"
+)

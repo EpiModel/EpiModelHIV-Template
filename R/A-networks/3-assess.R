@@ -38,3 +38,9 @@ plot(dx$static)
 
 print(dx$exact, digits = 2)
 plot(dx$exact)
+
+# 4. Ergmkit calibration (saved by 1-estimation.R on the HPC)
+cal_path <- fs::path(est_dir, paste0("ergmkit-calibration-", context, ".rds"))
+ergmkit_calibration <- readRDS(cal_path)
+print(ergmkit_calibration$main$per_node)
+print(ergmkit_calibration$casl$per_node)
