@@ -4,9 +4,11 @@
 ## scripts that interact with the HPC (the `workflow-*.R` ones)
 
 hpc_node_setup <- c(
-  ". /projects/epimodel/spack/share/spack/setup-env.sh",
-  "spack unload -a",
-  "spack load r@4.5.1"
+  "pixi install",
+  "pixi_activate"
+  # ". /projects/epimodel/spack/share/spack/setup-env.sh",
+  # "spack unload -a",
+  # "spack load r@4.5.1"
 )
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
@@ -55,7 +57,8 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
 
   if (update_renv) {
     renv::snapshot(
-      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
+      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData",
+                   "minpack.lm", "hetGP", "MASS"),
       lockfile = "renv.lock.hpc",
       prompt = FALSE
     )
