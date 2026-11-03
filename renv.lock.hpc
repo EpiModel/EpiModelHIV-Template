@@ -192,7 +192,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "9a5cbc2afb2e2c18b69d9fdbce955a969a52958c",
+      "RemoteSha": "fda1a55248eebb383995c30cfb614d4c2fcb56a1",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
@@ -242,7 +242,7 @@
       "RemoteUsername": "AdrienLeGuillou",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "ergmkit",
-      "RemoteSha": "050f0f38a080e5c9b650537a2669462ef059a9ec",
+      "RemoteSha": "10158ac141f83998df036dce649fb53b18c61540",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHPC": {
@@ -2658,8 +2658,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "main",
-      "RemoteSha": "c9e1dfbbfc646518c0869294ba6fa5ebeb63f983"
+      "RemoteRef": "dev",
+      "RemoteSha": "6a33b1bd75eca7b0d720cb1ae24a0acfad781e67"
     },
     "statnet.common": {
       "Package": "statnet.common",

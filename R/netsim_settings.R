@@ -108,6 +108,6 @@ has_sti <- c(
 
 ergmkit_control <- list(
   list(per_node = 1, separable = TRUE),
-  list(per_node = 1, separable = TRUE),
+  list(per_node = 0.5, separable = TRUE),
   list(exact =  "types")
 )

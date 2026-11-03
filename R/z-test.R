@@ -21,7 +21,7 @@ control <- control_msm(
     list(per_node = 1, separable = TRUE),
     list(exact = c("thinning", "types")[2])
   ),
-  nsteps = year_steps * 4,
+  nsteps = year_steps * 1,
   # cumulative.edgelist = TRUE,
   # truncate.el.cuml = Inf,
   # save.cumulative.edgelist = TRUE,
@@ -31,6 +31,27 @@ control <- control_msm(
 
 system.time(
   sim <- netsim(est, param, init, control)
+)
+
+control <- control_msm(
+  initialize.FUN = initialize_msm_ergmkit,
+  resim_nets.FUN = resim_nets_ergmkit,
+  ergmkit.control = list(
+    list(per_node = 1, separable = TRUE),
+    list(per_node = 1, separable = TRUE),
+    list(exact = c("thinning", "types")[2])
+  ),
+  start = year_steps * 1 + 1,
+  nsteps = year_steps * 2,
+  # cumulative.edgelist = TRUE,
+  # truncate.el.cuml = Inf,
+  # save.cumulative.edgelist = TRUE,
+  # save.nwstats = TRUE,
+  verbose = FALSE
+)
+
+system.time(
+  sim <- netsim(sim, param, init, control)
 )
 
 library(dplyr)

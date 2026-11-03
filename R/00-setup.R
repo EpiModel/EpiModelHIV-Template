@@ -26,6 +26,10 @@ renv::install(c(
   "EpiModel/EpiModelHPC@restart_pool"
 ))
 
+renv::install(c(
+  "EpiModel/slurmworkflow@dev"
+))
+
 # Lock the installed package versions
 renv::snapshot()
 
