@@ -20,7 +20,7 @@ library(EpiModelHIV)
 
 context <- params$context
 source("R/netsim_settings.R", local = TRUE)
-source("R/C-calibration/utils-calib_plots.R", local = TRUE)
+source("R/Z-calibration/utils-calib_plots.R", local = TRUE)
 
 d_outs <- readRDS(params$path_df) |>
   EpiModelHIV::mutate_calibration_targets()
