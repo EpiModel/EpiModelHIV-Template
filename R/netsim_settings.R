@@ -105,3 +105,9 @@ has_sti <- c(
   chla = init$prev.chla.rect > 0 | init$prev.chla.uret > 0,
   syph = init$prev.syph > 0
 )
+
+ergmkit_control <- list(
+  list(per_node = 1, separable = TRUE),
+  list(per_node = 1, separable = TRUE),
+  list(exact =  "types")
+)

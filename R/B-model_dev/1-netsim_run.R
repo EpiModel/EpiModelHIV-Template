@@ -26,6 +26,9 @@ print(init)
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 control <- control_msm(
+  # initialize.FUN = initialize_msm_ergmkit,
+  # resim_nets.FUN = resim_nets_ergmkit,
+  # ergmkit.control = ergmkit_control,
   nsteps = year_steps * 4
 )
 print(control)

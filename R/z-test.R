@@ -21,7 +21,7 @@ control <- control_msm(
     list(per_node = 1, separable = TRUE),
     list(exact = c("thinning", "types")[2])
   ),
-  nsteps = year_steps * 25,
+  nsteps = year_steps * 4,
   # cumulative.edgelist = TRUE,
   # truncate.el.cuml = Inf,
   # save.cumulative.edgelist = TRUE,
@@ -32,11 +32,6 @@ control <- control_msm(
 system.time(
   sim <- netsim(est, param, init, control)
 )
-#   user  system elapsed   mode
-# 172.298   0.542 173.495 tergm
-# 14.191   0.046  14.357  ergmk-thinning
-# 13.663   0.019  13.728  ergmk-types
-#
 
 library(dplyr)
 

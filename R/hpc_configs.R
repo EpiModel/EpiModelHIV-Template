@@ -5,7 +5,7 @@
 
 hpc_node_setup <- c(
   "pixi install",
-  "pixi_activate"
+  'eval "$(pixi shell-hook --shell zsh)"'
   # ". /projects/epimodel/spack/share/spack/setup-env.sh",
   # "spack unload -a",
   # "spack load r@4.5.1"
