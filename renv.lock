@@ -101,6 +101,30 @@
       "Repository/R-Forge/DateTimeStamp": "2026-08-19 18:14:28",
       "NeedsCompilation": "no"
     },
+    "DiceDesign": {
+      "Package": "DiceDesign",
+      "Version": "1.10",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Designs of Computer Experiments",
+      "Date": "2023-11-30",
+      "Author": "Jessica Franco, Delphine Dupuy, Olivier Roustant,  Patrice Kiener, Guillaume Damblin and Bertrand Iooss.",
+      "Maintainer": "Celine Helbert <Celine.Helbert@ec-lyon.fr>",
+      "Description": "Space-Filling Designs and space-filling criteria (distance-based and uniformity-based), with emphasis to computer experiments; <doi:10.18637/jss.v065.i11>.",
+      "License": "GPL-3",
+      "Depends": [
+        "R (>= 2.10)"
+      ],
+      "Suggests": [
+        "rgl",
+        "randtoolbox",
+        "lattice"
+      ],
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "LazyData": "true",
+      "Repository": "CRAN"
+    },
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.7.0",
@@ -165,11 +189,11 @@
       "Config/roxygen2/version": "8.1.1",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "4dc39b11215080ade08bd60e643348ef881de871"
+      "RemoteSha": "9a5cbc2afb2e2c18b69d9fdbce955a969a52958c",
+      "RemoteHost": "api.github.com"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -183,11 +207,12 @@
       "Authors@R": "c( person(\"Samuel M.\", \"Jenness\", role = c(\"cre\", \"aut\"), email = \"samuel.m.jenness@emory.edu\"), person(\"Steven M.\", \"Goodreau\", role = \"aut\", email = \"goodeau@uw.edu\"), person(\"Adrien\", \"Le Guillou\", role=c(\"aut\"), email=\"contact@aleguillou.org\", comment = c(ORCID = \"0000-0002-4791-418X\")))",
       "License": "GPL-3",
       "Depends": [
-        "R (>= 4.1.0)",
+        "R (>= 4.2)",
         "EpiModel (>= 2.6.2)"
       ],
       "Imports": [
         "ARTnet (>= 2.9.3)",
+        "ergmkit (>= 0.1.0)",
         "tergm",
         "ergm",
         "network",
@@ -213,11 +238,11 @@
       "Roxygen": "list(markdown = TRUE)",
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
-      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
+      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::AdrienLeGuillou/ergmkit-R",
       "RemoteUsername": "AdrienLeGuillou",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "ergmkit",
-      "RemoteSha": "508415090fc0e4b67855aea74279c15ffc000627",
+      "RemoteSha": "050f0f38a080e5c9b650537a2669462ef059a9ec",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHPC": {
@@ -1138,6 +1163,43 @@
       "Maintainer": "Pavel N. Krivitsky <pavel@statnet.org>",
       "Repository": "CRAN"
     },
+    "ergmkit": {
+      "Package": "ergmkit",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "Title": "Simulation of ERGMs and STERGMs with the Rust Engine ergmkit",
+      "Authors@R": "person(\"Adrien\", \"Le Guillou\", email = \"git@aleguillou.org\", role = c(\"aut\", \"cre\"))",
+      "Description": "Simulates separable temporal ERGMs (tergm's time step: discordTNT proposals and tergm's adaptive number of them) and draws dyad-independent ERGMs exactly, with the Rust crate ergmkit. ergm formulas and fits become model specs, the language-agnostic description the engine builds its models from; the simulations take and return edgelists.",
+      "License": "GPL-3",
+      "URL": "https://github.com/AdrienLeGuillou/ergmkit-R",
+      "BugReports": "https://github.com/AdrienLeGuillou/ergmkit-R/issues",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 4.2)"
+      ],
+      "Imports": [
+        "jsonlite",
+        "stats"
+      ],
+      "Suggests": [
+        "ergm",
+        "network",
+        "networkLite",
+        "testthat (>= 3.0.0)"
+      ],
+      "SystemRequirements": "Cargo (Rust's package manager), rustc >= 1.85",
+      "Config/testthat/edition": "3",
+      "Roxygen": "list(markdown = TRUE)",
+      "Config/roxygen2/version": "8.1.0",
+      "Author": "Adrien Le Guillou [aut, cre]",
+      "Maintainer": "Adrien Le Guillou <git@aleguillou.org>",
+      "RemoteType": "github",
+      "RemoteUsername": "AdrienLeGuillou",
+      "RemoteRepo": "ergmkit-R",
+      "RemoteRef": "main",
+      "RemoteSha": "7caff08eac40a8b96c31408b8f58c8a30eeaab24",
+      "RemoteHost": "api.github.com"
+    },
     "evaluate": {
       "Package": "evaluate",
       "Version": "1.0.5",
@@ -1296,14 +1358,13 @@
     },
     "future": {
       "Package": "future",
-      "Version": "1.80.0",
+      "Version": "1.82.0",
       "Source": "Repository",
       "Title": "Unified Parallel and Distributed Processing in R for Everyone",
       "Depends": [
         "R (>= 3.2.0)"
       ],
       "Imports": [
-        "digest",
         "globals (>= 0.18.0)",
         "listenv (>= 0.8.0)",
         "parallel",
@@ -1312,6 +1373,7 @@
         "utils"
       ],
       "Suggests": [
+        "digest",
         "methods",
         "RhpcBLASctl",
         "R.rsp",
@@ -1328,7 +1390,7 @@
       "Language": "en-US",
       "Encoding": "UTF-8",
       "Collate": "'000.bquote.R' '000.import.R' '000.re-exports.R' '009.deprecation.R' '010.tweakable.R' '010.utils-parallelly.R' 'backend_api-01-FutureBackend-class.R' 'backend_api-03.MultiprocessFutureBackend-class.R' 'backend_api-11.ClusterFutureBackend-class.R' 'backend_api-11.MulticoreFutureBackend-class.R' 'backend_api-11.SequentialFutureBackend-class.R' 'backend_api-13.MultisessionFutureBackend-class.R' 'backend_api-ConstantFuture-class.R' 'backend_api-Future-class.R' 'backend_api-FutureRegistry.R' 'backend_api-UniprocessFuture-class.R' 'backend_api-evalFuture.R' 'core_api-cancel.R' 'core_api-future.R' 'core_api-reset.R' 'core_api-resolved.R' 'core_api-value.R' 'delayed_api-futureAssign.R' 'delayed_api-futureOf.R' 'demo_api-mandelbrot.R' 'infix_api-01-futureAssign_OP.R' 'infix_api-02-globals_OP.R' 'infix_api-03-seed_OP.R' 'infix_api-04-stdout_OP.R' 'infix_api-05-conditions_OP.R' 'infix_api-06-lazy_OP.R' 'infix_api-07-label_OP.R' 'infix_api-08-plan_OP.R' 'infix_api-09-tweak_OP.R' 'protected_api-FutureCondition-class.R' 'protected_api-FutureGlobals-class.R' 'protected_api-FutureResult-class.R' 'protected_api-futures.R' 'protected_api-globals.R' 'protected_api-journal.R' 'protected_api-resolve.R' 'protected_api-result.R' 'protected_api-signalConditions.R' 'testme.R' 'utils-basic.R' 'utils-conditions.R' 'utils-connections.R' 'utils-debug.R' 'utils-immediateCondition.R' 'utils-marshalling.R' 'utils-objectSize.R' 'utils-options.R' 'utils-prune_pkg_code.R' 'utils-registerClusterTypes.R' 'utils-rng_utils.R' 'utils-signalEarly.R' 'utils-stealth_sample.R' 'utils-sticky_globals.R' 'utils-tweakExpression.R' 'utils-uuid.R' 'utils-whichIndex.R' 'utils_api-backtrace.R' 'utils_api-capture_journals.R' 'utils_api-futureCall.R' 'utils_api-futureSessionInfo.R' 'utils_api-makeClusterFuture.R' 'utils_api-minifuture.R' 'utils_api-nbrOfWorkers.R' 'utils_api-plan.R' 'utils_api-plan-with.R' 'utils_api-sessionDetails.R' 'utils_api-tweak.R' 'zzz.R'",
-      "Config/roxygen2/version": "8.1.0",
+      "Config/roxygen2/version": "8.1.1",
       "NeedsCompilation": "no",
       "Author": "Henrik Bengtsson [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-7579-5165>)",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
@@ -1543,6 +1605,36 @@
       "Maintainer": "Jennifer Bryan <jenny@posit.co>",
       "Repository": "CRAN"
     },
+    "gridExtra": {
+      "Package": "gridExtra",
+      "Version": "2.3.1",
+      "Source": "Repository",
+      "Authors@R": "c(person(\"Baptiste\", \"Auguie\", email = \"baptiste.auguie@vuw.ac.nz\", role = c(\"aut\", \"cre\")), person(\"Anton\", \"Antonov\", email = \"tonytonov@gmail.com\", role = c(\"ctb\")))",
+      "License": "GPL (>= 2)",
+      "Title": "Miscellaneous Functions for \"Grid\" Graphics",
+      "Type": "Package",
+      "Description": "Provides a number of user-level functions to work with \"grid\" graphics, notably to arrange multiple grid-based plots on a page, and draw tables.",
+      "VignetteBuilder": "knitr",
+      "Imports": [
+        "gtable",
+        "grid",
+        "grDevices",
+        "graphics",
+        "utils"
+      ],
+      "Suggests": [
+        "ggplot2",
+        "egg",
+        "lattice",
+        "knitr",
+        "testthat"
+      ],
+      "RoxygenNote": "6.0.1",
+      "NeedsCompilation": "no",
+      "Author": "Baptiste Auguie [aut, cre], Anton Antonov [ctb]",
+      "Maintainer": "Baptiste Auguie <baptiste.auguie@vuw.ac.nz>",
+      "Repository": "CRAN"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.6",
@@ -1581,6 +1673,44 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut], Thomas Lin Pedersen [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
+      "Repository": "CRAN"
+    },
+    "hetGP": {
+      "Package": "hetGP",
+      "Version": "1.1.9",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Heteroskedastic Gaussian Process Modeling and Design under Replication",
+      "Date": "2026-04-17",
+      "Authors@R": "c(person(given = \"Mickael\", family = \"Binois\", role = c(\"aut\", \"cre\"), email = \"mickael.binois@inria.fr\"), person(given = c(\"Robert\", \"B.\"), family = \"Gramacy\", role = \"aut\"))",
+      "Description": "Performs Gaussian process regression with heteroskedastic noise following the model by Binois, M., Gramacy, R., Ludkovski, M. (2016) <doi:10.48550/arXiv.1611.05902>, with implementation details in Binois, M. & Gramacy, R. B. (2021) <doi:10.18637/jss.v098.i13>. The input dependent noise is modeled as another Gaussian process. Replicated observations are encouraged as they yield computational savings. Sequential design procedures based on the integrated mean square prediction error and lookahead heuristics are provided, and notably fast update functions when adding new observations.",
+      "License": "LGPL",
+      "LazyData": "FALSE",
+      "Depends": [
+        "R (>= 2.10)"
+      ],
+      "Imports": [
+        "Rcpp (>= 0.12.3)",
+        "MASS",
+        "methods",
+        "DiceDesign",
+        "mco",
+        "quadprog"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Suggests": [
+        "knitr",
+        "monomvn",
+        "lhs",
+        "colorspace"
+      ],
+      "VignetteBuilder": "knitr",
+      "RoxygenNote": "7.3.3",
+      "NeedsCompilation": "yes",
+      "Author": "Mickael Binois [aut, cre], Robert B. Gramacy [aut]",
+      "Maintainer": "Mickael Binois <mickael.binois@inria.fr>",
       "Repository": "CRAN"
     },
     "highr": {
@@ -2132,6 +2262,29 @@
       "Maintainer": "Lionel Henry <lionel@posit.co>",
       "Repository": "CRAN"
     },
+    "mco": {
+      "Package": "mco",
+      "Version": "1.17",
+      "Source": "Repository",
+      "Title": "Multiple Criteria Optimization Algorithms and Related Functions",
+      "Description": "A collection of function to solve multiple criteria optimization problems  using genetic algorithms (NSGA-II). Also included is a collection of test functions.",
+      "Authors@R": "c( person(\"Olaf\", \"Mersmann\", role=c(\"aut\", \"cre\"), email=\"olafm@p-value.net\"),  person(\"Heike\", \"Trautmann\", role=c(\"ctb\"), email=\"trautmann@wi.uni-muenster.de\"), person(\"Detlef\", \"Steuer\", role=c(\"ctb\"), email=\"detlef.steuer@hsu-hamburg.de\"), person(\"Bernd\", \"Bischl\", role=c(\"ctb\"), email=\"bernd_bischl@gmx.net\"), person(\"Kalyanmoy\", \"Deb\", role=c(\"cph\")) )",
+      "Language": "en-US",
+      "Depends": [
+        "R (>= 3.4.0)"
+      ],
+      "Suggests": [
+        "scatterplot3d",
+        "testthat"
+      ],
+      "License": "GPL-2",
+      "URL": "https://github.com/olafmersmann/mco",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Olaf Mersmann [aut, cre], Heike Trautmann [ctb], Detlef Steuer [ctb], Bernd Bischl [ctb], Kalyanmoy Deb [cph]",
+      "Maintainer": "Olaf Mersmann <olafm@p-value.net>",
+      "Repository": "CRAN"
+    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -2181,6 +2334,22 @@
       "NeedsCompilation": "yes",
       "Author": "Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>, https://yihui.org), Jeffrey Horner [ctb], Beilei Bian [ctb]",
       "Maintainer": "Yihui Xie <xie@yihui.name>",
+      "Repository": "CRAN"
+    },
+    "minpack.lm": {
+      "Package": "minpack.lm",
+      "Version": "1.2-4",
+      "Source": "Repository",
+      "Title": "R Interface to the Levenberg-Marquardt Nonlinear Least-Squares Algorithm Found in MINPACK, Plus Support for Bounds",
+      "Author": "Timur V. Elzhov, Katharine M. Mullen, Andrej-Nikolai Spiess, Ben Bolker",
+      "Maintainer": "Katharine M. Mullen <mullenkate@gmail.com>",
+      "Description": "The nls.lm function provides an R interface to lmder and lmdif from the MINPACK library, for solving nonlinear least-squares problems by a modification of the Levenberg-Marquardt algorithm, with support for lower and upper parameter bounds.  The implementation can be used via nls-like calls using the nlsLM function.",
+      "Suggests": [
+        "MASS"
+      ],
+      "License": "GPL-3",
+      "Copyright": "inst/COPYRIGHTS",
+      "NeedsCompilation": "yes",
       "Repository": "CRAN"
     },
     "network": {
@@ -2773,6 +2942,23 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut, cre] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Lionel Henry [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
+      "Repository": "CRAN"
+    },
+    "quadprog": {
+      "Package": "quadprog",
+      "Version": "1.5-8",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Functions to Solve Quadratic Programming Problems",
+      "Date": "2019-11-20",
+      "Author": "S original by Berwin A. Turlach <Berwin.Turlach@gmail.com>  R port by Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at> Fortran contributions from Cleve Moler (dposl/LINPACK and (a modified version of) dpodi/LINPACK)",
+      "Maintainer": "Berwin A. Turlach <Berwin.Turlach@gmail.com>",
+      "Description": "This package contains routines and documentation for solving quadratic programming problems.",
+      "Depends": [
+        "R (>= 3.1.0)"
+      ],
+      "License": "GPL (>= 2)",
+      "NeedsCompilation": "yes",
       "Repository": "CRAN"
     },
     "rappdirs": {
@@ -3859,6 +4045,52 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut], Lionel Henry [aut], Davis Vaughan [aut, cre], data.table team [cph] (Radix sort based on data.table's forder() and their contribution to R's order()), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Davis Vaughan <davis@posit.co>",
+      "Repository": "CRAN"
+    },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.6.5",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Colorblind-Friendly Color Maps for R",
+      "Date": "2024-01-28",
+      "Authors@R": "c( person(\"Simon\", \"Garnier\", email = \"garnier@njit.edu\", role = c(\"aut\", \"cre\")), person(\"Noam\", \"Ross\", email = \"noam.ross@gmail.com\", role = c(\"ctb\", \"cph\")), person(\"Bob\", \"Rudis\", email = \"bob@rud.is\", role = c(\"ctb\", \"cph\")), person(\"Marco\", \"Sciaini\", email = \"sciaini.marco@gmail.com\", role = c(\"ctb\", \"cph\")), person(\"Antônio Pedro\", \"Camargo\", role = c(\"ctb\", \"cph\")), person(\"Cédric\", \"Scherer\", email = \"scherer@izw-berlin.de\", role = c(\"ctb\", \"cph\")) )",
+      "Maintainer": "Simon Garnier <garnier@njit.edu>",
+      "Description": "Color maps designed to improve graph readability for readers with  common forms of color blindness and/or color vision deficiency. The color  maps are also perceptually-uniform, both in regular form and also when  converted to black-and-white for printing. This package also contains  'ggplot2' bindings for discrete and continuous color and fill scales. A lean version of the package called 'viridisLite' that does not include the  'ggplot2' bindings can be found at  <https://cran.r-project.org/package=viridisLite>.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 2.10)",
+        "viridisLite (>= 0.4.0)"
+      ],
+      "Imports": [
+        "ggplot2 (>= 1.0.1)",
+        "gridExtra"
+      ],
+      "Suggests": [
+        "hexbin (>= 1.27.0)",
+        "scales",
+        "MASS",
+        "knitr",
+        "dichromat",
+        "colorspace",
+        "httr",
+        "mapproj",
+        "vdiffr",
+        "svglite (>= 1.2.0)",
+        "testthat",
+        "covr",
+        "rmarkdown",
+        "maps",
+        "terra"
+      ],
+      "LazyData": "true",
+      "VignetteBuilder": "knitr",
+      "URL": "https://sjmgarnier.github.io/viridis/, https://github.com/sjmgarnier/viridis/",
+      "BugReports": "https://github.com/sjmgarnier/viridis/issues",
+      "RoxygenNote": "7.3.1",
+      "NeedsCompilation": "no",
+      "Author": "Simon Garnier [aut, cre], Noam Ross [ctb, cph], Bob Rudis [ctb, cph], Marco Sciaini [ctb, cph], Antônio Pedro Camargo [ctb, cph], Cédric Scherer [ctb, cph]",
       "Repository": "CRAN"
     },
     "viridisLite": {

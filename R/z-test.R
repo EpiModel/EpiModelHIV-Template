@@ -4,8 +4,12 @@ source("R/B-model_dev/z-context.R")
 source("R/netsim_settings.R", local = TRUE)
 est <- readRDS(path_to_est)
 
-calibrate_netest(est$fit_main, separable = TRUE)
-# calibrate_netest(est$fit_casl, separable = TRUE)
+system.time(
+  cl_main <- calibrate_netest(est$fit_main, separable = TRUE)
+)
+system.time(
+  cl_casl <- calibrate_netest(est$fit_main, separable = TRUE)
+)
 
 # TODO: set 'ergmkit.control' in netsim_settings
 
@@ -17,9 +21,9 @@ control <- control_msm(
     list(per_node = 1, separable = TRUE),
     list(exact = c("thinning", "types")[2])
   ),
-  nsteps = year_steps * 4,
-  cumulative.edgelist = TRUE,
-  truncate.el.cuml = Inf,
+  nsteps = year_steps * 25,
+  # cumulative.edgelist = TRUE,
+  # truncate.el.cuml = Inf,
   # save.cumulative.edgelist = TRUE,
   # save.nwstats = TRUE,
   verbose = FALSE
@@ -29,7 +33,7 @@ system.time(
   sim <- netsim(est, param, init, control)
 )
 #   user  system elapsed   mode
-# 28.094   0.098  28.304  tergm
+# 172.298   0.542 173.495 tergm
 # 14.191   0.046  14.357  ergmk-thinning
 # 13.663   0.019  13.728  ergmk-types
 #
