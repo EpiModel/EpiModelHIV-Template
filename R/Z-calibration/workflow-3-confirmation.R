@@ -19,14 +19,17 @@ source("R/netsim_settings.R", local = TRUE)
 # Control settings
 control <- control_msm(
   nsteps = calibration_end,
-  inst.resim = "exact",
   start = restart_time,
   initialize.FUN = initialize.net,
+  inst.resim = "exact",
+  # initialize.FUN = initialize_msm_ergmkit,
+  # resim_nets.FUN = resim_nets_ergmkit,
+  ergmkit.control = ergmkit_control,
   verbose = FALSE
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("merck_confirm", override = TRUE)
+wf <- make_em_workflow("ergmkit_confirm_tergm", override = TRUE)
 
 wf <- add_workflow_step(
   wf_summary = wf,
@@ -38,7 +41,7 @@ wf <- add_workflow_step(
     control,
     scenarios_list = NULL,
     output_dir = calib_dir,
-    n_rep = 552,
+    n_rep = 128,
     n_cores = max_cores,
     max_array_size = 500,
     setup_lines = hpc_node_setup

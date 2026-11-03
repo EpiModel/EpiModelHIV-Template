@@ -242,7 +242,7 @@
       "RemoteUsername": "AdrienLeGuillou",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "ergmkit",
-      "RemoteSha": "6f79401990199e27f208cdf22fe3a3a373a35ddb",
+      "RemoteSha": "2439bd03cfc7d10a6e3b555fa5149d61ac2d339a",
       "RemoteHost": "api.github.com"
     },
     "EpiModelHPC": {

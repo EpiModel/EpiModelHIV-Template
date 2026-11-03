@@ -82,8 +82,8 @@ calib_plot_infos <- list(
     text_offset = 0.01,
     fmt_target = scales::percent_format(0.1)
   ),
-  num.active.sex = list(
-    names = "num.active.sex",
+  num = list(
+    names = "num",
     ylab = "Population",
     text_offset = 500,
     fmt_target = scales::number_format(1)
