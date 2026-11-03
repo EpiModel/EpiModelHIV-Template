@@ -3,6 +3,7 @@
 ## This script should not be run directly. But `sourced` by `2-diagnostics.R`
 ##
 ## One-off partnerships are instantaneous so only static diagnostics are needed
+message("\n", "Running one-off network diagnostics\n\n")
 
 model_ooff_dx <- ~edges +
   nodematch("age.grp", diff = FALSE) +

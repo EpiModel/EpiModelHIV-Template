@@ -24,6 +24,7 @@ source("R/A-networks/diag_ooff.R", local = TRUE)
 message("\n\n", "Network diagnostics are saved in: \"", diag_dir, "\"")
 
 # Ergmkit calibration ----------------------------------------------------------
+message("\n", "Running ergmkit calibration\n\n")
 # The proposals per node the main and casual steps need with the separable
 # step. The one-off network is drawn exactly and makes no proposals.
 ergmkit_calibration <- list(

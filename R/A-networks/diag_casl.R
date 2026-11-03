@@ -3,6 +3,7 @@
 ## This script should not be run directly. But `sourced` by `2-diagnostics.R`
 ##
 ## Produces dynamic and static diagnostics (see diag_main.R for explanation)
+message("\n", "Running casual network diagnostics\n\n")
 
 model_casl_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
