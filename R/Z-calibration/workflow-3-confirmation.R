@@ -20,16 +20,17 @@ source("R/netsim_settings.R", local = TRUE)
 control <- control_msm(
   nsteps = calibration_end,
   start = restart_time,
-  initialize.FUN = initialize.net,
-  inst.resim = "exact",
-  # initialize.FUN = initialize_msm_ergmkit,
-  # resim_nets.FUN = resim_nets_ergmkit,
-  ergmkit.control = ergmkit_control,
+  # initialize.FUN = initialize.net,
+  # inst.resim = "exact",
+  initialize.FUN = initialize_msm_ergmkit,
+  resim_nets.FUN = resim_nets_ergmkit,
+  ergmkit.control = list(list(), list(), list(exact =  "types")),
+  # ergmkit.control = ergmkit_control,
   verbose = FALSE
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("ergmkit_confirm_tergm", override = TRUE)
+wf <- make_em_workflow("ergmkit_confirm_ergmkit", override = TRUE)
 
 wf <- add_workflow_step(
   wf_summary = wf,
