@@ -71,9 +71,48 @@ utils::write.csv(
 )
 
 # Workflow creation ------------------------------------------------------------
-wf_name <- sprintf("truing_%s_w%d_i%d", truing_campaign, wave, iteration)
+wf_name <- paste0(
+  Sys.getenv("HPC_WF_PREFIX"),
+  sprintf("truing_%s_w%d_i%d", truing_campaign, wave, iteration)
+)
 wf <- make_em_workflow(wf_name, override = TRUE)
+n_steps <- 1 # the renv restore
 
+# slurmworkflow chains an array to the next step through the job ID of its
+# *last task* only (`afterany:$SLURM_JOB_ID`): the next step can start while
+# other tasks still run. Hence: one array per design, throttled to
+# `truing_max_cores` (`%k`, set on the job script below), and a step after it
+# that waits for every batch file, or for the array to leave the queue.
+truing_wait_for_sims <- function(sim_dir, pattern, expected, job_name,
+                                 poll_s = 60, timeout_h = 24) {
+  t0 <- Sys.time()
+  repeat {
+    n <- if (fs::dir_exists(sim_dir)) {
+      length(fs::dir_ls(sim_dir, regexp = pattern))
+    } else {
+      0
+    }
+    queued <- system2(
+      "squeue", c("-h", "-u", Sys.getenv("USER"), "-n", job_name),
+      stdout = TRUE
+    )
+    message(format(Sys.time()), ": ", n, " / ", expected, " batch files, ",
+            length(queued), " tasks still queued")
+    if (n >= expected) break
+    if (length(queued) == 0) {
+      warning(expected - n, " batch files missing and no task left: ",
+              "check the array logs")
+      break
+    }
+    if (difftime(Sys.time(), t0, units = "hours") > timeout_h) {
+      warning("Timeout after ", timeout_h, " h with ", n, " / ", expected)
+      break
+    }
+    Sys.sleep(poll_s)
+  }
+}
+
+throttle <- c()
 for (i in seq_len(nrow(designs))) {
   d <- designs[i, ]
   wf <- add_workflow_step(
@@ -89,7 +128,7 @@ for (i in seq_len(nrow(designs))) {
       libraries = "EpiModelHIV",
       setup_lines = c(hpc_node_setup,
                       paste0("export TRUING_SEED=", d$seed_base)),
-      max_array_size = truing_max_cores %/% d$n_cores
+      max_array_size = Inf
     ),
     sbatch_opts = list(
       "mail-type" = "FAIL,TIME_LIMIT",
@@ -98,6 +137,29 @@ for (i in seq_len(nrow(designs))) {
       "mem-per-cpu" = "5G"
     )
   )
+  n_steps <- n_steps + 1
+  throttle[as.character(n_steps)] <- truing_max_cores %/% d$n_cores
+
+  wf <- add_workflow_step(
+    wf_summary = wf,
+    step_tmpl = step_tmpl_do_call(
+      what = truing_wait_for_sims,
+      args = list(
+        sim_dir = truing_sim_dir,
+        pattern = sprintf("/sim__w%d_i%d_%s_p[0-9]+__[0-9]+\\.rds$",
+                          wave, iteration, d$design),
+        expected = d$n_points * ceiling(d$n_rep / d$n_cores),
+        job_name = paste0(wf_name, "_step", n_steps)
+      ),
+      setup_lines = hpc_node_setup
+    ),
+    sbatch_opts = list(
+      "cpus-per-task" = 1,
+      "time" = "1-00:00:00",
+      "mem" = "2G"
+    )
+  )
+  n_steps <- n_steps + 1
 }
 
 wf <- add_workflow_step(
@@ -138,6 +200,25 @@ wf <- add_workflow_step(
     "mem" = "16G"
   )
 )
+
+# Throttle the simulation arrays (the step templates set `--array=0-<n>`)
+for (s in names(throttle)) {
+  job <- fs::path("workflows", wf_name, "SWF", "steps", s, "job.sh")
+  lines <- readLines(job)
+  arr <- grepl("^#SBATCH --array=[0-9]+-[0-9]+$", lines)
+  if (sum(arr) != 1) stop("No `--array` line to throttle in ", job)
+  lines[arr] <- paste0(lines[arr], "%", throttle[[s]])
+  writeLines(lines, job)
+}
+
+# Agents (`HPC_WF_PREFIX` set) send no mail
+if (nzchar(Sys.getenv("HPC_WF_PREFIX"))) {
+  for (job in fs::dir_ls(fs::path("workflows", wf_name, "SWF", "steps"),
+                         recurse = TRUE, regexp = "/job\\.sh$")) {
+    lines <- readLines(job)
+    writeLines(lines[!grepl("^#SBATCH --mail-", lines)], job)
+  }
+}
 
 message(
   "\nWorkflow \"", wf_name, "\": ", sum(design_tbl$.n_rep), " simulations (",
