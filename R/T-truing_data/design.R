@@ -70,6 +70,14 @@ truing_current_values <- function(params_df, carry_file) {
   vals[truing_params]
 }
 
+# The carried values with `params` scaled by `factor` (probabilities capped at 1)
+truing_scale_carry <- function(current, params, factor) {
+  current[params] <- current[params] * factor
+  prob <- grepl("prob", names(current))
+  current[prob] <- pmin(current[prob], 1)
+  current
+}
+
 # Designs ----------------------------------------------------------------------
 # A crossed design: every parameter gets `n_points` values over its range (log
 # scale), shuffled independently, so that a 1-D slice is clean and the other
@@ -77,8 +85,11 @@ truing_current_values <- function(params_df, carry_file) {
 # - "grid": evenly spaced values (a centred Latin hypercube)
 # - "lhs":  one random draw inside each of the `n_points` strata
 # Each point is run `n_rep` times.
+# `carry`: the name of the carry variant (see `workflow-wave.R`); its
+# `carry_factor` scaled the previous wave's carried values in `current`.
 make_truing_design <- function(wave, iteration, design, n_points, n_rep,
-                               current, ranges = NULL, seed) {
+                               current, ranges = NULL, seed,
+                               carry = "root", carry_factor = 1) {
   design <- match.arg(design, c("grid", "lhs"))
   w <- truing_waves[[wave]]
   ranges <- ranges %||% w$range
@@ -105,16 +116,24 @@ make_truing_design <- function(wave, iteration, design, n_points, n_rep,
 
   dplyr::bind_cols(pts, fixed) |>
     dplyr::mutate(
-      .scenario.id = sprintf("w%d_i%d_%s_p%04d", wave, iteration, design,
+      .scenario.id = sprintf("w%d_i%d_%s%s_p%04d", wave, iteration,
+                             truing_carry_tag(carry), design,
                              dplyr::row_number()),
       .point = dplyr::row_number(),
       .design = design,
+      .carry = carry,
+      .carry_factor = carry_factor,
       .wave = wave,
       .iteration = iteration,
       .n_rep = n_rep,
       .at = 1,
       .before = 1
     )
+}
+
+# The scenario ids of a carry variant: none for the root, "<carry>_" else
+truing_carry_tag <- function(carry) {
+  ifelse(carry == "root", "", paste0(carry, "_"))
 }
 
 # The scenarios for `EpiModelHPC::step_tmpl_netsim_scenarios()`: only

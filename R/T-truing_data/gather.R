@@ -3,7 +3,8 @@
 ##
 ## Run by the last step of `workflow-wave.R` (`step_tmpl_do_call_script`) with:
 ## - `design`: the design table of the wave iteration (all designs bound)
-## - `step_info`: one row per design, with `design`, `n_cores`, `seed_base`
+## - `step_info`: one row per (carry variant, design), with `carry`, `design`,
+##   `n_cores`, `seed_base` (no `carry`: a single "root" variant)
 ## - `df_dir`, `sim_dir`: the intermediates
 ## - `truing_dir`: the campaign directory
 ## - `year_steps`
@@ -33,10 +34,16 @@ res <- lapply(df_files, function(f) {
 }) |>
   bind_rows()
 
+# Workflows built before the carry variants
+if (!".carry" %in% names(design)) {
+  design <- mutate(design, .carry = "root", .carry_factor = 1)
+}
+if (!"carry" %in% names(step_info)) step_info$carry <- "root"
+
 # The seed each batch ran with (array element `k` of its design)
 seeds <- design |>
-  select(".scenario.id", ".design", ".point", ".n_rep") |>
-  left_join(step_info, by = c(.design = "design")) |>
+  select(".scenario.id", ".carry", ".design", ".point", ".n_rep") |>
+  left_join(step_info, by = c(.carry = "carry", .design = "design")) |>
   mutate(n_batch = ceiling(.data$.n_rep / .data$n_cores))
 
 res <- res |>
@@ -44,14 +51,15 @@ res <- res |>
   mutate(.seed = .data$seed_base + (.data$.point - 1) * .data$n_batch +
            .data$batch_number) |>
   select(-c("n_batch", "n_cores", "seed_base", ".n_rep", "sim_number",
-            "batch_number"))
+            "batch_number", ".carry"))
 
 # swfcalib `full_results` layout: parameters, bookkeeping, outputs
 full <- design |>
   select(-c(".at", ".n_rep")) |>
   inner_join(res, by = c(.scenario.id = ".scenario", ".design", ".point")) |>
   rename(.scenario = ".scenario.id") |>
-  arrange(.data$.design, .data$.point, .data$sim) |>
+  arrange(.data$.carry_factor != 1, .data$.carry_factor, .data$.design,
+          .data$.point, .data$sim) |>
   mutate(
     .campaign = fs::path_file(truing_dir),
     .proposal_index = row_number()
@@ -60,7 +68,8 @@ full <- design |>
     all_of(truing_params),
     ".proposal_index", ".wave", ".iteration", "sim",
     any_of(out_cols),
-    ".campaign", ".design", ".point", ".scenario", ".seed"
+    ".campaign", ".carry", ".carry_factor", ".design", ".point", ".scenario",
+    ".seed"
   )
 
 # Every simulation present?

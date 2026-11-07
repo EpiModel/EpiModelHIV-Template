@@ -17,6 +17,20 @@ over the last year, as `R/Z-calibration/swfcalib_model.R`), then `.campaign`,
   deletes the intermediates in `data/run/calibration/truing_*` once every
   simulation is there.
 
+Carry variants (wave >= 2, first iteration): the previous wave's parameters
+are run at their carried root (full designs) and scaled jointly by x0.1, 0.25,
+0.5, 0.8, 1.25, 2, 4, 10 (smaller designs: grid 64x4 + LHS 256), the earlier
+waves at their roots. Columns `.carry` / `.carry_factor`; scenario ids
+`w<k>_i<j>[_x<f>]_<design>_p<NNNN>`.
+
+Arrays are split into chunks of at most 512 tasks (RSPH `MaxArraySize` = 1001)
+and throttled to 32 cores; a wait step follows each chunk (slurmworkflow chains
+an array through its last task only).
+
+`TRUING_WAVE`, `TRUING_ITER` select the wave; `TRUING_LOCAL_TEST=1` runs a tiny
+version locally (1 year) into `data/run/truing/TEST` instead of building a
+workflow.
+
 Loop:
 
 1. Set `wave`/`iteration` in `workflow-wave.R` and run it locally
