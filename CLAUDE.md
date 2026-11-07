@@ -8,14 +8,29 @@ This is an **EpiModelHIV applied project** (from the EpiModelHIV-Template). It c
 
 ## Environment and Setup
 
-Uses `renv` for R package management. `R/00-setup.R` sets up the project library from `renv.lock`; `renv.lock.hpc` is the smaller lockfile restored on the HPC (R 4.5 via spack, see `R/hpc_configs.R`). The project `.Renviron` sets `EPIMODELHIV_DIR`, `HPC_MAIL_USER`, and `GITHUB_PAT`.
+Two setups share `renv.lock`:
+
+- **pixi + renv** (local, and HPCs with pixi): `pixi install` provides R 4.5.3, Rust and
+  every CRAN package conda-forge carries (`pixi.toml`); renv's project library adds only
+  the GitHub packages (ergmkit, EpiModel, EpiModelHIV, EpiModelHPC, slurmworkflow,
+  swfcalib, ARTnet, ARTnetData) and hetGP. `pixi.toml` sets
+  `RENV_CONFIG_SANDBOX_ENABLED=false` so renv sees the pixi library. **Always run R
+  through pixi from the project root.** `renv::snapshot()` still records every package
+  (CRAN ones included), so the lockfile stays complete.
+- **spack + renv** (default RSPH HPC): renv installs everything from the same lockfile.
+
+`R/00-setup.R` sets up the project library; `renv.lock.hpc` is the smaller lockfile
+written by `make_em_workflow()` (see `R/hpc_configs.R`). The project `.Renviron` sets
+`EPIMODELHIV_DIR`, `HPC_MAIL_USER`, and `GITHUB_PAT` (ergmkit-R and ARTnetData are
+private).
+
+Current GitHub pins (see `R/00-setup.R`): EpiModelHIV-p `AdrienLeGuillou@ergmkit`,
+EpiModelHPC `restart_pool_review` (PR #74), slurmworkflow `feature/step-child-shell`
+(PR #37), `EpiModel/ergmkit-R@main`.
 
 ```bash
-# Restore R packages (from the project root)
-Rscript -e 'renv::restore()'
-
-# Install/update EpiModelHIV-p from GitHub (branch: `EMHIVp_branch` in R/shared_variables.R)
-Rscript -e 'renv::install("EpiModel/EpiModelHIV-p@v3.3.x")'
+pixi install
+pixi run Rscript -e 'renv::restore()'
 ```
 
 ```r

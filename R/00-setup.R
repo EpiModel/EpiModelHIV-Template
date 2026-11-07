@@ -7,6 +7,12 @@
 ## Step 1: Initialize renv ----
 ## This sets up package version management for the project and installs the
 ## required packages using the "renv.lock" file.
+##
+## With pixi, always start R from the project root through pixi (`pixi run R`,
+## `pixi run Rscript ...`), first `pixi install`. renv then installs only the
+## packages pixi does not provide (the GitHub ones and hetGP); renv's
+## "required system packages are not installed" warning is spurious there,
+## pixi ships those libraries.
 renv::init()
 
 ## >>> RESTART R NOW (Ctrl+Shift+F10 in RStudio) before continuing <<<
@@ -14,20 +20,29 @@ renv::init()
 ## Step 2: Install packages ----------------------------------------------------
 source("R/shared_variables.R", local = TRUE)
 
+# Two setups share this script and `renv.lock`:
+# - pixi + renv (local, `pixi run R`): pixi provides R and the CRAN packages,
+#   renv only installs what is below (the pixi library stays visible because
+#   `pixi.toml` disables the renv sandbox).
+# - spack + renv (default HPC): renv installs every package, CRAN ones
+#   included, from the same lockfile.
+
 # Install ergmkit first: EpiModelHIV imports it. It builds its Rust engine at
-# install time, so cargo and rustc (>= 1.85) must be on the PATH.
-renv::install("AdrienLeGuillou/ergmkit-R")
+# install time, so cargo and rustc (>= 1.85) must be on the PATH (pixi ships
+# them).
+renv::install("EpiModel/ergmkit-R")
 
 # Install the correct version of EpiModelHIV-p for your project
-renv::install(paste0("/EpiModelHIV-p@", EMHIVp_branch))
+renv::install(paste0("AdrienLeGuillou/EpiModelHIV-p@", EMHIVp_branch))
 
 renv::install(c(
   "EpiModel/EpiModel",
-  "EpiModel/EpiModelHPC@restart_pool"
-))
-
-renv::install(c(
-  "EpiModel/slurmworkflow@dev"
+  "EpiModel/ARTnetData",
+  "EpiModel/ARTnet",
+  "EpiModel/EpiModelHPC@restart_pool_review", # EpiModelHPC PR #74
+  "EpiModel/slurmworkflow@feature/step-child-shell", # slurmworkflow PR #37
+  "EpiModel/swfcalib",
+  "hetGP" # CRAN, not on conda-forge
 ))
 
 # Lock the installed package versions

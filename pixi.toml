@@ -7,6 +7,13 @@ version = "0.1.0"
 
 [tasks]
 
+# R packages: pixi provides R and every CRAN package conda-forge carries;
+# renv (project library, `renv.lock`) adds the GitHub packages and the few CRAN
+# ones conda-forge lacks (hetGP). renv must see the pixi library, hence no
+# sandbox. On a spack + renv system the same `renv.lock` installs everything.
+[activation.env]
+RENV_CONFIG_SANDBOX_ENABLED = "false"
+
 [dependencies]
 r = ">=4.5,<4.6"
 r-languageserver = ">=0.3.21,<0.4"
@@ -51,3 +58,14 @@ r-stringi = ">=1.8.9,<2"
 r-fs = ">=2.1.0,<3"
 "r-minpack.lm" = ">=1.2_4,<2"
 r-viridis = ">=0.6.5,<0.7"
+r-dicedesign = ">=1.10,<2"
+r-ergm = ">=4.12.0,<5"
+"r-ergm.multi" = ">=0.3.0,<0.4"
+r-lhs = ">=1.3.0,<2"
+r-mco = ">=1.17,<2"
+r-network = ">=1.20.0,<2"
+r-networkdynamic = ">=0.12.0,<0.13"
+r-networklite = ">=1.1.0,<2"
+r-quadprog = ">=1.5_8,<2"
+"r-statnet.common" = ">=4.13.0,<5"
+r-tergm = ">=4.2.2,<5"

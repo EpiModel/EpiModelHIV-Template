@@ -147,6 +147,7 @@
       "Imports": [
         "future (>= 1.40.0)",
         "future.apply",
+        "globals",
         "graphics",
         "grDevices",
         "stats",
@@ -189,11 +190,11 @@
       "Config/roxygen2/version": "8.1.1",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "fda1a55248eebb383995c30cfb614d4c2fcb56a1",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "56640c3951ae20c4f53c89d07a68fab16990737e"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -239,11 +240,11 @@
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::AdrienLeGuillou/ergmkit-R",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "AdrienLeGuillou",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "ergmkit",
-      "RemoteSha": "2439bd03cfc7d10a6e3b555fa5149d61ac2d339a",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "72e734a3fe52969efff32880ac37ccdfdf97877c"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -286,11 +287,11 @@
       "Author": "Samuel Jenness [cre, aut]",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "restart_pool",
-      "RemoteSha": "862271104c3144b7b0d974a2a0a46c3424d2bef6",
-      "RemoteHost": "api.github.com"
+      "RemoteRef": "restart_pool_review",
+      "RemoteSha": "da446b60a554e25aad4a379347c3600ca0b78c1d"
     },
     "MASS": {
       "Package": "MASS",
@@ -1171,15 +1172,16 @@
       "Authors@R": "person(\"Adrien\", \"Le Guillou\", email = \"git@aleguillou.org\", role = c(\"aut\", \"cre\"))",
       "Description": "Simulates separable temporal ERGMs (tergm's time step: discordTNT proposals and tergm's adaptive number of them) and draws dyad-independent ERGMs exactly, with the Rust crate ergmkit. ergm formulas and fits become model specs, the language-agnostic description the engine builds its models from; the simulations take and return edgelists.",
       "License": "GPL-3",
-      "URL": "https://github.com/AdrienLeGuillou/ergmkit-R",
-      "BugReports": "https://github.com/AdrienLeGuillou/ergmkit-R/issues",
+      "URL": "https://github.com/EpiModel/ergmkit-R",
+      "BugReports": "https://github.com/EpiModel/ergmkit-R/issues",
       "Encoding": "UTF-8",
       "Depends": [
         "R (>= 4.2)"
       ],
       "Imports": [
         "jsonlite",
-        "stats"
+        "stats",
+        "utils"
       ],
       "Suggests": [
         "ergm",
@@ -1194,11 +1196,11 @@
       "Author": "Adrien Le Guillou [aut, cre]",
       "Maintainer": "Adrien Le Guillou <git@aleguillou.org>",
       "RemoteType": "github",
-      "RemoteUsername": "AdrienLeGuillou",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "ergmkit-R",
       "RemoteRef": "main",
-      "RemoteSha": "7caff08eac40a8b96c31408b8f58c8a30eeaab24",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "d701b54616c159fa51d7e97ea5ea38ac60d843a4"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -1786,6 +1788,39 @@
       "Maintainer": "Carson Sievert <carson@posit.co>",
       "Repository": "CRAN"
     },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.6.4",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "HTML Widgets for R",
+      "Authors@R": "c( person(\"Ramnath\", \"Vaidyanathan\", role = c(\"aut\", \"cph\")), person(\"Yihui\", \"Xie\", role = \"aut\"), person(\"JJ\", \"Allaire\", role = \"aut\"), person(\"Joe\", \"Cheng\", , \"joe@posit.co\", role = \"aut\"), person(\"Carson\", \"Sievert\", , \"carson@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4958-2844\")), person(\"Kenton\", \"Russell\", role = c(\"aut\", \"cph\")), person(\"Ellis\", \"Hughes\", role = \"ctb\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "A framework for creating HTML widgets that render in various contexts including the R console, 'R Markdown' documents, and 'Shiny' web applications.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://github.com/ramnathv/htmlwidgets",
+      "BugReports": "https://github.com/ramnathv/htmlwidgets/issues",
+      "Imports": [
+        "grDevices",
+        "htmltools (>= 0.5.7)",
+        "jsonlite (>= 0.9.16)",
+        "knitr (>= 1.8)",
+        "rmarkdown",
+        "yaml"
+      ],
+      "Suggests": [
+        "testthat"
+      ],
+      "Enhances": [
+        "shiny (>= 1.1)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.2.3",
+      "NeedsCompilation": "no",
+      "Author": "Ramnath Vaidyanathan [aut, cph], Yihui Xie [aut], JJ Allaire [aut], Joe Cheng [aut], Carson Sievert [aut, cre] (<https://orcid.org/0000-0002-4958-2844>), Kenton Russell [aut, cph], Ellis Hughes [ctb], Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Carson Sievert <carson@posit.co>",
+      "Repository": "CRAN"
+    },
     "httpuv": {
       "Package": "httpuv",
       "Version": "1.6.17",
@@ -2145,7 +2180,7 @@
       "NeedsCompilation": "yes",
       "Author": "Rob Carnell [aut, cre] (ORCID: <https://orcid.org/0009-0009-0465-7564>)",
       "Maintainer": "Rob Carnell <bertcarnell@gmail.com>",
-      "Repository": "https://packagemanager.posit.co/cran/latest"
+      "Repository": "CRAN"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -2757,6 +2792,41 @@
       "NeedsCompilation": "yes",
       "Author": "Gábor Csárdi [aut, cre, cph] (ORCID: <https://orcid.org/0000-0001-7098-9676>), Winston Chang [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>), Ascent Digital Services [cph, fnd]",
       "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
+      "Repository": "CRAN"
+    },
+    "profvis": {
+      "Package": "profvis",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Title": "Interactive Visualizations for Profiling R Code",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Winston\", \"Chang\", role = \"aut\"), person(\"Javier\", \"Luraschi\", role = \"aut\"), person(\"Timothy\", \"Mastny\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(, \"jQuery Foundation\", role = \"cph\", comment = \"jQuery library\"), person(, \"jQuery contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery library; authors listed in inst/htmlwidgets/lib/jquery/AUTHORS.txt\"), person(\"Mike\", \"Bostock\", role = c(\"ctb\", \"cph\"), comment = \"D3 library\"), person(, \"D3 contributors\", role = \"ctb\", comment = \"D3 library\"), person(\"Ivan\", \"Sagalaev\", role = c(\"ctb\", \"cph\"), comment = \"highlight.js library\") )",
+      "Description": "Interactive visualizations for profiling R code.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://profvis.r-lib.org, https://github.com/r-lib/profvis",
+      "BugReports": "https://github.com/r-lib/profvis/issues",
+      "Depends": [
+        "R (>= 4.0)"
+      ],
+      "Imports": [
+        "htmlwidgets (>= 0.3.2)",
+        "rlang (>= 1.1.0)",
+        "vctrs"
+      ],
+      "Suggests": [
+        "htmltools",
+        "knitr",
+        "rmarkdown",
+        "shiny",
+        "testthat (>= 3.0.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate, rmarkdown",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "yes",
+      "Author": "Hadley Wickham [aut, cre], Winston Chang [aut], Javier Luraschi [aut], Timothy Mastny [aut], Posit Software, PBC [cph, fnd], jQuery Foundation [cph] (jQuery library), jQuery contributors [ctb, cph] (jQuery library; authors listed in inst/htmlwidgets/lib/jquery/AUTHORS.txt), Mike Bostock [ctb, cph] (D3 library), D3 contributors [ctb] (D3 library), Ivan Sagalaev [ctb, cph] (highlight.js library)",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
     "progressr": {
@@ -3531,8 +3601,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "dev",
-      "RemoteSha": "6a33b1bd75eca7b0d720cb1ae24a0acfad781e67"
+      "RemoteRef": "feature/step-child-shell",
+      "RemoteSha": "02d10ea7fdb5e2c036fd488100e95c4145341104"
     },
     "sourcetools": {
       "Package": "sourcetools",
