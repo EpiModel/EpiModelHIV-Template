@@ -112,54 +112,68 @@ truing_wait_for_sims <- function(sim_dir, pattern, expected, job_name,
   }
 }
 
+# RSPH caps job arrays at 1001 tasks (`MaxArraySize`): a design runs as chunks
+# of at most `truing_max_array` tasks, one array each. The seed stays keyed on
+# the task's index in the whole design: chunk starting after `offset` tasks
+# exports `TRUING_SEED = seed_base + offset`.
+truing_max_array <- 512
 throttle <- c()
 for (i in seq_len(nrow(designs))) {
   d <- designs[i, ]
-  wf <- add_workflow_step(
-    wf_summary = wf,
-    step_tmpl = step_tmpl_netsim_scenarios(
-      path_to_est, param, init, control,
-      scenarios_list = truing_design_to_scenarios(
-        filter(design_tbl, .design == d$design)
+  n_batch <- ceiling(d$n_rep / d$n_cores)
+  per_chunk <- max(1, truing_max_array %/% n_batch)
+  chunks <- split(seq_len(d$n_points),
+                  ceiling(seq_len(d$n_points) / per_chunk))
+  for (pts in chunks) {
+    wf <- add_workflow_step(
+      wf_summary = wf,
+      step_tmpl = step_tmpl_netsim_scenarios(
+        path_to_est, param, init, control,
+        scenarios_list = truing_design_to_scenarios(
+          filter(design_tbl, .design == d$design, .point %in% pts)
+        ),
+        n_rep = d$n_rep,
+        n_cores = d$n_cores,
+        output_dir = truing_sim_dir,
+        libraries = "EpiModelHIV",
+        setup_lines = c(
+          hpc_node_setup,
+          paste0("export TRUING_SEED=", d$seed_base + (min(pts) - 1) * n_batch)
+        ),
+        max_array_size = Inf
       ),
-      n_rep = d$n_rep,
-      n_cores = d$n_cores,
-      output_dir = truing_sim_dir,
-      libraries = "EpiModelHIV",
-      setup_lines = c(hpc_node_setup,
-                      paste0("export TRUING_SEED=", d$seed_base)),
-      max_array_size = Inf
-    ),
-    sbatch_opts = list(
-      "mail-type" = "FAIL,TIME_LIMIT",
-      "cpus-per-task" = d$n_cores,
-      "time" = "04:00:00",
-      "mem-per-cpu" = "5G"
+      sbatch_opts = list(
+        "mail-type" = "FAIL,TIME_LIMIT",
+        "cpus-per-task" = d$n_cores,
+        "time" = "04:00:00",
+        "mem-per-cpu" = "5G"
+      )
     )
-  )
-  n_steps <- n_steps + 1
-  throttle[as.character(n_steps)] <- truing_max_cores %/% d$n_cores
+    n_steps <- n_steps + 1
+    throttle[as.character(n_steps)] <- truing_max_cores %/% d$n_cores
 
-  wf <- add_workflow_step(
-    wf_summary = wf,
-    step_tmpl = step_tmpl_do_call(
-      what = truing_wait_for_sims,
-      args = list(
-        sim_dir = truing_sim_dir,
-        pattern = sprintf("/sim__w%d_i%d_%s_p[0-9]+__[0-9]+\\.rds$",
-                          wave, iteration, d$design),
-        expected = d$n_points * ceiling(d$n_rep / d$n_cores),
-        job_name = paste0(wf_name, "_step", n_steps)
+    wf <- add_workflow_step(
+      wf_summary = wf,
+      step_tmpl = step_tmpl_do_call(
+        what = truing_wait_for_sims,
+        args = list(
+          sim_dir = truing_sim_dir,
+          pattern = sprintf("/sim__w%d_i%d_%s_p[0-9]+__[0-9]+\\.rds$",
+                            wave, iteration, d$design),
+          # every batch of this design up to the end of the chunk
+          expected = max(pts) * n_batch,
+          job_name = paste0(wf_name, "_step", n_steps)
+        ),
+        setup_lines = hpc_node_setup
       ),
-      setup_lines = hpc_node_setup
-    ),
-    sbatch_opts = list(
-      "cpus-per-task" = 1,
-      "time" = "1-00:00:00",
-      "mem" = "2G"
+      sbatch_opts = list(
+        "cpus-per-task" = 1,
+        "time" = "1-00:00:00",
+        "mem" = "2G"
+      )
     )
-  )
-  n_steps <- n_steps + 1
+    n_steps <- n_steps + 1
+  }
 }
 
 wf <- add_workflow_step(
