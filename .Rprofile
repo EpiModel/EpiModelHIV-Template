@@ -68,3 +68,15 @@ load_local_EpiModelHIV <- function() {
   pkgload::load_all(dev_dir)
 }
 
+
+# 5. Reproducible array tasks (`R/T-truing_data/`): with `TRUING_SEED` set by the
+# step's setup lines, array element `k` (slurmworkflow's corrected index) runs
+# after `set.seed(TRUING_SEED + k)`.
+if (nzchar(Sys.getenv("TRUING_SEED")) &&
+      nzchar(Sys.getenv("SLURM_ARRAY_TASK_ID"))) {
+  set.seed(
+    as.numeric(Sys.getenv("TRUING_SEED")) +
+      as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID")) +
+      as.numeric(Sys.getenv("SWF__ARRAY_OFFSET", "1"))
+  )
+}

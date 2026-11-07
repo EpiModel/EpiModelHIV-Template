@@ -147,6 +147,7 @@
       "Imports": [
         "future (>= 1.40.0)",
         "future.apply",
+        "globals",
         "graphics",
         "grDevices",
         "stats",
@@ -189,11 +190,11 @@
       "Config/roxygen2/version": "8.1.1",
       "Author": "Samuel Jenness [cre, aut], Steven M. Goodreau [aut], Martina Morris [aut], Adrien Le Guillou [aut], Chad Klumb [aut], Skye Bender-deMoll [ctb]",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "fda1a55248eebb383995c30cfb614d4c2fcb56a1",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "56640c3951ae20c4f53c89d07a68fab16990737e"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -239,11 +240,11 @@
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main, github::AdrienLeGuillou/ergmkit-R",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "AdrienLeGuillou",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "ergmkit",
-      "RemoteSha": "2439bd03cfc7d10a6e3b555fa5149d61ac2d339a",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "72e734a3fe52969efff32880ac37ccdfdf97877c"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -286,11 +287,11 @@
       "Author": "Samuel Jenness [cre, aut]",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/slurmworkflow, github::EpiModel/swfcalib",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "restart_pool",
-      "RemoteSha": "862271104c3144b7b0d974a2a0a46c3424d2bef6",
-      "RemoteHost": "api.github.com"
+      "RemoteRef": "restart_pool_review",
+      "RemoteSha": "da446b60a554e25aad4a379347c3600ca0b78c1d"
     },
     "MASS": {
       "Package": "MASS",
@@ -1027,15 +1028,16 @@
       "Authors@R": "person(\"Adrien\", \"Le Guillou\", email = \"git@aleguillou.org\", role = c(\"aut\", \"cre\"))",
       "Description": "Simulates separable temporal ERGMs (tergm's time step: discordTNT proposals and tergm's adaptive number of them) and draws dyad-independent ERGMs exactly, with the Rust crate ergmkit. ergm formulas and fits become model specs, the language-agnostic description the engine builds its models from; the simulations take and return edgelists.",
       "License": "GPL-3",
-      "URL": "https://github.com/AdrienLeGuillou/ergmkit-R",
-      "BugReports": "https://github.com/AdrienLeGuillou/ergmkit-R/issues",
+      "URL": "https://github.com/EpiModel/ergmkit-R",
+      "BugReports": "https://github.com/EpiModel/ergmkit-R/issues",
       "Encoding": "UTF-8",
       "Depends": [
         "R (>= 4.2)"
       ],
       "Imports": [
         "jsonlite",
-        "stats"
+        "stats",
+        "utils"
       ],
       "Suggests": [
         "ergm",
@@ -1050,11 +1052,11 @@
       "Author": "Adrien Le Guillou [aut, cre]",
       "Maintainer": "Adrien Le Guillou <git@aleguillou.org>",
       "RemoteType": "github",
-      "RemoteUsername": "AdrienLeGuillou",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "ergmkit-R",
       "RemoteRef": "main",
-      "RemoteSha": "7caff08eac40a8b96c31408b8f58c8a30eeaab24",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "d701b54616c159fa51d7e97ea5ea38ac60d843a4"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -1787,7 +1789,7 @@
       "NeedsCompilation": "yes",
       "Author": "Rob Carnell [aut, cre] (ORCID: <https://orcid.org/0009-0009-0465-7564>)",
       "Maintainer": "Rob Carnell <bertcarnell@gmail.com>",
-      "Repository": "https://packagemanager.posit.co/cran/latest"
+      "Repository": "CRAN"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -2658,8 +2660,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "dev",
-      "RemoteSha": "6a33b1bd75eca7b0d720cb1ae24a0acfad781e67"
+      "RemoteRef": "feature/step-child-shell",
+      "RemoteSha": "02d10ea7fdb5e2c036fd488100e95c4145341104"
     },
     "statnet.common": {
       "Package": "statnet.common",
