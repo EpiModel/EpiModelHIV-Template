@@ -3,7 +3,7 @@ library(EpiModel)
 
 make_calib_plot <- function(d, plot_info, year_steps = 52) {
   targets <- EpiModelHIV::get_calibration_targets()
-  targets["num"] <- 1e5
+  targets["num.active.sex"] <- 1e5
   colors <-  c("steelblue", "firebrick", "seagreen")
   text_pos <- max(d$time) - 500
   par(mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))
@@ -57,6 +57,12 @@ calib_plot_infos <- list(
     ylab = "Proportion",
     text_offset = 0.01,
     fmt_target = scales::percent_format(0.1)
+  ),
+  ir100.hiv.dx = list(
+    names = paste0("ir100.hiv.dx.", races),
+    ylab = "Incidence per 100 MSM",
+    text_offset = 0.01,
+    fmt_target = scales::number_format(0.001)
   ),
   ir100.sti = list(
     names = c("ir100.gono", "ir100.chla", "ir100.syph"),

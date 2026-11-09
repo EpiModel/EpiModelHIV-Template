@@ -3,10 +3,13 @@
 ## This script should not be run directly. But `sourced` from the
 ## scripts that interact with the HPC (the `workflow-*.R` ones)
 
+# RSPH: R and Rust from spack, every R package from renv ("renv.lock.hpc").
+# The pixi + renv alternative (on a cluster with pixi) is:
+#   "pixi install", 'eval "$(pixi shell-hook)"'
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
-  "spack unload -a",
-  "spack load r@4.5.1"
+  "spack load r@4.6.1",
+  "spack load rust@1.97.1"
 )
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
@@ -55,7 +58,8 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
 
   if (update_renv) {
     renv::snapshot(
-      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
+      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData",
+                   "minpack.lm", "hetGP", "MASS"),
       lockfile = "renv.lock.hpc",
       prompt = FALSE
     )

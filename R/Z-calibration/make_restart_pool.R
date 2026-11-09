@@ -1,31 +1,22 @@
-## Choose Restart Point
-##
-##  Assess the candidates simulations for restart point, pick the best one and
-##  save it in `path_to_restart`.
-##
-## It runs as a step of `workflow-restart_point.R`. To pick a restart point from
-## another set of simulations (for example the best Phase 1 scenario), set
-## `scenario_name` below and run it from the project root in a batch job on the
-## HPC, where the simulation files are.
-
 # Setup ------------------------------------------------------------------------
-scenario_name <- "empty_scenario"
-hpc_context <- TRUE
-# scenario_name <- "scenario_2"
-# hpc_context <- FALSE
+# variables required:
+#   - scenario_name
+#   - pool_dir
+#   - sims_dir
+#   - max_n
 
 library(EpiModelHIV)
 library(dplyr)
 source("R/shared_variables.R", local = TRUE)
-source("R/C-calibration/z-context.R", local = TRUE)
-source("R/C-calibration/utils-restart.R", local = TRUE)
+hpc_context <- TRUE
+source("R/Z-calibration/z-context.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 targets <- EpiModelHIV::get_calibration_targets()
 
 path_df <- fs::path(
-  calib_dir,
+  sims_dir,
   "merged_tibbles",
   paste0("df__", scenario_name, ".rds")
 )
@@ -49,13 +40,13 @@ for (nme in names(targets)) {
   d_dist$cost <- d_dist$cost + d_dist[[nme]]^2
 }
 
-# Ensure every STI ir100 is at least 25% of the targets.
+# Ensure every STI ir100 is at least 50% of the targets.
 # (d_dist contains distances from targets)
 for (sti in names(has_sti)) {
   if (has_sti[sti]) {
     sti_tar <- paste0("ir100.", sti)
     d_dist$cost <- ifelse(
-      d_dist[[sti_tar]] < -0.75 * targets[[sti_tar]],
+      d_dist[[sti_tar]] < -0.5 * targets[[sti_tar]],
       Inf,
       d_dist$cost
     )
@@ -67,23 +58,34 @@ if (all(d_dist$cost == Inf))
 
 # pick best sim
 best_sim <- d_dist |>
-  arrange(cost) |>
-  head(1)
+  filter(!is.infinite(cost)) |>
+  slice_head(n = max_n)
 
-glimpse(best_sim)
+attrs_names <- names(EpiModelHIV::get_default_attrs())
+time_prefixes <- c(".last$", ".time$")
 
-sim_path <- fs::path(
-  calib_dir,
-  paste0("sim__", scenario_name, "__", best_sim$batch_number, ".rds")
+time_attrs <- Reduce(
+  function(a, prefix) c(a, grepv(prefix, attrs_names)),
+  time_prefixes,
+  init = character(0)
 )
 
-if (!fs::file_exists(sim_path))
-  stop("`sim` file: '", sim_path, "' not present.")
-
-restart_point <- make_restart_point_hiv(
-  sim = readRDS(sim_path),
-  sim_num = best_sim$sim_number,
-  sim_cost = best_sim$cost
+EpiModelHPC::make_restart_pool(
+  pool_dir = pool_dir,
+  scenario_name = scenario_name,
+  scenarios_dir = sims_dir,
+  keep_sims = best_sim,
+  time_attrs = time_attrs
 )
 
-saveRDS(restart_point, path_to_restart)
+syph_res <- best_sim |>
+  select(batch_number, sim_number, ir100.syph) |>
+  mutate(ir100.syph = ir100.syph + targets["ir100.syph"])
+pool_index <- read.csv(fs::path(pool_dir, "pool_index.csv")) |>
+  left_join(syph_res, by = c("batch_number", "sim_number"))
+
+write.csv(
+  pool_index,
+  fs::path(pool_dir, "pool_index.csv"),
+  row.names = FALSE
+)

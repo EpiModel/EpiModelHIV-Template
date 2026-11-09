@@ -7,6 +7,8 @@
 ##   temporal stability
 ## - Static: samples from the ERGM once to check target statistic reproduction
 
+message("\n", "Running main network diagnostics\n\n")
+
 # Diagnostic formula — uses `levels = TRUE` to show all levels (more detail than
 # the estimation formula) and adds `degree(0:3)` to inspect the degree
 # distribution directly
