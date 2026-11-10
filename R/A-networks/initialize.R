@@ -44,7 +44,9 @@ if (system.file(package = "ARTnetData") == "") {
   # geography your project actually models.
   #
   # This is not only a calibration input. It sets num.B / num.H / num.W and
-  # therefore the in-model denominator of every race-specific target.
+  # therefore the in-model denominator of every race-specific target. The size
+  # of the same population is `msm_pop` in `R/shared_variables.R`; change the
+  # two together.
   #
   # Reproduce the numbers with, in the EpiModelHIV-p repo:
   #   python3 inst/AHEAD/scripts/02-census-race-distribution.py

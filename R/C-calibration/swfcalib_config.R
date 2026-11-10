@@ -206,13 +206,16 @@ calib_object <- list(
       )
     ),
     wave7 = list(
+      # The population stays at the size the networks were estimated at,
+      # `msm_pop` in `R/shared_variables.R`. The threshold is 0.01 percent of
+      # it, which was 10 nodes when the size was 100,000.
       job0 = list(
         targets = "num",
-        targets_val = 100e3,
+        targets_val = msm_pop,
         params = c("a.rate"),
         initial_proposals = tibble(a.rate = priors$a.rate),
         make_next_proposals = make_shrink_proposer(n_sims, shrink = 2),
-        get_result = determ_poly_end(10, poly_n = 3)
+        get_result = determ_poly_end(msm_pop * 1e-4, poly_n = 3)
       )
     )
   )

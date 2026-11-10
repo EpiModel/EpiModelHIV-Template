@@ -41,6 +41,7 @@ load_local_EpiModelHIV()
 ### Shared configuration
 Every top-level script starts by sourcing `R/shared_variables.R` which defines:
 - `EMHIVp_branch`: EpiModelHIV-p branch (the local clone path is `EPIMODELHIV_DIR` in `.Renviron`)
+- `msm_pop`: size of the modeled population (75,237, MSM in the four EHE counties of metropolitan Atlanta); the HPC network size and the `num` calibration target
 - `time_unit`, `year_steps`: Time step duration (7 days) and steps per year (52)
 - Key time points: `prep_start`, `calibration_end`, `restart_time`, `intervention_start`, `intervention_end`
 - All data paths: `input_dir`, `run_dir`, `output_dir`, and subdirectories
@@ -53,7 +54,7 @@ Modify shared values only in `shared_variables.R` — never redefine them in ind
 Estimate 3 TERGM network models (main, casual, one-off) from ARTnet data. Outputs saved to `data/run/estimates/`.
 - `initialize.R` → `model_main.R` → `model_casl.R` → `model_ooff.R` (sourced by `1-estimation.R`)
 - `diag_main.R`, `diag_casl.R`, `diag_ooff.R` (sourced by `2-diagnostics.R`)
-- Local: 10k nodes; HPC: 100k nodes
+- Local: 10k nodes; HPC: `msm_pop` nodes (75,237)
 
 ### B-model_dev — Model Development
 Run `netsim` simulations and debug EpiModelHIV modules interactively.

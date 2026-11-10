@@ -89,7 +89,7 @@ within a wave run in parallel.
 | 4 | `ir100.{gono,chla,syph}` | `{gono,chla,syph}.*prob` | STI incidence rates |
 | 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint). **Under revision for v4.0**: moving to `ir100.dx.{B,H,W}`, a diagnosis rate rather than a prevalence stock. See `RECALIBRATION.md`. |
 | 6 | `disease.mr100` | `aids.off.tx.mort.rate` | Disease mortality |
-| 7 | `num` | `a.rate` | Population size (~100k) |
+| 7 | `num` | `a.rate` | Population size (`msm_pop` in `R/shared_variables.R`) |
 
 The wave ordering encodes causal dependencies: the care cascade (PrEP →
 testing → suppression) must be correct before tuning transmission outcomes.

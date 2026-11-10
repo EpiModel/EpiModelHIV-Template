@@ -99,8 +99,8 @@ For most projects, the default network models and ARTnet configuration in
 If your project requires different network parameterizations (e.g., different
 city, different age groups, different partnership structure), modify:
 
-- `initialize.R` — geographic settings, initial HIV prevalence
-- `model_*.R` — ERGM formula terms and target statistics
-- `diag_*.R` — diagnostic formulas (should mirror estimation formulas, but can
-  include extra terms for inspection)
-- `z-context.R` — network sizes (keep local ≤ 10k to avoid very long estimation times)
+- `initialize.R`: geographic settings, race composition, initial HIV prevalence
+- `msm_pop` in `R/shared_variables.R`: size of the modeled population, which is the HPC network size
+- `model_*.R`: ERGM formula terms and target statistics
+- `diag_*.R`: diagnostic formulas (should mirror estimation formulas, but can include extra terms for inspection)
+- `z-context.R`: local network size (keep it ≤ 10k to avoid very long estimation times)
