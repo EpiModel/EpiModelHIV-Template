@@ -1,4 +1,4 @@
-# See "data/run/calibration/calib_assess.csv" for quick comparison of
+# See "data/run/<city>/calibration/calib_assess.csv" for quick comparison of
 # calibration scenarios
 
 # Plot calibration targets for a given scenario --------------------------------

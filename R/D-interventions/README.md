@@ -17,11 +17,11 @@ results** for publication.
 
 ## Prerequisites
 
-- **Chapter A** completed — network estimates in `data/run/estimates/`
+- **Chapter A** completed — network estimates in `data/run/<city>/estimates/`
 - **Chapter B** completed — model development finalized (no more changes to
   pre-intervention simulation logic)
 - **Chapter C** completed — calibrated restart point in
-  `data/run/estimates/restart-{context}.rds`
+  `data/run/<city>/estimates/restart-{context}.rds`
 
 The restart point is a saved simulation state from the end of the calibration
 period. Intervention runs start from this point instead of re-simulating the
@@ -98,7 +98,7 @@ Use the existing code as a scaffold and adapt it to your analysis.
 
 | Mistake | Fix |
 |---|---|
-| Old simulations mixed with new results | Delete `data/run/scenarios/` contents before re-running |
+| Old simulations mixed with new results | Delete `data/run/<city>/scenarios/` contents before re-running |
 | Baseline scenario name doesn't match `outcomes.R` | Update the `make_d_ref()` call in processing scripts |
 | Restart point missing | Complete Chapter C first |
 | Using `ncores > 1` with `load_all()` in debug script | Always `ncores = 1` during development |

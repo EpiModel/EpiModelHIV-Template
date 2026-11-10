@@ -27,8 +27,8 @@ see the [wiki](https://github.com/EpiModel/EpiModeling/wiki#tergm).
 
 | Script | What it does |
 |---|---|
-| **`1-estimation.R`** | Fit the 3 network models. Saves estimates to `data/run/estimates/`. |
-| **`2-diagnostics.R`** | Simulate from the fitted models and compute diagnostic statistics. Saves to `data/run/diagnostics/`. |
+| **`1-estimation.R`** | Fit the 3 network models. Saves estimates to `data/run/<city>/estimates/`. |
+| **`2-diagnostics.R`** | Simulate from the fitted models and compute diagnostic statistics. Saves to `data/run/<city>/diagnostics/`. |
 | **`3-assess.R`** | Load and inspect the diagnostics interactively (print tables, plot). |
 | **`workflow-networks.R`** | Generate the HPC workflow to run estimation + diagnostics at full scale. |
 
@@ -39,7 +39,7 @@ Utility scripts (sourced, never run directly):
 | `initialize.R` | Load ARTnet data, build network objects with node attributes |
 | `model_main.R`, `model_casl.R`, `model_ooff.R` | Define ERGM formulas, target statistics, and fit each model |
 | `diag_main.R`, `diag_casl.R`, `diag_ooff.R` | Run dynamic and static diagnostics for each model |
-| `z-context.R` | Set network size and estimation parameters for local vs. HPC |
+| `z-context.R` | Set network size and estimation parameters for local vs. HPC, and announce the city |
 
 ## Workflow
 
@@ -83,10 +83,10 @@ diagnostics:
 Once you are satisfied with the local diagnostics:
 
 1. Push your code to GitHub.
-2. Run **`workflow-networks.R`** locally — this generates SLURM job files in
-   `workflows/networks/`.
+2. Run **`workflow-networks.R`** locally. This generates SLURM job files in
+   `workflows/networks-<city>/` (for Atlanta, `workflows/networks-atl/`).
 3. Submit the workflow on the HPC (see [wiki](https://github.com/EpiModel/EpiModeling/wiki#slurmworkflow)).
-4. Once complete, download `data/run/estimates/` and `data/run/diagnostics/`
+4. Once complete, download `data/run/<city>/estimates/` and `data/run/<city>/diagnostics/`
    from the HPC.
 5. Re-run `3-assess.R` with `hpc_context <- TRUE` to inspect the full-scale
    diagnostics.
@@ -96,11 +96,14 @@ Once you are satisfied with the local diagnostics:
 For most projects, the default network models and ARTnet configuration in
 `initialize.R` will work without changes.
 
-If your project requires different network parameterizations (e.g., different
-city, different age groups, different partnership structure), modify:
+The city is not set in this chapter. Its geography, population size, race composition and initial HIV prevalence come from the city registry in EpiModelHIV, through `city` and `city_spec` in `R/shared_variables.R`. To model another city, change `city` there (see the main README); to model one the registry does not have, add it to the registry.
 
-- `initialize.R`: geographic settings, race composition, initial HIV prevalence
-- `msm_pop` in `R/shared_variables.R`: size of the modeled population, which is the HPC network size
+Seattle is in the registry, but its networks cannot be built with this template yet. With ARTnet 2.9.3 the mean duration of main partnerships in its oldest age group is longer than the model's departure rate allows, so `build_netstats()` stops. ARTnet 2.10.0 can cap the durations (`duration.cap`).
+
+If your project requires different network parameterizations (e.g., different
+age groups, different partnership structure), modify:
+
+- `initialize.R`: the ARTnet calls
 - `model_*.R`: ERGM formula terms and target statistics
 - `diag_*.R`: diagnostic formulas (should mirror estimation formulas, but can include extra terms for inspection)
 - `z-context.R`: local network size (keep it ≤ 10k to avoid very long estimation times)

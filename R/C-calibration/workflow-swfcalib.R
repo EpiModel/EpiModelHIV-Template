@@ -22,12 +22,12 @@ max_cores <- batch_size
 ## Uncomment the calibration config to use
 source("R/C-calibration/swfcalib_config.R", local = TRUE)
 
-wf <- make_em_workflow("swfcalib", override = TRUE)
+wf <- make_em_workflow(wf_name("swfcalib"), override = TRUE)
 
 # Register this campaign in the deploy-doctor watch list. Pairs with the teardown
 # step at the end; together they stop the shared deploy doctor (launched from the
 # deploy script) once this is the last campaign still running. Requires EpiModelHPC.
-wf <- add_doctor_register_step(wf, "swfcalib")
+wf <- add_doctor_register_step(wf, wf_name("swfcalib"))
 
 # Calibration step 1
 wf <- add_workflow_step(
@@ -169,4 +169,4 @@ wf <- add_workflow_step(
 
 # Final step: deregister from the deploy-doctor watch list and stop the shared
 # doctor once this is the last campaign still running (EpiModelHPC).
-wf <- add_doctor_teardown_step(wf, "swfcalib")
+wf <- add_doctor_teardown_step(wf, wf_name("swfcalib"))

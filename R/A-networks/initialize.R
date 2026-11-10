@@ -22,10 +22,24 @@ if (system.file(package = "ARTnetData") == "") {
   epistats <- readRDS(system.file("epistats-example.rds", package = "ARTnet"))
   netstats <- readRDS(system.file("netstats-example.rds", package = "ARTnet"))
 } else {
+  # The geography, the initial HIV prevalence and the race composition come
+  # from the city registry (`city_spec`, set in `R/shared_variables.R`). A value
+  # the registry marks provisional is announced here, not used silently.
+  if (length(city_spec$provisional) > 0) {
+    message(
+      "=================================================================\n",
+      city_spec$label, ": the registry marks as provisional: ",
+      paste(city_spec$provisional, collapse = ", "), ".\n",
+      "The networks can be estimated and the model developed with it, but\n",
+      "the value itself should not be reported (see `?get_city_spec`).\n",
+      "================================================================="
+    )
+  }
+
   epistats <- build_epistats(
-    geog.lvl = "city",
-    geog.cat = "Atlanta",
-    init.hiv.prev = c(0.33, 0.137, 0.084), # by race: Black, Hispanic, White
+    geog.lvl = city_spec$geog.lvl,
+    geog.cat = city_spec$geog.cat,
+    init.hiv.prev = city_spec$init.hiv.prev, # by race: Black, Hispanic, White
     race = TRUE,
     time.unit = time_unit
   )
@@ -36,21 +50,14 @@ if (system.file(package = "ARTnetData") == "") {
   )
 
   # Race composition of the modeled population, ordered Black, Hispanic,
-  # White/Other. Leaving this NULL falls back to `ARTnetData::race.dist`, whose
-  # `city` rows are MUNICIPALITY figures rather than metro ones: its "Atlanta"
-  # row is 0.515 / 0.046 / 0.439, which is the city proper, while men aged 15-64
-  # across the four-county EHE metro are 0.366 / 0.166 / 0.468. A Hispanic share
-  # of 4.6 percent is not attainable for the metro. Set this explicitly for the
-  # geography your project actually models.
+  # White/Other, for the counties that define the city. Leaving this NULL falls
+  # back to `ARTnetData::race.dist`, whose `city` rows are MUNICIPALITY figures:
+  # its "Atlanta" row is 0.515 / 0.046 / 0.439, the city proper, while men aged
+  # 15-64 across the four EHE counties are 0.366 / 0.166 / 0.468.
   #
   # This is not only a calibration input. It sets num.B / num.H / num.W and
-  # therefore the in-model denominator of every race-specific target. The size
-  # of the same population is `msm_pop` in `R/shared_variables.R`; change the
-  # two together.
-  #
-  # Reproduce the numbers with, in the EpiModelHIV-p repo:
-  #   python3 inst/AHEAD/scripts/02-census-race-distribution.py
-  race_prop <- c(0.3662, 0.1661, 0.4678) # <- USER: Black, Hispanic, White/Other
+  # therefore the in-model denominator of every race-specific target.
+  race_prop <- city_spec$race.prop
 
   netstats <- build_netstats(
     epistats,

@@ -25,10 +25,7 @@ if (dir.exists("renv/")) {
 # 2. directory structure
 .folder.struct <- c(
   "data/input",
-  "data/run/calibration",
-  "data/run/diagnostics",
-  "data/run/estimates",
-  "data/run/scenarios",
+  "data/run",
   "data/output",
   "workflows"
 )

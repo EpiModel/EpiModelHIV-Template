@@ -25,7 +25,7 @@ source("R/C-calibration/utils-calib_plots.R", local = TRUE)
 d_outs <- readRDS(params$path_df) |>
   EpiModelHIV::mutate_calibration_targets()
 
-targets <- EpiModelHIV::get_calibration_targets()
+targets <- EpiModelHIV::get_calibration_targets(city = city)
 races_names <- c("B", "H", "W")
 races <- 1:3
 
@@ -281,7 +281,7 @@ row_names <- c(
 
 fmtr <- scales::label_number(1)
 tar_names <- c("num")
-tar <- msm_pop |> fmtr()
+tar <- city_spec$msm.pop |> fmtr()
 p_names <- c("a.rate")
 prms <- unlist(param[p_names]) |> scales::label_scientific()()
 

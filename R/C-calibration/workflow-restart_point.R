@@ -36,7 +36,7 @@ control <- control_msm(
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("restart_point", override = TRUE)
+wf <- make_em_workflow(wf_name("restart_point"), override = TRUE)
 
 # Run the pool of candidate simulations. With no scenarios, the output files
 # are named for the empty scenario, which is what `3-choose_restart.R` reads.

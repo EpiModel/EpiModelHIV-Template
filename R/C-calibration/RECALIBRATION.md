@@ -12,7 +12,7 @@ Procedural companion to `README.md`, which describes the three-phase pipeline. T
 
 **Check the extinction cliff for the STI parameters.** Below some transmission probability a fraction of replicates go extinct, and the mean incidence curve becomes meaningless. Report the root's headroom over the cliff, and filter to replicates with an extinction fraction under 0.5 before fitting.
 
-**Archive, do not reuse, prior swfcalib state.** `swfcalib::calibration_step1()` starts with `load_calib_object()`, which reads `data/run/swfcalib/calib_object.rds` if it exists and discards the object `swfcalib_config.R` just built. A stale state whose late waves are marked `done = TRUE` makes `is_calibration_complete()` return `TRUE`: the workflow skips ahead, `update_param.R` writes the previous campaign's values back out, and the run mails END looking like a successful recalibration. Move it to a timestamped path rather than deleting it, so the prior assessments survive.
+**Archive, do not reuse, prior swfcalib state.** `swfcalib::calibration_step1()` starts with `load_calib_object()`, which reads `data/run/<city>/swfcalib/calib_object.rds` if it exists and discards the object `swfcalib_config.R` just built. A stale state whose late waves are marked `done = TRUE` makes `is_calibration_complete()` return `TRUE`: the workflow skips ahead, `update_param.R` writes the previous campaign's values back out, and the run mails END looking like a successful recalibration. Move it to a timestamped path rather than deleting it, so the prior assessments survive.
 
 ## Things that fail silently
 

@@ -32,12 +32,12 @@ control <- control_msm(
 )
 
 # Workflow creation ------------------------------------------------------------
-wf <- make_em_workflow("restart_calib", override = TRUE)
+wf <- make_em_workflow(wf_name("restart_calib"), override = TRUE)
 
 # Register this campaign in the deploy-doctor watch list. Pairs with the teardown
 # step at the end; together they stop the shared deploy doctor (launched from the
 # deploy script) once this is the last campaign still running. Requires EpiModelHPC.
-wf <- add_doctor_register_step(wf, "restart_calib")
+wf <- add_doctor_register_step(wf, wf_name("restart_calib"))
 
 # Using scenarios --------------------------------------------------------------
 
@@ -124,4 +124,4 @@ wf <- add_workflow_step(
 
 # Final step: deregister from the deploy-doctor watch list and stop the shared
 # doctor once this is the last campaign still running (EpiModelHPC).
-wf <- add_doctor_teardown_step(wf, "restart_calib")
+wf <- add_doctor_teardown_step(wf, wf_name("restart_calib"))

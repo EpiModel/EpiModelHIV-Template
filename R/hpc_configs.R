@@ -9,6 +9,12 @@ hpc_node_setup <- c(
   "spack load r@4.5.1"
 )
 
+# The city a workflow is created for (`city` in `R/shared_variables.R`). HPC
+# jobs have neither this session's `city` variable nor its environment, so every
+# step exports the city before R starts and `R/shared_variables.R` reads it
+# there. Without this every job would run the default city.
+hpc_node_setup <- c(hpc_node_setup, paste0("export EPIMODELHIV_CITY=", city))
+
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
 # used on the HPC. This simplifies the setup by only installing
 # what's required to run the model itself and not the packages used

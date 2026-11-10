@@ -48,7 +48,7 @@ No new simulations are needed: the restart point is picked from the results of t
 1. Evaluates each simulation against targets (sum of squared errors),
    disqualifying any sim where an STI incidence drops below 25% of its target.
 2. A suitable simulation's end-state is saved as the restart point to
-   `path_to_restart` (i.e. `data/run/estimates/restart-{context}.rds`).
+   `path_to_restart` (i.e. `data/run/<city>/estimates/restart-{context}.rds`).
 
 A restart point is needed for **both** contexts (local and HPC) so that
 Chapters B and D scripts can start from it.
@@ -89,7 +89,7 @@ within a wave run in parallel.
 | 4 | `ir100.{gono,chla,syph}` | `{gono,chla,syph}.*prob` | STI incidence rates |
 | 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint). **Under revision for v4.0**: moving to `ir100.dx.{B,H,W}`, a diagnosis rate rather than a prevalence stock. See `RECALIBRATION.md`. |
 | 6 | `disease.mr100` | `aids.off.tx.mort.rate` | Disease mortality |
-| 7 | `num` | `a.rate` | Population size (`msm_pop` in `R/shared_variables.R`) |
+| 7 | `num` | `a.rate` | Population size (the city's MSM population, `city_spec$msm.pop`) |
 
 The wave ordering encodes causal dependencies: the care cascade (PrEP →
 testing → suppression) must be correct before tuning transmission outcomes.
@@ -108,7 +108,7 @@ for details on the package.
 
 After swfcalib converges and its values are in `data/input/model_parameters.csv`, run `workflow-restart_point.R`. It runs a pool of 500 replications of the calibrated model from scratch to `calibration_end`, merges them, picks the simulation closest to the targets with `3-choose_restart.R`, saves it to `path_to_restart`, and writes `calib_assess.csv` for the pool. This is the restart point Chapter D uses for intervention runs; copy it to your computer as well. Expect a few hours on the HPC.
 
-Before each run, clear the previous pool from `data/run/calibration/` on the HPC (`sim__empty_scenario__*.rds` and `merged_tibbles/df__empty_scenario.rds`), or the old files are merged with the new ones, and keep a copy of the restart point it will overwrite.
+Before each run, clear the previous pool from `data/run/<city>/calibration/` on the HPC (`sim__empty_scenario__*.rds` and `merged_tibbles/df__empty_scenario.rds`), or the old files are merged with the new ones, and keep a copy of the restart point it will overwrite.
 
 Run it again whenever attributes or parameters change. A restart point carries the attributes of the model that produced it, so nodes restarted from an old one lack any attribute added since, and their values reflect the old parameters.
 
@@ -116,7 +116,7 @@ Run it again whenever attributes or parameters change. A restart point carries t
 
 This chapter produces two artifacts consumed by the rest of the project:
 
-- **`data/run/estimates/restart-{context}.rds`** — The restart point checkpoint.
+- **`data/run/<city>/estimates/restart-{context}.rds`** — The restart point checkpoint.
   Used by Chapter D (`D-interventions`) as the starting state for intervention
   runs, and by `B-model_dev/2-debug_modules.R` for post-calibration module
   development. Both local and HPC versions are needed.

@@ -3,11 +3,17 @@
 ## This script should not be run directly. But `sourced` from other scripts
 ## within the `R/A-networks/` directory.
 
+if (!exists("city_spec")) {
+  stop("No `city_spec`: source `R/shared_variables.R` before this script.")
+}
+message("City: ", city_spec$label, " (", city, ")")
+
 if (exists("hpc_context") && hpc_context) {
   context <- "hpc"
-  # The modeled population itself, not a round number: see `msm_pop` in
-  # `R/shared_variables.R`
-  networks_size   <- msm_pop
+  # The city's own MSM population, not a round number, so that the model's
+  # `num` is the denominator of the diagnosis rate targets. Local runs use
+  # 10,000 nodes for any city.
+  networks_size   <- city_spec$msm.pop
   est_cores <- 10
 
   control_ergm <- ergm::control.ergm(

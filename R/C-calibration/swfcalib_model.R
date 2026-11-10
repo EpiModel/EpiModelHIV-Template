@@ -35,7 +35,7 @@ make_model_fn <- function(calib_steps) {
 
     # Simulation and processing ------------------------------------------------
     sim <- netsim(orig, param_sc, init, control)
-    targets <- EpiModelHIV::get_calibration_targets()
+    targets <- EpiModelHIV::get_calibration_targets(city = city)
 
     as_tibble(sim) |>
       mutate_calibration_targets() |>

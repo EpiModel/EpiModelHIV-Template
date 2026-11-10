@@ -41,20 +41,21 @@ load_local_EpiModelHIV()
 ### Shared configuration
 Every top-level script starts by sourcing `R/shared_variables.R` which defines:
 - `EMHIVp_branch`: EpiModelHIV-p branch (the local clone path is `EPIMODELHIV_DIR` in `.Renviron`)
-- `msm_pop`: size of the modeled population (75,237, MSM in the four EHE counties of metropolitan Atlanta); the HPC network size and the `num` calibration target
+- `city`, `city_spec`: the modeled city (default `default_city`, `"atl"`) and its specification from the city registry in EpiModelHIV (`EpiModelHIV::get_city_spec()`): ARTnet geography, counties, MSM population (`city_spec$msm.pop`, the HPC network size and the `num` calibration target), race composition, initial HIV prevalence. Set `city` before sourcing a top-level script, or export `EPIMODELHIV_CITY`, to run another city. No city-specific number is written in this project
 - `time_unit`, `year_steps`: Time step duration (7 days) and steps per year (52)
 - Key time points: `prep_start`, `calibration_end`, `restart_time`, `intervention_start`, `intervention_end`
-- All data paths: `input_dir`, `run_dir`, `output_dir`, and subdirectories
+- All data paths: `input_dir`, `run_dir`, `output_dir`, and subdirectories. Everything under `data/run/` and `data/output/` is kept per city (`data/run/<city>/...`)
+- `wf_name()`: HPC workflow names per city (`wf_name("networks")` is `"networks-atl"`)
 
 Modify shared values only in `shared_variables.R` — never redefine them in individual scripts.
 
 ## Project Chapters (R/ subdirectories)
 
 ### A-networks — Network Estimation
-Estimate 3 TERGM network models (main, casual, one-off) from ARTnet data. Outputs saved to `data/run/estimates/`.
+Estimate 3 TERGM network models (main, casual, one-off) from ARTnet data. Outputs saved to `data/run/<city>/estimates/`.
 - `initialize.R` → `model_main.R` → `model_casl.R` → `model_ooff.R` (sourced by `1-estimation.R`)
 - `diag_main.R`, `diag_casl.R`, `diag_ooff.R` (sourced by `2-diagnostics.R`)
-- Local: 10k nodes; HPC: `msm_pop` nodes (75,237)
+- Local: 10k nodes; HPC: the city's MSM population (`city_spec$msm.pop`; 75,237 for Atlanta)
 
 ### B-model_dev — Model Development
 Run `netsim` simulations and debug EpiModelHIV modules interactively.
@@ -79,10 +80,10 @@ Run calibrated model with intervention scenarios and process results.
 ## Data Directories
 
 - `data/input/`: `model_parameters.csv` (project overrides of the EpiModelHIV parameter defaults, merged by `read_model_params()` in `R/netsim_settings.R`; a row for a parameter the package does not have is an error), scenarios (git-tracked)
-- `data/run/` — Estimates, diagnostics, calibration, scenario outputs (NOT git-tracked)
-- `data/output/` — Final tables/plots for publication (NOT git-tracked)
+- `data/run/<city>/`: Estimates, diagnostics, calibration, scenario outputs (NOT git-tracked)
+- `data/output/<city>/`: Final tables/plots for publication (NOT git-tracked)
 
-The `.Rprofile` auto-creates the directory structure on session start.
+The `.Rprofile` creates the top-level folders on session start; `R/shared_variables.R` creates the city's folders.
 
 ## Common Workflow: Developing a New Module
 
@@ -95,7 +96,7 @@ The `.Rprofile` auto-creates the directory structure on session start.
 ## HPC Workflow
 
 1. Push changes to GitHub (both this repo and EpiModelHIV-p)
-2. Run the appropriate `workflow-*.R` script to generate SLURM jobs in `workflows/`
+2. Run the appropriate `workflow-*.R` script to generate SLURM jobs in `workflows/<name>-<city>/`. The workflow carries its city to the HPC jobs (`EPIMODELHIV_CITY` in `hpc_node_setup`)
 3. Delete old workflow dirs locally AND on HPC before recreating with the same name
 4. `hpc_configs.R` defines `make_em_workflow()` which handles renv snapshot and SLURM setup. It reads the local git branch, and the HPC clone must be on the same branch
 5. `renv.lock.hpc` is a minimal lockfile for HPC (only simulation packages, no analysis packages)

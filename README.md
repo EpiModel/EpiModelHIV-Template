@@ -60,7 +60,9 @@ The project `.Renviron` is git-ignored, so the token stays out of git.
 
 ### 3. Personalize
 
-Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name, and the population size if you model an area other than Atlanta). **The project will not work until this is done.**
+Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name, and the city your project models). **The project will not work until this is done.**
+
+The city is a key of the city registry in EpiModelHIV (`EpiModelHIV::list_cities()` shows them; the default is `"atl"`, Atlanta). The registry supplies everything specific to the city: its counties, the size of its MSM population, its race composition, its ARTnet geography and its calibration targets. To run another city without editing the file, assign `city` before sourcing a script (`city <- "sf"`) or set the `EPIMODELHIV_CITY` environment variable.
 
 `R/hpc_configs.R` needs no edits. When you create an HPC workflow, it reads the current git branch of this project, and the HPC clone of the project must be on that same branch.
 
@@ -83,10 +85,10 @@ The project is organized into four sequential chapters under `R/`:
 
 | Chapter | What it does | Output |
 |---|---|---|
-| [**A — Networks**](R/A-networks/README.md) | Estimate partnership network models from ARTnet data | `data/run/estimates/` |
+| [**A — Networks**](R/A-networks/README.md) | Estimate partnership network models from ARTnet data | `data/run/<city>/estimates/` |
 | [**B — Model Dev**](R/B-model_dev/README.md) | Run simulations, develop and debug custom modules | — |
-| [**C — Calibration**](R/C-calibration/README.md) | Fit parameters to epidemiological targets | `data/run/calibration/` |
-| [**D — Interventions**](R/D-interventions/README.md) | Run intervention scenarios, produce tables and plots | `data/run/scenarios/` & `data/output/` |
+| [**C — Calibration**](R/C-calibration/README.md) | Fit parameters to epidemiological targets | `data/run/<city>/calibration/` |
+| [**D — Interventions**](R/D-interventions/README.md) | Run intervention scenarios, produce tables and plots | `data/run/<city>/scenarios/` & `data/output/<city>/` |
 
 In practice the workflow is iterative — you will cycle between B, C, and D as
 the project evolves.
@@ -101,13 +103,13 @@ the project evolves.
 - **Other scripts**: utilities sourced by numbered scripts. Never run directly.
 
 **Shared variables** — `R/shared_variables.R` is sourced by every top-level
-script and is the single source of truth for paths, time steps, and milestones.
+script and is the single source of truth for the city, paths, time steps, and milestones.
 Never redefine its variables in other scripts.
 
 **Model parameters**: the default values come from `model_parameters.csv` in the EpiModelHIV package (`inst/model_parameters.csv` in EpiModelHIV-p). `data/input/model_parameters.csv` holds only this project's overrides and starts with just its header. To change a value, copy the parameter's row from the package file into the project file and edit `value`. Empty cells keep the package value, so a row with only `param` and `value` filled in also works. `read_model_params()` in `R/netsim_settings.R` combines the two files. It stops with an error if the project file names a parameter the package does not have, so an override left behind after a parameter is renamed or removed fails loudly. New parameters go in the package file on your EpiModelHIV-p branch. Scripts that call `library(EpiModelHIV)` read the installed package's file; `load_local_EpiModelHIV()` reads the one in your local clone.
 
 **Data directories:**
 
-- `data/input/` — parameters, scenario definitions (**git-tracked**)
-- `data/run/` — estimates, calibration, raw simulations (not tracked)
-- `data/output/` — publication tables and plots (not tracked)
+- `data/input/`: parameters, scenario definitions (**git-tracked**), shared by every city of the project
+- `data/run/<city>/`: estimates, calibration, raw simulations (not tracked)
+- `data/output/<city>/`: publication tables and plots (not tracked)

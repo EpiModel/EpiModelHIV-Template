@@ -2,6 +2,10 @@
 ##
 ## Define a workflow to run the estimation and diagnostics of the network models
 ## on the HPC
+##
+## One workflow per city: with `city` set to "atl" this creates
+## `workflows/networks-atl`, whose jobs estimate Atlanta's networks. To run
+## several cities, source this script once for each, with `city` assigned first.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -14,7 +18,7 @@ source("R/A-networks/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
 
 # Process ----------------------------------------------------------------------
-wf <- make_em_workflow("networks", override = TRUE)
+wf <- make_em_workflow(wf_name("networks"), override = TRUE)
 
 wf <- add_workflow_step(
   wf_summary = wf,

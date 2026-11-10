@@ -3,7 +3,7 @@ library(EpiModel)
 
 make_calib_plot <- function(d, plot_info, year_steps = 52) {
   targets <- project_calibration_targets()
-  targets["num"] <- msm_pop # `R/shared_variables.R`
+  targets["num"] <- city_spec$msm.pop
   colors <-  c("steelblue", "firebrick", "seagreen")
   text_pos <- max(d$time) - 500
   par(mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))

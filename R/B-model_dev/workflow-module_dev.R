@@ -29,7 +29,7 @@ control <- control_msm(
 )
 
 # Workflow creation
-wf <- make_em_workflow("module_dev", override = TRUE)
+wf <- make_em_workflow(wf_name("module_dev"), override = TRUE)
 
 # Define test scenarios
 scenarios_df <- tibble(

@@ -12,6 +12,9 @@ renv::init()
 ## >>> RESTART R NOW (Ctrl+Shift+F10 in RStudio) before continuing <<<
 
 ## Step 2: Install packages ----------------------------------------------------
+## If this prints that the installed EpiModelHIV has no city registry, the
+## package installed from "renv.lock" predates it; the next line installs your
+## branch, which must be at version 4.5.0 or later.
 source("R/shared_variables.R", local = TRUE)
 
 # Install the correct version of EpiModelHIV-p for your project

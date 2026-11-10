@@ -17,7 +17,7 @@ see the [EpiModel documentation](https://epimodel.github.io/EpiModel/).
 ## Prerequisites
 
 You must have completed **Chapter A** (network estimation) so that
-`data/run/estimates/` contains the fitted network models.
+`data/run/<city>/estimates/` contains the fitted network models.
 
 ## Scripts
 
@@ -82,6 +82,6 @@ In particular, adapt the scenario definitions in `3-scenarios_run.R` and `workfl
 | Mistake | Fix |
 |---|---|
 | Using `ncores > 1` with `load_local_EpiModelHIV()` | Always `ncores = 1` during development |
-| Old simulations mixed with new results | Delete `data/run/scenarios/` contents before a new run |
+| Old simulations mixed with new results | Delete `data/run/<city>/scenarios/` contents before a new run |
 | Forgetting to reload after editing a module | Re-run `load_local_EpiModelHIV()` |
 | Running scripts without restarting R | Always `Ctrl+Shift+F10` before a numbered script |
