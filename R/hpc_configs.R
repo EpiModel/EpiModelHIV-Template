@@ -6,7 +6,15 @@
 hpc_node_setup <- c(
   ". /projects/epimodel/spack/share/spack/setup-env.sh",
   "spack unload -a",
-  "spack load r@4.5.1"
+  "spack load r@4.5.1",
+  # Raise the floor of R's heap so that R collects garbage less often. At 100k
+  # nodes this takes 17 to 20% off each time step on the cluster, with
+  # identical output (EpiModel/EpiModelHIV-p#429). R reads these variables only
+  # when it starts, so they are exported here, before `Rscript`, and not set
+  # from R. Each R process may then hold up to 1 GB more memory: a task of 8
+  # simulations grows from about 9 to 13 GB, inside the 40 GB it requests at
+  # 5 GB per CPU.
+  "export R_VSIZE=1G R_NSIZE=5M"
 )
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be

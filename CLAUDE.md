@@ -98,3 +98,4 @@ The `.Rprofile` auto-creates the directory structure on session start.
 3. Delete old workflow dirs locally AND on HPC before recreating with the same name
 4. `hpc_configs.R` defines `make_em_workflow()` which handles renv snapshot and SLURM setup. It reads the local git branch, and the HPC clone must be on the same branch
 5. `renv.lock.hpc` is a minimal lockfile for HPC (only simulation packages, no analysis packages)
+6. `hpc_node_setup` in `hpc_configs.R` holds the shell lines every step runs before R: the spack R module and the R heap floor (`export R_VSIZE=1G R_NSIZE=5M`). The floor must stay in these lines because R reads it only at startup and the netsim workers are forked from that one process
