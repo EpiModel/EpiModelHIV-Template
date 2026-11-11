@@ -223,3 +223,16 @@ calib_object <- list(
 
 # Uncomment to run a single wave for testing
 # calib_object$waves <- calib_object$waves[-c(1, 2, 3)]
+
+# A job whose target is missing from the project's targets gets NA, and
+# swfcalib would run it to the end and report convergence. Stop here.
+for (wave in calib_object$waves) {
+  for (job in wave) {
+    if (anyNA(job$targets_val)) {
+      stop(
+        "No calibration target (`R/calibration_targets.R`) for: ",
+        paste(job$targets[is.na(job$targets_val)], collapse = ", ")
+      )
+    }
+  }
+}

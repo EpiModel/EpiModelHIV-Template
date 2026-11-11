@@ -22,10 +22,12 @@ if (system.file(package = "ARTnetData") == "") {
   epistats <- readRDS(system.file("epistats-example.rds", package = "ARTnet"))
   netstats <- readRDS(system.file("netstats-example.rds", package = "ARTnet"))
 } else {
+  # The geography, initial HIV prevalence and race composition are the city's,
+  # from `data/input/city.csv` (`city_spec` in `R/shared_variables.R`).
   epistats <- build_epistats(
-    geog.lvl = "city",
-    geog.cat = "Atlanta",
-    init.hiv.prev = c(0.33, 0.137, 0.084), # by race: Black, Hispanic, White
+    geog.lvl = city_spec$geog.lvl,
+    geog.cat = city_spec$geog.cat,
+    init.hiv.prev = city_spec$init.hiv.prev, # by race: Black, Hispanic, White
     race = TRUE,
     time.unit = time_unit
   )
@@ -35,22 +37,10 @@ if (system.file(package = "ARTnetData") == "") {
     smooth.main.dur = TRUE
   )
 
-  # Race composition of the modeled population, ordered Black, Hispanic,
-  # White/Other. Leaving this NULL falls back to `ARTnetData::race.dist`, whose
-  # `city` rows are MUNICIPALITY figures rather than metro ones: its "Atlanta"
-  # row is 0.515 / 0.046 / 0.439, which is the city proper, while men aged 15-64
-  # across the four-county EHE metro are 0.366 / 0.166 / 0.468. A Hispanic share
-  # of 4.6 percent is not attainable for the metro. Set this explicitly for the
-  # geography your project actually models.
-  #
-  # This is not only a calibration input. It sets num.B / num.H / num.W and
-  # therefore the in-model denominator of every race-specific target. The size
-  # of the same population is `msm_pop` in `R/shared_variables.R`; change the
-  # two together.
-  #
-  # Reproduce the numbers with, in the EpiModelHIV-p repo:
-  #   python3 inst/AHEAD/scripts/02-census-race-distribution.py
-  race_prop <- c(0.3662, 0.1661, 0.4678) # <- USER: Black, Hispanic, White/Other
+  # Race composition, ordered Black, Hispanic, White/Other. It sets num.B, num.H
+  # and num.W, the denominators of every race-specific target. Left NULL, ARTnet
+  # uses `ARTnetData::race.dist`, whose city rows are municipality figures.
+  race_prop <- city_spec$race.prop
 
   netstats <- build_netstats(
     epistats,

@@ -41,7 +41,8 @@ load_local_EpiModelHIV()
 ### Shared configuration
 Every top-level script starts by sourcing `R/shared_variables.R` which defines:
 - `EMHIVp_branch`: EpiModelHIV-p branch (the local clone path is `EPIMODELHIV_DIR` in `.Renviron`)
-- `msm_pop`: size of the modeled population (75,237, MSM in the four EHE counties of metropolitan Atlanta); the HPC network size and the `num` calibration target
+- `city_spec`: the modeled city, read from `data/input/city.csv` (label, MSM population, race composition, ARTnet geography, initial HIV prevalence). The template ships Atlanta's; the format is in the README under "Modeling another city"
+- `msm_pop`: `city_spec$msm.pop` (75,237 for Atlanta); the HPC network size and the `num` calibration target
 - `time_unit`, `year_steps`: Time step duration (7 days) and steps per year (52)
 - Key time points: `prep_start`, `calibration_end`, `restart_time`, `intervention_start`, `intervention_end`
 - All data paths: `input_dir`, `run_dir`, `output_dir`, and subdirectories
@@ -78,7 +79,7 @@ Run calibrated model with intervention scenarios and process results.
 
 ## Data Directories
 
-- `data/input/`: `model_parameters.csv` (project overrides of the EpiModelHIV parameter defaults, merged by `read_model_params()` in `R/netsim_settings.R`; a row for a parameter the package does not have is an error), scenarios (git-tracked)
+- `data/input/`: `model_parameters.csv` (project overrides of the EpiModelHIV parameter defaults, merged by `read_model_params()` in `R/netsim_settings.R`; a row for a parameter the package does not have is an error), scenarios, and the modeled city's `city.csv`; a project modeling another city adds its calibration targets as `targets.csv`, which `project_calibration_targets()` in `R/calibration_targets.R` reads in place of the engine defaults (git-tracked)
 - `data/run/` — Estimates, diagnostics, calibration, scenario outputs (NOT git-tracked)
 - `data/output/` — Final tables/plots for publication (NOT git-tracked)
 
