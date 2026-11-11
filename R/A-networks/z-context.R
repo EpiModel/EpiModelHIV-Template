@@ -5,7 +5,9 @@
 
 if (exists("hpc_context") && hpc_context) {
   context <- "hpc"
-  networks_size   <- 100 * 1e3
+  # The modeled population itself, not a round number: see `msm_pop` in
+  # `R/shared_variables.R`
+  networks_size   <- msm_pop
   est_cores <- 10
 
   control_ergm <- ergm::control.ergm(

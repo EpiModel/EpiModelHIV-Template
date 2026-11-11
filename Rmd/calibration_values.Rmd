@@ -281,7 +281,7 @@ row_names <- c(
 
 fmtr <- scales::label_number(1)
 tar_names <- c("num")
-tar <- 1e5 |> fmtr()
+tar <- msm_pop |> fmtr()
 p_names <- c("a.rate")
 prms <- unlist(param[p_names]) |> scales::label_scientific()()
 

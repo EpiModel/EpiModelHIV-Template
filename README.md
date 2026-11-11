@@ -60,7 +60,7 @@ The project `.Renviron` is git-ignored, so the token stays out of git.
 
 ### 3. Personalize
 
-Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name). **The project will not work until this is done.**
+Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name, and the population size if you model an area other than Atlanta). **The project will not work until this is done.**
 
 `R/hpc_configs.R` needs no edits. When you create an HPC workflow, it reads the current git branch of this project, and the HPC clone of the project must be on that same branch.
 
