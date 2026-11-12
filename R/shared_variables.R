@@ -43,6 +43,7 @@ city_spec <- list(
   geog.cat = city_values[["geog.cat"]],
   init.hiv.prev = as.numeric(city_values[paste0("init.hiv.prev_", 1:3)])
 )
+message("Modeled city: ", city_spec$label)
 
 # Size of the modeled population. On the HPC the networks are estimated at this
 # size, so the model's `num` is the denominator of the rate targets. It is also
