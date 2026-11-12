@@ -58,6 +58,15 @@ GITHUB_PAT="<your GitHub token>"
 
 The project `.Renviron` is git-ignored, so the token stays out of git.
 
+Optional, for large local runs (25k nodes and up): at its default heap size R collects garbage often, which costs about 15% of each time step. The HPC workflows raise the heap floor in `hpc_node_setup` (`R/hpc_configs.R`). To do the same locally, add these two lines to the project `.Renviron` and restart R:
+
+```
+R_VSIZE=1G
+R_NSIZE=5M
+```
+
+The simulation output does not change. Each R process, including every `ncores` worker, may then hold about 1 GB more memory, so leave the lines out on a machine that cannot spare that for each core in use.
+
 ### 3. Personalize
 
 Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name, and the population size if you model an area other than Atlanta). **The project will not work until this is done.**
