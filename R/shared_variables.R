@@ -5,20 +5,6 @@
 # EpiModelHIV-p local directory
 EMHIVp_branch <- "v4.0.x"    # <- USER: your EpiModelHIV-p branch name
 
-# Size of the modeled population: MSM in the four EHE-priority counties of
-# metropolitan Atlanta (Fulton 30,169, DeKalb 20,302, Cobb 11,388, Gwinnett
-# 13,378), from Grey et al. 2016 (JMIR Public Health Surveill 2(1):e14),
-# past-five-year definition, men 18 and over. The HIV diagnosis rate targets in
-# `EpiModelHIV::get_calibration_targets()` are per 100 person-years over this
-# population, and `race_prop` in `R/A-networks/initialize.R` is the race
-# composition of the same four counties.
-#
-# On the HPC the networks are estimated at this size, so the model's `num` is
-# the denominator of the rate targets and model counts read as counts in that
-# population. It is also the `num` calibration target. Local runs use 10,000
-# nodes whatever this value is (`R/A-networks/z-context.R`).
-msm_pop <- 75237             # <- USER: MSM population of the area you model
-
 # Relevant time steps for the simulation
 time_unit  <- 7               # number of days in a time step
 year_steps <- 364 / time_unit # number of time steps in a year
@@ -39,3 +25,27 @@ calib_dir      <- paste0(run_dir, "calibration/")
 calib_plot_dir <- paste0(run_dir, "calibration_plots/")
 scenarios_dir  <- paste0(run_dir, "scenarios/")
 swfcalib_dir   <- paste0(run_dir, "swfcalib/")
+
+# The modeled city -------------------------------------------------------------
+#
+# What the city is comes from `data/input/city.csv`: its MSM population, race
+# composition, ARTnet geography and initial HIV prevalence. The template ships
+# Atlanta's. To model another city, replace it and add the city's calibration
+# targets as `data/input/targets.csv`: see "Modeling another city" in the
+# README for the two formats.
+city_table <- read.csv(paste0(input_dir, "city.csv"), colClasses = "character")
+city_values <- setNames(city_table$value, city_table$param)
+city_spec <- list(
+  label = city_values[["label"]],
+  msm.pop = as.numeric(city_values[["msm.pop"]]),
+  race.prop = as.numeric(city_values[paste0("race.prop_", 1:3)]),
+  geog.lvl = city_values[["geog.lvl"]],
+  geog.cat = city_values[["geog.cat"]],
+  init.hiv.prev = as.numeric(city_values[paste0("init.hiv.prev_", 1:3)])
+)
+message("Modeled city: ", city_spec$label)
+
+# Size of the modeled population. On the HPC the networks are estimated at this
+# size, so the model's `num` is the denominator of the rate targets. It is also
+# the `num` calibration target. Local runs use 10,000 nodes.
+msm_pop <- city_spec$msm.pop

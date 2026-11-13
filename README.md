@@ -69,7 +69,7 @@ The simulation output does not change. Each R process, including every `ncores` 
 
 ### 3. Personalize
 
-Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name, and the population size if you model an area other than Atlanta). **The project will not work until this is done.**
+Open **`R/shared_variables.R`** and edit every variable marked with `# <- USER` (your EpiModelHIV-p branch name). The template models Atlanta; to model another city, see [Modeling another city](#modeling-another-city). **The project will not work until this is done.**
 
 `R/hpc_configs.R` needs no edits. When you create an HPC workflow, it reads the current git branch of this project, and the HPC clone of the project must be on that same branch.
 
@@ -100,6 +100,25 @@ The project is organized into four sequential chapters under `R/`:
 In practice the workflow is iterative — you will cycle between B, C, and D as
 the project evolves.
 
+## Modeling another city
+
+Everything specific to the modeled city comes from two files in `data/input/`. The template models Atlanta: it ships Atlanta's `city.csv`, and takes Atlanta's calibration targets from the engine defaults (`EpiModelHIV::get_calibration_targets()`). To model another city, replace `city.csv`, add the city's `targets.csv`, re-estimate the networks, and recalibrate. No script needs editing.
+
+`city.csv`, read in `R/shared_variables.R` into `city_spec`. One row per input, with columns `param`, `value`, `provisional` (`TRUE` for a placeholder) and `source`:
+
+| `param` | used for |
+|---|---|
+| `label` | the city's name |
+| `counties` | FIPS codes of the counties that define the modeled area, separated by `;` |
+| `msm.pop` | number of MSM in those counties: the HPC network size and the `num` calibration target |
+| `race.prop_1`, `_2`, `_3` | race composition (Black, Hispanic, White/Other), passed to `ARTnet::build_netstats()` |
+| `geog.lvl`, `geog.cat` | the geography passed to `ARTnet::build_epistats()` |
+| `init.hiv.prev_1`, `_2`, `_3` | initial HIV prevalence by race, passed to `ARTnet::build_epistats()` |
+
+`targets.csv`, read in `R/calibration_targets.R` when it exists, in place of the engine defaults. One row per calibration target, with columns `target` (the name of a series `mutate_calibration_targets()` computes), `value`, `lower` and `upper` (a plausible interval, or empty), `year`, `fitted` and `source`. The calibration configuration stops if a job has no value for its target, so a city needs a row for every target that `R/C-calibration/swfcalib_config.R` fits.
+
+Any files in this format work. The ones for the cities our team models, with the scripts that derive them, are in `cities/` of [EpiModelHIV-Appendix](https://github.com/EpiModel/EpiModelHIV-Appendix): copy `cities/<key>/city.csv` and `cities/<key>/targets.csv` into `data/input/`.
+
 ## Conventions
 
 **Script types** — Each chapter contains:
@@ -117,6 +136,6 @@ Never redefine its variables in other scripts.
 
 **Data directories:**
 
-- `data/input/` — parameters, scenario definitions (**git-tracked**)
+- `data/input/` — parameters, scenario definitions, and the modeled city's `city.csv` (**git-tracked**)
 - `data/run/` — estimates, calibration, raw simulations (not tracked)
 - `data/output/` — publication tables and plots (not tracked)

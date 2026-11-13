@@ -6,9 +6,9 @@ In this chapter we calibrate the model. This is a technical step and most users
 will not perform the calibration themselves. The rest of this document is aimed
 at the person in charge of calibration.
 
-The calibration aims to make the model fit a set of *targets* (defined in the
-`EpiModelHIV` package via `get_calibration_targets()`) by modifying input
-parameters. The core loop is always the same:
+The calibration aims to make the model fit a set of *targets* (returned by
+`project_calibration_targets()`: the engine defaults for Atlanta, or the
+project's `data/input/targets.csv`) by modifying input parameters. The core loop is always the same:
 
 1. Run the model with a set of parameters
 2. Assess how close the model is to the targets
@@ -89,7 +89,7 @@ within a wave run in parallel.
 | 4 | `ir100.{gono,chla,syph}` | `{gono,chla,syph}.*prob` | STI incidence rates |
 | 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint). **Under revision for v4.0**: moving to `ir100.dx.{B,H,W}`, a diagnosis rate rather than a prevalence stock. See `RECALIBRATION.md`. |
 | 6 | `disease.mr100` | `aids.off.tx.mort.rate` | Disease mortality |
-| 7 | `num` | `a.rate` | Population size (`msm_pop` in `R/shared_variables.R`) |
+| 7 | `num` | `a.rate` | Population size (`msm.pop` in `data/input/city.csv`) |
 
 The wave ordering encodes causal dependencies: the care cascade (PrEP →
 testing → suppression) must be correct before tuning transmission outcomes.

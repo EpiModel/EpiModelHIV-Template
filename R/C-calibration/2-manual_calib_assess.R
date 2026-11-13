@@ -3,6 +3,7 @@
 
 # Plot calibration targets for a given scenario --------------------------------
 source("R/shared_variables.R", local = TRUE)
+source("R/calibration_targets.R", local = TRUE)
 source("R/C-calibration/utils-calib_plots.R", local = TRUE)
 
 d_calib <- readRDS(fs::path(calib_dir, "merged_tibbles/df__empty_scenario.rds")) |>

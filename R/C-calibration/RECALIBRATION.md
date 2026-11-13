@@ -2,11 +2,11 @@
 
 Procedural companion to `README.md`, which describes the three-phase pipeline. This file is about what goes wrong and how to avoid it. Each item below cost a real campaign.
 
-**Where the target numbers come from is documented elsewhere**, in the engine repo: `EpiModelHIV-p/inst/AHEAD/DERIVATION.md` for each target's inputs and formula, and `EpiModelHIV-p/plan/calibration-targets-2026.md` for the decisions behind them. The split is deliberate. Evidence lives with the engine, because the targets ship in `EpiModelHIV::get_calibration_targets()`. Procedure lives here, because this is where the scripts that run it are.
+**Where the target numbers come from is documented elsewhere.** The template's targets are the engine defaults, which are Atlanta's: `EpiModelHIV-p/inst/AHEAD/DERIVATION.md` has each target's inputs and formula, and `EpiModelHIV-p/plan/calibration-targets-2026.md` the decisions behind them. A project with its own `data/input/targets.csv` carries a source on each row; for the cities our team models, the file and the script that derives it are in `cities/` of EpiModelHIV-Appendix. Procedure lives here, because this is where the scripts that run it are.
 
 ## Before you launch anything
 
-**Override targets in one place.** `R/calibration_targets.R` defines `project_calibration_targets()`, and every consumer reads through it: `swfcalib_config.R`, `3-choose_restart.R`, `process_calibs.R`, `utils-calib_plots.R`. Do not edit the engine and do not override at a call site. A campaign has previously been run with settled targets that lived only in a GitHub issue while every script still read the engine defaults.
+**Override targets in one place.** `R/calibration_targets.R` defines `project_calibration_targets()`, and every consumer reads through it: `swfcalib_config.R`, `3-choose_restart.R`, `process_calibs.R`, `utils-calib_plots.R`. Do not override at a call site. A campaign has previously been run with settled targets that lived only in a GitHub issue while every script still read the engine defaults.
 
 **Bracket-check every target whose parameter you are about to sweep.** swfcalib does not detect an unreachable target. If the root lies outside the prior, the job pins at a boundary, burns its full 100-iteration budget, and reports the boundary as converged. The failure is invisible in the min/max error in `assessments.rds`, because replicate noise confounds it. Run a short sweep of the parameter across its prior, fit the mean response curve, invert it for the root, and confirm the root sits inside the prior with headroom. Any change to a target moves its root; a natural-history change once moved the chlamydia root from 0.204 to 0.142 against a prior floor of 0.19, which would have deadlocked wave 4 for its whole budget.
 
@@ -28,7 +28,7 @@ Procedural companion to `README.md`, which describes the three-phase pipeline. T
 
 **Fit is not the same as rest.** Report, per target, the slope over the final decade of the burn-in alongside the final-year mean. A target met in passing on a monotone trajectory is not the same as one at equilibrium, and the fitted parameter absorbs whatever truncation the horizon imposes. Diagnosed HIV prevalence has historically been the only target in this model that fails this check, drifting 1.4 to 3.3 percent of target per decade at year 70 against acceptance bands of order 12 percent. See EpiModelHIV-p#374.
 
-**Use plausible intervals, not just the point target.** `project_calibration_intervals` in `R/calibration_targets.R` is where they go. The optimizer does not read them; they are how you decide whether a calibrated model is acceptable rather than merely closest, and they are what sets prior width for a bracket check.
+**Use plausible intervals, not just the point target.** `project_calibration_intervals` in `R/calibration_targets.R` is where they go; with a `data/input/targets.csv` they are read from its `lower` and `upper` columns. The optimizer does not read them; they are how you decide whether a calibrated model is acceptable rather than merely closest, and they are what sets prior width for a bracket check.
 
 ## The wave structure
 
