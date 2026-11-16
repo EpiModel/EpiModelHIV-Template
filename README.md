@@ -115,7 +115,9 @@ Everything specific to the modeled city comes from two files in `data/input/`. T
 | `geog.lvl`, `geog.cat` | the geography passed to `ARTnet::build_epistats()` |
 | `init.hiv.prev_1`, `_2`, `_3` | initial HIV prevalence by race, passed to `ARTnet::build_epistats()` |
 
-`targets.csv`, read in `R/calibration_targets.R` when it exists, in place of the engine defaults. One row per calibration target, with columns `target` (the name of a series `mutate_calibration_targets()` computes), `value`, `lower` and `upper` (a plausible interval, or empty), `year`, `fitted` and `source`. The calibration configuration stops if a job has no value for its target, so a city needs a row for every target that `R/C-calibration/swfcalib_config.R` fits.
+`targets.csv`, read in `R/calibration_targets.R` when it exists, in place of the engine defaults. One row per calibration target, with columns `target` (the name of a series `mutate_calibration_targets()` computes), `value`, `lower` and `upper` (a plausible interval, or empty), `year`, `fitted` and `source`. Only the rows with `fitted` set to `TRUE` are targets; the others stay in the file for the record. The calibration configuration stops if a job has no value for its target, so a city needs a fitted row for every target that `R/C-calibration/swfcalib_config.R` fits.
+
+A project that fits reported STI case rates can also add `sti-ranges.csv`, whose `guard` rows (columns `target`, `kind`, `lower`, `upper`) give the range of true incidence a calibrated model should not leave. `R/C-calibration/process_calibs.R` reports each STI's true incidence against it; without the file there is no guard.
 
 Any files in this format work. The ones for the cities our team models, with the scripts that derive them, are in `cities/` of [EpiModelHIV-Appendix](https://github.com/EpiModel/EpiModelHIV-Appendix): copy `cities/<key>/city.csv` and `cities/<key>/targets.csv` into `data/input/`.
 
