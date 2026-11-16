@@ -38,6 +38,8 @@ wf <- add_workflow_step(
       scenario_name = "empty_scenario",
       sims_dir = calib_dir,
       pool_dir = path_to_restart_pool,
+      # At least the size of the pool run (`n_rep` in
+      # `workflow-restart_point.R`, 64 or 500), so no qualifying run is left out
       max_n = 500,
       # Adrien's rule: keep every simulation whose STI rates are at least half
       # their targets

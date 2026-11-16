@@ -7,7 +7,8 @@
 ## Run it after the parameters change: once calibration has converged and its
 ## values are in "data/input/model_parameters.csv", and again whenever
 ## attributes or parameters change, since a restart point carries the state of
-## the model that produced it.
+## the model that produced it. Its simulations are also what
+## `workflow-restart_pool.R` makes the swfcalib restart pool from.
 ##
 ## Before deploying, clear the previous pool from `calib_dir` on the HPC
 ## (`sim__empty_scenario__*.rds` and `merged_tibbles/df__empty_scenario.rds`).
@@ -26,6 +27,13 @@ source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
 max_cores <- 8
+
+# Size of the pool run. 64 for a first pool, before swfcalib: the restart pool
+# made from it (`workflow-restart_pool.R`) only needs every STI epidemic alive,
+# not a run close to the targets. 500 for the restart point after calibration,
+# which picks the one simulation closest to the targets. Either size is within
+# the restart pool's `max_n` (500), so a pool keeps every qualifying run.
+n_rep <- 64
 
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
@@ -47,7 +55,7 @@ wf <- add_workflow_step(
     path_to_est, param, init, control,
     scenarios_list = NULL,
     output_dir = calib_dir,
-    n_rep = 500,
+    n_rep = n_rep,
     n_cores = max_cores,
     max_array_size = 1000,
     setup_lines = hpc_node_setup

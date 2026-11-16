@@ -68,7 +68,7 @@ Fit model parameters to epidemiological targets. Two approaches:
 - **Manual**: Run scenarios, download `calib_assess.csv`, adjust parameters, repeat
 - **Automated**: `swfcalib` package for systematic calibration, each job solved with the Gaussian process stopping rules in `het_gp_process.R`; the waves and priors are in `swfcalib_config.R`
 - `3-choose_restart.R`: Picks a simulation and saves it as the restart point (checkpoint) for later calibration and intervention runs
-- `workflow-restart_point.R`: HPC workflow that runs 500 replications with the current parameters and saves the best as the restart point; rerun it after calibration and whenever attributes or parameters change
+- `workflow-restart_point.R`: HPC workflow that runs `n_rep` replications with the current parameters (64 for a first pool before swfcalib, 500 for the restart point after calibration) and saves the best as the restart point; rerun it after calibration and whenever attributes or parameters change
 - `workflow-restart_pool.R`: HPC workflow that turns the simulations of a restart-point run into the restart pool the swfcalib runs start from (`path_to_restart_pool`)
 - `process_calibs.R`: after a run, writes `calib_assess.csv`, `calib_tolerance.csv` (the stop rule, `target_tolerance()` in `R/calibration_targets.R`) and `calib_sti_checks.csv`
 
