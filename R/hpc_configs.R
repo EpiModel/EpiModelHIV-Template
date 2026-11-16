@@ -69,9 +69,14 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
     "The HPC clone must be on the git branch:\n    \"", current_git_branch, "\""
   )
 
+  # hetGP and minpack.lm are listed because no package here depends on them:
+  # the Gaussian process stopping rules of the swfcalib calibration call them
+  # on the HPC, and a snapshot of the other three alone would drop them from
+  # the lockfile.
   if (update_renv) {
     renv::snapshot(
-      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
+      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData",
+                   "hetGP", "minpack.lm"),
       lockfile = "renv.lock.hpc",
       prompt = FALSE
     )
