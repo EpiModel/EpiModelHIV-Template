@@ -7,8 +7,9 @@
 ## the network estimate (`.pool` NA) or a restart from its pool element, 70
 ## years; the outputs are the last-year means (as `swfcalib_model.R`). Runs
 ## with `.keep` also save their restart point in `<batch_dir>/states/`.
-## Writes `<batch_dir>/out_<task>.rds` (`.run` + outputs); a failed run is
-## left out (the controller reruns it once).
+## Writes `<batch_dir>/out_<task>.rds` (`.run` + outputs); a run the model
+## fails on is a row with its `.error` message (failures are data: the engine
+## does not rerun it).
 
 if (!exists("batch_dir")) {
   args <- commandArgs(trailingOnly = TRUE)
@@ -82,14 +83,30 @@ run_one <- function(i) {
   data.frame(.run = r$.run, out, check.names = FALSE)
 }
 
-res <- if (length(rows) == 0) list() else parallel::mclapply(rows, function(i) {
-  tryCatch(run_one(i), error = function(e) {
-    message("run ", prop$.run[i], " failed: ", conditionMessage(e))
-    NULL
-  })
-}, mc.cores = max(1, min(length(rows), truing_runs_per_task)), mc.preschedule = FALSE)
+## a failed run: its error message, prefixed by netsim's "An error occurred in
+## module ..." line when there is one
+run_safe <- function(i) {
+  where <- ""
+  tryCatch(
+    withCallingHandlers(run_one(i), message = function(m) {
+      if (grepl("error occurred in module", conditionMessage(m))) {
+        where <<- trimws(conditionMessage(m))
+      }
+    }),
+    error = function(e) {
+      msg <- paste0(if (nzchar(where)) paste0(where, ": ") else "", conditionMessage(e))
+      message("run ", prop$.run[i], " failed: ", msg)
+      data.frame(.run = prop$.run[i], .error = msg)
+    })
+}
+
+res <- if (length(rows) == 0) list() else parallel::mclapply(
+  rows, run_safe,
+  mc.cores = max(1, min(length(rows), truing_runs_per_task)), mc.preschedule = FALSE
+)
 res <- dplyr::bind_rows(res[vapply(res, is.data.frame, TRUE)])
 if (NROW(res) > 0) {
   saveRDS(res, fs::path(batch_dir, sprintf("out_%04d.rds", task)))
 }
-message(NROW(res), " / ", length(rows), " runs done")
+n_err <- if (is.null(res$.error)) 0 else sum(!is.na(res$.error))
+message(NROW(res) - n_err, " / ", length(rows), " runs done, ", n_err, " failed")

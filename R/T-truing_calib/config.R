@@ -16,14 +16,17 @@ guess <- params_df |>
 
 # Allowed ranges (hard), wide: probabilities and per-week rates 0-1, scales
 # 0-100; `a.rate` 0-0.002 (x5 its default: a higher arrival rate grows the
-# population, and the runtime, without bound). No search range: pass 1 covers
-# the whole allowed range, log-spaced from the end nearer the guess.
+# population, and the runtime, without bound). No search range for the others:
+# pass 1 covers the whole allowed range, log-spaced from the end nearer the guess.
+# `a.rate` alone has a search range: below ~1e-5 the population collapses and
+# the model fails (wave 4 of the first launch, 2026-11-16).
 allowed_of <- function(p) {
   if (p == "a.rate") c(0, 0.002) else if (grepl("scale", p)) c(0, 100) else c(0, 1)
 }
+search_of <- function(p) if (p == "a.rate") c(0.0002, 0.0006) else NULL
 par_of <- function(p) {
   if (!p %in% names(guess)) stop("No default value for `", p, "`")
-  truing_par(p, guess[[p]], allowed_of(p))
+  truing_par(p, guess[[p]], allowed_of(p), search = search_of(p))
 }
 
 # Targets: value, tolerance, the parameter that solves it, its direction
