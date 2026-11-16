@@ -103,6 +103,11 @@ The confirmation run ends with `process_calibs.R`, which writes to `data/run/cal
 
 - `calib_tolerance.csv`: whether each target is within its tolerance (`target_tolerance()` in `R/calibration_targets.R`), 1 percentage point for the care-cascade proportions (`cc.*`) and 10% of the target for the others. This is the stop rule: the calibration is done when every fitted target is within tolerance. Its `fitted` column marks the targets a wave fits, and the printed summary counts only those; the default targets no wave fits (`i.prev.dx.*`, `disease.mr100`) are reported as checks.
 - `calib_sti_checks.csv`: each STI's fade-out share (runs with no infection in the final year) and, if the project has a `data/input/sti-ranges.csv`, its true incidence against the guard range there (`project_calibration_incidence_guard()`). A target met as an average of extinct and persisting runs is not a fit.
+- `calib_drift.csv`: whether the model is at rest at the targets, not passing through them. Each target's slope over the final 20 years must be within 0.25 tolerances per decade, and diagnosed prevalence by race within 1% of its level per decade.
+
+Stop when every fitted target is within tolerance, no STI dies out in more than 5% of runs, and every target is at rest. Otherwise run another pass, or stop after a third and look: misses left after that are not drift between waves.
+
+**Later passes.** A wave is fitted with every later wave's parameters at their starting values, and each job over runs in which the other jobs of its wave sweep their priors, so later waves move targets earlier ones fitted. A calibration therefore runs in passes. Pass n (`calib_pass`, set before sourcing `workflow-swfcalib.R`) refits the waves from pass n - 1's fitted values (its `calibrated.csv`, downloaded from the HPC), each job searching a window around its start, and writes to `data/run/swfcalib-pass<n>/` and `data/run/calibration-pass<n>/`. The windows, resets, start values and waves of each pass are in `calib_pass_settings.R`, keyed by pass; a pass needs an entry there, even an empty one, so it is on record. Before a pass, `workflow-pass_probe.R` runs the model at the pass's start values, warm from the previous confirmation's end states, writes the same three checks to `data/run/probe-pass<n>/`, and makes the pass's restart pool from the end states (`restart_pool-hpc-pass<n>`); its results set the pass's windows and resets. A later pass skips the arrival wave unless the probe shows population more than 1% off.
 
 After convergence, `update_param.R` writes `params.csv` to the swfcalib directory. It holds the project parameter overrides (the rows already in `data/input/model_parameters.csv` plus the calibrated values). Copy it over `data/input/model_parameters.csv`.
 
@@ -144,7 +149,7 @@ This chapter produces two artifacts consumed by the rest of the project:
 | `5-calibration_report.R` | Render calibration report |
 | `het_gp_process.R` | Gaussian process stopping rules and designs for the swfcalib jobs |
 | `make_restart_pool.R` | Make a restart pool from the simulations of a pool run |
-| `process_calibs.R` | Generate `calib_assess.csv`, `calib_tolerance.csv` and `calib_sti_checks.csv` |
+| `process_calibs.R` | Generate `calib_assess.csv`, `calib_tolerance.csv`, `calib_sti_checks.csv` and `calib_drift.csv` |
 | `swfcalib_config.R` | Wave definitions and priors for swfcalib |
 | `swfcalib_model.R` | Model function passed to swfcalib |
 | `update_param.R` | Write the project overrides, with calibrated values, to `params.csv` |
