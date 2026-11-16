@@ -46,6 +46,7 @@ Every top-level script starts by sourcing `R/shared_variables.R` which defines:
 - `time_unit`, `year_steps`: Time step duration (7 days) and steps per year (52)
 - Key time points: `prep_start`, `calibration_end`, `restart_time`, `intervention_start`, `intervention_end`
 - All data paths: `input_dir`, `run_dir`, `output_dir`, and subdirectories
+- `calib_pass` and `calib_pass_suffix()`: the calibration pass, which keys `calib_dir` and `swfcalib_dir`; `calib_years`: the final years each calibration run is scored over (5)
 
 Modify shared values only in `shared_variables.R` — never redefine them in individual scripts.
 
@@ -70,7 +71,8 @@ Fit model parameters to epidemiological targets. Two approaches:
 - `3-choose_restart.R`: Picks a simulation and saves it as the restart point (checkpoint) for later calibration and intervention runs
 - `workflow-restart_point.R`: HPC workflow that runs `n_rep` replications with the current parameters (64 for a first pool before swfcalib, 500 for the restart point after calibration) and saves the best as the restart point; rerun it after calibration and whenever attributes or parameters change
 - `workflow-restart_pool.R`: HPC workflow that turns the simulations of a restart-point run into the restart pool the swfcalib runs start from (`path_to_restart_pool`)
-- `process_calibs.R`: after a run, writes `calib_assess.csv`, `calib_tolerance.csv` (the stop rule, `target_tolerance()` in `R/calibration_targets.R`) and `calib_sti_checks.csv`
+- `process_calibs.R`: after a run, writes `calib_assess.csv`, `calib_tolerance.csv` (the stop rule, `target_tolerance()` in `R/calibration_targets.R`), `calib_sti_checks.csv` and `calib_drift.csv`
+- Calibration runs in passes: `calib_pass` (default 1, set before sourcing) keys `calib_dir`, `swfcalib_dir`, the restart pool and the workflow names. Each later pass needs an entry in `calib_pass_settings.R` and a probe run (`workflow-pass_probe.R`) before it
 
 ### D-interventions — Intervention Scenarios
 Run calibrated model with intervention scenarios and process results.

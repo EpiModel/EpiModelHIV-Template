@@ -16,7 +16,8 @@
 ## elements are made with `make_restart_point_hiv()`, which shifts the `.due`
 ## attributes as well as `.last` and `.time`.
 ##
-## Runs as a step of `workflow-restart_pool.R`, which passes:
+## Runs as a step of `workflow-restart_pool.R` (and of `workflow-pass_probe.R`,
+## which also passes `calib_pass`), which passes:
 ##   - `scenario_name`: the scenario of the simulation files
 ##   - `sims_dir`: the directory holding them and their `merged_tibbles/`
 ##   - `pool_dir`: the pool to create; it must not exist

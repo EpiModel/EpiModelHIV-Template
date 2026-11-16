@@ -4,9 +4,9 @@
 ##
 ## The calibration runs and the confirmation run at the end start from the
 ## restart pool, which must exist on the HPC before launch
-## (`workflow-restart_pool.R`). Running scenarios from a pool needs EpiModelHPC
-## 2.10.0 or later, which both lockfiles pin: build this workflow with it
-## installed.
+## (`workflow-restart_pool.R` for pass 1, `workflow-pass_probe.R` for a later
+## pass). Running scenarios from a pool needs EpiModelHPC 2.10.0 or later,
+## which both lockfiles pin: build this workflow with it installed.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -16,6 +16,11 @@ library(EpiModelHPC)
 library(EpiModelHIV)
 
 hpc_context <- TRUE
+# Calibration pass: 1 for a first calibration; 2 or more to refit the waves
+# from the previous pass's fitted values (see "Later passes" in
+# `swfcalib_config.R`). Download the previous pass's
+# `data/run/swfcalib*/calibrated.csv` from the HPC first.
+if (!exists("calib_pass")) calib_pass <- 1L
 source("R/shared_variables.R", local = TRUE)
 source("R/C-calibration/z-context.R", local = TRUE)
 source("R/hpc_configs.R", local = TRUE)
@@ -28,12 +33,15 @@ max_cores <- batch_size
 ## Uncomment the calibration config to use
 source("R/C-calibration/swfcalib_config.R", local = TRUE)
 
-wf <- make_em_workflow("swfcalib", override = TRUE)
+# "swfcalib" for pass 1, "swfcalib-pass<n>" after that, so a later pass never
+# deletes an earlier one's workflow tree or logs.
+swfcalib_wf <- paste0("swfcalib", calib_pass_suffix(calib_pass))
+wf <- make_em_workflow(swfcalib_wf, override = TRUE)
 
 # Register this campaign in the deploy-doctor watch list. Pairs with the teardown
 # step at the end; together they stop the shared deploy doctor (launched from the
 # deploy script) once this is the last campaign still running. Requires EpiModelHPC.
-wf <- add_doctor_register_step(wf, "swfcalib")
+wf <- add_doctor_register_step(wf, swfcalib_wf)
 
 # Calibration step 1
 wf <- add_workflow_step(
@@ -114,7 +122,9 @@ wf <- add_workflow_step(
 
 source("R/netsim_settings.R", local = TRUE)
 
-# Control settings
+# Control settings. `save.run` stays at its default (TRUE): the probe of the
+# next pass (`workflow-pass_probe.R`) can make its restart pool from the end
+# states of these confirmation runs.
 control <- control_msm(
   nsteps              = calibration_end,
   start               = restart_time,
@@ -163,7 +173,8 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/C-calibration/process_calibs.R",
     args = list(hpc_context = TRUE, n_cores = max_cores,
-                fitted_targets = fitted_targets),
+                fitted_targets = fitted_targets,
+                calib_pass = calib_pass),
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(
@@ -176,4 +187,4 @@ wf <- add_workflow_step(
 
 # Final step: deregister from the deploy-doctor watch list and stop the shared
 # doctor once this is the last campaign still running (EpiModelHPC).
-wf <- add_doctor_teardown_step(wf, "swfcalib")
+wf <- add_doctor_teardown_step(wf, swfcalib_wf)

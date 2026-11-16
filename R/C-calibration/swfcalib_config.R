@@ -12,6 +12,10 @@
 ## (`workflow-restart_pool.R`), not from the single restart point, so the GP
 ## sees the variance between starting states as well as between runs.
 ##
+## A calibration runs in passes (`calib_pass`, "Later passes" below): pass 1
+## searches the priors, and each later pass refits the waves from the previous
+## pass's fitted values.
+##
 ## This script should not be run directly. But `sourced` from the swfcalib
 ## workflow
 library(swfcalib)
@@ -19,7 +23,10 @@ library(dplyr)
 library(tidyr)
 
 source("R/C-calibration/swfcalib_model.R", local = TRUE)
-model_fn <- make_model_fn(calib_steps = year_steps, pool = TRUE)
+# Each run is scored on its mean over its final `calib_years` years, which
+# `R/shared_variables.R` sets
+model_fn <- make_model_fn(calib_steps = calib_years * year_steps, pool = TRUE,
+                          pass = calib_pass)
 
 source("R/C-calibration/het_gp_process.R", local = TRUE)
 
@@ -28,7 +35,9 @@ source("R/calibration_targets.R", local = TRUE)
 source("R/netsim_settings.R", local = TRUE)
 targets <- project_calibration_targets()
 
-n_points <- 64
+# A later pass searches a window around the previous fit rather than the whole
+# prior, so half the design resolves the root as well (see "Later passes").
+n_points <- if (calib_pass == 1) 64 else 32
 n_reps <- 4
 n_sims <- n_points * n_reps
 
@@ -91,13 +100,93 @@ extended <- lapply(priors, \(x) c(x[1] / 2, x[2] * 2))
 # those values set in `data/input/model_parameters.csv` once the engine
 # supports them (EpiModelHIV-p#378). Until then it stays at the engine default.
 # `disease.mr100` is a check, reported with the other targets after the
-# confirmation run.
+# confirmation run. A later pass drops it from an earlier fit
+# (`retired_params` in `calib_pass_settings.R`).
+
+# Later passes -----------------------------------------------------------------
+#
+# A wave is fitted with the parameters of every later wave still at their
+# `param` values, so a later wave can move a target an earlier one fitted, and
+# each job of a wave is fitted over runs in which the other jobs' parameters
+# sweep their whole priors, so it fits an average over them rather than the
+# response at their fitted values. In a four-city calibration's first pass
+# (November 2026), one city ended with Black PrEP coverage 2.5 points and
+# Hispanic diagnosed 1.9 points over target. Hispanic diagnosed was on target
+# in its own wave and moved when the next wave cut treatment halting and raised
+# STI screening; Black PrEP was about a point under in wave 1, where it rose
+# with the White start rate the other job was sweeping, and then rose with
+# testing and screening.
+#
+# So a calibration runs in passes. Pass 1 runs to its confirmation; pass n
+# (`calib_pass`, set before sourcing) then refits the waves with every
+# parameter starting at pass n - 1's fitted value, and each job searches a
+# window around its previous value, from fit / w to fit * w within its extended
+# range, so the other jobs of its wave move only that far. A one-parameter job
+# that does not reach its target widens its range toward it, and a joint job
+# widens its box. The windows are `default_window` in `calib_pass_settings.R`:
+# 1.5 by default, 2 for the PrEP start rates, and a narrow 1.08 for the STI
+# transmission probabilities. Each STI's incidence is zero below a threshold
+# and rises steeply above it, and fits sit only a few percent above their
+# thresholds; a design that spans the threshold makes the GP average the flat
+# part into the steep one.
+#
+# Stop when, in the confirmation, every fitted target is within tolerance
+# (`calib_tolerance.csv`), no STI dies out in more than 5 percent of runs
+# (`calib_sti_checks.csv`), and the model is at rest at the targets
+# (`calib_drift.csv`: every target drifting within 0.25 tolerances per decade
+# over the final 20 years, and diagnosed prevalence by race within 1 percent
+# of its level per decade). Otherwise run another pass, or stop after a third
+# and look: misses left after that are not drift between waves.
+#
+# The windows, resets, starting file and waves of each pass are in
+# `calib_pass_settings.R`, so they are kept in git with the code that used
+# them. Before a pass, `workflow-pass_probe.R` runs the model at its start
+# values and makes its restart pool.
+prev_fit <- NULL
+pass_window <- NULL
+pass_reset <- list()
+pass_waves <- NULL
+if (calib_pass > 1) {
+  source("R/C-calibration/calib_pass_settings.R", local = TRUE)
+  settings <- pass_settings(calib_pass)
+  pass_window <- settings$window
+  pass_reset <- settings$reset
+  pass_waves <- settings$waves
+  prev_fit <- pass_start_values(calib_pass, retired_params)
+}
 
 #' The prior, or the extended range, of a parameter: its own entry if it has
 #' one, otherwise the entry of its name without the race suffix.
 param_range <- function(param, ranges) {
   if (param %in% names(ranges)) ranges[[param]] else
     ranges[[sub("_\\d$", "", param)]]
+}
+
+#' The range a job searches first for `param` in this pass.
+search_range <- function(param) {
+  if (is.null(prev_fit)) return(param_range(param, priors))
+  if (param %in% names(pass_reset)) return(pass_reset[[param]])
+  v <- prev_fit[[param]]
+  w <- pass_window[c(param, sub("_\\d$", "", param), "default")]
+  w <- w[!is.na(w)][[1]]
+  ext <- param_range(param, extended)
+  c(max(v / w, ext[1]), min(v * w, ext[2]))
+}
+
+#' The values every wave starts from: `param`'s in pass 1, the previous pass's
+#' fitted values after that (moved by the pass's `preposition` factors).
+start_values <- function(defaults) {
+  if (is.null(prev_fit)) return(defaults)
+  if (!setequal(names(prev_fit), names(defaults))) {
+    stop(
+      "The previous pass fitted a different set of parameters than this one ",
+      "fits.\n  Previous only: ",
+      paste(setdiff(names(prev_fit), names(defaults)), collapse = ", "),
+      "\n  This pass only: ",
+      paste(setdiff(names(defaults), names(prev_fit)), collapse = ", ")
+    )
+  }
+  dplyr::as_tibble(as.list(prev_fit[names(defaults)]))
 }
 
 # Job constructors, so every job of a kind is set up the same way. A
@@ -111,7 +200,7 @@ gp_job_single <- function(target, param, target_val = targets[target],
     targets_val = target_val,
     params = param,
     initial_proposals = make_grid_design(
-      param, param_range(param, priors), n_points, n_reps
+      param, search_range(param), n_points, n_reps
     ),
     make_next_proposals = proposer_load_sideload,
     get_result = determ_gp_end_single(
@@ -127,7 +216,7 @@ gp_job_joint <- function(target_names, params) {
     targets_val = targets[target_names],
     params = params,
     initial_proposals = make_lhs_design(
-      params, lapply(params, param_range, ranges = priors), n_points, n_reps
+      params, lapply(params, search_range), n_points, n_reps
     ),
     make_next_proposals = proposer_load_sideload,
     get_result = determ_gp_end_joint(n_points, n_reps)
@@ -145,7 +234,7 @@ calib_object <- list(
     n_sims = n_sims,
     # Every parameter a wave fits must be here: swfcalib keeps a fitted value
     # only for the columns of this table, and drops any other without a word.
-    default_proposal = select(
+    default_proposal = start_values(select(
       params_df,
       prep.start.rate_1, prep.start.rate_2, prep.start.rate_3,
       hiv.test.int_1, hiv.test.int_2, hiv.test.int_3,
@@ -153,7 +242,7 @@ calib_object <- list(
       hiv.trans.scale_1, hiv.trans.scale_2, hiv.trans.scale_3,
       gono.uret.prob, chla.uret.prob, syph.prob,
       a.rate
-    )
+    ))
   ),
   waves = list(
     # PrEP coverage by race
@@ -198,7 +287,9 @@ calib_object <- list(
     # structure"). HIV goes first because its parameters move more between
     # calibration passes, and the STI fits, which sit just above the values at
     # which their epidemics die out, are best fitted last, against an HIV
-    # epidemic near its final level.
+    # epidemic near its final level. The HIV miss this leaves is what a later
+    # pass corrects, by running this wave alone if needed (`waves` in
+    # `calib_pass_settings.R`).
     wave4 = list(
       job1 = gp_job_joint(
         paste0("ir100.hiv.dx.", c("B", "H", "W")),
@@ -219,7 +310,10 @@ calib_object <- list(
     ),
     # The population stays at the size the networks were estimated at,
     # `msm_pop` in `R/shared_variables.R`, which is also the denominator of
-    # every rate target.
+    # every rate target. It was within 0.1 percent of target in all three
+    # first-pass confirmations of a four-city calibration, so a later pass
+    # skips this wave unless its probe shows population more than 1 percent
+    # off.
     wave6 = list(
       job1 = gp_job_single("num", "a.rate", target_val = c(num = msm_pop))
     )
@@ -228,10 +322,22 @@ calib_object <- list(
 
 # The targets the waves fit, which `process_calibs.R` marks as `fitted` in
 # `calib_tolerance.csv` (the workflow passes them). The other targets are
-# reported as checks.
+# reported as checks. Collected before a later pass drops waves, so the
+# stop rule still judges every target the calibration fits.
 fitted_targets <- unique(unlist(lapply(calib_object$waves, function(wave) {
   lapply(wave, function(job) job$targets)
 })))
+
+# A later pass may run only some waves (`waves` in `calib_pass_settings.R`):
+# every parameter keeps its starting value unless a wave it belongs to runs.
+if (!is.null(pass_waves)) {
+  unknown_waves <- setdiff(pass_waves, names(calib_object$waves))
+  if (length(unknown_waves) > 0) {
+    stop("Unknown waves in the pass settings: ",
+         paste(unknown_waves, collapse = ", "))
+  }
+  calib_object$waves <- calib_object$waves[pass_waves]
+}
 
 # Uncomment to run a single wave for testing
 # calib_object$waves <- calib_object$waves[-c(1, 2, 3)]

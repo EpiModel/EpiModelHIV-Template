@@ -28,6 +28,9 @@
 ## passing through them on a sloped path (EpiModelHIV-p#374): see
 ## `drift_table()`.
 ##
+## Each target is scored on its mean over the final `calib_years` years
+## (`R/shared_variables.R`), as in the swfcalib model function.
+##
 ## This script should be called by one of the manual_calibration workflows.
 
 # Setup ------------------------------------------------------------------------
@@ -229,7 +232,7 @@ calib_info_tbl <- EpiModelHPC::get_scenarios_tibble_infos(calib_merged_dir)
 
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(calib_info_tbl)),
-  \(i) process_one_calib_tibble(calib_info_tbl[i, ], year_steps)
+  \(i) process_one_calib_tibble(calib_info_tbl[i, ], calib_years * year_steps)
 )
 
 d_calib <- bind_rows(lapply(d_ls, `[[`, "assess"))
