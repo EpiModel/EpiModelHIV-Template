@@ -57,12 +57,17 @@ waves <- list(
               n_rows = 128, reps = 8)
 )
 
-# Restart pools: every STI epidemic at least half its target
-pool_keep <- function(Y) {
-  Y$ir100.gono >= targets_val[["ir100.gono"]] / 2 &
-    Y$ir100.chla >= targets_val[["ir100.chla"]] / 2 &
-    Y$ir100.syph >= targets_val[["ir100.syph"]] / 2
-}
+# Restart pools: every STI epidemic at least half its target. The function is
+# saved in `config.rds` and called by later controllers: it must carry its
+# thresholds (a `local()` environment is saved with it, the global one is not)
+pool_keep <- local({
+  thr <- unlist(targets_val[c("ir100.gono", "ir100.chla", "ir100.syph")]) / 2
+  function(Y) {
+    Y$ir100.gono >= thr[["ir100.gono"]] &
+      Y$ir100.chla >= thr[["ir100.chla"]] &
+      Y$ir100.syph >= thr[["ir100.syph"]]
+  }
+})
 
 truing_cfg <- truing_config(
   name = truing_calib_name, params = params, targets = targets, waves = waves,
