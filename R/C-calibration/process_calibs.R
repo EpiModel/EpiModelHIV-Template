@@ -11,6 +11,11 @@
 ## (`target_tolerance()` in `R/calibration_targets.R`):
 ##   - care-cascade proportions (`cc.*`): 1 percentage point
 ##   - every other target: 10% of the target
+## Its `fitted` column is TRUE for the targets a wave of the calibration fits
+## (`fitted_targets`, which `workflow-swfcalib.R` passes from
+## `swfcalib_config.R`); the others are checks. The stop rule and the printed
+## summary count only the fitted targets. Callers without waves (the ballpark
+## and restart workflows) leave `fitted` empty, and every target counts.
 ##
 ## `calib_sti_checks.csv` adds two checks on the bacterial STIs that the
 ## tolerance rule does not make: the share of runs in which each has died out
@@ -33,6 +38,9 @@ source("R/C-calibration/z-context.R", local = TRUE)
 # and restart workflows do.
 if (!exists("n_cores")) {
   n_cores <- 8
+}
+if (!exists("fitted_targets")) {
+  fitted_targets <- NULL
 }
 
 # Process ----------------------------------------------------------------------
@@ -116,9 +124,14 @@ d_ls <- future.apply::future_lapply(
 d_calib <- bind_rows(lapply(d_ls, `[[`, "assess"))
 write.csv(d_calib, fs::path(calib_dir, "calib_assess.csv"), row.names = FALSE)
 
-d_tol <- bind_rows(lapply(d_ls, `[[`, "tolerance"))
+d_tol <- bind_rows(lapply(d_ls, `[[`, "tolerance")) |>
+  mutate(
+    fitted = if (is.null(fitted_targets)) NA else target %in% fitted_targets,
+    .after = target
+  )
 write.csv(d_tol, fs::path(calib_dir, "calib_tolerance.csv"), row.names = FALSE)
 d_tol |>
+  filter(is.na(fitted) | fitted) |>
   summarize(
     n_within = sum(within), n = n(),
     outside = paste(target[!within], collapse = ", "),

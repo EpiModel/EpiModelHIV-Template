@@ -101,7 +101,7 @@ The runs start from a random member of the **restart pool**, not from the single
 
 The confirmation run ends with `process_calibs.R`, which writes to `data/run/calibration/`:
 
-- `calib_tolerance.csv`: whether each target is within its tolerance (`target_tolerance()` in `R/calibration_targets.R`), 1 percentage point for the care-cascade proportions (`cc.*`) and 10% of the target for the others. This is the stop rule: the calibration is done when every fitted target is within tolerance. The default targets no wave fits (`i.prev.dx.*`, `disease.mr100`) are reported as checks.
+- `calib_tolerance.csv`: whether each target is within its tolerance (`target_tolerance()` in `R/calibration_targets.R`), 1 percentage point for the care-cascade proportions (`cc.*`) and 10% of the target for the others. This is the stop rule: the calibration is done when every fitted target is within tolerance. Its `fitted` column marks the targets a wave fits, and the printed summary counts only those; the default targets no wave fits (`i.prev.dx.*`, `disease.mr100`) are reported as checks.
 - `calib_sti_checks.csv`: each STI's fade-out share (runs with no infection in the final year) and, if the project has a `data/input/sti-ranges.csv`, its true incidence against the guard range there (`project_calibration_incidence_guard()`). A target met as an average of extinct and persisting runs is not a fit.
 
 After convergence, `update_param.R` writes `params.csv` to the swfcalib directory. It holds the project parameter overrides (the rows already in `data/input/model_parameters.csv` plus the calibrated values). Copy it over `data/input/model_parameters.csv`.

@@ -226,6 +226,13 @@ calib_object <- list(
   )
 )
 
+# The targets the waves fit, which `process_calibs.R` marks as `fitted` in
+# `calib_tolerance.csv` (the workflow passes them). The other targets are
+# reported as checks.
+fitted_targets <- unique(unlist(lapply(calib_object$waves, function(wave) {
+  lapply(wave, function(job) job$targets)
+})))
+
 # Uncomment to run a single wave for testing
 # calib_object$waves <- calib_object$waves[-c(1, 2, 3)]
 
