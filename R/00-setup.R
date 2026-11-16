@@ -39,7 +39,7 @@ renv::install(c(
   "EpiModel/EpiModel",
   "EpiModel/ARTnetData",
   "EpiModel/ARTnet",
-  "EpiModel/EpiModelHPC@restart_pool_review", # EpiModelHPC PR #74
+  "EpiModel/EpiModelHPC",
   "EpiModel/slurmworkflow@feature/step-child-shell", # slurmworkflow PR #37
   "EpiModel/swfcalib",
   "hetGP" # CRAN, not on conda-forge

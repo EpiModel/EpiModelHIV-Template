@@ -16,3 +16,6 @@ workflows/
 .pixi/*
 !.pixi/config.toml
 /assessment.html
+
+# the truing engine, synced from calibration_work/truing
+/truing

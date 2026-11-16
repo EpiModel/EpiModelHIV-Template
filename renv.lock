@@ -11,9 +11,9 @@
   "Packages": {
     "ARTnet": {
       "Package": "ARTnet",
-      "Version": "2.9.3",
+      "Version": "2.10.0",
       "Source": "GitHub",
-      "Date": "2026-10-18",
+      "Date": "2026-11-07",
       "Title": "Epidemic and Network Model Parameterization with the ARTnet Dataset",
       "Description": "Epidemic and Network Model Parameterization with the ARTnet Dataset.",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -26,7 +26,8 @@
         "EpiModel (>= 2.5)"
       ],
       "Imports": [
-        "dplyr"
+        "dplyr",
+        "nnet"
       ],
       "Suggests": [
         "ARTnetData",
@@ -39,15 +40,15 @@
       "Encoding": "UTF-8",
       "Roxygen": "list(markdown = TRUE)",
       "Config/testthat/edition": "3",
-      "Config/roxygen2/version": "8.0.0",
+      "Config/roxygen2/version": "8.1.1",
       "Author": "Samuel Jenness [cre, aut]",
       "RemoteType": "github",
       "Remotes": "github::EpiModel/ARTnetData@main",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ARTnet",
       "RemoteRef": "main",
-      "RemoteSha": "4114a59a797c74801f770d00eef2002f11256901",
-      "RemoteHost": "api.github.com"
+      "RemoteSha": "e6b76540df4c7ae2af3916c77f1b4e1a545c0742"
     },
     "ARTnetData": {
       "Package": "ARTnetData",
@@ -164,8 +165,7 @@
         "rlang",
         "dplyr (>= 1.1.0)",
         "coda",
-        "networkLite (>= 1.0.5)",
-        "Rcpp"
+        "networkLite (>= 1.0.5)"
       ],
       "Suggests": [
         "bslib (>= 0.6.0)",
@@ -182,7 +182,6 @@
       ],
       "VignetteBuilder": "knitr",
       "LinkingTo": [
-        "Rcpp",
         "ergm"
       ],
       "Encoding": "UTF-8",
@@ -194,7 +193,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "56640c3951ae20c4f53c89d07a68fab16990737e"
+      "RemoteSha": "234a8f94f2901e25a8dd898de30a7b867ec7fc57"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -250,7 +249,7 @@
       "Package": "EpiModelHPC",
       "Version": "2.10.0",
       "Source": "GitHub",
-      "Date": "2026-10-05",
+      "Date": "2026-11-13",
       "Title": "EpiModel Extensions for High-Performance Computing",
       "Description": "Extension package to EpiModel to run large-scale stochastic network models on modern high-performance computing systems. Provides scenario-based batch simulation, helpers for building 'slurmworkflow' job workflows and 'swfcalib' calibrations, cluster configuration presets, and shell tooling for detecting and recovering degenerate SLURM tasks.",
       "Maintainer": "Samuel Jenness <samuel.m.jenness@emory.edu>",
@@ -290,8 +289,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "restart_pool_review",
-      "RemoteSha": "da446b60a554e25aad4a379347c3600ca0b78c1d"
+      "RemoteRef": "main",
+      "RemoteSha": "ec97dcba1c2c1f2cb90631e1769f2e06b4a28385"
     },
     "MASS": {
       "Package": "MASS",
@@ -1169,7 +1168,7 @@
       "Version": "0.1.0",
       "Source": "GitHub",
       "Title": "Simulation of ERGMs and STERGMs with the Rust Engine ergmkit",
-      "Authors@R": "person(\"Adrien\", \"Le Guillou\", email = \"git@aleguillou.org\", role = c(\"aut\", \"cre\"))",
+      "Authors@R": "person(\"Adrien\", \"Le Guillou\", email = \"git@aleguillou.org\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4791-418X\"))",
       "Description": "Simulates separable temporal ERGMs (tergm's time step: discordTNT proposals and tergm's adaptive number of them) and draws dyad-independent ERGMs exactly, with the Rust crate ergmkit. ergm formulas and fits become model specs, the language-agnostic description the engine builds its models from; the simulations take and return edgelists.",
       "License": "GPL-3",
       "URL": "https://github.com/EpiModel/ergmkit-R",
@@ -1193,14 +1192,14 @@
       "Config/testthat/edition": "3",
       "Roxygen": "list(markdown = TRUE)",
       "Config/roxygen2/version": "8.1.0",
-      "Author": "Adrien Le Guillou [aut, cre]",
+      "Author": "Adrien Le Guillou [aut, cre] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "Maintainer": "Adrien Le Guillou <git@aleguillou.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "ergmkit-R",
       "RemoteRef": "main",
-      "RemoteSha": "d701b54616c159fa51d7e97ea5ea38ac60d843a4"
+      "RemoteSha": "0f77ef6546a6c4a8d72ab05966f6a17d4c8e734c"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -1469,7 +1468,7 @@
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "4.0.3",
+      "Version": "4.0.4",
       "Source": "Repository",
       "Title": "Create Elegant Data Visualisations Using the Grammar of Graphics",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\", comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Winston\", \"Chang\", role = \"aut\", comment = c(ORCID = \"0000-0002-1576-2126\")), person(\"Lionel\", \"Henry\", role = \"aut\"), person(\"Thomas Lin\", \"Pedersen\", , \"thomas.pedersen@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-5147-4711\")), person(\"Kohske\", \"Takahashi\", role = \"aut\"), person(\"Claus\", \"Wilke\", role = \"aut\", comment = c(ORCID = \"0000-0002-7470-9261\")), person(\"Kara\", \"Woo\", role = \"aut\", comment = c(ORCID = \"0000-0002-5125-4188\")), person(\"Hiroaki\", \"Yutani\", role = \"aut\", comment = c(ORCID = \"0000-0002-3385-7233\")), person(\"Dewey\", \"Dunnington\", role = \"aut\", comment = c(ORCID = \"0000-0002-9415-4582\")), person(\"Teun\", \"van den Brand\", role = \"aut\", comment = c(ORCID = \"0000-0002-9335-7468\")), person(\"Posit, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")) )",
@@ -2513,6 +2512,31 @@
       "NeedsCompilation": "yes",
       "Author": "José Pinheiro [aut] (S version), Douglas Bates [aut] (up to 2007), Saikat DebRoy [ctb] (up to 2002), Deepayan Sarkar [ctb] (up to 2005), EISPACK authors [ctb] (src/rs.f), Siem Heisterkamp [ctb] (Author fixed sigma), Bert Van Willigen [ctb] (Programmer fixed sigma), Johannes Ranke [ctb] (varConstProp()), R Core Team [aut, cre] (ROR: <https://ror.org/02zz1nj61>)",
       "Maintainer": "R Core Team <R-core@R-project.org>",
+      "Repository": "CRAN"
+    },
+    "nnet": {
+      "Package": "nnet",
+      "Version": "7.3-21",
+      "Source": "Repository",
+      "Priority": "recommended",
+      "Date": "2026-08-01",
+      "Depends": [
+        "R (>= 3.0.0)",
+        "stats",
+        "utils"
+      ],
+      "Suggests": [
+        "MASS"
+      ],
+      "Authors@R": "c(person(\"Brian\", \"Ripley\", role = c(\"aut\", \"cre\", \"cph\"), email = \"Brian.Ripley@R-project.org\"), person(\"William\", \"Venables\", role = \"cph\"))",
+      "Description": "Software for feed-forward neural networks with a single hidden layer, and for multinomial log-linear models.",
+      "Title": "Feed-Forward Neural Networks and Multinomial Log-Linear Models",
+      "ByteCompile": "yes",
+      "License": "GPL-2 | GPL-3",
+      "URL": "http://www.stats.ox.ac.uk/pub/MASS4/",
+      "NeedsCompilation": "yes",
+      "Author": "Brian Ripley [aut, cre, cph], William Venables [cph]",
+      "Maintainer": "Brian Ripley <Brian.Ripley@R-project.org>",
       "Repository": "CRAN"
     },
     "otel": {

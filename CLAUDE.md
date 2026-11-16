@@ -25,7 +25,7 @@ written by `make_em_workflow()` (see `R/hpc_configs.R`). The project `.Renviron`
 private).
 
 Current GitHub pins (see `R/00-setup.R`): EpiModelHIV-p `AdrienLeGuillou@ergmkit`,
-EpiModelHPC `restart_pool_review` (PR #74), slurmworkflow `feature/step-child-shell`
+EpiModelHPC `main`, slurmworkflow `feature/step-child-shell`
 (PR #37), `EpiModel/ergmkit-R@main`.
 
 ```bash
