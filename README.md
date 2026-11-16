@@ -119,7 +119,7 @@ Everything specific to the modeled city comes from two files in `data/input/`. T
 
 A project that fits reported STI case rates can also add `sti-ranges.csv`, whose `guard` rows (columns `target`, `kind`, `lower`, `upper`) give the range of true incidence a calibrated model should not leave. `R/C-calibration/process_calibs.R` reports each STI's true incidence against it; without the file there is no guard.
 
-Any files in this format work. The ones for the cities our team models, with the scripts that derive them, are in `cities/` of [EpiModelHIV-Appendix](https://github.com/EpiModel/EpiModelHIV-Appendix): copy `cities/<key>/city.csv` and `cities/<key>/targets.csv` into `data/input/`.
+Any files in this format work. The ones for the cities our team models, with the scripts that derive them, are in `cities/` of [EpiModelHIV-Appendix](https://github.com/EpiModel/EpiModelHIV-Appendix): copy `cities/<key>/city.csv` and `cities/<key>/targets.csv` into `data/input/`. Their targets are not yet the set this template fits: they fit trailing-year PrEP coverage and reported STI case rates, which the v4.0.x engine does not compute yet, and mark `cc.prep.*` and the true STI incidence `ir100.{gono,chla,syph}` as not fitted. With one of them, `swfcalib_config.R` stops until its waves are changed to match.
 
 ## Conventions
 
