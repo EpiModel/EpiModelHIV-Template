@@ -192,7 +192,7 @@
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
-      "Version": "4.1.0",
+      "Version": "4.6.0",
       "Source": "GitHub",
       "Date": "2026-08-06",
       "Type": "Package",
@@ -232,12 +232,12 @@
       "Config/roxygen2/version": "8.0.0",
       "Author": "Samuel M. Jenness [cre, aut], Steven M. Goodreau [aut], Adrien Le Guillou [aut] (ORCID: <https://orcid.org/0000-0002-4791-418X>)",
       "RemoteType": "github",
-      "Remotes": "github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
+      "Remotes": "github::EpiModel/EpiModel@main, github::EpiModel/ARTnet@main, github::EpiModel/ARTnetData@main",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "v4.0.x",
-      "RemoteSha": "4a257c26ab1a3f7cc151d107c5945d12d598a8fc"
+      "RemoteSha": "71f46b67d1cbfb615c89c3098d8b1d741a39a650"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
