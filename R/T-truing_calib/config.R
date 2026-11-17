@@ -54,8 +54,14 @@ par_of <- function(p) {
   truing_par(p, guess[[p]], allowed_of(p), search = search_of(p))
 }
 
-# Targets: value, tolerance, the parameter that solves it, its direction
-tgt <- function(t, tol, p, inc) truing_target(t, targets_val[[t]], tol, p, inc)
+# Targets: value, tolerance, the parameter that solves it, its direction.
+# An STI epidemic that died out (incidence 0) is a forbidden output: the GP
+# is fitted without it (the kink at extinction biases it), the side of the
+# target is still read from it
+tgt <- function(t, tol, p, inc, forbidden = NULL) {
+  truing_target(t, targets_val[[t]], tol, p, inc, forbidden = forbidden)
+}
+died_out <- function(y) y <= 0
 races <- c("B", "H", "W")
 targets <- c(
   lapply(1:3, \(i) tgt(paste0("cc.prep.", races[i]), 0.01,
@@ -64,9 +70,9 @@ targets <- c(
                        paste0("hiv.test.rate_", i), TRUE)),
   lapply(1:3, \(i) tgt(paste0("cc.vsupp.", races[i]), 0.01,
                        paste0("tx.halt.rate_", i), FALSE)),
-  list(tgt("ir100.gono", 0.5, "gono.uret.prob", TRUE),
-       tgt("ir100.chla", 0.5, "chla.uret.prob", TRUE),
-       tgt("ir100.syph", 0.25, "syph.prob", TRUE)),
+  list(tgt("ir100.gono", 0.5, "gono.uret.prob", TRUE, died_out),
+       tgt("ir100.chla", 0.5, "chla.uret.prob", TRUE, died_out),
+       tgt("ir100.syph", 0.25, "syph.prob", TRUE, died_out)),
   lapply(1:3, \(i) tgt(paste0("i.prev.dx.", races[i]),
                        c(0.01, 0.005, 0.005)[i],
                        paste0("hiv.trans.scale_", i), TRUE)),
