@@ -23,10 +23,18 @@ max_cores <- 8
 source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
+#
+# `save.run = FALSE`: `$run` is the final netsim_dat state (attributes and
+# edgelists at the last step, not a history) and about 98% of a saved object,
+# but nothing in this chapter reads it. The analysis scripts read
+# `merged_tibbles/`, and the merged tibble is identical either way (#57). Keep
+# the default in the calibration workflows, whose simulation files are where
+# restart points are made.
 control <- control_msm(
   start               = restart_time,
   nsteps              = intervention_end,
   initialize.FUN      = reinit_msm,
+  save.run            = FALSE,
   verbose             = FALSE
 )
 
@@ -56,8 +64,8 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
-    "time" = "04:00:00",
-    "mem-per-cpu" = "5G"
+    "time" = netsim_time,
+    "mem-per-cpu" = netsim_mem_per_cpu
   )
 )
 

@@ -23,10 +23,15 @@ make_model_fn <- function(calib_steps) {
     source("R/calibration_targets.R", local = TRUE)
 
     orig <- readRDS(path_to_restart)
+    # `save.run = FALSE`: the simulation is reduced to its target summaries
+    # below and never saved, so the final model state that `save.run` keeps
+    # (attributes and edgelists at the last step, which is all it holds) would
+    # only add memory to each worker (#57).
     control <- control_msm(
       nsteps = calibration_end,
       start = restart_time,
       initialize.FUN = reinit_msm,
+      save.run = FALSE,
       verbose = FALSE
     )
 

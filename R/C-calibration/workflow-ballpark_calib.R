@@ -23,7 +23,9 @@ max_cores <- 8
 # Process ----------------------------------------------------------------------
 source("R/netsim_settings.R", local = TRUE)
 
-# Control settings
+# Control settings. `save.run` stays at its default (TRUE): a restart point can
+# be made from these simulations (`3-choose_restart.R`), and it is built from
+# the final model state that `save.run` keeps (#57).
 control <- control_msm(
   nsteps = calibration_end
 )
@@ -67,8 +69,8 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
-    "time" = "04:00:00",
-    "mem-per-cpu" = "5G"
+    "time" = netsim_time,
+    "mem-per-cpu" = netsim_mem_per_cpu
   )
 )
 

@@ -13,9 +13,17 @@ hpc_node_setup <- c(
   # when it starts, so they are exported here, before `Rscript`, and not set
   # from R. Each R process may then hold up to 1 GB more memory: a task of 8
   # simulations grows from about 9 to 13 GB, inside the 40 GB it requests at
-  # 5 GB per CPU.
+  # 5 GB per CPU (`netsim_mem_per_cpu` below).
   "export R_VSIZE=1G R_NSIZE=5M"
 )
+
+# Wall time and memory per CPU of every workflow step that runs `netsim`, a
+# task of 8 simulations. Eight hours is the most short-cpu allows, and a longer
+# limit keeps a task off that partition's nodes. It is ample for the
+# calibration period: tasks of 8 simulations over it took 1.4 to 3.1 hours at
+# about 250,000 nodes (November 2026).
+netsim_time <- "08:00:00"
+netsim_mem_per_cpu <- "5G"
 
 # `update_renv = TRUE` makes a lighter "renv.lock.hpc" file to be
 # used on the HPC. This simplifies the setup by only installing
@@ -61,9 +69,14 @@ make_em_workflow <- function(wf_name, override = FALSE, update_renv = TRUE) {
     "The HPC clone must be on the git branch:\n    \"", current_git_branch, "\""
   )
 
+  # hetGP and minpack.lm are listed because no package here depends on them:
+  # the Gaussian process stopping rules of the swfcalib calibration call them
+  # on the HPC, and a snapshot of the other three alone would drop them from
+  # the lockfile.
   if (update_renv) {
     renv::snapshot(
-      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData"),
+      packages = c("EpiModelHIV", "EpiModelHPC", "ARTnetData",
+                   "hetGP", "minpack.lm"),
       lockfile = "renv.lock.hpc",
       prompt = FALSE
     )

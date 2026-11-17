@@ -99,5 +99,6 @@ The `.Rprofile` auto-creates the directory structure on session start.
 2. Run the appropriate `workflow-*.R` script to generate SLURM jobs in `workflows/`
 3. Delete old workflow dirs locally AND on HPC before recreating with the same name
 4. `hpc_configs.R` defines `make_em_workflow()` which handles renv snapshot and SLURM setup. It reads the local git branch, and the HPC clone must be on the same branch
-5. `renv.lock.hpc` is a minimal lockfile for HPC (only simulation packages, no analysis packages)
+5. `renv.lock.hpc` is a minimal lockfile for HPC (only simulation packages, plus hetGP and minpack.lm for the calibration's stopping rules; no analysis packages)
 6. `hpc_node_setup` in `hpc_configs.R` holds the shell lines every step runs before R: the spack R module and the R heap floor (`export R_VSIZE=1G R_NSIZE=5M`). The floor must stay in these lines because R reads it only at startup and the netsim workers are forked from that one process
+7. Every workflow step that runs `netsim` takes its wall time and memory from `netsim_time` (8 hours, the short-cpu maximum) and `netsim_mem_per_cpu` in `hpc_configs.R`. Only the swfcalib model function and the intervention runs set `save.run = FALSE`; the other calibration workflows keep it, because restart points are made from their simulation files
