@@ -85,16 +85,19 @@ tn <- vapply(targets, `[[`, "", "name")
 by_race <- function(re) {
   if (truing_variant == "joint_cascade") list(grep(re, tn, value = TRUE)) else list()
 }
+# Every wave = one crossed design of 32 rows x 4 runs (128 runs) shared by
+# all its targets: never size a wave by a target's noise (the confirmation
+# does that)
 waves <- list(
   truing_wave(grep("^cc.prep", tn, value = TRUE), joint = by_race("^cc.prep"),
-              n_rows = 64, reps = 4),
+              n_rows = 32, reps = 4),
   truing_wave(grep("^cc.(dx|vsupp)", tn, value = TRUE),
               joint = c(by_race("^cc.dx"), by_race("^cc.vsupp")),
-              n_rows = 64, reps = 8),
-  truing_wave(grep("^ir100", tn, value = TRUE), n_rows = 128, reps = 8),
+              n_rows = 32, reps = 4),
+  truing_wave(grep("^ir100", tn, value = TRUE), n_rows = 32, reps = 4),
   truing_wave(c(paste0("i.prev.dx.", races), "disease.mr100", "num"),
               joint = list(paste0("i.prev.dx.", races)),
-              n_rows = 128, reps = 8)
+              n_rows = 32, reps = 4)
 )
 
 # Restart pools: every STI epidemic at least half its target. The function is
