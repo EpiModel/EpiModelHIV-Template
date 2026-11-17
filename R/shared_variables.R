@@ -21,10 +21,29 @@ run_dir        <- "data/run/"
 output_dir     <- "data/output/"
 est_dir        <- paste0(run_dir, "estimates/")
 diag_dir       <- paste0(run_dir, "diagnostics/")
-calib_dir      <- paste0(run_dir, "calibration/")
 calib_plot_dir <- paste0(run_dir, "calibration_plots/")
 scenarios_dir  <- paste0(run_dir, "scenarios/")
-swfcalib_dir   <- paste0(run_dir, "swfcalib/")
+
+# swfcalib calibration pass. Pass 1 writes to `calibration/` and `swfcalib/`.
+# Pass n starts every wave from pass n - 1's fitted values (see "Later passes"
+# in `R/C-calibration/swfcalib_config.R`) and writes to `calibration-pass<n>/`
+# and `swfcalib-pass<n>/`, so every pass's results stay on disk and a later
+# pass never reads an earlier one's leftovers. Set `calib_pass` before
+# sourcing; the swfcalib workflow passes it to the steps that run on the HPC.
+if (!exists("calib_pass")) calib_pass <- 1L
+calib_pass_suffix <- function(pass) if (pass == 1) "" else paste0("-pass", pass)
+calib_dir <- paste0(run_dir, "calibration", calib_pass_suffix(calib_pass), "/")
+swfcalib_dir <- paste0(run_dir, "swfcalib", calib_pass_suffix(calib_pass), "/")
+
+# Each calibration run is scored on its mean over the final `calib_years`
+# years (the swfcalib model function and `process_calibs.R`), not one. A rate
+# built on small counts has a one-year mean that is mostly Poisson noise, which
+# the GP then spends its replicates averaging out: in a city of about 60,000
+# MSM with a small Black population, the model makes about 27 HIV diagnoses a
+# year among Black MSM. At the drift the stop rule allows (0.25 tolerances per
+# decade), the two-year shift of the window's midpoint biases a target by
+# about 0.05 tolerances.
+calib_years <- 5
 
 # The modeled city -------------------------------------------------------------
 #

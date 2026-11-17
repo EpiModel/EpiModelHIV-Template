@@ -13,9 +13,13 @@
 #'   pool (`path_to_restart_pool`, made by `workflow-restart_pool.R`) drawn at
 #'   random, and the output records which one in `pool_num`. If `FALSE`, every
 #'   simulation starts from the single restart point (`path_to_restart`).
-make_model_fn <- function(calib_steps, pool = FALSE) {
+#' @param pass The calibration pass (`calib_pass`). It must travel with the
+#'   function: on the node, `R/shared_variables.R` would otherwise default it
+#'   to 1, and a later pass would start from the first pass's restart pool.
+make_model_fn <- function(calib_steps, pool = FALSE, pass = 1L) {
   force(calib_steps)
   force(pool)
+  force(pass)
   function(proposal) {
     # Libraries - --------------------------------------------------------------
     library(EpiModelHIV)
@@ -23,6 +27,7 @@ make_model_fn <- function(calib_steps, pool = FALSE) {
 
     # Settings -----------------------------------------------------------------
     hpc_context <- TRUE
+    calib_pass <- pass
     source("R/shared_variables.R", local = TRUE)
     source("R/C-calibration/z-context.R", local = TRUE)
 

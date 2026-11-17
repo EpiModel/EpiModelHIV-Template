@@ -62,8 +62,12 @@ netstats <- readRDS(fs::path(est_dir, paste0("netstats-", context, ".rds")))
 path_to_est <- fs::path(est_dir, paste0("netest-", context, ".rds"))
 path_to_restart <- fs::path(est_dir, paste0("restart-", context, ".rds"))
 # A directory of restart points (`1.rds`, `2.rds`, ... and `pool_index.csv`),
-# made by `R/C-calibration/workflow-restart_pool.R`
-path_to_restart_pool <- fs::path(est_dir, paste0("restart_pool-", context))
+# made by `R/C-calibration/workflow-restart_pool.R` for the first calibration
+# pass and by `R/C-calibration/workflow-pass_probe.R` for each later one
+# (`restart_pool-<context>-pass<n>`).
+path_to_restart_pool <- fs::path(
+  est_dir, paste0("restart_pool-", context, calib_pass_suffix(calib_pass))
+)
 
 # Package defaults with the project overrides applied
 params_df <- read_model_params() |>
