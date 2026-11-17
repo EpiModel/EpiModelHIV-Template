@@ -5,7 +5,8 @@
 ## or sourced with `batch_dir` and `task` defined (local test).
 ## Each run: its parameters (a one-row scenario), its seed, a cold start from
 ## the network estimate (`.pool` NA) or a restart from its pool element, 70
-## years; the outputs are the last-year means (as `swfcalib_model.R`). Runs
+## years; the outputs are the means over the last `truing_score_years` (5;
+## less noise per run than the last year, as Template PR #82). Runs
 ## with `.keep` also save their restart point in `<batch_dir>/states/`.
 ## Writes `<batch_dir>/out_<task>.rds` (`.run` + outputs); a run the model
 ## fails on is a row with its `.error` message (failures are data: the engine
@@ -74,7 +75,7 @@ run_one <- function(i) {
   sim <- netsim(orig, param_r, init, control)
   out <- as_tibble(sim) |>
     mutate_calibration_targets(year_steps = year_steps) |>
-    filter(time >= max(time) - year_steps) |>
+    filter(time > max(time) - truing_score_years * year_steps) |>
     summarise(across(any_of(out_cols), \(x) mean(x, na.rm = TRUE)))
   if (isTRUE(r$.keep)) {
     rp <- EpiModel::make_restart_point(sim, time_attrs = time_attrs, sim_num = 1)

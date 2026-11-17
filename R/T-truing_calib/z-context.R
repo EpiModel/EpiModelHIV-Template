@@ -14,6 +14,9 @@ truing_calib_dir  <- fs::path(run_dir, "truing_calib", truing_calib_name)
 # on the HPC (`rsync calibration_work/truing/ <hpc project>/truing/`)
 truing_engine_dir <- Sys.getenv("TRUING_ENGINE", "truing")
 
+# Each run is scored on its outputs' means over its last years
+truing_score_years <- 5L
+
 # Array tasks: `truing_runs_per_task` runs on as many cores
 truing_runs_per_task <- 8L
 
@@ -30,4 +33,5 @@ if (truing_tiny) {
   truing_calib_name <- if (truing_local_test) "LOCAL_TEST" else "TINY"
   truing_calib_dir  <- fs::path(run_dir, "truing_calib", truing_calib_name)
   truing_runs_per_task <- 2L
+  truing_score_years <- 1L
 }
