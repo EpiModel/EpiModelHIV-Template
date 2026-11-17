@@ -23,10 +23,19 @@ source("R/hpc_configs.R", local = TRUE)
 wf_name <- paste0(Sys.getenv("HPC_WF_PREFIX"), "truing_calib_", truing_calib_name)
 wf <- make_em_workflow(wf_name, override = TRUE)
 
+# the TRUING_* settings of this session (calibration name, variant) go to the
+# first controller; it writes them into every later job script
+truing_env <- local({
+  e <- Sys.getenv()
+  e <- e[grepl("^TRUING_", names(e))]
+  if (length(e)) paste0("export ", names(e), "=", shQuote(e)) else character(0)
+})
+
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_bash_lines(c(
     hpc_node_setup,
+    truing_env,
     "Rscript R/T-truing_calib/controller.R"
   )),
   sbatch_opts = list(

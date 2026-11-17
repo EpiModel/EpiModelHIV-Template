@@ -24,6 +24,31 @@ allowed_of <- function(p) {
   if (p == "a.rate") c(0, 0.002) else if (grepl("scale", p)) c(0, 100) else c(0, 1)
 }
 search_of <- function(p) if (p == "a.rate") c(0.0002, 0.0006) else NULL
+
+# Variants (`TRUING_VARIANT`, set when the workflow is made; give each its own
+# `TRUING_CALIB`):
+# - "bad_search": deliberately bad search ranges. Each (a.rate's excepted: its
+#   range is where the model runs) is 0.4 of the allowed range wide, on the
+#   parameter's scale, and misses the final value of a reference calibration
+#   (`TRUING_REF`, default "emhiv10k_2026-11") by 0.3 of the range, on the side
+#   with more room
+# - "joint_cascade": cc.prep, cc.dx and cc.vsupp each solved as one B/H/W joint
+#   block, with the same design sizes
+truing_variant <- Sys.getenv("TRUING_VARIANT", "")
+stopifnot(truing_variant %in% c("", "bad_search", "joint_cascade"))
+if (truing_variant == "bad_search") {
+  ref_x <- readRDS(fs::path(run_dir, "truing_calib",
+                            Sys.getenv("TRUING_REF", "emhiv10k_2026-11"),
+                            "state.rds"))$x
+  search_of <- function(p) {
+    if (p == "a.rate") return(c(0.0002, 0.0006))
+    one <- list(params = stats::setNames(
+      list(truing_par(p, guess[[p]], allowed_of(p))), p))
+    v <- to_v(one, p, ref_x[[p]])
+    w <- if (v < 0.5) c(v + 0.3, v + 0.7) else c(v - 0.7, v - 0.3)
+    from_v(one, p, pmin(pmax(w, 0), 1))
+  }
+}
 par_of <- function(p) {
   if (!p %in% names(guess)) stop("No default value for `", p, "`")
   truing_par(p, guess[[p]], allowed_of(p), search = search_of(p))
@@ -51,9 +76,15 @@ targets <- c(
 params <- lapply(vapply(targets, `[[`, "", "param"), par_of)
 
 tn <- vapply(targets, `[[`, "", "name")
+by_race <- function(re) {
+  if (truing_variant == "joint_cascade") list(grep(re, tn, value = TRUE)) else list()
+}
 waves <- list(
-  truing_wave(grep("^cc.prep", tn, value = TRUE), n_rows = 64, reps = 4),
-  truing_wave(grep("^cc.(dx|vsupp)", tn, value = TRUE), n_rows = 64, reps = 8),
+  truing_wave(grep("^cc.prep", tn, value = TRUE), joint = by_race("^cc.prep"),
+              n_rows = 64, reps = 4),
+  truing_wave(grep("^cc.(dx|vsupp)", tn, value = TRUE),
+              joint = c(by_race("^cc.dx"), by_race("^cc.vsupp")),
+              n_rows = 64, reps = 8),
   truing_wave(grep("^ir100", tn, value = TRUE), n_rows = 128, reps = 8),
   truing_wave(c(paste0("i.prev.dx.", races), "disease.mr100", "num"),
               joint = list(paste0("i.prev.dx.", races)),
