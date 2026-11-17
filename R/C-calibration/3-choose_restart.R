@@ -50,11 +50,12 @@ for (nme in names(targets)) {
   d_dist$cost <- d_dist$cost + d_dist[[nme]]^2
 }
 
-# Ensure every STI ir100 is at least 25% of the targets.
-# (d_dist contains distances from targets)
-for (sti in names(has_sti)) {
+# Ensure every STI's target rate (`sti_target_names()`) is at least 25% of its
+# target. (d_dist contains distances from targets)
+sti_targets <- sti_target_names(targets)
+for (sti in intersect(names(has_sti), names(sti_targets))) {
   if (has_sti[sti]) {
-    sti_tar <- paste0("ir100.", sti)
+    sti_tar <- sti_targets[[sti]]
     d_dist$cost <- ifelse(
       d_dist[[sti_tar]] < -0.75 * targets[[sti_tar]],
       Inf,

@@ -6,8 +6,16 @@
 ## This script should not be run directly. But `sourced` from the
 ## swfcalib_config scripts.
 
-make_model_fn <- function(calib_steps) {
+#' Make the swfcalib model function.
+#'
+#' @param calib_steps Number of final time steps the outputs are averaged over.
+#' @param pool If `TRUE`, each simulation starts from a member of the restart
+#'   pool (`path_to_restart_pool`, made by `workflow-restart_pool.R`) drawn at
+#'   random, and the output records which one in `pool_num`. If `FALSE`, every
+#'   simulation starts from the single restart point (`path_to_restart`).
+make_model_fn <- function(calib_steps, pool = FALSE) {
   force(calib_steps)
+  force(pool)
   function(proposal) {
     # Libraries - --------------------------------------------------------------
     library(EpiModelHIV)
@@ -22,7 +30,14 @@ make_model_fn <- function(calib_steps) {
     source("R/netsim_settings.R", local = TRUE)
     source("R/calibration_targets.R", local = TRUE)
 
-    orig <- readRDS(path_to_restart)
+    if (pool) {
+      pool_index <- read.csv(fs::path(path_to_restart_pool, "pool_index.csv"))
+      pool_num <- sample(pool_index$pool_num, 1)
+      orig <- readRDS(fs::path(path_to_restart_pool, paste0(pool_num, ".rds")))
+    } else {
+      pool_num <- NA_integer_
+      orig <- readRDS(path_to_restart)
+    }
     # `save.run = FALSE`: the simulation is reduced to its target summaries
     # below and never saved, so the final model state that `save.run` keeps
     # (attributes and edgelists at the last step, which is all it holds) would
@@ -54,6 +69,7 @@ make_model_fn <- function(calib_steps) {
           \(x) mean(x, na.rm = TRUE)
         ),
         .groups = "drop"
-      )
+      ) |>
+      mutate(pool_num = pool_num)
   }
 }

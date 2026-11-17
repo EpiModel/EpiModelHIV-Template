@@ -1,6 +1,12 @@
 ## HPC Workflow: swfcalib - Automated calibration
 ##
 ## Define a workflow to run the automated calibration process using swfcalib
+##
+## The calibration runs and the confirmation run at the end start from the
+## restart pool, which must exist on the HPC before launch
+## (`workflow-restart_pool.R`). Running scenarios from a pool needs EpiModelHPC
+## 2.10.0 or later, which both lockfiles pin: build this workflow with it
+## installed.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 
@@ -119,7 +125,7 @@ control <- control_msm(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_swfcalib_output(
-    path_to_restart, param, init, control, calib_object,
+    path_to_restart_pool, param, init, control, calib_object,
     output_dir = calib_dir,
     n_rep = 256,
     n_cores = batch_size,
@@ -156,7 +162,8 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/C-calibration/process_calibs.R",
-    args = list(hpc_context = TRUE, n_cores = max_cores),
+    args = list(hpc_context = TRUE, n_cores = max_cores,
+                fitted_targets = fitted_targets),
     setup_lines = hpc_node_setup
   ),
   sbatch_opts = list(

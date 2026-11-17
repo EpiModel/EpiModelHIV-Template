@@ -117,23 +117,23 @@ colnames(tbl) <- col_names
 knitr::kable(tbl)
 ```
 
-## i.prev.dx - section 8.2
+## ir100.hiv.dx - section 8.2
 
 ```{r}
-p <- calib_plot_infos[["i.prev.dx"]]
+p <- calib_plot_infos[["ir100.hiv.dx"]]
 make_calib_plot(d_outs, p)
 ```
 
 ```{r}
 col_names <- paste0(c("Black", "Hispanic", "White/Other"), "MSM")
 row_names <- c(
-  "Target Statistic: HIV Prevalence",
-  "Simulations: HIV Prevalence (med [IQR])",
+  "Target Statistic: HIV Diagnoses per 100 PYAR",
+  "Simulations: HIV Diagnoses per 100 PYAR (med [IQR])",
   "Transmission Scaler (per act)"
 )
 
-fmtr <- scales::label_percent(0.1)
-tar_names <- paste0("i.prev.dx.", races_names)
+fmtr <- scales::label_number(0.01)
+tar_names <- paste0("ir100.hiv.dx.", races_names)
 tar <- targets[tar_names] |> fmtr()
 p_names <- paste0("hiv.trans.scale")
 prms <- param[[p_names]] |> scales::label_number(0.01)()
@@ -152,6 +152,13 @@ rownames(tbl) <- row_names
 colnames(tbl) <- col_names
 
 knitr::kable(tbl)
+```
+
+Diagnosed HIV prevalence is not fitted (EpiModelHIV-p#230); it is shown as a check.
+
+```{r}
+p <- calib_plot_infos[["i.prev.dx"]]
+make_calib_plot(d_outs, p)
 ```
 
 ## cc.prep - section xx
@@ -230,6 +237,8 @@ knitr::kable(tbl)
 
 ## Disease MR100 - section xx
 
+`disease.mr100` is a check: the AIDS death rate is not fitted (see `R/C-calibration/swfcalib_config.R`).
+
 ```{r}
 p <- calib_plot_infos[["disease.mr100"]]
 make_calib_plot(d_outs, p)
@@ -240,7 +249,7 @@ col_names <- "disease.mr100"
 row_names <- c(
   "Target Statistic: disease mr100",
   "Simulations: disease mr100 (med [IQR])",
-  "Calibrated aids.off.tx.mort.rate (per week)"
+  "aids.off.tx.mort.rate (per week, not fitted)"
 )
 
 fmtr <- scales::label_number(0.1)

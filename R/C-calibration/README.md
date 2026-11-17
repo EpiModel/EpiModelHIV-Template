@@ -84,20 +84,25 @@ within a wave run in parallel.
 | Wave | Targets | Parameters | Rationale |
 |------|---------|------------|-----------|
 | 1 | `cc.prep.{B,H,W}` | `prep.start.rate_{1,2,3}` | PrEP coverage by race |
-| 2 | `cc.dx.{B,H,W}` | `hiv.test.int_{1,2,3}` | HIV diagnosis rates |
+| 2 | `cc.dx.{B,H,W}` | `hiv.test.int_{1,2,3}` | Diagnosed fraction |
 | 3 | `cc.vsupp.{B,H,W}` | `tx.halt.rate_{1,2,3}` | Viral suppression (joint) |
-| 4 | `ir100.{gono,chla,syph}` | `{gono,chla,syph}.*prob` | STI incidence rates |
-| 5 | `i.prev.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV prevalence (joint). **Under revision for v4.0**: moving to `ir100.dx.{B,H,W}`, a diagnosis rate rather than a prevalence stock. See `RECALIBRATION.md`. |
-| 6 | `disease.mr100` | `aids.off.tx.mort.rate` | Disease mortality |
-| 7 | `num` | `a.rate` | Population size (`msm.pop` in `data/input/city.csv`) |
+| 4 | `ir100.hiv.dx.{B,H,W}` | `hiv.trans.scale_{1,2,3}` | HIV diagnosis rates (joint). A diagnosis rate rather than the diagnosed prevalence stock `i.prev.dx.*`, which is reported as a check (EpiModelHIV-p#230) |
+| 5 | `ir100.{gono,chla,syph}` | `{gono,chla}.uret.prob`, `syph.prob` | STI incidence rates |
+| 6 | `num` | `a.rate` | Population size (`msm.pop` in `data/input/city.csv`) |
 
 The wave ordering encodes causal dependencies: the care cascade (PrEP →
-testing → suppression) must be correct before tuning transmission outcomes.
+testing → suppression) must be correct before tuning transmission outcomes. HIV goes before the STIs, whose fits sit just above the values at which their epidemics die out and are best fitted last; `RECALIBRATION.md` gives the measured coupling between the two.
 
-Care-cascade targets use a **shrink proposer** (halving the range each
-iteration) with polynomial convergence checks. Noisier epidemiological targets
-(STIs, HIV prevalence) use a **SE-range proposer** (retaining top 30%) with
-absolute threshold convergence.
+The AIDS death rate off treatment (`aids.off.tx.mort.rate`) is not fitted. Fitted to `disease.mr100`, it stops being a survival estimate and absorbs whatever the care cascade and the target's count of deaths get wrong. It is to be fixed from the pre-ART literature, with AIDS-triggered diagnosis and return to ART, in `data/input/model_parameters.csv` once the engine supports them (EpiModelHIV-p#378). Until then it stays at the engine default, and `disease.mr100` is a check.
+
+Every job is solved with Adrien's Gaussian process (GP) method (`het_gp_process.R`, ported from LA-PrEP-CABARET-CEA). A one-parameter job runs 64 evenly spaced values over its range, 4 runs each; a three-parameter job (waves 3 and 4) runs a 64-point Latin hypercube, 4 runs each. A heteroskedastic GP emulator is fitted to each target over those runs and solved for the target. A one-parameter job accepts the closest value within the target's tolerance when the emulator never crosses it, and an STI job fits on the design points where its epidemic survived in every run. The joint solver works on residuals relative to each target and starts from the best design points as well as the center of the box. A job whose design does not reach its target moves to a wider design and is fitted again on both, so most waves take one or two iterations. A wave still open after `max_iteration` (4) stops the campaign for a look.
+
+The runs start from a random member of the **restart pool**, not from the single restart point, so the emulator sees the variance between starting states as well. Make the pool before launching: run `workflow-restart_point.R` with the current parameters and `n_rep` at 64, then `workflow-restart_pool.R`. It turns the simulations of that run in `data/run/calibration/` into `data/run/estimates/restart_pool-hpc/`, keeping every simulation whose STI rates are all at least half their targets (Adrien's rule), without selecting on closeness to the targets. Each simulation's output records the member it started from (`pool_num`). The confirmation run after convergence (256 simulations with the calibrated values) starts from the pool as well, which needs EpiModelHPC 2.10.0 or later.
+
+The confirmation run ends with `process_calibs.R`, which writes to `data/run/calibration/`:
+
+- `calib_tolerance.csv`: whether each target is within its tolerance (`target_tolerance()` in `R/calibration_targets.R`), 1 percentage point for the care-cascade proportions (`cc.*`) and 10% of the target for the others. This is the stop rule: the calibration is done when every fitted target is within tolerance. Its `fitted` column marks the targets a wave fits, and the printed summary counts only those; the default targets no wave fits (`i.prev.dx.*`, `disease.mr100`) are reported as checks.
+- `calib_sti_checks.csv`: each STI's fade-out share (runs with no infection in the final year) and, if the project has a `data/input/sti-ranges.csv`, its true incidence against the guard range there (`project_calibration_incidence_guard()`). A target met as an average of extinct and persisting runs is not a fit.
 
 After convergence, `update_param.R` writes `params.csv` to the swfcalib directory. It holds the project parameter overrides (the rows already in `data/input/model_parameters.csv` plus the calibrated values). Copy it over `data/input/model_parameters.csv`.
 
@@ -106,7 +111,7 @@ for details on the package.
 
 ### Final restart point (`workflow-restart_point.R`)
 
-After swfcalib converges and its values are in `data/input/model_parameters.csv`, run `workflow-restart_point.R`. It runs a pool of 500 replications of the calibrated model from scratch to `calibration_end`, merges them, picks the simulation closest to the targets with `3-choose_restart.R`, saves it to `path_to_restart`, and writes `calib_assess.csv` for the pool. This is the restart point Chapter D uses for intervention runs; copy it to your computer as well. Expect a few hours on the HPC.
+After swfcalib converges and its values are in `data/input/model_parameters.csv`, run `workflow-restart_point.R` with `n_rep` set to 500 (it ships at 64, the size of a first pool before swfcalib). It runs that many replications of the calibrated model from scratch to `calibration_end`, merges them, picks the simulation closest to the targets with `3-choose_restart.R`, saves it to `path_to_restart`, and writes `calib_assess.csv` for the pool. This is the restart point Chapter D uses for intervention runs; copy it to your computer as well. Expect a few hours on the HPC.
 
 Before each run, clear the previous pool from `data/run/calibration/` on the HPC (`sim__empty_scenario__*.rds` and `merged_tibbles/df__empty_scenario.rds`), or the old files are merged with the new ones, and keep a copy of the restart point it will overwrite.
 
@@ -120,6 +125,7 @@ This chapter produces two artifacts consumed by the rest of the project:
   Used by Chapter D (`D-interventions`) as the starting state for intervention
   runs, and by `B-model_dev/2-debug_modules.R` for post-calibration module
   development. Both local and HPC versions are needed.
+- **`data/run/estimates/restart_pool-hpc/`**: the restart pool the swfcalib runs start from (HPC only).
 - **`data/input/model_parameters.csv`** (updated): the project overrides of the EpiModelHIV parameter defaults. When using swfcalib, copy the `params.csv` written by `update_param.R` over this file so the calibrated values become the defaults for all subsequent runs.
 
 ## Post-Calibration
@@ -136,7 +142,9 @@ This chapter produces two artifacts consumed by the rest of the project:
 | `3-choose_restart.R` | Pick the best simulation and save it as the restart point (set `scenario_name` at the top) |
 | `4-swfcalib_assess.R` | Assess swfcalib results interactively |
 | `5-calibration_report.R` | Render calibration report |
-| `process_calibs.R` | Generate `calib_assess.csv` summary |
+| `het_gp_process.R` | Gaussian process stopping rules and designs for the swfcalib jobs |
+| `make_restart_pool.R` | Make a restart pool from the simulations of a pool run |
+| `process_calibs.R` | Generate `calib_assess.csv`, `calib_tolerance.csv` and `calib_sti_checks.csv` |
 | `swfcalib_config.R` | Wave definitions and priors for swfcalib |
 | `swfcalib_model.R` | Model function passed to swfcalib |
 | `update_param.R` | Write the project overrides, with calibrated values, to `params.csv` |
@@ -145,5 +153,6 @@ This chapter produces two artifacts consumed by the rest of the project:
 | `workflow-ballpark_calib.R` | HPC workflow: ballpark calibration (Phase 1) |
 | `workflow-restart_calib.R` | HPC workflow: manual fine-tuning from restart (Phase 3) |
 | `workflow-restart_point.R` | HPC workflow: run a pool of replications and save the best as the restart point |
+| `workflow-restart_pool.R` | HPC workflow: make the restart pool for swfcalib from a pool run |
 | `workflow-swfcalib.R` | HPC workflow: automated swfcalib calibration |
 | `z-context.R` | Local/HPC context switch |
