@@ -46,11 +46,15 @@ wf <- add_workflow_step(
 )
 
 # Agents (`HPC_WF_PREFIX` set) send no mail
+# (the sbatch options live in `workflow.yaml`, older slurmworkflow versions
+# wrote them into each step's `job.sh`)
 if (nzchar(Sys.getenv("HPC_WF_PREFIX"))) {
-  for (job in fs::dir_ls(fs::path("workflows", wf_name, "SWF", "steps"),
-                         recurse = TRUE, regexp = "/job\\.sh$")) {
-    lines <- readLines(job)
-    writeLines(lines[!grepl("^#SBATCH --mail-", lines)], job)
+  for (f in c(fs::path("workflows", wf_name, "workflow.yaml"),
+              fs::dir_ls(fs::path("workflows", wf_name, "SWF", "steps"),
+                         recurse = TRUE, regexp = "/job\\.sh$"))) {
+    if (!fs::file_exists(f)) next
+    lines <- readLines(f)
+    writeLines(lines[!grepl("^#SBATCH --mail-|^ *mail-", lines)], f)
   }
 }
 
