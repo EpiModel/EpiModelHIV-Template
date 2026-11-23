@@ -54,7 +54,7 @@ scenarios_df <- tibble(
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
-EpiModelHPC::netsim_scenarios(
+EpiModel::netsim_scenarios(
   path_to_est, param, init, control,
   scenarios_list = scenarios_list,
   n_rep = n_cores,
@@ -62,7 +62,7 @@ EpiModelHPC::netsim_scenarios(
   output_dir = calib_dir
 )
 
-EpiModelHPC::merge_netsim_scenarios_tibble(
+EpiModel::merge_netsim_scenarios_tibble(
   sim_dir = calib_dir,
   output_dir = fs::path(calib_dir, "merged_tibbles"),
   steps_to_keep = Inf
