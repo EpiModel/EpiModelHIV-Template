@@ -7,8 +7,8 @@
 ## meant to carry the run-to-run variance (Adrien's restart pool design for the
 ## Gaussian process calibration).
 ##
-## The pool has the layout of EpiModelHPC's restart pools (EpiModelHPC 2.10.0),
-## and is checked with its `validate_restart_pool()`:
+## The pool has the layout of EpiModel's restart pools (EpiModel 2.7.1),
+## and is checked with `EpiModel::validate_restart_pool()`:
 ## `1.rds`, `2.rds`, ... and a `pool_index.csv` with `pool_num`,
 ## `scenario_name`, `batch_number`, `sim_number`, `file_path` and
 ## `epimodel_version`, plus the cost and STI rates of each member. It is
@@ -159,6 +159,6 @@ write.csv(
   row.names = FALSE
 )
 fs::file_move(partial_dir, pool_dir)
-# The checks EpiModelHPC makes before running scenarios from a pool
-EpiModelHPC::validate_restart_pool(pool_dir)
+# The checks EpiModel makes before running scenarios from a pool
+EpiModel::validate_restart_pool(pool_dir)
 message("Restart pool of ", nrow(pool_index), " members at ", pool_dir)

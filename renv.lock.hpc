@@ -123,7 +123,7 @@
     },
     "EpiModel": {
       "Package": "EpiModel",
-      "Version": "2.7.0",
+      "Version": "2.7.1",
       "Source": "GitHub",
       "Date": "2026-10-16",
       "Title": "Mathematical Modeling of Infectious Disease Dynamics",
@@ -188,7 +188,7 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "main",
-      "RemoteSha": "234a8f94f2901e25a8dd898de30a7b867ec7fc57"
+      "RemoteSha": "cea40a5e555b2efb8ecff84920273bdf1fc04b40"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -253,22 +253,18 @@
       "BugReports": "https://github.com/EpiModel/EpiModelHPC/issues",
       "Depends": [
         "R (>= 4.1)",
-        "EpiModel (>= 2.7.0)"
+        "EpiModel (>= 2.7.1)"
       ],
       "Imports": [
-        "callr",
         "dplyr",
-        "fs",
         "future",
-        "future.apply",
         "rlang",
         "slurmworkflow",
-        "stringr",
         "swfcalib",
-        "tidyselect",
         "utils"
       ],
       "Suggests": [
+        "fs",
         "knitr",
         "rmarkdown",
         "testthat"
@@ -283,8 +279,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "main",
-      "RemoteSha": "ec97dcba1c2c1f2cb90631e1769f2e06b4a28385"
+      "RemoteRef": "move-to-epimodel",
+      "RemoteSha": "1bf714c1c0f7ab6abb48c9c7543eb28d2286651d"
     },
     "MASS": {
       "Package": "MASS",

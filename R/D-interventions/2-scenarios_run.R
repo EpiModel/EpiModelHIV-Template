@@ -32,7 +32,7 @@ scenarios_df <- read.csv(fs::path(input_dir, "scenarios.csv"))
 glimpse(scenarios_df)
 scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 
-EpiModelHPC::netsim_scenarios(
+EpiModel::netsim_scenarios(
   path_to_restart, param, init, control,
   scenarios_list = scenarios_list,
   n_rep = 8,
@@ -42,7 +42,7 @@ EpiModelHPC::netsim_scenarios(
 fs::dir_ls(scenarios_dir)
 
 # merge the simulations. Keeping one `tibble` per scenario
-EpiModelHPC::merge_netsim_scenarios_tibble(
+EpiModel::merge_netsim_scenarios_tibble(
   sim_dir = scenarios_dir,
   output_dir = fs::path(scenarios_dir, "merged_tibbles"),
   steps_to_keep = intervention_end - intervention_start

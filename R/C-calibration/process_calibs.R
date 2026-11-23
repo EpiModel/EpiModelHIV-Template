@@ -228,7 +228,7 @@ future::plan("multisession", workers = n_cores)
 # A probe run (`workflow-pass_probe.R`) passes its own folder as `out_dir`
 if (exists("out_dir")) calib_dir <- out_dir
 calib_merged_dir <- fs::path(calib_dir, "merged_tibbles")
-calib_info_tbl <- EpiModelHPC::get_scenarios_tibble_infos(calib_merged_dir)
+calib_info_tbl <- EpiModel::get_scenarios_tibble_infos(calib_merged_dir)
 
 d_ls <- future.apply::future_lapply(
   seq_len(nrow(calib_info_tbl)),

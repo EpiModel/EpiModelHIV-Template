@@ -54,7 +54,7 @@ scenarios_list <- EpiModel::create_scenario_list(scenarios_df)
 # Replicates are saved in batches of up to `n_cores` per file.
 # With n_rep = 3 and n_cores = 2, each scenario produces 2 files
 # (a batch of 2 and a batch of 1).
-EpiModelHPC::netsim_scenarios(
+EpiModel::netsim_scenarios(
   path_to_est, param, init, control,
   scenarios_list = scenarios_list, # set to NULL to run with default params
   n_rep = 3,                       # number of replications per scenario
@@ -67,7 +67,7 @@ fs::dir_ls(scenarios_dir)
 # Merge all batches into one tibble per scenario. `steps_to_keep` controls how
 # many time steps are retained (from the end of the simulation).
 # Keeping fewer steps saves memory.
-EpiModelHPC::merge_netsim_scenarios_tibble(
+EpiModel::merge_netsim_scenarios_tibble(
   sim_dir = scenarios_dir,
   output_dir = fs::path(scenarios_dir, "merged_tibbles"),
   steps_to_keep = year_steps * 1 # keep only the last year

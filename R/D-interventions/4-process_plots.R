@@ -17,7 +17,7 @@ source("R/D-interventions/outcomes.R", local = TRUE)
 # Process ----------------------------------------------------------------------
 
 scenarios_tibble_dir <- fs::path(scenarios_dir, "merged_tibbles")
-scenarios_info <- EpiModelHPC::get_scenarios_tibble_infos(scenarios_tibble_dir)
+scenarios_info <- EpiModel::get_scenarios_tibble_infos(scenarios_tibble_dir)
 
 # Reference (baseline) scenario for NIA/PIA
 d_ref <- make_d_ref(
