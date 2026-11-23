@@ -24,6 +24,7 @@ est <- readRDS(path_to_est)
 
 # Control settings
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = year_steps * 4,
   # Always ncores = 1 with load_local_EpiModelHIV():
   # parallel workers load the installed package, not the dev version.

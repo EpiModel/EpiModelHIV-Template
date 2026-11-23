@@ -20,6 +20,7 @@ source("R/netsim_settings.R", local = TRUE)
 
 # Control settings
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   start               = restart_time,
   nsteps              = intervention_end,
   initialize.FUN      = reinit_msm,

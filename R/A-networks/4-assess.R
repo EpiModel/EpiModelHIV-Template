@@ -1,7 +1,8 @@
-## 3. Network Model Diagnostics: Interactive Assessment
+## 4. Network Model Diagnostics: Interactive Assessment
 ##
-## Assess the diagnosed network models using the diagnostics computed on the
-## previous script.
+## Look at the diagnostics of `2-diagnostics.R` in full: every table and plot.
+## `3-check.R` gives the verdict against the targets; this is for reading a
+## miss, or a fit, in detail.
 
 # Restart R before running this script (Ctrl_Shift_F10 / Cmd_Shift_0)
 

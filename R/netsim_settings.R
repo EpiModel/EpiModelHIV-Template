@@ -69,6 +69,18 @@ path_to_restart_pool <- fs::path(
   est_dir, paste0("restart_pool-", context, calib_pass_suffix(calib_pass))
 )
 
+# The fits must have passed the network check (`R/A-networks/3-check.R`), at
+# the tergm sampling the simulations use, before anything is simulated from
+# them. The local fits are for development and are not held to it.
+if (context == "hpc") {
+  source("R/A-networks/network_check.R", local = TRUE)
+  assert_network_check(
+    est_path = path_to_est,
+    check_path = fs::path(diag_dir, "network_check-hpc.rds"),
+    proposals = tergm_proposals
+  )
+}
+
 # Package defaults with the project overrides applied
 params_df <- read_model_params() |>
   dplyr::select(param, value, type)

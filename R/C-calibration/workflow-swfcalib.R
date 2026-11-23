@@ -126,6 +126,7 @@ source("R/netsim_settings.R", local = TRUE)
 # next pass (`workflow-pass_probe.R`) can make its restart pool from the end
 # states of these confirmation runs.
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps              = calibration_end,
   start               = restart_time,
   initialize.FUN      = reinit_msm,

@@ -48,6 +48,7 @@ make_model_fn <- function(calib_steps, pool = FALSE, pass = 1L) {
     # (attributes and edgelists at the last step, which is all it holds) would
     # only add memory to each worker (#57).
     control <- control_msm(
+      set.control.tergm = control_tergm_sim(),
       nsteps = calibration_end,
       start = restart_time,
       initialize.FUN = reinit_msm,

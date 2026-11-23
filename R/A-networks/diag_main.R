@@ -21,7 +21,10 @@ model_main_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:3)
 
-# Dynamic diagnostics: simulate network over time
+# Dynamic diagnostics: simulate network over time. The tergm sampling per step
+# is the one every netsim run uses (`control_tergm_sim()` in
+# R/shared_variables.R), so these diagnostics test the networks as the
+# simulations will move them.
 dx_main <- EpiModel::netdx(
   est$fit_main,
   nsims = diag_nsims,
@@ -29,8 +32,7 @@ dx_main <- EpiModel::netdx(
   nsteps = diag_nsteps,
   nwstats.formula = model_main_dx,
   set.control.ergm = ergm::control.simulate.formula(MCMC.burnin = 1e5),
-  set.control.tergm =
-    tergm::control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
+  set.control.tergm = control_tergm_sim()
 )
 
 # Static diagnostics: sample from the fitted ERGM (no dynamics)
@@ -42,7 +44,14 @@ dx_main_static <- EpiModel::netdx(
   set.control.ergm = ergm::control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-dx <- list(dynamic = dx_main, static = dx_main_static)
+# The setting the dynamic diagnostics ran at goes with them: the network check
+# (`3-check.R`) refuses diagnostics made at a setting other than the one the
+# simulations use.
+dx <- list(
+  dynamic = dx_main,
+  static = dx_main_static,
+  tergm_proposals = tergm_proposals
+)
 dx_path <- fs::path(diag_dir, paste0("netdx-main-", context, ".rds"))
 saveRDS(dx, dx_path)
 rm(dx, dx_main, dx_main_static)

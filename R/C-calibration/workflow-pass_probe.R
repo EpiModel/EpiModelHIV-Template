@@ -77,6 +77,7 @@ scenarios_list <- EpiModel::create_scenario_list(
 # `save.run` stays at its default (TRUE): the pass's restart pool is made from
 # the end states of these runs.
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = restart_time - 1 + settings$probe_years * year_steps,
   start = restart_time,
   initialize.FUN = reinit_msm,
