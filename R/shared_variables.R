@@ -68,3 +68,36 @@ message("Modeled city: ", city_spec$label)
 # size, so the model's `num` is the denominator of the rate targets. It is also
 # the `num` calibration target. Local runs use 10,000 nodes.
 msm_pop <- city_spec$msm.pop
+
+# NETWORK SIMULATION SAMPLING: how many MCMC proposals tergm makes per time step
+# when it moves the main and casual networks forward. One setting for every
+# dynamic simulation, the network diagnostics (chapter A) and every netsim run
+# (chapters B to D, passed to `control_msm()` as
+# `set.control.tergm = control_tergm_sim()`), so the diagnostics test what the
+# simulations run. Add it to any new `control_msm()` call.
+#
+# The engine default is adaptive, from 5,000 proposals up to 100,000, and its
+# stopping rule does not keep up with the network: it took about 12,000
+# proposals a step at 10,000 nodes and 40,000 at 250,000 nodes, while the
+# partnerships that must form each step grow in proportion to the population.
+# Total partnerships, degree and durations hold, but the pairs that form
+# fastest for the dyads they have fall short. At 250,000 nodes, main
+# partnerships within the youngest age group ran 8% under their target and
+# casual partnerships within the smallest race group 17% under. A fixed
+# 200,000 brought both within 2%, for about a tenth more run time at that size.
+#
+# The minimum and maximum are set equal because tergm silently caps a minimum
+# above its default maximum of 100,000. A network much larger than 250,000
+# nodes may need more: the network check (`R/A-networks/3-check.R`) tests the
+# setting against each fit's targets and fails if it under-samples.
+tergm_proposals <- 2e5
+control_tergm_sim <- function() {
+  tergm::control.simulate.formula.tergm(
+    MCMC.burnin.min = tergm_proposals,
+    MCMC.burnin.max = tergm_proposals,
+    # The change log must hold every formation and dissolution of a long
+    # diagnostic run, which passes tergm's default of 1e6 in a large casual
+    # network (about 1.1 million over 500 steps at 250,000 nodes).
+    MCMC.maxchanges = 1e7
+  )
+}

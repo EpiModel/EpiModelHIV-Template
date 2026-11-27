@@ -26,6 +26,7 @@ print(init)
 # See listing of modules and other control settings
 # Module function defaults defined in ?control_msm
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = year_steps * 4
 )
 print(control)
@@ -56,6 +57,7 @@ tail(df)
 ## Run 2 simulations on 2 cores
 ## Note: this run will not generate a progress tracker in the console
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = year_steps * 4,
   nsims = 2,
   ncores = 2

@@ -102,7 +102,7 @@ the project evolves.
 
 ## Modeling another city
 
-Everything specific to the modeled city comes from two files in `data/input/`. The template models Atlanta: it ships Atlanta's `city.csv`, and takes Atlanta's calibration targets from the engine defaults (`EpiModelHIV::get_calibration_targets()`). To model another city, replace `city.csv`, add the city's `targets.csv`, re-estimate the networks, and recalibrate. No script needs editing.
+Everything specific to the modeled city comes from two files in `data/input/`. The template models Atlanta: it ships Atlanta's `city.csv`, and takes Atlanta's calibration targets from the engine defaults (`EpiModelHIV::get_calibration_targets()`). To model another city, replace `city.csv`, add the city's `targets.csv`, re-estimate the networks, pass the network check (`R/A-networks/3-check.R`), and only then recalibrate. No script needs editing.
 
 `city.csv`, read in `R/shared_variables.R` into `city_spec`. One row per input, with columns `param`, `value`, `provisional` (`TRUE` for a placeholder) and `source`:
 

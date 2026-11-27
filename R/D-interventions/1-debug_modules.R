@@ -23,6 +23,7 @@ source("R/netsim_settings.R", local = TRUE)
 # Start from the restart point (end of calibration) and run 4 years forward.
 # reinit_msm re-initializes the simulation state from the saved restart object.
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   start          = restart_time,
   nsteps         = restart_time + year_steps * 4,
   initialize.FUN = reinit_msm,

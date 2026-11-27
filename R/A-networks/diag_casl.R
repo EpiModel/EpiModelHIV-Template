@@ -15,7 +15,7 @@ model_casl_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:4)
 
-# Dynamic diagnostics
+# Dynamic diagnostics, at the tergm sampling the simulations use
 dx_casl <- EpiModel::netdx(
   est$fit_casl,
   nsims = diag_nsims,
@@ -23,8 +23,7 @@ dx_casl <- EpiModel::netdx(
   nsteps = diag_nsteps,
   nwstats.formula = model_casl_dx,
   set.control.ergm = ergm::control.simulate.formula(MCMC.burnin = 1e5),
-  set.control.tergm =
-    tergm::control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
+  set.control.tergm = control_tergm_sim()
 )
 
 # Static diagnostics
@@ -36,7 +35,12 @@ dx_casl_static <- EpiModel::netdx(
   set.control.ergm = ergm::control.simulate.formula(MCMC.burnin = 1e5)
 )
 
-dx <- list(dynamic = dx_casl, static = dx_casl_static)
+# As for the main model: the tergm setting goes with the diagnostics
+dx <- list(
+  dynamic = dx_casl,
+  static = dx_casl_static,
+  tergm_proposals = tergm_proposals
+)
 dx_path <- fs::path(diag_dir, paste0("netdx-casl-", context, ".rds"))
 saveRDS(dx, dx_path)
 rm(dx, dx_casl, dx_casl_static)

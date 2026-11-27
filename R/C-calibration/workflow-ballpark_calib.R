@@ -27,6 +27,7 @@ source("R/netsim_settings.R", local = TRUE)
 # be made from these simulations (`3-choose_restart.R`), and it is built from
 # the final model state that `save.run` keeps (#57).
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = calibration_end
 )
 

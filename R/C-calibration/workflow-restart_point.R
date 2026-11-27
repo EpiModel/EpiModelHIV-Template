@@ -41,6 +41,7 @@ source("R/netsim_settings.R", local = TRUE)
 # Control settings. `save.run` stays at its default (TRUE): the restart point
 # is built from the final model state that `save.run` keeps (#57).
 control <- control_msm(
+  set.control.tergm = control_tergm_sim(),
   nsteps = calibration_end
 )
 

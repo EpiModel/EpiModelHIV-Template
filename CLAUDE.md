@@ -56,6 +56,8 @@ Modify shared values only in `shared_variables.R` — never redefine them in ind
 Estimate 3 TERGM network models (main, casual, one-off) from ARTnet data. Outputs saved to `data/run/estimates/`.
 - `initialize.R` → `model_main.R` → `model_casl.R` → `model_ooff.R` (sourced by `1-estimation.R`)
 - `diag_main.R`, `diag_casl.R`, `diag_ooff.R` (sourced by `2-diagnostics.R`)
+- **`3-check.R` is the gate before any netsim work.** It compares every target statistic and duration of the three fits with the diagnostics (criteria in `network_check.R`: within 5%, or one standard deviation of the statistic for small counts; static, and dynamic at `tergm_proposals`) and writes `network_check-<context>.csv` and `.rds` to `data/run/diagnostics/`. `R/netsim_settings.R` stops every HPC-context script unless the fits it loads have passed at the current `tergm_proposals`, matched by the checksum of the `netest` file. The diagnostics hold attributes static, so what aging does to the networks is netsim work; if that calls for different network statistics, return to chapter A. `4-assess.R` is the interactive look at the diagnostics.
+- **Every dynamic simulation passes `set.control.tergm = control_tergm_sim()`** (`R/shared_variables.R`: 200,000 tergm proposals per step, minimum and maximum equal). That covers the diagnostics and every `control_msm()` call; add it to any new one. The engine's adaptive default under-samples the fastest-forming pairs at full size, and tergm silently caps a minimum above its default maximum of 100,000.
 - Local: 10k nodes; HPC: `msm_pop` nodes (75,237)
 
 ### B-model_dev — Model Development
